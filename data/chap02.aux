@@ -1,0 +1,139 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\citation{}
+\citation{}
+\pp@pagectr{footnote}{2}{17}{6}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第二章}基于多尺度特征融合的点云几何特征检测}{6}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10.0pt}}
+\@writefile{lot}{\addvspace {10.0pt}}
+\@writefile{loa}{\addvspace {10\p@ }}
+\newlabel{chap:necdnet}{{二}{6}{基于多尺度特征融合的点云几何特征检测}{chapter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}引言}{6}{section.2.1}\protected@file@percent }
+\citation{}
+\citation{}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces NECDNet 网络架构及工作流程示意图。}}{7}{figure.caption.9}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:necdnet_framework}{{2.1}{7}{NECDNet 网络架构及工作流程示意图。}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}多尺度局部特征提取与计算}{7}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}多尺度邻域构建}{7}{subsection.2.2.1}\protected@file@percent }
+\newlabel{eq:X_i}{{2.1}{8}{多尺度邻域构建}{equation.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}局部特征描述符设计}{8}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}邻域归一化预处理}{9}{subsubsection.2.2.2.1}\protected@file@percent }
+\newlabel{eq:svd_Ki}{{2.2}{9}{邻域归一化预处理}{equation.2.2}{}}
+\newlabel{eq:center_Qi}{{2.3}{9}{邻域归一化预处理}{equation.2.3}{}}
+\newlabel{eq:norm_Qi}{{2.4}{9}{邻域归一化预处理}{equation.2.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}点云法向量估计}{9}{subsubsection.2.2.2.2}\protected@file@percent }
+\newlabel{sec:normal_estimatation}{{2）}{9}{点云法向量估计}{subsubsection.2.2.2.2}{}}
+\citation{}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3）}曲率（ $\kappa _i$ ）}{10}{subsubsection.2.2.2.3}\protected@file@percent }
+\newlabel{eq:curvature}{{2.5}{10}{曲率（ $\kappa _i$ ）}{equation.2.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4）}投影距离均值（ $\bar  {d_i}$ ）}{10}{subsubsection.2.2.2.4}\protected@file@percent }
+\newlabel{eq:projection_distance}{{2.6}{10}{投影距离均值（ $\bar {d_i}$ ）}{equation.2.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5）}中心偏离比（ $r_i$ ）}{11}{subsubsection.2.2.2.5}\protected@file@percent }
+\newlabel{eq:mean_center_distance}{{2.7}{11}{中心偏离比（ $r_i$ ）}{equation.2.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6）}法向量角度差（$\mu _{\theta ,i}$）}{11}{subsubsection.2.2.2.6}\protected@file@percent }
+\newlabel{eq:normal_angle}{{2.8}{11}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.8}{}}
+\newlabel{eq:normal_angle_difference}{{2.9}{12}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.9}{}}
+\newlabel{eq:normal_value_difference}{{2.10}{12}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7）}法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{12}{subsubsection.2.2.2.7}\protected@file@percent }
+\newlabel{eq:normal_distribution_variance}{{2.11}{12}{法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{equation.2.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8）}法线投影距离均值（ $\bar  {\text  {proj}_i}$ ）}{12}{subsubsection.2.2.2.8}\protected@file@percent }
+\newlabel{eq:projectional_normal_norm}{{2.12}{13}{法线投影距离均值（ $\bar {\text {proj}_i}$ ）}{equation.2.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}局部特征描述符数值可视化分析}{13}{subsection.2.2.3}\protected@file@percent }
+\newlabel{eq:feature_vector}{{2.13}{13}{局部特征描述符数值可视化分析}{equation.2.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。}}{14}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:feature_distribution}{{2.2}{14}{六个局部特征描述符在不同几何类别下的数值分布情况。}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}\textrm  {NECDNet} 网络架构设计}{14}{section.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces NECDNet 网络架构示意图。}}{15}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:necdnet_architecture}{{2.3}{15}{NECDNet 网络架构示意图。}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}多尺度特征融合}{15}{subsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}逐级分类器}{16}{subsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}损失函数}{16}{subsection.2.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}评价指标}{16}{subsection.2.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}\textrm  {ABC-Corner} 数据集构建}{16}{section.2.4}\protected@file@percent }
+\newlabel{sec:dataset}{{2.4}{16}{\textrm {ABC-Corner} 数据集构建}{section.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}数据集模型选取}{16}{subsection.2.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}初步标注}{16}{subsection.2.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}r}{16}{subsection.2.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}本章小结}{16}{section.2.5}\protected@file@percent }
+\@setckpt{data/chap02}{
+\setcounter{page}{17}
+\setcounter{equation}{13}
+\setcounter{enumi}{0}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{2}
+\setcounter{section}{5}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{3}
+\setcounter{table}{0}
+\setcounter{parentequation}{0}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
+\setcounter{pp@a@footnote}{2}
+\setcounter{endNonectr}{20}
+\setcounter{currNonectr}{0}
+\setcounter{LT@tables}{0}
+\setcounter{LT@chunks}{0}
+\setcounter{nlinenum}{0}
+\setcounter{NAT@ctr}{0}
+\setcounter{section@level}{0}
+\setcounter{Item}{0}
+\setcounter{Hfootnote}{0}
+\setcounter{Hy@AnnotLevel}{0}
+\setcounter{bookmark@seq@number}{27}
+\setcounter{AlgoLine}{0}
+\setcounter{algocfline}{0}
+\setcounter{algocfproc}{0}
+\setcounter{algocf}{0}
+\setcounter{shu@bookmark}{0}
+\setcounter{currassumptionctr}{0}
+\setcounter{endassumptionctr}{0}
+\setcounter{assumption}{0}
+\setcounter{currpropositionctr}{0}
+\setcounter{endpropositionctr}{0}
+\setcounter{proposition}{0}
+\setcounter{currlemmactr}{0}
+\setcounter{endlemmactr}{0}
+\setcounter{lemma}{0}
+\setcounter{currtheoremctr}{0}
+\setcounter{endtheoremctr}{0}
+\setcounter{theorem}{0}
+\setcounter{curraxiomctr}{0}
+\setcounter{endaxiomctr}{0}
+\setcounter{axiom}{0}
+\setcounter{currcorollaryctr}{0}
+\setcounter{endcorollaryctr}{0}
+\setcounter{corollary}{0}
+\setcounter{currexercisectr}{0}
+\setcounter{endexercisectr}{0}
+\setcounter{exercise}{0}
+\setcounter{currexamplectr}{0}
+\setcounter{endexamplectr}{0}
+\setcounter{example}{0}
+\setcounter{currproblemctr}{0}
+\setcounter{endproblemctr}{0}
+\setcounter{problem}{0}
+\setcounter{currconjecturectr}{0}
+\setcounter{endconjecturectr}{0}
+\setcounter{conjecture}{0}
+\setcounter{currdefinitionctr}{0}
+\setcounter{enddefinitionctr}{0}
+\setcounter{definition}{0}
+\setcounter{currremarkctr}{0}
+\setcounter{endremarkctr}{0}
+\setcounter{remark}{0}
+\setcounter{currproofctr}{0}
+\setcounter{endproofctr}{0}
+\setcounter{proof}{0}
+\setcounter{float@type}{4}
+}

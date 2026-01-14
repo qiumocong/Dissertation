@@ -1,0 +1,58 @@
+\chapter{经典函数公式}
+论文中用到的经典函数公式.\\
+\noindent{\bfseries (Sigmoid Function)}
+Sigmoid 函数定义为
+\[
+\operatorname{Sigmoid}(x)=\frac{1}{1+e^{-x}}.
+\]\\
+\noindent{\bfseries (ReLU Function)}
+ReLU 函数定义为
+\[
+\operatorname{ReLU}(x)=\max(0,x).
+\]\\
+\noindent{\bfseries (Leaky ReLU Function)}
+Leaky ReLU 函数定义为
+\[
+\operatorname{LeakyReLU}(x)=\begin{cases}x,&x\geq0\\
+\alpha x,&x<0\end{cases}
+\]
+其中 $\alpha$ 是一个较小的常数，通常取值为 0.01。\\
+
+\chapter{用于定量比较的指标公式}
+章节~\ref{} 中提到的用于定量比较的指标公式如下。\\
+\noindent{\bfseries (Precision)}
+精确率（Precision）定义为
+\[
+\text{Precision} = \frac{TP}{TP + FP}
+\]
+其中 $TP$ 表示真正例（True Positive）的数量，$FP$ 表示假正例（False Positive）的数量。\\
+\noindent{\bfseries (Recall)}
+召回率（Recall）定义为
+\[
+\text{Recall} = \frac{TP}{TP + FN}
+\]
+其中 $TP$ 表示真正例（True Positive）的数量，$FN$ 表示假负例（False Negative）的数量。\\
+\noindent{\bfseries (F1 Score)}
+F1 分数定义为
+\[
+\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\]
+用于综合评估模型的精确率和召回率。\\
+\noindent{\bfseries (Matthews Correlation Coefficient)}
+马修斯相关系数（The Matthews Correlation Coefﬁcient, MCC）定义为
+\[
+\text{MCC} = \frac{TP \times TN - FP \times FN}{\sqrt{(TP + FP)(TP + FN)(TN + FP)(TN + FN)}}
+\]
+其中 $TP$、$TN$、$FP$ 和 $FN$ 分别表示真正例、真反例、假正例和假反例的数量。\\
+\noindent{\bfseries (Intersection over Union)}
+交并比（Intersection over Union, IoU）定义为
+\[
+\text{IoU} = \frac{TP}{TP + FP + FN}
+\]
+用于衡量预测结果与真实标签之间的重叠程度。\\
+\noindent{\bfseries (Accuracy)}
+准确率（Accuracy）定义为
+\[
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\]
+用于衡量模型预测的整体正确性。

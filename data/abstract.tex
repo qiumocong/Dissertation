@@ -1,0 +1,12 @@
+% 中英文摘要和关键字
+\begin{cabstract}
+针对点云几何特征检测精度不足及机器人抓取规划灵活性受限的问题，本文提出一种融合神经网络特征学习与基于模型抓取规划的框架。首先，提出神经边缘角点检测网络（NECDNet）。该网络通过分析多尺度邻域内的位置和法向分布构建特征矩阵，利用层次化神经网络实现面、边、角点的同步分类；同时构建了包含1000个模型的ABC-Corner数据集。其次，本文提出一种考虑边、角接触的六自由度双指抓取规划算法。该算法利用NECDNet提取特征区域，设计特征化接触检测器搜索对偶接触点，并引入软接触模型评估稳定性，有效解决了非规则物体的抓取难题，增强抓取规划多样性。实验表明，NECDNet的角点检测F1分数达0.815，优于现有方法；抓取算法在分布复杂度指标（STD、Range、MAD）均优于GPD，GraspIt等基于模型的抓取规划方法，抓取配置灵活性显著提升。机器人实验验证了包括角-角、角-边等六种接触组合的有效性与鲁棒性，展示了抓取规划的有效性及抓取成功率上的提升。
+\end{cabstract}
+
+\ckeywords{点云处理, 几何特征检测, 神经网络, 机器人, 抓取规划, 平行手爪}
+
+\begin{eabstract}
+This thesis addresses the challenges of insufficient geometric feature detection accuracy in point clouds and limited flexibility in robotic grasp planning by proposing a unified framework that integrates neural network-based feature learning with model-based grasp planning. First, we introduce the Neural Edge and Corner Detection Network (NECDNet), which constructs a feature matrix by analyzing the positional and normal distributions within multi-scale neighborhoods and employs a hierarchical neural network to simultaneously classify faces, edges, and corners. Additionally, we curate the ABC-Corner dataset containing 1,000 annotated models to support training and evaluation. Second, we present a six-degree-of-freedom dual-finger grasp planning algorithm that explicitly accounts for edge and corner contacts. This algorithm leverages NECDNet for feature region extraction, employs feature-specific contact detectors to identify antipodal contact pairs, and integrates a soft contact model for stability assessment, thereby effectively tackling the grasp planning challenges associated with irregular objects and enhancing grasp configuration diversity. Experimental results demonstrate that NECDNet achieves corner detection with an F1 score of 0.815, outperforming existing methods. Furthermore, the proposed grasp algorithm surpasses model-based grasp planning approaches such as GPD and GraspIt across all distribution complexity metrics (STD, Range, MAD), significantly improving grasp configuration flexibility. Real-world robotic experiments validate the robustness and effectiveness of six distinct contact combinations, including corner-corner and corner-edge interactions, demonstrating improved grasp planning efficacy and success rate.
+\end{eabstract}
+
+\ekeywords{Point cloud processing, Geometrical feature detection, Neural network, Robotics, Grasp planning, Parallel gripper.}

@@ -1,0 +1,82 @@
+% !Mode:: "TeX:UTF-8"
+\documentclass[type=profmaster,openany,pifootnote]{shuthesis}
+% 选项:
+%  type=[master|profmaster|doctor], % 必选
+%  secret,                          % 可选 (如果论文需要保密, 这一项需要打开)
+%  pifootnote,                      % 可选（建议打开）
+%  openany|openright,               % 可选 (章首页是右开还是任意开, 默认是右开)
+%  nocolor                          % 提交最终版本时请打开此选项
+\usepackage{shuthesis}
+\usepackage{bm}
+\usepackage{titlesec}
+% \usepackage{newtxmath}
+\graphicspath{{figures/}}
+
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}）}
+\titleformat{\subsubsection}[block]
+  {\normalfont\bfseries} % 字体样式：常规字体，加粗
+  {\thesubsubsection}    % 标题编号
+  {0.5em}                % 编号与标题文字之间的间距
+  {}                     % 标题文字前的特殊代码
+
+% \titlespacing{命令}{左间距}{上间距}{下间距}
+\titlespacing{\subsubsection}{0pt}{1.0ex plus .1ex minus .2ex}{0.5ex plus .1ex}
+
+
+\begin{document}
+\frontmatter
+\shusetup{
+  %%%%%%%% 1. 配置里面不要出现空行. 2. 不需要的配置信息可以删除. %%%%%%%%%%%
+  secretlevel={公开},             % 秘级
+  % 中文信息
+  ctitle={基于学习的点云几何特征检测及机器人抓取规划方法研究},
+  cdisciplines={工学},
+  cdepartment={机电工程与自动化学院},
+  cmajor={机械},
+  cauthor={邱模聪},
+  csupervisor={袁建军},
+  id={23722063},
+  catalognumber={XXX},
+  cdate={2026 年 5 月},
+  coverdate={\zhdigits{2026}年\zhnumber{5}月},
+  % 英文信息
+  etitle={Learning-Based Point Cloud Geometric Feature Detection and Robotic Grasp Planning},
+  edisciplines={Engineering},
+  edepartment={School of Mechatronic Engineering and Automation},
+  emajor={Mechanics},
+  eauthor={Mocong Qiu},
+  esupervisor={Jianjun Yuan},
+  edate={December, 2026}
+}
+
+\input{data/abstract}
+\makefirstpage                         % 生成带有学校 logo 的封面
+\makecover
+
+\tableofcontents                       % 目录
+
+\input{data/denotation}                % 符号对照表
+
+% 正文部分
+\mainmatter
+\include{data/chap01}
+\include{data/chap02}
+\include{data/chap03}
+\include{data/chap04}
+\include{data/chap05}
+\listoffigures                        % 插图索引
+\listoftables                         % 表格索引
+
+% 参考文献. 
+\bibliographystyle{gbt7714-numerical}
+\bibliography{reference/refs}
+
+\include{data/publications}           % 发表论文清单
+\include{data/acknowledgement}        % 致谢
+
+\backmatter
+\begin{appendix}
+\input{data/appendix}
+\end{appendix}
+
+\end{document}
