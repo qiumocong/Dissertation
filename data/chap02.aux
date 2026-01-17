@@ -17,29 +17,28 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}多尺度局部特征提取与计算}{7}{section.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}多尺度邻域构建}{7}{subsection.2.2.1}\protected@file@percent }
 \newlabel{eq:X_i}{{2.1}{8}{多尺度邻域构建}{equation.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}局部特征描述符设计}{8}{subsection.2.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}邻域归一化预处理}{9}{subsubsection.2.2.2.1}\protected@file@percent }
-\newlabel{eq:svd_Ki}{{2.2}{9}{邻域归一化预处理}{equation.2.2}{}}
-\newlabel{eq:center_Qi}{{2.3}{9}{邻域归一化预处理}{equation.2.3}{}}
-\newlabel{eq:norm_Qi}{{2.4}{9}{邻域归一化预处理}{equation.2.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}点云法向量估计}{9}{subsubsection.2.2.2.2}\protected@file@percent }
-\newlabel{sec:normal_estimatation}{{2）}{9}{点云法向量估计}{subsubsection.2.2.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}点云前处理}{8}{subsection.2.2.2}\protected@file@percent }
+\newlabel{sec:preprocessing}{{2.2.2}{8}{点云前处理}{subsection.2.2.2}{}}
+\newlabel{eq:svd_Ki}{{2.2}{8}{点云前处理}{equation.2.2}{}}
 \citation{}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3）}曲率（ $\kappa _i$ ）}{10}{subsubsection.2.2.2.3}\protected@file@percent }
+\newlabel{eq:center_Qi}{{2.3}{9}{点云前处理}{equation.2.3}{}}
+\newlabel{eq:norm_Qi}{{2.4}{9}{点云前处理}{equation.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}局部特征描述符设计}{10}{subsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}曲率（ $\kappa _i$ ）}{10}{subsubsection.2.2.3.1}\protected@file@percent }
 \newlabel{eq:curvature}{{2.5}{10}{曲率（ $\kappa _i$ ）}{equation.2.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4）}投影距离均值（ $\bar  {d_i}$ ）}{10}{subsubsection.2.2.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}投影距离均值（ $\bar  {d_i}$ ）}{10}{subsubsection.2.2.3.2}\protected@file@percent }
 \newlabel{eq:projection_distance}{{2.6}{10}{投影距离均值（ $\bar {d_i}$ ）}{equation.2.6}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5）}中心偏离比（ $r_i$ ）}{11}{subsubsection.2.2.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3）}中心偏离比（ $r_i$ ）}{11}{subsubsection.2.2.3.3}\protected@file@percent }
 \newlabel{eq:mean_center_distance}{{2.7}{11}{中心偏离比（ $r_i$ ）}{equation.2.7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6）}法向量角度差（$\mu _{\theta ,i}$）}{11}{subsubsection.2.2.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4）}法向量角度差（$\mu _{\theta ,i}$）}{11}{subsubsection.2.2.3.4}\protected@file@percent }
 \newlabel{eq:normal_angle}{{2.8}{11}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.8}{}}
-\newlabel{eq:normal_angle_difference}{{2.9}{12}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.9}{}}
+\newlabel{eq:normal_angle_difference}{{2.9}{11}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.9}{}}
 \newlabel{eq:normal_value_difference}{{2.10}{12}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.10}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7）}法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{12}{subsubsection.2.2.2.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5）}法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{12}{subsubsection.2.2.3.5}\protected@file@percent }
 \newlabel{eq:normal_distribution_variance}{{2.11}{12}{法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{equation.2.11}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8）}法线投影距离均值（ $\bar  {\text  {proj}_i}$ ）}{12}{subsubsection.2.2.2.8}\protected@file@percent }
-\newlabel{eq:projectional_normal_norm}{{2.12}{13}{法线投影距离均值（ $\bar {\text {proj}_i}$ ）}{equation.2.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}局部特征描述符数值可视化分析}{13}{subsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6）}法线投影距离均值（ $\bar  {\text  {proj}_i}$ ）}{12}{subsubsection.2.2.3.6}\protected@file@percent }
+\newlabel{eq:projectional_normal_norm}{{2.12}{12}{法线投影距离均值（ $\bar {\text {proj}_i}$ ）}{equation.2.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}局部特征描述符数值可视化分析}{13}{subsection.2.2.4}\protected@file@percent }
 \newlabel{eq:feature_vector}{{2.13}{13}{局部特征描述符数值可视化分析}{equation.2.13}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。}}{14}{figure.caption.10}\protected@file@percent }
 \newlabel{fig:feature_distribution}{{2.2}{14}{六个局部特征描述符在不同几何类别下的数值分布情况。}{figure.caption.10}{}}
@@ -47,18 +46,24 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces NECDNet 网络架构示意图。}}{15}{figure.caption.11}\protected@file@percent }
 \newlabel{fig:necdnet_architecture}{{2.3}{15}{NECDNet 网络架构示意图。}{figure.caption.11}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}多尺度特征融合}{15}{subsection.2.3.1}\protected@file@percent }
+\citation{lin_focal_2020}
+\citation{mao_crossentropy_2023}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}逐级分类器}{16}{subsection.2.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}损失函数}{16}{subsection.2.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}评价指标}{16}{subsection.2.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}\textrm  {ABC-Corner} 数据集构建}{16}{section.2.4}\protected@file@percent }
-\newlabel{sec:dataset}{{2.4}{16}{\textrm {ABC-Corner} 数据集构建}{section.2.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}数据集模型选取}{16}{subsection.2.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}初步标注}{16}{subsection.2.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}r}{16}{subsection.2.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}本章小结}{16}{section.2.5}\protected@file@percent }
+\newlabel{eq:ce_loss}{{2.14}{16}{损失函数}{equation.2.14}{}}
+\citation{}
+\newlabel{eq:weighted_ce_loss}{{2.15}{17}{损失函数}{equation.2.15}{}}
+\newlabel{eq:focal_loss}{{2.16}{17}{损失函数}{equation.2.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}评价指标}{17}{subsection.2.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}\textrm  {ABC-Corner} 数据集构建}{17}{section.2.4}\protected@file@percent }
+\newlabel{sec:dataset}{{2.4}{17}{\textrm {ABC-Corner} 数据集构建}{section.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}数据集模型选取}{17}{subsection.2.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}初步标注}{17}{subsection.2.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}r}{17}{subsection.2.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}本章小结}{17}{section.2.5}\protected@file@percent }
 \@setckpt{data/chap02}{
-\setcounter{page}{17}
-\setcounter{equation}{13}
+\setcounter{page}{18}
+\setcounter{equation}{16}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -80,7 +85,7 @@
 \setcounter{subfigure}{0}
 \setcounter{subtable}{0}
 \setcounter{pp@a@footnote}{2}
-\setcounter{endNonectr}{20}
+\setcounter{endNonectr}{23}
 \setcounter{currNonectr}{0}
 \setcounter{LT@tables}{0}
 \setcounter{LT@chunks}{0}
@@ -90,7 +95,7 @@
 \setcounter{Item}{0}
 \setcounter{Hfootnote}{0}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{27}
+\setcounter{bookmark@seq@number}{28}
 \setcounter{AlgoLine}{0}
 \setcounter{algocfline}{0}
 \setcounter{algocfproc}{0}
