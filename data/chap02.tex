@@ -271,12 +271,54 @@ Focal Loss 正是在加权交叉熵损失的基础上进行改进的。Focal Los
 \section{\textrm{ABC-Corner} 数据集构建}
 \label{sec:dataset}
 网络训练和评估离不开高质量的标注数据集。针对点云几何特征检测任务，本文构建了一个专门的数据集——ABC-Corner 数据集。该数据集基于 ABC 数据集~\cite{koch_abc_2019} 中的 CAD 模型，经过精细的标注和处理，包含丰富的面点、边缘点和角点样本，能够有效支持深度学习模型的训练与评估。下文将详细介绍数据集的选取标准、标注流程及统计特性。
-\subsection{数据集模型选取}
-针对点云数据的深度学习任务，目前已有多个公开数据集可供使用，如 ModelNet~\cite{wu_modelnet_2015}、ShapeNet~\cite{chang_shapenet_2015}、ScanNet~\cite{dai_scannet_2017}、ABC~\cite{koch_abc_2019} 等。然而，这些数据集在几何特征的多样性和标注精度方面存在一定的局限性。例如，ModelNet 和 ShapeNet 主要包含日常物体的点云，几何特征相对简单，且缺乏精细的边缘和角点标注；ScanNet 虽然包含真实场景的点云，但噪声较多，且标注不够细致。相比之下，ABC 数据集基于 CAD 模型，具有丰富的几何特征和高精度的边缘与角点信息，非常适合用于本研究中的几何特征检测任务。
-\subsection{初步标注算法}
-\subsection{人工排错与精修}
+\subsection{数据集选取}
+针对点云数据的深度学习任务，目前已有多个公开数据集可供使用，如 ShapeNet~\cite{chang_shapenet_2015}、ScanNet~\cite{dai_scannet_2017}、RGB-D Object Dataset~\cite{} 等。图~\ref{fig:dataset_comparision}展示了部分常用的点云数据集。这些数据集的原始数据一般为扫描得到的非结构化点云，或者RGB-D估计得到的点云，适用于多种点云处理任务，如分类、分割和重建等。然而，在本文的几何特征检测任务中，要求数据集具备高质量的几何特征标注，特别是边缘和角点的精确位置标注。通过扫描或重建得到的点云数据往往存在噪声和不完整性，且难以得到精确的几何特征标注，故本文选择基于 CAD 模型的数据集进行构建。
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{NECDNet/dataset_comparison.jpg}
+%     \bicaption{常用点云数据集对比示意图。}{Comparison of commonly used point cloud datasets.}
+%     \label{fig:dataset_comparison}
+% \end{figure}
+
+在 CAD 模型数据集中，ABC 数据集因其丰富的几何多样性和高精度的模型表示而被广泛应用于几何处理和计算机图形学领域~\cite{koch_abc_2019}。如图~\ref{}，ABC 数据集包含了大量由真实工程设计生成的 CAD 模型，涵盖了各种复杂的几何形状和结构，适合用于点云几何特征检测任务。并且，CAD 模型本身具有明确的几何定义，便于从中提取精确的边缘和角点信息，满足本文对数据集标注质量的高要求。因此，本文选择 ABC 数据集作为构建 ABC-Corner 数据集的基础。
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{NECDNet/abc_dataset_examples.jpg}
+%     \bicaption{ABC 数据集中的部分 CAD 模型示例。}{Examples of CAD models from the ABC dataset.}
+%     \label{fig:abc_dataset_examples}
+% \end{figure}
+
+\subsection{数据集标注流程}
+ABC 数据集中包含了大量的 CAD 模型，原始数据为模型的几何表示（如 B-Rep）。ABC 数据集在构建过程中基于模型的原始数据，生成了网格化表示和几何真值（法向量、曲率、补丁分割、尖锐特征等）。本文的数据集 ABC-Corner 主要使用原始数据集中的OBJ模型文件及其对应的几何真值文件，结合自定义的标注流程，生成包含面点、边缘点和角点标签的点云数据集。如图~\ref{fig:annotation_pipeline}所示，本文数据集标注流程主要包括以下几个步骤：边缘提取、粗角点检测和人工精修。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{NECDNet/annotation_pipeline.jpg}
+    \bicaption{ABC-Corner 数据集标注流程示意图。}{Annotation pipeline for the ABC-Corner dataset.}
+    \label{fig:annotation_pipeline}
+\end{figure}
+
+ABC 数据集的模型文件中包含均匀采样得到的点云数据（顶点），以及每个顶点的法向量和曲率信息。几何真值文件中包含了模型的曲面补丁划分和边缘曲线信息。其中的边缘曲线信息是将模型所有边缘进行参数化表示，包含边缘上各顶点的索引信息，以及曲线的样式。基于该信息可以实现边缘点的自动标注。
+
+ABC中虽然包含了边缘信息，但并未直接提供角点的标注。为了提取角点，本文设计了一种基于几何规则的粗角点检测方法。具体而言，根据边缘曲线信息，识别出边缘的交叉点作为角点候选集，即某个索引在所有曲线中出现三次或三次以上，则将其视为角点。在实际检测中发现对于样条曲线，交点的提取由于索引定义的问题，按照上述规则会将所有构成点均视为角点，导致误检较多。因此，在角点粗提取中会排除样条曲线，仅针对直线和圆弧进行交点检测。通过该方法，能够初步获得角点的候选集。
+
+观察图~\ref{fig:annotation_pipeline} 中的标注结果，可以发现自动提取的边缘点和角点存在一定的误差和遗漏。且粗角点检测中未考虑样条曲线。为此，本文引入了人工精修环节，对自动标注的结果进行校正和补充。具体而言，使用可视化工具 CloudCompare 对点云进行展示，人工检查每个模型的边缘和角点标注，修正错误标注并补充遗漏的特征点。通过该流程，最终生成了高质量的点云几何特征标注数据集 ABC-Corner。
+
+ABC-Corner 在 ABC 数据集的基础上增加了对于模型尖锐角点的准确标注，极大地提升了数据集在点云几何特征检测任务中的适用性。该数据集包含了多样化的几何形状和复杂结构，能够有效支持深度学习模型的训练与评估。在平衡人工标注难度及本文训练数据量要求后，最终的 ABC-Corner 包含了ABC数据集chunk00子集中的1000个模型，模型的选择主要针对几何特征较为突出的模型进行筛选。每个模型均经过上述标注流程处理，生成了包含面点、边缘点和角点标签的点云数据。图~\ref{fig:dataset_samples} 展示了 ABC-Corner 数据集中的部分样本及其标注结果。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{NECDNet/dataset_samples.jpg}
+    \bicaption{ABC-Corner 数据集中的部分样本及其标注结果。}{Samples from the ABC-Corner dataset and their annotation results.}
+    \label{fig:dataset_samples}
+\end{figure}
+
+
 % 介绍数据集来源（ABC dataset）及筛选标准。
 % 详述标注流程（从CAD模型提取边缘 -> 几何规则提取粗角点 -> 人工精修）。
 % 数据集的统计特性与类别不平衡处理（过采样策略）。
 
 \section{本章小结}
+本章主要对NECDNet 网络的设计与实现进行了详细阐述。首先，介绍了多尺度几何特征的提取方法及其在点云三类几何特征中的分布表现，验证了所选特征描述符的有效性。随后，详细描述了NECDNet的网络架构设计，包括多尺度特征融合模块和逐级分类器模块，强调了其在处理点云几何特征检测任务中的优势。接着，介绍了网络训练中的损失函数和评估指标等设置。最后，详细介绍了ABC-Corner数据集的构建过程，包括数据集选取、标注流程及统计特性，为后续实验提供了坚实的数据基础。整体而言，本章为NECDNet的实现奠定了理论与实践基础，为后续章节的实验评估做好准备。
