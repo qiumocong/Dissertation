@@ -169,14 +169,10 @@
     \label{fig:feature_distribution}
 \end{figure}
 
-
 \section{\textrm{NECDNet} 网络架构设计}
-% 阐述 MLP 基础的层次化网络结构。
-% 多尺度特征矩阵的构建与输入。
-% 分类器的设计与Dropout策略防止过拟合。
-NECDNet 的网络架构设计基于多层感知机（Multi-Layer Perceptron, MLP）结构，旨在通过逐层融合多尺度局部特征矩阵，实现对点云中面点、边缘点和角点的高精度分类。该网络架构充分利用了前述计算的多尺度特征矩阵，结合深度学习的强大表达能力，有效捕捉点云局部几何结构的复杂关系。
 
-图~\ref{fig:necdnet_architecture} 展示了 NECDNet 的具体网络结构。网络的输入为 $n$ 个查询点的多尺度特征矩阵 $\mathbf{X}_i^\text{c}$，其维度为 $n \times m \times 6$，其中 $m$ 为尺度数量（本文中取4）。网络整体可以分为两个本部分：多尺度特征融合及逐级分类。网络由多个全连接层（绿色）组成，每层后均采用 Leaky ReLU 激活函数（红色）以引入非线性变换，从而增强模型的表达能力。为了防止过拟合，网络中还引入了 Dropout 层（蓝色），在训练过程中随机丢弃部分神经元连接，提升模型的泛化能力。网络的输出为在，面、边缘、角点，三个类别上的分数，通过 Softmax 函数进行归一化获得，在三个类别中数值最大的类别即为最终的分类结果。
+NECDNet 网络架构针对点云数据中特征点的精细分类任务（包括面点、边缘点和角点），设计了以多层感知机（Multi-Layer Perceptron, MLP）为核心、多尺度特征深度融合与分阶段判别相结合的高效结构~\cite{tolstikhin_mlpmixer_2021}。整体网络流程如图~\ref{fig:necdnet_architecture} 所示，主要包括两大模块：首先，多尺度特征融合模块从多个邻域尺度提取并逐级整合各类局部几何信息，实现输入信息的丰富表达；其次，逐级分类模块采用分层分类思路，将点的最终类别归属过程划分为由简到繁的两个层次，提升了分类准确率和模型的泛化能力。结合全连接层、Leaky ReLU 激活及 Dropout 策略，有效增强了网络的判别能力并抑制了过拟合风险~\cite{xu_empirical_2015, srivastava_dropout_2014}。下文将分别对多尺度特征融合与逐级分类策略进行详细阐述。
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/necdnet_architecture.jpg}
@@ -185,16 +181,42 @@ NECDNet 的网络架构设计基于多层感知机（Multi-Layer Perceptron, MLP
 \end{figure}
 
 \subsection{多尺度特征融合}
-由于网络输入的数据是在多个邻域尺度下得到的，各个尺度下的特征矩阵包含了不同层次的局部几何信息。如果只是进行简单的拼接或平均处理，可能无法充分利用各尺度间的互补信息。因此，NECDNet 设计了逐层融合的机制，通过多层感知机对各尺度特征进行逐级整合，将特征的融合也作为网络的一部分进行学习。
+NECDNet 的输入部分针对每个查询点构建了多尺度邻域下的几何属性特征矩阵。具体地，针对每个点，分别在 $k=8, 16, 32, 64$ 四种不同邻域尺度内提取点云的几何特征，每个尺度获得一个 $6$ 维特征向量 $\mathbf{x}_{i,k} \in \mathbb{R}^6$，所有尺度拼接形成 $4 \times 6$ 的特征矩阵。
 
-具体而言，本文中输入的单个查询点的特征矩阵 $\mathbf{X}_i^\text{c}$ 包含四个尺度（$k=8,16,32,64$）下的六维特征。网络采用两两融合的方式，将输入的四个尺度的特征进行两两拼接（8和16，32和64），即为图~\ref{fig:necdnet_architecture}中的 Concatenation 符号，拼接后的特征向量维度为 12。随后，通过全连接层对拼接后的特征进行非线性变换和降维处理，得到融合后的特征向量，融合后的向量维度为 12。第二层对融合后的特征再次进行两两拼接，得到维度为 24 的特征向量。之后为了防止数据维度过高，在融合的基础上，本文利用全连接层进行进一步的降维，最终得到一个 16 维的特征向量。此外，在进行非线性变换后，为了防止过拟合的现象，本文引入了Dropout层。最终的融合向量综合了不同尺度下的局部几何信息，为后续的分类任务提供了丰富的输入。
+这一多尺度特征首先经过特征提取单元处理。对于第 $j$ 个尺度 ($j \in \{1, 2, 3, 4\}$) 的输入特征 $\mathbf{x}_{i,j}$，通过全连接层（FC）、Leaky ReLU 激活函数进行非线性映射。该过程可表示为：
+\begin{equation}
+    \mathbf{h}_i^{(1)} = \sigma_{\text{LReLU}}(\mathbf{W}_i^{(1)} \mathbf{x}_{i,j} + \mathbf{b}_i^{(1)})
+\end{equation}
+其中，$\mathbf{W}_i^{(1)}$ 和 $\mathbf{b}_i^{(1)}$ 为权重矩阵和偏置项，$\sigma_{\text{LReLU}}$ 表示 Leaky ReLU 激活函数，其定义为 $f(x) = \max(x, \alpha x)$，$\alpha$ 为负半轴斜率（通常取 $0.01$）~\cite{xu_empirical_2015}。
+
+随后，参考图~\ref{fig:necdnet_architecture} 中的结构，模型将相邻两个尺度的特征进行两两拼接（Concatenate）。例如，将 $k=8$ 和 $k=16$ 对应的特征 $\mathbf{h}_1^{(1)}$ 和 $\mathbf{h}_2^{(1)}$ 拼接得到 $\mathbf{z}_{12} = [\mathbf{h}_1^{(1)}, \mathbf{h}_2^{(1)}]$。融合后的特征再次通过类似的非线性变换，公式如(\ref{eq:secondary_fusion})所示。相较于上一步，这里引入了 Dropout 层以防止过拟合现象的发生~\cite{srivastava_dropout_2014}。
+\begin{equation}
+    \mathbf{h}_{12}^{(2)} = \text{Dropout}\left(\sigma_{\text{LReLU}}(\mathbf{W}_{12}^{(2)} \mathbf{z}_{12} + \mathbf{b}_{12}^{(2)})\right)
+    \label{eq:secondary_fusion}
+\end{equation}
+同理可得 $\mathbf{h}_{34}^{(2)}$。接着，将这两组特征进一步拼接为 $24$ 维大向量 $\mathbf{z}_{\text{final}}$，并通过进一步的 FC 层非线性降维，得到 $16$ 维的综合多尺度特征输出 $\mathbf{F}_{\text{out}}$。
+
+整个多尺度特征融合过程不仅实现了不同邻域尺度下信息的交互、互补和融合，还通过层级式的非线性变换消除了简单拼接可能造成的信息冗余，使网络能够自主学习到最具区分力的综合表达，为后续分类模块奠定坚实基础。
 
 \subsection{逐级分类器}
-特征融合后则进入逐级分类器部分。与特征融合类似，该部分也主要由全连接层组成，采用 Leaky ReLU 激活函数。但在具体结构上，逐级分类器部分使用分层设计，首先进行简单的分类任务（面、非面点），根据结果过滤非面点再进行更细粒度的分类（边缘、角点）。这种设计有助于简化分类任务，提高整体的分类准确率。
+多尺度特征融合单元输出的 $16$ 维向量 $\mathbf{F}_{\text{out}}$ 随后交由逐级分类器进行细粒度类别判别。该模块采用两级分层判别架构。
 
-具体而言，首先让维度 16 的融合特征通过一个全连接层，输出维度为 8 的中间特征向量。随后，该中间特征向量通过另一个全连接层，输出维度为 2 的面、非面分类分数。根据该分数，本文采用阈值过滤的方式，将非面点送入下一级分类器进行边缘、角点的细粒度分类。下一级分类器同样由两个全连接层组成，首先将维度 8 的中间特征向量通过一个全连接层，输出维度为 4 的特征向量。随后，该特征向量通过另一个全连接层，输出维度为 2 的边缘、角点分类分数。最终，通过 Softmax 函数对三个分类分数进行归一化处理，得到每个类别的概率分布。
+\subsubsection{第一级分类（面点判别）}
+首先，$\mathbf{F}_{\text{out}}$ 经过类似公式(\ref{eq:secondary_fusion})的变换降维至 $8$ 维，得到中间特征 $\mathbf{v}_{\text{mid}}$。随后，通过 FC 层输出面点与非面点的逻辑值（Logits）$\mathbf{l}_1 \in \mathbb{R}^2$。最终的初级分类概率分布 $\mathbf{p}_1$ 由 Softmax 函数计算得出~\cite{bishop_pattern_2006}：
+\begin{equation}
+    \mathbf{p}_1 = \text{Softmax}(\mathbf{l}_1) = \frac{e^{\mathbf{l}_{1,j}}}{\sum_{k=1}^{2} e^{\mathbf{l}_{1,k}}}, \quad j \in \{1, 2\}
+    \label{eq:softmax_result}
+\end{equation}
+若判定为面点，则直接据此输出结果；若为非面点，则将中间特征 $\mathbf{v}_{\text{mid}}$ 送入下一级分类子模块。
+
+\subsubsection{第二级分类（边缘点与角点判别）}
+在第二级分类器中，传入的 $8$ 维特征 $\mathbf{v}_{\text{mid}}$ 再次经历 FC、Leaky ReLU 和 Dropout 处理，降维为 $4$ 维特征 $\mathbf{v}_{\text{sub}}$，最后映射为边缘点和角点的二分类逻辑值 $\mathbf{l}_2$。同样利用 Softmax 得到概率分布 $\mathbf{p}_2$，类似公式(\ref{eq:softmax_result})所示。
+最终，对于每个输入点，网络结合两级输出确定“面-边缘-角”三类别的归属。
+
+这种分级判别方法，有效简化了单次多分类的复杂度，提升了点云中特征类别区分的精度和鲁棒性。值得一提的是，每层分类器均结合 Leaky ReLU 增强非线性表达，Dropout 有效应对过拟合风险，整体保证了 NECDNet 在结构复杂、类别分布不均等点云场景下的自适应能力。
+
 \subsection{损失函数}
-点云中几何特征的分布存在不平衡现象，面点数量远多于边缘点和角点，特别是角点。为了应对类别不平衡问题，本文在训练过程中采用 Focal Loss 作为优化指标~\cite{lin_focal_2020}。Focal Loss 旨在解决训练中前景与背景类别极度不平衡的单阶段物体检测场景（例如1：1000）。其在交叉熵损失（Cross Entropy, CE） 的基础上引入了调节因子，降低了易分类样本的权重，从而使模型更加关注难分类样本。
+点云中几何特征的分布存在不平衡现象，面点数量远多于边缘点和角点，特别是角点~\cite{japkowicz_class_2002a}。为了应对类别不平衡问题，本文在训练过程中采用 Focal Loss 作为优化指标~\cite{lin_focal_2020}。Focal Loss 旨在解决训练中前景与背景类别极度不平衡的单阶段物体检测场景（例如1：1000）。其在交叉熵损失（Cross Entropy, CE） 的基础上引入了调节因子，降低了易分类样本的权重，从而使模型更加关注难分类样本。
 
 交叉熵损失是分类任务中常用的损失函数，其可以度量模型预测概率分布与真实标签分布之间的差异。交叉熵越小，说明两者越相似；越大，说明差异越大。交叉熵损失的定义如公式(\ref{eq:ce_loss})所示~\cite{mao_crossentropy_2023}。其中，$p_t$ 表示模型对真实类别的预测概率。然而交叉熵损失在类别不平衡的情况下，容易被大量的易分类样本主导，导致模型对少数类别的学习效果不佳。
 \begin{equation}
@@ -202,31 +224,57 @@ NECDNet 的网络架构设计基于多层感知机（Multi-Layer Perceptron, MLP
     \label{eq:ce_loss}
 \end{equation}
 
-为了解决类别极度不均衡的问题，可以在交叉熵损失的基础上引入类别权重 $\alpha$，得到加权交叉熵损失，其在计算时对不同类别赋予不同的权重，增强对少数类别的关注，定义如公式(\ref{eq:weighted_ce_loss})所示。其中，$\alpha_t$ 为类别 $t$ 的权重，通常根据类别频率进行设置。Focal Loss 正是在加权交叉熵损失的基础上进行改进的。
+为了解决类别极度不均衡的问题，可以在交叉熵损失的基础上引入类别权重 $\alpha$，得到加权交叉熵损失（Weighted Cross Entropy, WCE）。其在计算时对不同类别赋予不同的权重，增强对少数类别的关注，定义如公式(\ref{eq:weighted_ce_loss})所示。其中，$\alpha_t$ 为类别 $t$ 的权重，通常根据类别频率进行设置。
 \begin{equation}
-    \mathrm{CE}_{\alpha}(p_t) = -\alpha_t \log(p_t)
+    \mathrm{WCE}_{\alpha}(p_t) = -\alpha_t \log(p_t)
     \label{eq:weighted_ce_loss}
 \end{equation}
 
-为此，Focal Loss 在加权交叉熵损失的基础上引入了调节因子 $(1 - p_t)^\gamma$，其中 $\gamma$ 为调节参数，用于控制易分类样本的权重衰减程度。Focal Loss 的定义如下：
+Focal Loss 正是在加权交叉熵损失的基础上进行改进的。Focal Loss 在加权交叉熵损失的基础上引入了调节因子 $(1 - p_t)^\gamma$，其中 $\gamma$ 为调节参数，用于控制易分类样本的权重衰减程度。Focal Loss 的定义如公式(\ref{eq:focal_loss})所示~\cite{lin_focal_2020}。相较于加权交叉熵损失，Focal Loss 通过调节因子有效降低了易分类样本的影响力，使模型更加关注难分类样本，从而提升在类别不平衡情况下的分类性能。
 \begin{equation}
     \mathrm{FL}(p_t) = -\alpha_t (1 - p_t)^\gamma \log(p_t)
     \label{eq:focal_loss}
 \end{equation}
 
-焦点损失旨在解决训练中前景与背景类别极度不平衡的单阶段物体检测场景（例如1：1000）。我们从交叉熵（CE）损失开始引入焦距损失，用于二元分类1：
-
 \subsection{评价指标}
-为了全面评估 NECDNet 在点云几何特征检测任务中的性能，本文采用了多种评价指标，包括准确率（Accuracy）、精确率（Precision）、召回率（Recall）、F1 分数（F1 Score）、交并比（Intersection over Union, IoU）和马修斯相关系数（The Matthews Correlation Coefficient, MCC）~\cite{}。这些指标能够从不同角度反映模型的分类效果，特别是在处理类别不平衡问题时，精确率和召回率尤为重要。这些指标主要通过混淆矩阵（Confusion Matrix）进行计算，混淆矩阵记录了模型在各类别上的预测结果与真实标签的对比情况。混淆矩阵的行表示真实类别，列表示预测类别，其中对角线上的值表示正确分类的数量，非对角线上的值表示分类错误的数量。基于混淆矩阵，可以计算出各项评价指标，从而全面评估模型的性能。
+\label{sec:metrics}
+为了全面评估 NECDNet 在点云几何特征检测任务中的性能，本文采用了多种评价指标，包括准确率（Accuracy）、精确率（Precision）、召回率（Recall）、F1 分数（F1 Score）、交并比（Intersection over Union, IoU）和马修斯相关系数（The Matthews Correlation Coefficient, MCC）~\cite{krstinic_multilabel_2020, chicco_advantages_2020, japkowicz_class_2002a}。这些指标能够从不同角度反映模型的分类效果，特别是在处理类别不平衡问题时，精确率和召回率尤为重要。这些指标主要通过混淆矩阵（Confusion Matrix）进行计算，混淆矩阵记录了模型在各类别上的预测结果与真实标签的对比情况。混淆矩阵的行表示真实类别，列表示预测类别，其中对角线上的值表示正确分类的数量，非对角线上的值表示分类错误的数量。基于混淆矩阵，可以计算出各项评价指标，从而全面评估模型的性能~\cite{duntsch_confusion_2019}，各个指标的具体计算公式请见附录\ref{cha:app_metrics}。
 
+本文中分类任务为三分类，类别分别为：$\mathtt{f}$（面点）、$\mathtt{e}$（边缘点）、$\mathtt{c}$（角点）。可以构建对应的混淆矩阵，如表~\ref{tab:confusion_matrix}所示。表中，$TP$（True Positive）表示正确预测为正类的数量，$TN$（True Negative）表示正确预测为负类的数量，$FP$（False Positive）表示错误预测为正类的数量，$FN$（False Negative）表示错误预测为负类的数量。
+\begin{table}[!htbp]
+    \centering
+    \bicaption{三分类任务的混淆矩阵示例。}{Example of confusion matrix for three-class classification task.}
+    \begin{tabular}{ccccc}
+        \toprule
+        & \multicolumn{3}{c}{预测类别} & \\ 
+        \cmidrule(lr){2-4}
+        真实类别 & $\mathtt{f}$ & $\mathtt{e}$ & $\mathtt{c}$ & 总计 \\
+        \midrule
+        $\mathtt{f}$ & $TP_{\mathtt{f}}$ & $FP_{\mathtt{e}}$ & $FP_{\mathtt{c}}$ & $P_{\mathtt{f}}$ \\
+        $\mathtt{e}$ & $FN_{\mathtt{f}}$ & $TP_{\mathtt{e}}$ & $FP_{\mathtt{c}}$ & $P_{\mathtt{e}}$ \\
+        $\mathtt{c}$ & $FN_{\mathtt{f}}$ & $FN_{\mathtt{e}}$ & $TP_{\mathtt{c}}$ & $P_{\mathtt{c}}$ \\
+        总计 & $N_{\mathtt{f}}$ & $N_{\mathtt{e}}$ & $N_{\mathtt{c}}$ & $N$ \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:confusion_matrix}
+\end{table}
 
+上述评价指标的标准公式是基于二分类任务进行设计的。对于多分类任务，需要在指标的计算或者混淆矩阵的构建上进行调整。例如\citet{erbani_confusion_2024} 提出基于传输的混淆矩阵构建方法，建立在最优传输理论和最大熵原理之上，针对多标签或软标签分类复杂任务提出了一种新的混淆矩阵构建方法。其次就是在指标计算上，可以采用宏平均（Macro-Averaging）和微平均（Micro-Averaging）两种方式~\cite{krstinic_multilabel_2020, japkowicz_class_2002a}。宏平均是对每个类别分别计算指标，然后取平均值，适用于类别分布不均衡的情况；而微平均则是将所有类别的预测结果合并后计算指标，更适用于类别分布均衡的情况。
+
+由于本文的分类任务较为简单，且为了与目前的其余最新方法（state-of-the-art, SOTA） 进行对比，本文中主要采用宏平均的方式计算各项评价指标。具体而言，设 $C$ 为类别总数，$M_c$ 为类别 $c$ 的评价指标值，则宏平均的计算公式如(\ref{eq:macro_average})所示。本文中 $C=3$，分别对应面、边缘、角点三类。
+\begin{equation}
+    M_\text{macro} = \frac{1}{C} \sum_{c=1}^{C} M_c
+    \label{eq:macro_average}
+\end{equation}
 
 
 \section{\textrm{ABC-Corner} 数据集构建}
 \label{sec:dataset}
+网络训练和评估离不开高质量的标注数据集。针对点云几何特征检测任务，本文构建了一个专门的数据集——ABC-Corner 数据集。该数据集基于 ABC 数据集~\cite{koch_abc_2019} 中的 CAD 模型，经过精细的标注和处理，包含丰富的面点、边缘点和角点样本，能够有效支持深度学习模型的训练与评估。下文将详细介绍数据集的选取标准、标注流程及统计特性。
 \subsection{数据集模型选取}
-\subsection{初步标注}
-\subsection{r}
+针对点云数据的深度学习任务，目前已有多个公开数据集可供使用，如 ModelNet~\cite{wu_modelnet_2015}、ShapeNet~\cite{chang_shapenet_2015}、ScanNet~\cite{dai_scannet_2017}、ABC~\cite{koch_abc_2019} 等。然而，这些数据集在几何特征的多样性和标注精度方面存在一定的局限性。例如，ModelNet 和 ShapeNet 主要包含日常物体的点云，几何特征相对简单，且缺乏精细的边缘和角点标注；ScanNet 虽然包含真实场景的点云，但噪声较多，且标注不够细致。相比之下，ABC 数据集基于 CAD 模型，具有丰富的几何特征和高精度的边缘与角点信息，非常适合用于本研究中的几何特征检测任务。
+\subsection{初步标注算法}
+\subsection{人工排错与精修}
 % 介绍数据集来源（ABC dataset）及筛选标准。
 % 详述标注流程（从CAD模型提取边缘 -> 几何规则提取粗角点 -> 人工精修）。
 % 数据集的统计特性与类别不平衡处理（过采样策略）。

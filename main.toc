@@ -29,41 +29,44 @@
 \contentsline {section}{\numberline {2.3}\textrm {NECDNet} 网络架构设计}{14}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}多尺度特征融合}{15}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}逐级分类器}{16}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {1）}第一级分类（面点判别）}{16}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2）}第二级分类（边缘点与角点判别）}{16}{subsubsection.2.3.2.2}%
 \contentsline {subsection}{\numberline {2.3.3}损失函数}{16}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}评价指标}{17}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}\textrm {ABC-Corner} 数据集构建}{17}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}数据集模型选取}{17}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}初步标注}{17}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}r}{17}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}本章小结}{17}{section.2.5}%
-\contentsline {chapter}{\numberline {第三章}考虑边缘与角点接触的机器人抓取规划}{18}{chapter.3}%
-\contentsline {section}{\numberline {3.1}引言}{18}{section.3.1}%
-\contentsline {section}{\numberline {3.2}基于几何特征的接触点采样与配对}{18}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}类别感知的体素采样}{18}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}特征化接触检测器设计}{18}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}对偶接触点配对策略}{18}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}基于软接触模型的稳定性评估}{18}{section.3.3}%
-\contentsline {section}{\numberline {3.4}抓取增强策略}{18}{section.3.4}%
-\contentsline {section}{\numberline {3.5}本章小结}{18}{section.3.5}%
-\contentsline {chapter}{\numberline {第四章}实验结果与分析}{19}{chapter.4}%
-\contentsline {section}{\numberline {4.1}实验环境及配置}{19}{section.4.1}%
-\contentsline {section}{\numberline {4.2}点云特征检测实验分析}{19}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}对比实验}{19}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}消融实验}{19}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}结果可视化}{19}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}抓取规划仿真实验分析}{19}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}抓取分布多样性评估}{19}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}典型物体抓取规划结果}{19}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}参数敏感性分析}{19}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}真实机器人抓取实验}{19}{section.4.4}%
-\contentsline {section}{\numberline {4.5}本章小结}{19}{section.4.5}%
-\contentsline {chapter}{\numberline {第五章}总结与展望}{20}{chapter.5}%
-\contentsline {section}{\numberline {5.1}全文总结}{20}{section.5.1}%
-\contentsline {section}{\numberline {5.2}创新点}{20}{section.5.2}%
-\contentsline {section}{\numberline {5.3}研究不足与展望}{20}{section.5.3}%
-\contentsline {chapter}{插图索引}{21}{section*.12}%
-\contentsline {chapter}{表格索引}{22}{section*.14}%
-\contentsline {chapter}{攻读专业硕士学位期间取得的研究成果}{23}{section*.16}%
-\contentsline {chapter}{致\hspace {\ccwd }谢}{24}{section*.18}%
-\contentsline {chapter}{\numberline {附录 A}经典函数公式}{25}{appendix.A}%
-\contentsline {chapter}{\numberline {附录 B}用于定量比较的指标公式}{26}{appendix.B}%
+\contentsline {section}{\numberline {2.4}\textrm {ABC-Corner} 数据集构建}{19}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}数据集模型选取}{19}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}初步标注}{19}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}r}{19}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}本章小结}{19}{section.2.5}%
+\contentsline {chapter}{\numberline {第三章}考虑边缘与角点接触的机器人抓取规划}{20}{chapter.3}%
+\contentsline {section}{\numberline {3.1}引言}{20}{section.3.1}%
+\contentsline {section}{\numberline {3.2}基于几何特征的接触点采样与配对}{20}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}类别感知的体素采样}{20}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}特征化接触检测器设计}{20}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}对偶接触点配对策略}{20}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}基于软接触模型的稳定性评估}{20}{section.3.3}%
+\contentsline {section}{\numberline {3.4}抓取增强策略}{20}{section.3.4}%
+\contentsline {section}{\numberline {3.5}本章小结}{20}{section.3.5}%
+\contentsline {chapter}{\numberline {第四章}实验结果与分析}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}实验环境及配置}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}点云特征检测实验分析}{21}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}对比实验}{21}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}消融实验}{21}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}结果可视化}{21}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}抓取规划仿真实验分析}{21}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}抓取分布多样性评估}{21}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}典型物体抓取规划结果}{21}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}参数敏感性分析}{21}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}真实机器人抓取实验}{21}{section.4.4}%
+\contentsline {section}{\numberline {4.5}本章小结}{21}{section.4.5}%
+\contentsline {chapter}{\numberline {第五章}总结与展望}{22}{chapter.5}%
+\contentsline {section}{\numberline {5.1}全文总结}{22}{section.5.1}%
+\contentsline {section}{\numberline {5.2}创新点}{22}{section.5.2}%
+\contentsline {section}{\numberline {5.3}研究不足与展望}{22}{section.5.3}%
+\contentsline {chapter}{插图索引}{23}{section*.13}%
+\contentsline {chapter}{表格索引}{24}{section*.15}%
+\contentsline {chapter}{参考文献}{25}{section*.17}%
+\contentsline {chapter}{攻读专业硕士学位期间取得的研究成果}{27}{section*.19}%
+\contentsline {chapter}{致\hspace {\ccwd }谢}{28}{section*.21}%
+\contentsline {chapter}{\numberline {附录 A}经典函数公式}{29}{appendix.A}%
+\contentsline {chapter}{\numberline {附录 B}用于定量比较的指标公式}{30}{appendix.B}%
