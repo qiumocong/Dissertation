@@ -12,15 +12,36 @@
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{FBGFBGrasp/framework.pdf}
-    \caption{基于几何特征的机器人抓取规划框架}{Robotic grasp planning framework based on geometric features.}
+    \bicaption{基于几何特征的机器人抓取规划框架}{Robotic grasp planning framework based on geometric features.}
     \label{fig:fbgrasp_framework}
 \end{figure}
 
 \section{类别感知的接触点采样}
 % 基于体素的均衡采样方法，确保面、边、角区域的接触点均有覆盖。
-给定一个物体的三角网格模型，首先需要在其表面采样其对应的稠密点云，以用于后续的接触点采样。
+基于采样点进行抓取规划的方法，首先需要从物体表面采样潜在的接触点。为了充分利用物体的几何特征，本文提出了一种类别感知的体素采样方法，确保从物体的面、边、角区域均衡地采样接触点。而由于最后的抓取配置数量会直接受到采样点数量的影响，因此在采样过程中需要在采样数量与计算效率之间进行权衡。本文基于类别的采样结果如图~\ref{fig:fbgrasp_sampling}所示，面区域采样点较多（蓝色），边区域次之（橙色），角区域最少（红色），但均能覆盖到物体的主要几何特征。
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{FBGFBGrasp/sampling.pdf}
+    \bicaption{基于类别的体素采样结果}{Voxel sampling results based on categories.}
+    \label{fig:fbgrasp_sampling}
+\end{figure}
+\subsection{几何特征检测}
+进行接触点采样前需要对物体的几何特征进行检测与分类。本文采用第(\ref{chap:necdnet})章中介绍的NECDNet进行几何特征检测。由于NECDNet输入为点云信息，所以需要先将三角网格模型转换为点云表示。本文主要选择均匀采样的方法，从物体表面均匀采样一定数量的点云，然后将其输入到预训练的NECDNet中进行特征分类。NECDNet输出每个点的类别标签，包括面、边、角三类。检测出的点云如图~\ref{fig:fbgrasp_feature_detection}所示，不同颜色表示不同的几何特征类别。由于基于模型的方法已知物体的真实法向量，因此上述选用基于真实法向量训练得到的NECDNet模型进行特征检测。
 
-\section{基于几何特征的接触点配对}
+由于角点在物体上一般为单独分布，为了使检测结果能直接适用于抓取规划，本文在NECDNet检测后对角点进行了聚类处理。具体而言，采用DBSCAN聚类算法对检测出的角点进行聚类，聚类后的每个簇代表一个角点区域。然后，计算每个簇的质心位置作为该角点区域的代表点，并将其类别标签设为角点类别。经过聚类处理后，角点的表示更加紧凑，有利于后续的采样与配对。
+
+DBSCAN聚类表示为公式~(\ref{eq:dbscan})。其中 $P$ 表示待聚类的点集，$\epsilon$ 表示邻域半径，$MinPts$ 表示最小邻域点数。
+\begin{equation}
+    \text{DBSCAN}(P, \epsilon, MinPts)
+    \label{eq:dbscan}
+\end{equation}
+\subsection{基于类别的体素采样}
+在获得物体表面的点云及其几何特征类别后，本文采用基于体素的均衡采样方法，从面、边、角区域均衡地采样潜在接触点。此外，采用体素采样的方法可以使采样点在空间上均匀分布，利于后续的接触检测与配对。
+
+具体而言，首先将不同几何类别的点云进行区分，并根据类别分别选用不同尺寸的体素
+
+
+\section{基于几何特征的接触点检测}
 
 \subsection{特征化接触检测器设计}
 
