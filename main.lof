@@ -1,11 +1,15 @@
 \addvspace {10.0pt}
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {2.1}{\ignorespaces NECDNet 网络架构及工作流程示意图。\relax }}{7}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。\relax }}{14}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces NECDNet 网络架构示意图。\relax }}{15}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces ABC-Corner 数据集标注流程示意图。\relax }}{20}{figure.caption.13}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces ABC-Corner 数据集中的部分样本及其标注结果。\relax }}{21}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces NECDNet 网络架构及工作流程示意图。}}{7}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。}}{14}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces NECDNet 网络架构示意图。}}{15}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces ABC-Corner 数据集标注流程示意图。}}{20}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces ABC-Corner 数据集中的部分样本及其标注结果。}}{21}{figure.caption.14}%
 \addvspace {10.0pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 基于几何特征的机器人抓取规划框架}}{23}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 基于类别的体素采样结果}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 基于NECDNet的几何特征检测结果}}{24}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 不同体素采样尺寸及采样策略下的采样结果}}{25}{figure.caption.18}%
 \addvspace {10.0pt}
 \addvspace {10.0pt}
 \addvspace {10.0pt}

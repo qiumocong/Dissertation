@@ -11,7 +11,7 @@
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth]{FBGFBGrasp/framework.pdf}
+    \includegraphics[width=0.8\textwidth]{FBGrasp/framework.pdf}
     \bicaption{基于几何特征的机器人抓取规划框架}{Robotic grasp planning framework based on geometric features.}
     \label{fig:fbgrasp_framework}
 \end{figure}
@@ -21,12 +21,21 @@
 基于采样点进行抓取规划的方法，首先需要从物体表面采样潜在的接触点。为了充分利用物体的几何特征，本文提出了一种类别感知的体素采样方法，确保从物体的面、边、角区域均衡地采样接触点。而由于最后的抓取配置数量会直接受到采样点数量的影响，因此在采样过程中需要在采样数量与计算效率之间进行权衡。本文基于类别的采样结果如图~\ref{fig:fbgrasp_sampling}所示，面区域采样点较多（蓝色），边区域次之（橙色），角区域最少（红色），但均能覆盖到物体的主要几何特征。
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth]{FBGFBGrasp/sampling.pdf}
+    % \includegraphics[width=1.0\textwidth]{FBGrasp/sampling.pdf}
+    \includegraphics[width=0.5\textwidth, alt={Big letter A on a gray background.}]{example-image-a}
+    
     \bicaption{基于类别的体素采样结果}{Voxel sampling results based on categories.}
     \label{fig:fbgrasp_sampling}
 \end{figure}
 \subsection{几何特征检测}
-进行接触点采样前需要对物体的几何特征进行检测与分类。本文采用第(\ref{chap:necdnet})章中介绍的NECDNet进行几何特征检测。由于NECDNet输入为点云信息，所以需要先将三角网格模型转换为点云表示。本文主要选择均匀采样的方法，从物体表面均匀采样一定数量的点云，然后将其输入到预训练的NECDNet中进行特征分类。NECDNet输出每个点的类别标签，包括面、边、角三类。检测出的点云如图~\ref{fig:fbgrasp_feature_detection}所示，不同颜色表示不同的几何特征类别。由于基于模型的方法已知物体的真实法向量，因此上述选用基于真实法向量训练得到的NECDNet模型进行特征检测。
+进行接触点采样前需要对物体的几何特征进行检测与分类。本文采用第\ref{chap:necdnet}章中介绍的NECDNet进行几何特征检测。由于NECDNet输入为点云信息，所以需要先将三角网格模型转换为点云表示。本文主要选择均匀采样的方法，从物体表面均匀采样一定数量的点云，然后将其输入到预训练的NECDNet中进行特征分类。NECDNet输出每个点的类别标签，包括面、边、角三类。检测出的点云如图~\ref{fig:fbgrasp_feature_detection}所示，不同颜色表示不同的几何特征类别。由于基于模型的方法已知物体的真实法向量，因此上述选用基于真实法向量训练得到的NECDNet模型进行特征检测。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth, alt={Big letter A on a gray background.}]{example-image-a}
+    \bicaption{基于NECDNet的几何特征检测结果}{Geometric feature detection results based on NECDNet.}
+    \label{fig:fbgrasp_feature_detection}
+\end{figure}
 
 由于角点在物体上一般为单独分布，为了使检测结果能直接适用于抓取规划，本文在NECDNet检测后对角点进行了聚类处理。具体而言，采用DBSCAN聚类算法对检测出的角点进行聚类，聚类后的每个簇代表一个角点区域。然后，计算每个簇的质心位置作为该角点区域的代表点，并将其类别标签设为角点类别。经过聚类处理后，角点的表示更加紧凑，有利于后续的采样与配对。
 
@@ -36,14 +45,28 @@ DBSCAN聚类表示为公式~(\ref{eq:dbscan})。其中 $P$ 表示待聚类的点
     \label{eq:dbscan}
 \end{equation}
 \subsection{基于类别的体素采样}
-在获得物体表面的点云及其几何特征类别后，本文采用基于体素的均衡采样方法，从面、边、角区域均衡地采样潜在接触点。此外，采用体素采样的方法可以使采样点在空间上均匀分布，利于后续的接触检测与配对。
+在获得物体表面的点云及其几何特征类别后，本文采用基于体素的均衡采样方法，从面、边、角区域均衡地采样潜在接触点。此外，采用体素采样的方法可以使采样点在空间上均匀分布，利于后续的接触检测与配对。反之，如果采用全局采样的方式会导致边缘、角点这两个数量较少的类别点难以被采样，无法进行后续的基于类别的抓取规划任务。
 
-具体而言，首先将不同几何类别的点云进行区分，并根据类别分别选用不同尺寸的体素
+基于类别的体素采样具体而言，首先将不同几何类别的点云进行区分，得到三个类别的子点云。由于均匀采样下的面点往往会远多于边缘点和角点，故本文针对面点选择较大的体素尺寸，角点则选择较小的体素尺寸。三个类别的体素尺寸比值如公式~(\ref{eq:voxel_size_ratio})。$ v_f, v_e, v_c$ 分别代表三个类别的体素采样尺寸，将 $v_c$ 记作体素采样的参数 $v$ 作为可调参数。
+\begin{equation}
+    v_f : v_e : v_c = 4 : 2 : 1
+    \label{eq:voxel_size_ratio}
+\end{equation}
+
+图~\ref{fig:fbgrasp_sampling_strategy}的不同列展示了同一个物体在不同体素采样尺寸 $v$ 下的采样结果，第一行展示了全局采样的结果，第二行展示了基于类别的体素采样结果。结果说明，随着采样尺寸的增大，采样点会减少，从而导致后续用于抓取规划的接触点减少，最后得到的抓取数量减少；而采样尺寸较小时，由于采样点较多，后续抓取规划的计算时间会更长。此外，全局采样方法下的采样点在边缘和角点上的分布会更少，而基于类别的采样方法在不同类别上的采样点分布较为均匀，采用后者方法更有利于本文的规划主题。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{FBGrasp/sampling_strategy.pdf}
+    \bicaption{不同体素采样尺寸及采样策略下的采样结果}{Sampling results under different voxel sizes and sampling strategies.}
+    \label{fig:fbgrasp_sampling_strategy}
+\end{figure}
 
 
-\section{基于几何特征的接触点检测}
+\section{基于几何特征的接触对检测}
+得到物体采样后的接触点则可以进行后续的接触对检测。
 
-\subsection{特征化接触检测器设计}
+\subsection{特征化接触对检测器设计}
 
 \subsection{对偶接触点配对策略}
 
