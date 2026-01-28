@@ -25,7 +25,7 @@
 \begin{figure}
     \centering
     % \includegraphics[width=1.0\textwidth]{FBGrasp/sampling.pdf}
-    \includegraphics[width=0.5\textwidth, alt={Big letter A on a gray background.}]{example-image-a}
+    \includegraphics[width=0.5\textwidth]{example-image-a}
     \bicaption{基于类别的体素采样结果}{Voxel sampling results based on categories.}
     \label{fig:fbgrasp_sampling}
 \end{figure}
@@ -36,7 +36,7 @@
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth, alt={Big letter A on a gray background.}]{example-image-a}
+    \includegraphics[width=0.5\textwidth]{example-image-a}
     \bicaption{基于NECDNet的几何特征检测结果}{Geometric feature detection results based on NECDNet.}
     \label{fig:fbgrasp_feature_detection}
 \end{figure}
@@ -191,7 +191,7 @@
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\linewidth]{pic/stability.pdf}
+    \includegraphics[width=0.8\linewidth]{FBGrasp/stability.pdf}
     \bicaption{基于软接触变形的接触点集获取示意图}{Obtaining contact points for stability estimation considering soft contact.}
     \label{fig:stability}
 \end{figure}
@@ -233,7 +233,7 @@
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\linewidth]{pic/augmentation.pdf}
+    \includegraphics[width=0.85\linewidth]{FBGrasp/augmentation.pdf}
     \bicaption{抓取构型增强示意图}{Schematic of grasp configuration augmentation.}
     \label{fig:augmentation}
 \end{figure}
@@ -243,10 +243,11 @@
 \section{本章小结}
 
 本章针对机器人操作中复杂几何物体的抓取难题，特别是传统方法在处理非平面特征时的局限性，提出了一种融合面、边、角多维几何特征的系统化抓取规划方法。
-首先，针对物体表面几何特征分布不均导致的采样“长尾”问题，提出了类别感知的体素均衡采样策略。通过结合 NECDNet 深度学习特征推理与 DBSCAN 聚类算法，实现了对面、边、角区域的独立体素化采样，确保了稀疏特征（如角点）在候选集中的有效覆盖，为多样化抓取奠定了数据基础。
+
+针对物体表面几何特征分布不均导致的采样“长尾”问题，提出了类别感知的体素均衡采样策略。通过结合 NECDNet 深度学习特征推理与 DBSCAN 聚类算法，实现了对面、边、角区域的独立体素化采样，确保了稀疏特征（如角点）在候选集中的有效覆盖，为多样化抓取奠定了数据基础。
 
 其次，依据不同几何特征的自由度约束特性，设计了特征化的空间接触检测器（圆柱体、扇形柱及圆锥体），并制定了相应的对偶接触点配对策略。通过引入基于投影距离与法向夹角的筛选机制，有效解决了混合特征下的接触点配对问题，从几何层面保证了候选抓取的合理性。
 
-再次，为了准确评估柔性指腹在边缘与角点处的接触稳定性，建立了基于离散化近似的软接触力学模型。该模型通过将连续的非线性软接触简化为分布式硬点接触簇，实现了基于力封闭理论的高效稳定性判别。此外，结合抓取构型增强策略，通过沿进近轴的旋转采样，进一步扩充了机器人的可行解空间。
+为了准确评估柔性指腹在边缘与角点处的接触稳定性，本文建立了基于离散化近似的软接触力学模型。该模型通过将连续的非线性软接触简化为分布式硬点接触簇，实现了基于力封闭理论的高效稳定性判别。此外，结合抓取构型增强策略，通过沿进近轴的旋转采样，进一步扩充了机器人的可行解空间。
 
 综上所述，本章所提出的方法有效突破了传统平面接触假设的束缚，显著提升了抓取规划算法对物体复杂几何外形的适应性，为后续章节的实验验证与实际应用提供了坚实的理论与算法支撑。

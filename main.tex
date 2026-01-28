@@ -10,8 +10,14 @@
 \usepackage{bm}
 \usepackage{titlesec}
 \usepackage{fontspec}
-\setmonofont{Courier New} 
-% \setmonofont{Ubuntu Mono}
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+% \setmonofont{Courier New} 
+\setmonofont{Ubuntu Mono}
 \graphicspath{{figures/}}
 
 \renewcommand{\thesubsubsection}{\arabic{subsubsection}）}
@@ -66,11 +72,13 @@
 \include{data/chap03}
 \include{data/chap04}
 \include{data/chap05}
+\include{data/chap_exp}
+\include{data/chap_exp2}
 \listoffigures                        % 插图索引
 \listoftables                         % 表格索引
 
 % 参考文献. 
-\bibliographystyle{gbt7714-numerical}
+% \bibliographystyle{gbt7714-numerical}
 \bibliography{reference/refs}
 
 \include{data/publications}           % 发表论文清单
