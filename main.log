@@ -1,94 +1,83 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2026.1.19)  28 JAN 2026 14:15
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.20)  31 JAN 2026 20:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **main
 (./main.tex
-LaTeX2e <2020-02-02> patch level 2
-L3 programming layer <2020-02-14> (./shuthesis.cls
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(./shuthesis.cls
 Document Class: shuthesis 2023/12/18 v2.2.0 Shanghai University Thesis Template
-(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks14
-) (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
-Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
-)) (/usr/share/texlive/texmf-dist/tex/latex/ctex/ctexbook.cls (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-02-14 L3 programming layer (loader) 
- (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def
-File: l3backend-xdvipdfmx.def 2020-02-03 L3 backend support: xdvipdfmx
-\g__graphics_track_int=\count163
-\l__pdf_internal_box=\box45
-\g__pdf_backend_object_int=\count164
-\g__pdf_backend_annotation_int=\count165
+(d:/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+) (d:/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (d:/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)) (d:/texlive/2025/texmf-dist/tex/latex/ctex/ctexbook.cls (d:/texlive/2025/texmf-dist/tex/latex/ctex/config/ctexbackend.cfg
+File: ctexbackend.cfg 2022/07/14 v2.5.10 Backend configuration file (CTEX)
+) (d:/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2025-01-18 L3 programming layer (loader) 
+ (d:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2024-05-08 L3 backend support: XeTeX
+\g__graphics_track_int=\count192
+\l__pdf_internal_box=\box52
+\g__pdf_backend_annotation_int=\count193
+\g__pdf_backend_link_int=\count194
 ))
-Document Class: ctexbook 2019/05/29 v2.4.16 Chinese adapter for class book (CTEX)
-(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2020-02-14 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count166
-\g__xparse_grabber_int=\count167
-\l__xparse_m_args_int=\count168
-\l__xparse_v_nesting_int=\count169
-) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2020-02-14 LaTeX2e option processing using LaTeX3 keys
-) (/usr/share/texlive/texmf-dist/tex/latex/ctex/ctexhook.sty
-Package: ctexhook 2019/05/29 v2.4.16 Document and package hooks (CTEX)
-) (/usr/share/texlive/texmf-dist/tex/latex/ctex/ctexpatch.sty
-Package: ctexpatch 2019/05/29 v2.4.16 Patching commands (CTEX)
-) (/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
-Package: fix-cm 2015/01/14 v1.1t fixes to LaTeX
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
+Document Class: ctexbook 2022/07/14 v2.5.10 Chinese adapter for class book (CTEX)
+(d:/texlive/2025/texmf-dist/tex/latex/ctex/ctexhook.sty
+Package: ctexhook 2022/07/14 v2.5.10 Document and package hooks (CTEX)
+) (d:/texlive/2025/texmf-dist/tex/latex/ctex/ctexpatch.sty
+Package: ctexpatch 2022/07/14 v2.5.10 Patching commands (CTEX)
+) (d:/texlive/2025/texmf-dist/tex/latex/base/fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+ (d:/texlive/2025/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
-)) (/usr/share/texlive/texmf-dist/tex/latex/ms/everysel.sty
-Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
+))
+\l__ctex_tmp_int=\count195
+\l__ctex_tmp_box=\box53
+\l__ctex_tmp_dim=\dimen141
+\g__ctex_section_depth_int=\count196
+\g__ctex_font_size_int=\count197
+ (d:/texlive/2025/texmf-dist/tex/latex/ctex/config/ctexopts.cfg
+File: ctexopts.cfg 2022/07/14 v2.5.10 Option configuration file (CTEX)
+) (d:/texlive/2025/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2024/06/29 v1.4n Standard LaTeX document class
+(d:/texlive/2025/texmf-dist/tex/latex/base/bk12.clo
+File: bk12.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
 )
-\l__ctex_tmp_int=\count170
-\l__ctex_tmp_box=\box46
-\l__ctex_tmp_dim=\dimen134
-\g__ctex_section_depth_int=\count171
-\g__ctex_font_size_int=\count172
- (/usr/share/texlive/texmf-dist/tex/latex/ctex/config/ctexopts.cfg
-File: ctexopts.cfg 2019/05/29 v2.4.16 Option configuration file (CTEX)
-) (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
-Document Class: book 2019/12/20 v1.4l Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/bk12.clo
-File: bk12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+\c@part=\count198
+\c@chapter=\count199
+\c@section=\count266
+\c@subsection=\count267
+\c@subsubsection=\count268
+\c@paragraph=\count269
+\c@subparagraph=\count270
+\c@figure=\count271
+\c@table=\count272
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen142
+) (d:/texlive/2025/texmf-dist/tex/latex/ctex/engine/ctex-engine-xetex.def
+File: ctex-engine-xetex.def 2022/07/14 v2.5.10 XeLaTeX adapter (CTEX)
+ (d:/texlive/2025/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
+Package: xeCJK 2022/08/05 v3.9.1 Typesetting CJK scripts with XeLaTeX
+ (d:/texlive/2025/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
+Package: xtemplate 2024-08-16 L3 Experimental prototype document functions
 )
-\c@part=\count173
-\c@chapter=\count174
-\c@section=\count175
-\c@subsection=\count176
-\c@subsubsection=\count177
-\c@paragraph=\count178
-\c@subparagraph=\count179
-\c@figure=\count180
-\c@table=\count181
-\abovecaptionskip=\skip47
-\belowcaptionskip=\skip48
-\bibindent=\dimen135
-) (/usr/share/texlive/texmf-dist/tex/latex/ctex/engine/ctex-engine-xetex.def
-File: ctex-engine-xetex.def 2019/05/29 v2.4.16 XeLaTeX adapter (CTEX)
- (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
-Package: xeCJK 2020/02/14 v3.8.1 Typesetting CJK scripts with XeLaTeX
- (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
-Package: xtemplate 2020-02-14 L3 Experimental prototype document functions
-\l__xtemplate_tmp_dim=\dimen136
-\l__xtemplate_tmp_int=\count182
-\l__xtemplate_tmp_muskip=\muskip16
-\l__xtemplate_tmp_skip=\skip49
-)
-\l__xeCJK_tmp_int=\count183
-\l__xeCJK_tmp_box=\box47
-\l__xeCJK_tmp_dim=\dimen137
-\l__xeCJK_tmp_skip=\skip50
-\g__xeCJK_space_factor_int=\count184
-\l__xeCJK_begin_int=\count185
-\l__xeCJK_end_int=\count186
+\l__xeCJK_tmp_int=\count273
+\l__xeCJK_tmp_box=\box54
+\l__xeCJK_tmp_dim=\dimen143
+\l__xeCJK_tmp_skip=\skip51
+\g__xeCJK_space_factor_int=\count274
+\l__xeCJK_begin_int=\count275
+\l__xeCJK_end_int=\count276
 \c__xeCJK_CJK_class_int=\XeTeXcharclass1
 \c__xeCJK_FullLeft_class_int=\XeTeXcharclass2
 \c__xeCJK_FullRight_class_int=\XeTeXcharclass3
@@ -97,247 +86,288 @@ Package: xtemplate 2020-02-14 L3 Experimental prototype document functions
 \c__xeCJK_NormalSpace_class_int=\XeTeXcharclass6
 \c__xeCJK_CM_class_int=\XeTeXcharclass7
 \c__xeCJK_HangulJamo_class_int=\XeTeXcharclass8
-\l__xeCJK_last_skip=\skip51
-\g__xeCJK_node_int=\count187
-\c__xeCJK_CJK_node_dim=\dimen138
-\c__xeCJK_CJK-space_node_dim=\dimen139
-\c__xeCJK_default_node_dim=\dimen140
-\c__xeCJK_default-space_node_dim=\dimen141
-\c__xeCJK_CJK-widow_node_dim=\dimen142
-\c__xeCJK_normalspace_node_dim=\dimen143
-\l__xeCJK_ccglue_skip=\skip52
-\l__xeCJK_ecglue_skip=\skip53
-\l__xeCJK_punct_kern_skip=\skip54
-\l__xeCJK_last_penalty_int=\count188
-\l__xeCJK_last_bound_dim=\dimen144
-\l__xeCJK_last_kern_dim=\dimen145
-\l__xeCJK_widow_penalty_int=\count189
+\l__xeCJK_last_skip=\skip52
+\c__xeCJK_none_node=\count277
+\g__xeCJK_node_int=\count278
+\c__xeCJK_CJK_node_dim=\dimen144
+\c__xeCJK_CJK-space_node_dim=\dimen145
+\c__xeCJK_default_node_dim=\dimen146
+\c__xeCJK_CJK-widow_node_dim=\dimen147
+\c__xeCJK_normalspace_node_dim=\dimen148
+\c__xeCJK_default-space_node_skip=\skip53
+\l__xeCJK_ccglue_skip=\skip54
+\l__xeCJK_ecglue_skip=\skip55
+\l__xeCJK_punct_kern_skip=\skip56
+\l__xeCJK_indent_box=\box55
+\l__xeCJK_last_penalty_int=\count279
+\l__xeCJK_last_bound_dim=\dimen149
+\l__xeCJK_last_kern_dim=\dimen150
+\l__xeCJK_widow_penalty_int=\count280
 
-Package xtemplate Info: Declaring object type 'xeCJK/punctuation' taking 0
-(xtemplate)             argument(s) on line 2302.
+LaTeX template Info: Declaring template type 'xeCJK/punctuation' taking 0
+(template)           argument(s) on line 2396.
 
-\l__xeCJK_fixed_punct_width_dim=\dimen146
-\l__xeCJK_mixed_punct_width_dim=\dimen147
-\l__xeCJK_middle_punct_width_dim=\dimen148
-\l__xeCJK_fixed_margin_width_dim=\dimen149
-\l__xeCJK_mixed_margin_width_dim=\dimen150
-\l__xeCJK_middle_margin_width_dim=\dimen151
-\l__xeCJK_bound_punct_width_dim=\dimen152
-\l__xeCJK_bound_margin_width_dim=\dimen153
-\l__xeCJK_margin_minimum_dim=\dimen154
-\l__xeCJK_kerning_total_width_dim=\dimen155
-\l__xeCJK_same_align_margin_dim=\dimen156
-\l__xeCJK_different_align_margin_dim=\dimen157
-\l__xeCJK_kerning_margin_width_dim=\dimen158
-\l__xeCJK_kerning_margin_minimum_dim=\dimen159
-\l__xeCJK_bound_dim=\dimen160
-\l__xeCJK_reverse_bound_dim=\dimen161
-\l__xeCJK_margin_dim=\dimen162
-\l__xeCJK_minimum_bound_dim=\dimen163
-\l__xeCJK_kerning_margin_dim=\dimen164
-\g__xeCJK_family_int=\count190
-\l__xeCJK_fam_int=\count191
-\g__xeCJK_fam_allocation_int=\count192
-\l__xeCJK_verb_case_int=\count193
-\l__xeCJK_verb_exspace_skip=\skip55
- (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty
-Package: fontspec 2020/02/03 v2.7h Font selection for XeLaTeX and LuaLaTeX
- (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
-Package: fontspec-xetex 2020/02/03 v2.7h Font selection for XeLaTeX and LuaLaTeX
-\l__fontspec_script_int=\count194
-\l__fontspec_language_int=\count195
-\l__fontspec_strnum_int=\count196
-\l__fontspec_tmp_int=\count197
-\l__fontspec_tmpa_int=\count198
-\l__fontspec_tmpb_int=\count199
-\l__fontspec_tmpc_int=\count266
-\l__fontspec_em_int=\count267
-\l__fontspec_emdef_int=\count268
-\l__fontspec_strong_int=\count269
-\l__fontspec_strongdef_int=\count270
-\l__fontspec_tmpa_dim=\dimen165
-\l__fontspec_tmpb_dim=\dimen166
-\l__fontspec_tmpc_dim=\dimen167
- (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
-) (/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
-File: xeCJK.cfg 2020/02/14 v3.8.1 Configuration file for xeCJK package
-)) (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
-Package: xeCJKfntef 2020/02/14 v3.8.1 xeCJK font effect
- (/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box48
-\UL@hyphenbox=\box49
-\UL@skip=\skip56
-\UL@hook=\toks15
-\UL@height=\dimen168
-\UL@pe=\count271
-\UL@pixel=\dimen169
-\ULC@box=\box50
-Package: ulem 2019/11/18
-\ULdepth=\dimen170
+\l__xeCJK_fixed_punct_width_dim=\dimen151
+\l__xeCJK_mixed_punct_width_dim=\dimen152
+\l__xeCJK_middle_punct_width_dim=\dimen153
+\l__xeCJK_fixed_margin_width_dim=\dimen154
+\l__xeCJK_mixed_margin_width_dim=\dimen155
+\l__xeCJK_middle_margin_width_dim=\dimen156
+\l__xeCJK_bound_punct_width_dim=\dimen157
+\l__xeCJK_bound_margin_width_dim=\dimen158
+\l__xeCJK_margin_minimum_dim=\dimen159
+\l__xeCJK_kerning_total_width_dim=\dimen160
+\l__xeCJK_same_align_margin_dim=\dimen161
+\l__xeCJK_different_align_margin_dim=\dimen162
+\l__xeCJK_kerning_margin_width_dim=\dimen163
+\l__xeCJK_kerning_margin_minimum_dim=\dimen164
+\l__xeCJK_bound_dim=\dimen165
+\l__xeCJK_reverse_bound_dim=\dimen166
+\l__xeCJK_margin_dim=\dimen167
+\l__xeCJK_minimum_bound_dim=\dimen168
+\l__xeCJK_kerning_margin_dim=\dimen169
+\g__xeCJK_family_int=\count281
+\l__xeCJK_fam_int=\count282
+\g__xeCJK_fam_allocation_int=\count283
+\l__xeCJK_verb_case_int=\count284
+\l__xeCJK_verb_exspace_skip=\skip57
+ (d:/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.sty (d:/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2024-08-16 L3 Experimental document command parser
 )
-\l__xeCJK_space_skip=\skip57
-\c__xeCJK_ulem-begin_node_dim=\dimen171
-\c__xeCJK_null_box=\box51
-\l__xeCJK_fntef_box=\box52
-\l__xeCJK_under_symbol_box=\box53
-\c__xeCJK_filll_skip=\skip58
-)
-\ccwd=\dimen172
-\l__ctex_ccglue_skip=\skip59
-)
-\l__ctex_ziju_dim=\dimen173
- (/usr/share/texlive/texmf-dist/tex/latex/zhnumber/zhnumber.sty
-Package: zhnumber 2019/04/07 v2.7 Typesetting numbers with Chinese glyphs
-\l__zhnum_scale_int=\count272
- (/usr/share/texlive/texmf-dist/tex/latex/zhnumber/zhnumber-utf8.cfg
-File: zhnumber-utf8.cfg 2019/04/07 v2.7 Chinese numerals with UTF8 encoding
+Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
+ (d:/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
+\l__fontspec_script_int=\count285
+\l__fontspec_language_int=\count286
+\l__fontspec_strnum_int=\count287
+\l__fontspec_tmp_int=\count288
+\l__fontspec_tmpa_int=\count289
+\l__fontspec_tmpb_int=\count290
+\l__fontspec_tmpc_int=\count291
+\l__fontspec_em_int=\count292
+\l__fontspec_emdef_int=\count293
+\l__fontspec_strong_int=\count294
+\l__fontspec_strongdef_int=\count295
+\l__fontspec_tmpa_dim=\dimen170
+\l__fontspec_tmpb_dim=\dimen171
+\l__fontspec_tmpc_dim=\dimen172
+ (d:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (d:/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (d:/texlive/2025/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
+File: xeCJK.cfg 2022/08/05 v3.9.1 Configuration file for xeCJK package
 ))
-\l__ctex_heading_skip=\skip60
- (/usr/share/texlive/texmf-dist/tex/latex/ctex/scheme/ctex-scheme-plain-book.def
-File: ctex-scheme-plain-book.def 2019/05/29 v2.4.16 Plain scheme for book (CTEX)
-) (/usr/share/texlive/texmf-dist/tex/latex/ctex/ctex-cs4size.clo
-File: ctex-cs4size.clo 2019/05/29 v2.4.16 cs4size option (CTEX)
-) (/usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-fandol.def
-File: ctex-fontset-fandol.def 2019/05/29 v2.4.16 Fandol fonts definition (CTEX)
+\ccwd=\dimen173
+\l__ctex_ccglue_skip=\skip58
+)
+\l__ctex_ziju_dim=\dimen174
+ (d:/texlive/2025/texmf-dist/tex/latex/zhnumber/zhnumber.sty
+Package: zhnumber 2022/07/14 v3.0 Typesetting numbers with Chinese glyphs
+\l__zhnum_scale_int=\count296
+\l__zhnum_tmp_int=\count297
+ (d:/texlive/2025/texmf-dist/tex/latex/zhnumber/zhnumber-utf8.cfg
+File: zhnumber-utf8.cfg 2022/07/14 v3.0 Chinese numerals with UTF8 encoding
+))
+\l__ctex_heading_skip=\skip59
+ (d:/texlive/2025/texmf-dist/tex/latex/ctex/scheme/ctex-scheme-plain-book.def
+File: ctex-scheme-plain-book.def 2022/07/14 v2.5.10 Plain scheme for book (CTEX)
+) (d:/texlive/2025/texmf-dist/tex/latex/ctex/ctex-cs4size.clo
+File: ctex-cs4size.clo 2022/07/14 v2.5.10 cs4size option (CTEX)
+) (d:/texlive/2025/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-windows.def
+File: ctex-fontset-windows.def 2022/07/14 v2.5.10 Windows fonts definition (CTEX)
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "KaiTi/B" (it probably doesn't
+(fontspec)             exist).
 
 
-Package fontspec Warning: Font "FandolSong-Regular" does not contain requested
-(fontspec)                Script "CJK".
+Package fontspec Info: 
+(fontspec)             Could not resolve font "SimHei/I" (it probably doesn't
+(fontspec)             exist).
 
 
-Package fontspec Info: Font family 'FandolSong-Regular(0)' created for font
-(fontspec)             'FandolSong-Regular' with options
-(fontspec)             [Script={CJK},Extension={.otf},BoldFont={FandolSong-Bold},ItalicFont={FandolKai-Regular}].
+Package fontspec Info: 
+(fontspec)             Could not resolve font "SimSun/BI" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'SimSun(0)' created for font 'SimSun' with
+(fontspec)             options
+(fontspec)             [Script={CJK},BoldFont={SimHei},ItalicFont={KaiTi}].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[FandolSong-Regular.otf]/OT:language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             <->"SimSun/OT:script=hani;language=dflt;"
 (fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[FandolSong-Bold.otf]/OT:language=dflt;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             <->"SimHei/OT:script=hani;language=dflt;"
 (fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"[FandolKai-Regular.otf]/OT:language=dflt;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
+(fontspec)             <->"KaiTi/OT:script=hani;language=dflt;"
 
-)) (/usr/share/texlive/texmf-dist/tex/latex/ctex/config/ctex.cfg
-File: ctex.cfg 2019/05/29 v2.4.16 Configuration file (CTEX)
-) (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifxetex.sty
+)) (d:/texlive/2025/texmf-dist/tex/latex/ctex/config/ctex.cfg
+File: ctex.cfg 2022/07/14 v2.5.10 Configuration file (CTEX)
+) (d:/texlive/2025/texmf-dist/tex/generic/iftex/ifxetex.sty
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
- (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2019/11/07 v1.0c TeX engine tests
-)) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count273
-) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2020/01/20 v2.17e AMS math features
-\@mathmargin=\skip61
+ (d:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+)) (d:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count298
+) (d:/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2024/11/05 v2.17t AMS math features
+\@mathmargin=\skip60
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2000/06/29 v2.01 AMS text
- (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+(d:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (d:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
-\ex@=\dimen174
-)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+\@emptytoks=\toks18
+\ex@=\dimen175
+)) (d:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen175
-) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2016/03/08 v2.02 operator names
+\pmbraise@=\dimen176
+) (d:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count274
-LaTeX Info: Redefining \frac on input line 227.
-\uproot@=\count275
-\leftroot@=\count276
-LaTeX Info: Redefining \overline on input line 389.
-\classnum@=\count277
-\DOTSCASE@=\count278
-LaTeX Info: Redefining \ldots on input line 486.
-LaTeX Info: Redefining \dots on input line 489.
-LaTeX Info: Redefining \cdots on input line 610.
-\Mathstrutbox@=\box54
-\strutbox@=\box55
-\big@size=\dimen176
-LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
-\macc@depth=\count279
-\c@MaxMatrixCols=\count280
+\inf@bad=\count299
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count300
+\leftroot@=\count301
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count302
+\DOTSCASE@=\count303
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box56
+\strutbox@=\box57
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen177
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count304
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count305
 \dotsspace@=\muskip17
-\c@parentequation=\count281
-\dspbrk@lvl=\count282
-\tag@help=\toks17
-\row@=\count283
-\column@=\count284
-\maxfields@=\count285
-\andhelp@=\toks18
-\eqnshift@=\dimen177
-\alignsep@=\dimen178
-\tagshift@=\dimen179
-\tagwidth@=\dimen180
-\totwidth@=\dimen181
-\lineht@=\dimen182
-\@envbody=\toks19
-\multlinegap=\skip62
-\multlinetaggap=\skip63
-\mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2859.
-LaTeX Info: Redefining \] on input line 2860.
-) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+\c@parentequation=\count306
+\dspbrk@lvl=\count307
+\tag@help=\toks19
+\row@=\count308
+\column@=\count309
+\maxfields@=\count310
+\andhelp@=\toks20
+\eqnshift@=\dimen178
+\alignsep@=\dimen179
+\tagshift@=\dimen180
+\tagwidth@=\dimen181
+\totwidth@=\dimen182
+\lineht@=\dimen183
+\@envbody=\toks21
+\multlinegap=\skip61
+\multlinetaggap=\skip62
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+ (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
+)) (d:/texlive/2025/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup6
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
-Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
+) (d:/texlive/2025/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2023/12/19 v1.2f Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup7
 \symboldletters=\mathgroup8
 \symboldsymbols=\mathgroup9
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
-LaTeX Info: Redefining \bm on input line 209.
-) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
-Package: mathtools 2020/01/17 v1.23 mathematical typesetting tools
- (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count286
-\calc@Bcount=\count287
-\calc@Adimen=\dimen183
-\calc@Bdimen=\dimen184
-\calc@Askip=\skip64
-\calc@Bskip=\skip65
+Package bm Info: No bold for \OMX/cmex/m/n, using \pmb.
+Package bm Info: No bold for \U/msa/m/n, using \pmb.
+Package bm Info: No bold for \U/msb/m/n, using \pmb.
+Package bm Info: No bold for \U/rsfs/m/n, using \pmb.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 149.
+) (d:/texlive/2025/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
+ (d:/texlive/2025/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count311
+\calc@Bcount=\count312
+\calc@Adimen=\dimen184
+\calc@Bdimen=\dimen185
+\calc@Askip=\skip63
+\calc@Bskip=\skip64
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count288
-\calc@Cskip=\skip66
-) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
-Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+\calc@Ccount=\count313
+\calc@Cskip=\skip65
+) (d:/texlive/2025/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
-LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count289
-\l_MT_multwidth_dim=\dimen185
-\origjot=\skip67
-\l_MT_shortvdotswithinadjustabove_dim=\dimen186
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen187
-\l_MT_above_intertext_sep=\dimen188
-\l_MT_below_intertext_sep=\dimen189
-\l_MT_above_shortintertext_sep=\dimen190
-\l_MT_below_shortintertext_sep=\dimen191
+\g_MT_multlinerow_int=\count314
+\l_MT_multwidth_dim=\dimen186
+\origjot=\skip66
+\l_MT_shortvdotswithinadjustabove_dim=\dimen187
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen188
+\l_MT_above_intertext_sep=\dimen189
+\l_MT_below_intertext_sep=\dimen190
+\l_MT_above_shortintertext_sep=\dimen191
+\l_MT_below_shortintertext_sep=\dimen192
+\xmathstrut@box=\box58
+\xmathstrut@dim=\dimen193
 )
 
-Package fontspec Info: Font family 'texgyretermes(0)' created for font
+Package fontspec Info: 
+(fontspec)             texgyretermes-regular scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-regular scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-regular scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-bold scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-bold scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-italic scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-italic scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-bolditalic scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             texgyretermes-bolditalic scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'texgyretermes(0)' created for font
 (fontspec)             'texgyretermes' with options [Ligatures=TeX,UprightFont
 (fontspec)             = *-regular,BoldFont = *-bold,ItalicFont =
 (fontspec)             *-italic,BoldItalicFont = *-bolditalic,Extension =
@@ -366,7 +396,44 @@ Package fontspec Info: Font family 'texgyretermes(0)' created for font
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 12.045pt on input line 97.
 
-Package fontspec Info: Font family 'texgyreheros(0)' created for font
+Package fontspec Info: 
+(fontspec)             texgyreheros-regular scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-regular scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-regular scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-bold scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-bold scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-italic scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-italic scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-bolditalic scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             texgyreheros-bolditalic scale = 0.9.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'texgyreheros(0)' created for font
 (fontspec)             'texgyreheros' with options [Ligatures=TeX,UprightFont
 (fontspec)             = *-regular,BoldFont = *-bold,ItalicFont =
 (fontspec)             *-italic,BoldItalicFont = *-bolditalic,Extension =
@@ -392,276 +459,303 @@ Package fontspec Info: Font family 'texgyreheros(0)' created for font
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
 (fontspec)             <->s*[0.9]"[texgyreheros-bolditalic.otf]/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
 
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty
-Package: courier 2005/04/12 PSNFSS-v9.2a (WaS) 
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+ (d:/texlive/2025/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
+) (d:/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (d:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: xetex.def on input line 105.
- (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
+Package graphics Info: Driver file: xetex.def on input line 106.
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
 ))
-\Gin@req@height=\dimen192
-\Gin@req@width=\dimen193
-) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
-Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
- (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2020/01/03 v3.4h Customizing captions (AR)
- (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen194
-\captionmargin@=\dimen195
-\captionwidth=\dimen196
-\caption@tempdima=\dimen197
-\caption@indent=\dimen198
-\caption@parindent=\dimen199
-\caption@hangindent=\dimen256
+\Gin@req@height=\dimen194
+\Gin@req@width=\dimen195
+) (d:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+ (d:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (d:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen196
+\captionmargin=\dimen197
+\caption@leftmargin=\dimen198
+\caption@rightmargin=\dimen199
+\caption@width=\dimen256
+\caption@indent=\dimen257
+\caption@parindent=\dimen258
+\caption@hangindent=\dimen259
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count290
-\c@continuedfloat=\count291
+\c@caption@flags=\count315
+\c@continuedfloat=\count316
 )
-\c@subfigure=\count292
-\c@subtable=\count293
-) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
-Package: enumitem 2019/06/20 v3.9 Customized lists
-\labelindent=\skip68
-\enit@outerparindent=\dimen257
-\enit@toks=\toks21
-\enit@inbox=\box56
-\enit@count@id=\count294
-\enitdp@description=\count295
-) (/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count317
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count318
+) (d:/texlive/2025/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2025/02/06 v3.11 Customized lists
+\labelindent=\skip67
+\enit@outerparindent=\dimen260
+\enit@toks=\toks23
+\enit@inbox=\box59
+\enit@count@id=\count319
+\enitdp@description=\count320
+) (d:/texlive/2025/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
- (/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+ (d:/texlive/2025/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
-)) (/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
-Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
-\FN@temptoken=\toks22
-\footnotemargin=\dimen258
-\c@pp@next@reset=\count296
-\c@@fnserial=\count297
-Package footmisc Info: Declaring symbol style bringhurst on input line 855.
-Package footmisc Info: Declaring symbol style chicago on input line 863.
-Package footmisc Info: Declaring symbol style wiley on input line 872.
-Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
-Package footmisc Info: Declaring symbol style lamport* on input line 903.
-Package footmisc Info: Declaring symbol style lamport*-robust on input line 924.
-) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/pifont.sty
-Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
+)) (d:/texlive/2025/texmf-dist/tex/latex/footmisc/footmisc.sty
+Package: footmisc 2024/12/24 v6.0g a miscellany of footnote facilities
+\FN@temptoken=\toks24
+\footnotemargin=\dimen261
+\@outputbox@depth=\dimen262
+ (d:/texlive/2025/texmf-dist/tex/latex/bigfoot/perpage.sty
+Package: perpage 2014/10/25 2.0 Reset/sort counters per page
+\c@abspage=\count321
+)
+\c@pp@a@footnote=\count322
+Package footmisc Info: Declaring symbol style bringhurst on input line 699.
+Package footmisc Info: Declaring symbol style chicago on input line 707.
+Package footmisc Info: Declaring symbol style wiley on input line 716.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 727.
+Package footmisc Info: Declaring symbol style lamport* on input line 747.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 768.
+) (d:/texlive/2025/texmf-dist/tex/latex/psnfss/pifont.sty
+Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
 LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/upzd.fd
+ (d:/texlive/2025/texmf-dist/tex/latex/psnfss/upzd.fd
 File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
 LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/upsy.fd
+ (d:/texlive/2025/texmf-dist/tex/latex/psnfss/upsy.fd
 File: upsy.fd 2001/06/04 font definitions for U/psy.
-)) (/usr/share/texlive/texmf-dist/tex/latex/ntheorem/ntheorem.sty
+)) (d:/texlive/2025/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
+Package: xeCJKfntef 2022/08/05 v3.9.1 xeCJK font effect
+ (d:/texlive/2025/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box60
+\UL@hyphenbox=\box61
+\UL@skip=\skip68
+\UL@hook=\toks25
+\UL@height=\dimen263
+\UL@pe=\count323
+\UL@pixel=\dimen264
+\ULC@box=\box62
+Package: ulem 2019/11/18
+\ULdepth=\dimen265
+)
+\l__xeCJK_space_skip=\skip69
+\c__xeCJK_ulem-begin_node_dim=\dimen266
+\l__xeCJK_hidden_box=\box63
+\l__xeCJK_fntef_box=\box64
+\l__xeCJK_under_symbol_box=\box65
+\c__xeCJK_filll_skip=\skip70
+) (d:/texlive/2025/texmf-dist/tex/latex/ntheorem/ntheorem.sty
 Style `ntheorem', Version 1.33 <2011/08/15>
 Package: ntheorem 2011/08/15 1.33
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+(d:/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
-\theorem@style=\toks23
-\theorem@@style=\toks24
-\theorembodyfont=\toks25
-\theoremnumbering=\toks26
-\theorempreskipamount=\skip69
-\theorempostskipamount=\skip70
-\theoremframepreskipamount=\skip71
-\theoremframepostskipamount=\skip72
-\theoreminframepreskipamount=\skip73
-\theoreminframepostskipamount=\skip74
-\theorem@preskip=\toks27
-\theorem@postskip=\toks28
-\theorem@framepreskip=\toks29
-\theorem@framepostskip=\toks30
-\theorem@inframepreskip=\toks31
-\theorem@inframepostskip=\toks32
-\theoremindent=\dimen259
-\theorem@indent=\dimen260
-\theoremrightindent=\dimen261
-\theorem@rightindent=\dimen262
-\theoremheaderfont=\toks33
-\theoremseparator=\toks34
-\theoremprework=\toks35
-\theorempostwork=\toks36
-\theoremsymbol=\toks37
-\qedsymbol=\toks38
-\theoremkeyword=\toks39
-\qedsymbol=\toks40
-\thm@topsep=\skip75
-\thm@topsepadd=\skip76
+\theorem@style=\toks26
+\theorem@@style=\toks27
+\theorembodyfont=\toks28
+\theoremnumbering=\toks29
+\theorempreskipamount=\skip71
+\theorempostskipamount=\skip72
+\theoremframepreskipamount=\skip73
+\theoremframepostskipamount=\skip74
+\theoreminframepreskipamount=\skip75
+\theoreminframepostskipamount=\skip76
+\theorem@preskip=\toks30
+\theorem@postskip=\toks31
+\theorem@framepreskip=\toks32
+\theorem@framepostskip=\toks33
+\theorem@inframepreskip=\toks34
+\theorem@inframepostskip=\toks35
+\theoremindent=\dimen267
+\theorem@indent=\dimen268
+\theoremrightindent=\dimen269
+\theorem@rightindent=\dimen270
+\theoremheaderfont=\toks36
+\theoremseparator=\toks37
+\theoremprework=\toks38
+\theorempostwork=\toks39
+\theoremsymbol=\toks40
+\qedsymbol=\toks41
+\theoremkeyword=\toks42
+\qedsymbol=\toks43
+\thm@topsep=\skip77
+\thm@topsepadd=\skip78
 Package ntheorem Info: Option `thmmarks' loaded on input line 1175.
-\c@endNonectr=\count298
-\c@currNonectr=\count299
-\mysavskip=\skip77
+\c@endNonectr=\count324
+\c@currNonectr=\count325
+\mysavskip=\skip79
 Package ntheorem Info: option `amsmath' handling for `thmmarks' loaded on input line 1175.
-\thm@amstmpdepth=\dimen263
-\tagwidth=\dimen264
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen265
-\ar@mcellbox=\box57
-\extrarowheight=\dimen266
-\NC@list=\toks41
-\extratabsurround=\skip78
-\backup@length=\skip79
-\ar@cellbox=\box58
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip80
-\LTright=\skip81
-\LTpre=\skip82
-\LTpost=\skip83
-\LTchunksize=\count300
-\LTcapwidth=\dimen267
-\LT@head=\box59
-\LT@firsthead=\box60
-\LT@foot=\box61
-\LT@lastfoot=\box62
-\LT@cols=\count301
-\LT@rows=\count302
-\c@LT@tables=\count303
-\c@LT@chunks=\count304
-\LT@p@ftn=\toks42
-) (/usr/share/texlive/texmf-dist/tex/latex/makecell/makecell.sty
+\thm@amstmpdepth=\dimen271
+\tagwidth=\dimen272
+) (d:/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen273
+\ar@mcellbox=\box66
+\extrarowheight=\dimen274
+\NC@list=\toks44
+\extratabsurround=\skip80
+\backup@length=\skip81
+\ar@cellbox=\box67
+) (d:/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip82
+\LTright=\skip83
+\LTpre=\skip84
+\LTpost=\skip85
+\LTchunksize=\count326
+\LTcapwidth=\dimen275
+\LT@head=\box68
+\LT@firsthead=\box69
+\LT@foot=\box70
+\LT@lastfoot=\box71
+\LT@gbox=\box72
+\LT@cols=\count327
+\LT@rows=\count328
+\c@LT@tables=\count329
+\c@LT@chunks=\count330
+\LT@p@ftn=\toks45
+) (d:/texlive/2025/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen268
-\c@nlinenum=\count305
-\TeXr@lab=\toks43
-) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+\rotheadsize=\dimen276
+\c@nlinenum=\count331
+\TeXr@lab=\toks46
+) (d:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen269
-\lightrulewidth=\dimen270
-\cmidrulewidth=\dimen271
-\belowrulesep=\dimen272
-\belowbottomsep=\dimen273
-\aboverulesep=\dimen274
-\abovetopsep=\dimen275
-\cmidrulesep=\dimen276
-\cmidrulekern=\dimen277
-\defaultaddspace=\dimen278
-\@cmidla=\count306
-\@cmidlb=\count307
-\@aboverulesep=\dimen279
-\@belowrulesep=\dimen280
-\@thisruleclass=\count308
-\@lastruleclass=\count309
-\@thisrulewidth=\dimen281
-) (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+\heavyrulewidth=\dimen277
+\lightrulewidth=\dimen278
+\cmidrulewidth=\dimen279
+\belowrulesep=\dimen280
+\belowbottomsep=\dimen281
+\aboverulesep=\dimen282
+\abovetopsep=\dimen283
+\cmidrulesep=\dimen284
+\cmidrulekern=\dimen285
+\defaultaddspace=\dimen286
+\@cmidla=\count332
+\@cmidlb=\count333
+\@aboverulesep=\dimen287
+\@belowrulesep=\dimen288
+\@thisruleclass=\count334
+\@lastruleclass=\count335
+\@thisrulewidth=\dimen289
+) (d:/texlive/2025/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip84
-\bibsep=\skip85
+\bibhang=\skip86
+\bibsep=\skip87
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count310
-) (/usr/share/texlive/texmf-dist/tex/latex/gbt7714/gbt7714.sty
-Package: gbt7714 2019/11/20 v1.1.2 GB/T 7714-2015 BibTeX Style
- (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\c@NAT@ctr=\count336
+) (d:/texlive/2025/texmf-dist/tex/latex/gbt7714/gbt7714.sty
+Package: gbt7714 2022/10/03 v2.1.5 GB/T 7714 BibTeX Style
+ (d:/texlive/2025/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)) (/usr/share/texlive/texmf-dist/tex/latex/caption/bicaption.sty
-Package: bicaption 2016/03/27 v1.2 Bilingual Captions (AR)
-\bicaption@lang=\count311
-Package bicaption Info: main language is not set.
-) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
- (/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO)
- (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+)) (d:/texlive/2025/texmf-dist/tex/latex/caption/bicaption.sty
+Package: bicaption 2023/02/19 v1.6 Bilingual Captions (AR)
+\bicaption@lang=\count337
+) (d:/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
+ (d:/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (d:/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ (d:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (d:/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode not found.
-) (/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
-Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-) (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+)) (d:/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
-Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
-) (/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
-Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (d:/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+ (d:/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (d:/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\@linkdim=\dimen282
-\Hy@linkcounter=\count312
-\Hy@pagecounter=\count313
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
-Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
-Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
-)
-\Hy@SavedSpaceFactor=\count314
-Package hyperref Info: Option `unicode' set `true' on input line 4421.
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2020/01/14 v7.00d Hyperref: PDF Unicode definition (HO)
-)
-Package hyperref Info: Hyper figures OFF on input line 4547.
-Package hyperref Info: Link nesting OFF on input line 4552.
-Package hyperref Info: Hyper index ON on input line 4555.
-Package hyperref Info: Plain pages OFF on input line 4562.
-Package hyperref Info: Backreferencing OFF on input line 4567.
-Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count315
-LaTeX Info: Redefining \url on input line 5159.
-\XeTeXLinkMargin=\dimen283
- (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
-Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
- (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
-))
-\Fld@menulength=\count316
-\Field@Width=\dimen284
-\Fld@charsize=\dimen285
-Package hyperref Info: Hyper figures OFF on input line 6430.
-Package hyperref Info: Link nesting OFF on input line 6435.
-Package hyperref Info: Hyper index ON on input line 6438.
-Package hyperref Info: backreferencing OFF on input line 6445.
-Package hyperref Info: Link coloring OFF on input line 6450.
-Package hyperref Info: Link coloring with OCG OFF on input line 6455.
-Package hyperref Info: PDF/A mode OFF on input line 6460.
-LaTeX Info: Redefining \ref on input line 6500.
-LaTeX Info: Redefining \pageref on input line 6504.
- (/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
-Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
-)
-\Hy@abspage=\count317
-\c@Item=\count318
-\c@Hfootnote=\count319
-)
-Package hyperref Info: Driver (autodetected): hxetex.
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2020/01/14 v7.00d Hyperref driver for XeTeX
- (/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty
+\c@section@level=\count338
+) (d:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\pdfm@box=\box63
-\c@Hy@AnnotLevel=\count320
-\HyField@AnnotCount=\count321
-\Fld@listcount=\count322
-\c@bookmark@seq@number=\count323
- (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
-Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
- (/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
-Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+\@linkdim=\dimen290
+\Hy@linkcounter=\count339
+\Hy@pagecounter=\count340
+ (d:/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+) (d:/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count341
+ (d:/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4040.
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing OFF on input line 4177.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+\c@Hy@tempcnt=\count342
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen291
+ (d:/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (d:/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count343
+\Field@Width=\dimen292
+\Fld@charsize=\dimen293
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+ (d:/texlive/2025/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count344
+\c@Item=\count345
+\c@Hfootnote=\count346
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+ (d:/texlive/2025/texmf-dist/tex/latex/hyperref/hxetex.def
+File: hxetex.def 2024-11-05 v7.01l Hyperref driver for XeTeX
+\pdfm@box=\box73
+\c@Hy@AnnotLevel=\count347
+\HyField@AnnotCount=\count348
+\Fld@listcount=\count349
+\c@bookmark@seq@number=\count350
+ (d:/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (d:/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+) (d:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip86
+\Hy@SectionHShift=\skip88
 )
 Package hyperref Info: Option `CJKbookmarks' set `true' on input line 140.
 Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 153.
@@ -669,226 +763,202 @@ Package hyperref Info: Option `bookmarksopen' set `true' on input line 153.
 Package hyperref Info: Option `breaklinks' set `true' on input line 153.
 Package hyperref Info: Option `colorlinks' set `true' on input line 153.
 Package hyperref Info: Option `plainpages' set `false' on input line 153.
- (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+ (d:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+ (d:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count324
-\Gm@cntv=\count325
-\c@Gm@tempcnt=\count326
-\Gm@bindingoffset=\dimen286
-\Gm@wd@mp=\dimen287
-\Gm@odd@mp=\dimen288
-\Gm@even@mp=\dimen289
-\Gm@layoutwidth=\dimen290
-\Gm@layoutheight=\dimen291
-\Gm@layouthoffset=\dimen292
-\Gm@layoutvoffset=\dimen293
-\Gm@dimlist=\toks44
-) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
-\f@nch@headwidth=\skip87
-\f@nch@O@elh=\skip88
-\f@nch@O@erh=\skip89
-\f@nch@O@olh=\skip90
-\f@nch@O@orh=\skip91
-\f@nch@O@elf=\skip92
-\f@nch@O@erf=\skip93
-\f@nch@O@olf=\skip94
-\f@nch@O@orf=\skip95
-) (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+\Gm@cnth=\count351
+\Gm@cntv=\count352
+\c@Gm@tempcnt=\count353
+\Gm@bindingoffset=\dimen294
+\Gm@wd@mp=\dimen295
+\Gm@odd@mp=\dimen296
+\Gm@even@mp=\dimen297
+\Gm@layoutwidth=\dimen298
+\Gm@layoutheight=\dimen299
+\Gm@layouthoffset=\dimen300
+\Gm@layoutvoffset=\dimen301
+\Gm@dimlist=\toks47
+) (d:/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+\f@nch@headwidth=\skip89
+\f@nch@offset@elh=\skip90
+\f@nch@offset@erh=\skip91
+\f@nch@offset@olh=\skip92
+\f@nch@offset@orh=\skip93
+\f@nch@offset@elf=\skip94
+\f@nch@offset@erf=\skip95
+\f@nch@offset@olf=\skip96
+\f@nch@offset@orf=\skip97
+\f@nch@height=\skip98
+\f@nch@footalignment=\skip99
+\f@nch@widthL=\skip100
+\f@nch@widthC=\skip101
+\f@nch@widthR=\skip102
+\@temptokenb=\toks48
+) (d:/texlive/2025/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Invalid UTF-8 byte or sequence at line 284 replaced by U+FFFD.
 Invalid UTF-8 byte or sequence at line 299 replaced by U+FFFD.
 Invalid UTF-8 byte or sequence at line 550 replaced by U+FFFD.
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count327
-\algocf@hangindent=\skip96
- (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
-Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count328
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+\c@AlgoLine=\count354
+\algocf@hangindent=\skip103
+ (d:/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count355
+) (d:/texlive/2025/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
-) (/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
+) (d:/texlive/2025/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip97
-\skiplinenumber=\skip98
-\skiprule=\skip99
-\skiphlne=\skip100
-\skiptext=\skip101
-\skiplength=\skip102
-\algomargin=\skip103
-\skipalgocfslide=\skip104
-\algowidth=\dimen294
-\inoutsize=\dimen295
-\inoutindent=\dimen296
-\interspacetitleruled=\dimen297
-\interspacealgoruled=\dimen298
-\interspacetitleboxruled=\dimen299
-\algocf@ruledwidth=\skip105
-\algocf@inoutbox=\box64
-\algocf@inputbox=\box65
-\AlCapSkip=\skip106
-\AlCapHSkip=\skip107
-\algoskipindent=\skip108
-\algocf@nlbox=\box66
-\algocf@hangingbox=\box67
-\algocf@untilbox=\box68
-\algocf@skipuntil=\skip109
-\algocf@capbox=\box69
-\algocf@lcaptionbox=\skip110
-\algoheightruledefault=\skip111
-\algoheightrule=\skip112
-\algotitleheightruledefault=\skip113
-\algotitleheightrule=\skip114
-\c@algocfline=\count329
-\c@algocfproc=\count330
-\c@algocf=\count331
-\algocf@algoframe=\box70
-\algocf@algobox=\box71
+\skiptotal=\skip104
+\skiplinenumber=\skip105
+\skiprule=\skip106
+\skiphlne=\skip107
+\skiptext=\skip108
+\skiplength=\skip109
+\algomargin=\skip110
+\skipalgocfslide=\skip111
+\algowidth=\dimen302
+\inoutsize=\dimen303
+\inoutindent=\dimen304
+\interspacetitleruled=\dimen305
+\interspacealgoruled=\dimen306
+\interspacetitleboxruled=\dimen307
+\algocf@ruledwidth=\skip112
+\algocf@inoutbox=\box74
+\algocf@inputbox=\box75
+\AlCapSkip=\skip113
+\AlCapHSkip=\skip114
+\algoskipindent=\skip115
+\algocf@nlbox=\box76
+\algocf@hangingbox=\box77
+\algocf@untilbox=\box78
+\algocf@skipuntil=\skip116
+\algocf@capbox=\box79
+\algocf@lcaptionbox=\skip117
+\algoheightruledefault=\skip118
+\algoheightrule=\skip119
+\algotitleheightruledefault=\skip120
+\algotitleheightrule=\skip121
+\c@algocfline=\count356
+\c@algocfproc=\count357
+\c@algocf=\count358
+\algocf@algoframe=\box80
+\algocf@algobox=\box81
 )
-\c@shu@bookmark=\count332
-\shu@kw=\box72
-\enitdp@shu@denotation=\count333
+\c@shu@bookmark=\count359
+\shu@kw=\box82
+\enitdp@shu@denotation=\count360
 ) (./shuthesis.cfg
 File: shuthesis.cfg 2023/12/18 v2.2.0 Shanghai University Thesis Template
-\c@currassumptionctr=\count334
-\c@endassumptionctr=\count335
-\c@assumption=\count336
-\c@currpropositionctr=\count337
-\c@endpropositionctr=\count338
-\c@proposition=\count339
-\c@currlemmactr=\count340
-\c@endlemmactr=\count341
-\c@lemma=\count342
-\c@currtheoremctr=\count343
-\c@endtheoremctr=\count344
-\c@theorem=\count345
-\c@curraxiomctr=\count346
-\c@endaxiomctr=\count347
-\c@axiom=\count348
-\c@currcorollaryctr=\count349
-\c@endcorollaryctr=\count350
-\c@corollary=\count351
-\c@currexercisectr=\count352
-\c@endexercisectr=\count353
-\c@exercise=\count354
-\c@currexamplectr=\count355
-\c@endexamplectr=\count356
-\c@example=\count357
-\c@currproblemctr=\count358
-\c@endproblemctr=\count359
-\c@problem=\count360
-\c@currconjecturectr=\count361
-\c@endconjecturectr=\count362
-\c@conjecture=\count363
-\c@currdefinitionctr=\count364
-\c@enddefinitionctr=\count365
-\c@definition=\count366
-\c@currremarkctr=\count367
-\c@endremarkctr=\count368
-\c@remark=\count369
-\c@currproofctr=\count370
-\c@endproofctr=\count371
-\c@proof=\count372
+\c@currassumptionctr=\count361
+\c@endassumptionctr=\count362
+\c@assumption=\count363
+\c@currpropositionctr=\count364
+\c@endpropositionctr=\count365
+\c@proposition=\count366
+\c@currlemmactr=\count367
+\c@endlemmactr=\count368
+\c@lemma=\count369
+\c@currtheoremctr=\count370
+\c@endtheoremctr=\count371
+\c@theorem=\count372
+\c@curraxiomctr=\count373
+\c@endaxiomctr=\count374
+\c@axiom=\count375
+\c@currcorollaryctr=\count376
+\c@endcorollaryctr=\count377
+\c@corollary=\count378
+\c@currexercisectr=\count379
+\c@endexercisectr=\count380
+\c@exercise=\count381
+\c@currexamplectr=\count382
+\c@endexamplectr=\count383
+\c@example=\count384
+\c@currproblemctr=\count385
+\c@endproblemctr=\count386
+\c@problem=\count387
+\c@currconjecturectr=\count388
+\c@endconjecturectr=\count389
+\c@conjecture=\count390
+\c@currdefinitionctr=\count391
+\c@enddefinitionctr=\count392
+\c@definition=\count393
+\c@currremarkctr=\count394
+\c@endremarkctr=\count395
+\c@remark=\count396
+\c@currproofctr=\count397
+\c@endproofctr=\count398
+\c@proof=\count399
 ) (./shuthesis.sty
 Package: shuthesis 2017/05/04
- (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip115
-\multirow@cntb=\count373
-\multirow@dima=\skip116
-\bigstrutjot=\dimen300
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
-Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
-\TX@col@width=\dimen301
-\TX@old@table=\dimen302
-\TX@old@col=\dimen303
-\TX@target=\dimen304
-\TX@delta=\dimen305
-\TX@cols=\count374
-\TX@ftn=\toks45
-) (/usr/share/texlive/texmf-dist/tex/latex/diagbox/diagbox.sty
+ (d:/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip122
+\multirow@cntb=\count400
+\multirow@dima=\skip123
+\bigstrutjot=\dimen308
+) (d:/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+\TX@col@width=\dimen309
+\TX@old@table=\dimen310
+\TX@old@col=\dimen311
+\TX@target=\dimen312
+\TX@delta=\dimen313
+\TX@cols=\count401
+\TX@ftn=\toks49
+) (d:/texlive/2025/texmf-dist/tex/latex/diagbox/diagbox.sty
 Package: diagbox 2020/02/09 v2.3 Making table heads with diagonal lines
- (/usr/share/texlive/texmf-dist/tex/latex/pict2e/pict2e.sty
-Package: pict2e 2019/08/20 v0.3c Improved picture commands (HjG,RN,JT)
- (/usr/share/texlive/texmf-dist/tex/latex/pict2e/pict2e.cfg
+ (d:/texlive/2025/texmf-dist/tex/latex/pict2e/pict2e.sty
+Package: pict2e 2020/09/30 v0.4b Improved picture commands (HjG,RN,JT)
+ (d:/texlive/2025/texmf-dist/tex/latex/pict2e/pict2e.cfg
 File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
 )
-Package pict2e Info: Driver file: xetex.def on input line 119.
-Package pict2e Info: Driver file for pict2e: p2e-xetex.def on input line 121.
- (/usr/share/texlive/texmf-dist/tex/latex/pict2e/p2e-xetex.def
+Package pict2e Info: Driver file: xetex.def on input line 112.
+Package pict2e Info: Driver file for pict2e: p2e-xetex.def on input line 114.
+ (d:/texlive/2025/texmf-dist/tex/latex/pict2e/p2e-xetex.def
 File: p2e-xetex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
 )
-\pIIe@GRAPH=\toks46
-\@arclen=\dimen306
-\@arcrad=\dimen307
-\@tempdimd=\dimen308
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp.sty
-Package: fp 1995/04/02
- `Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich (/usr/share/texlive/texmf-dist/tex/latex/fp/defpattern.sty
-Package: defpattern 1994/10/12
-\actioncount=\count375
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-basic.sty
-Package: fp-basic 1996/05/13
-\FP@xs=\count376
-\FP@xia=\count377
-\FP@xib=\count378
-\FP@xfa=\count379
-\FP@xfb=\count380
-\FP@rega=\count381
-\FP@regb=\count382
-\FP@regs=\count383
-\FP@times=\count384
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-addons.sty
-Package: fp-addons 1995/03/15
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-snap.sty
-Package: fp-snap 1995/04/05
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-exp.sty
-Package: fp-exp 1995/04/03
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-trigo.sty
-Package: fp-trigo 1995/04/14
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-pas.sty
-Package: fp-pas 1994/08/29
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-random.sty
-Package: fp-random 1995/02/23
-\FPseed=\count385
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-eqn.sty
-Package: fp-eqn 1995/04/03
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-upn.sty
-Package: fp-upn 1996/10/21
-) (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-eval.sty
-Package: fp-eval 1995/04/03
-))
-\diagbox@boxa=\box73
-\diagbox@boxb=\box74
-\diagbox@boxm=\box75
-\diagbox@wd=\dimen309
-\diagbox@ht=\dimen310
-\diagbox@insepl=\dimen311
-\diagbox@insepr=\dimen312
-\diagbox@outsepl=\dimen313
-\diagbox@outsepr=\dimen314
-) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+\pIIe@GRAPH=\toks50
+\@arclen=\dimen314
+\@arcrad=\dimen315
+\pIIe@tempdima=\dimen316
+\pIIe@tempdimb=\dimen317
+\pIIe@tempdimc=\dimen318
+\pIIe@tempdimd=\dimen319
+\pIIe@tempdime=\dimen320
+\pIIe@tempdimf=\dimen321
+)
+\diagbox@boxa=\box83
+\diagbox@boxb=\box84
+\diagbox@boxm=\box85
+\diagbox@wd=\dimen322
+\diagbox@ht=\dimen323
+\diagbox@insepl=\dimen324
+\diagbox@insepr=\dimen325
+\diagbox@outsepl=\dimen326
+\diagbox@outsepr=\dimen327
+) (d:/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count386
-\float@exts=\toks47
-\float@box=\box76
-\@float@everytoks=\toks48
-\@floatcapt=\box77
-)) (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
-Package: titlesec 2019/10/16 v2.13 Sectioning titles
-\ttl@box=\box78
-\beforetitleunit=\skip117
-\aftertitleunit=\skip118
-\ttl@plus=\dimen315
-\ttl@minus=\dimen316
-\ttl@toksa=\toks49
-\titlewidth=\dimen317
-\titlewidthlast=\dimen318
-\titlewidthfirst=\dimen319
-) (/usr/share/texlive/texmf-dist/tex/latex/cleveref/cleveref.sty
+\c@float@type=\count402
+\float@exts=\toks51
+\float@box=\box86
+\@float@everytoks=\toks52
+\@floatcapt=\box87
+)) (d:/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box88
+\beforetitleunit=\skip124
+\aftertitleunit=\skip125
+\ttl@plus=\dimen328
+\ttl@minus=\dimen329
+\ttl@toksa=\toks53
+\titlewidth=\dimen330
+\titlewidthlast=\dimen331
+\titlewidthfirst=\dimen332
+) (d:/texlive/2025/texmf-dist/tex/latex/cleveref/cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `hyperref' support loaded on input line 2370.
 LaTeX Info: Redefining \cref on input line 2370.
@@ -903,107 +973,91 @@ LaTeX Info: Redefining \labelcref on input line 2370.
 LaTeX Info: Redefining \labelcpageref on input line 2370.
 Package cleveref Info: `ntheorem' support loaded on input line 3055.
 Package cleveref Info: `algorithm2e' support loaded on input line 3147.
-) (/usr/share/texlive/texmf-dist/tex/latex/threeparttable/threeparttable.sty
+) (d:/texlive/2025/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box79
-) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+\@tempboxb=\box89
+) (d:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: xetex.def on input line 225.
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
-Package xcolor Info: Model `RGB' extended on input line 1364.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
-Package: adjustbox 2019/01/04 v1.2 Adjusting TeX boxes (trim, clip, ...)
- (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
- (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks50
-\XKV@tempa@toks=\toks51
+Package xcolor Info: Driver file: xetex.def on input line 274.
+ (d:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (d:/texlive/2025/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
+ (d:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+ (d:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex (d:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks54
+\XKV@tempa@toks=\toks55
 )
-\XKV@depth=\count387
+\XKV@depth=\count403
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-)) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+)) (d:/texlive/2025/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-ends (calc, etex, pgfmath)
-) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
-Package: trimclip 2018/04/08 v1.1 Trim and clip general TeX material
- (/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
-Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
-\collectedbox=\box80
+) (d:/texlive/2025/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
+ (d:/texlive/2025/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box90
 )
-\tc@llx=\dimen320
-\tc@lly=\dimen321
-\tc@urx=\dimen322
-\tc@ury=\dimen323
+\tc@llx=\dimen333
+\tc@lly=\dimen334
+\tc@urx=\dimen335
+\tc@ury=\dimen336
 Package trimclip Info: Using driver 'tc-xetex.def'.
- (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-xetex.def
+ (d:/texlive/2025/texmf-dist/tex/latex/adjustbox/tc-xetex.def
 File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
 ))
-\adjbox@Width=\dimen324
-\adjbox@Height=\dimen325
-\adjbox@Depth=\dimen326
-\adjbox@Totalheight=\dimen327
-\adjbox@pwidth=\dimen328
-\adjbox@pheight=\dimen329
-\adjbox@pdepth=\dimen330
-\adjbox@ptotalheight=\dimen331
- (/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+\adjbox@Width=\dimen337
+\adjbox@Height=\dimen338
+\adjbox@Depth=\dimen339
+\adjbox@Totalheight=\dimen340
+\adjbox@pwidth=\dimen341
+\adjbox@pheight=\dimen342
+\adjbox@pdepth=\dimen343
+\adjbox@ptotalheight=\dimen344
+ (d:/texlive/2025/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box81
-\sift@deathcycles=\count388
-\@vwid@loff=\dimen332
-\@vwid@roff=\dimen333
+\@vwid@box=\box91
+\sift@deathcycles=\count404
+\@vwid@loff=\dimen345
+\@vwid@roff=\dimen346
 ))
 
-Package fontspec Info: Font family 'UbuntuMono(0)' created for font 'Ubuntu
-(fontspec)             Mono' with options
+Package fontspec Info: 
+(fontspec)             Font family 'CourierNew(0)' created for font 'Courier
+(fontspec)             New' with options
 (fontspec)             [WordSpace={1,0,0},HyphenChar=None,PunctuationSpace=WordSpace].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"Ubuntu
-(fontspec)             Mono/OT:script=latn;language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"Ubuntu
-(fontspec)             Mono/B/OT:script=latn;language=dflt;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'italic' (m/it) with NFSS spec.: <->"Ubuntu
-(fontspec)             Mono/I/OT:script=latn;language=dflt;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Ubuntu
-(fontspec)             Mono/BI/OT:script=latn;language=dflt;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"Courier
+(fontspec)             New/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"Courier
+(fontspec)             New/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->"Courier
+(fontspec)             New/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Courier
+(fontspec)             New/BI/OT:script=latn;language=dflt;"
+
+ (./main.aux (./data/chap01.aux) (./data/chap02.aux) (./data/chap03.aux
+
+LaTeX Warning: Label `fig:fbgrasp_contact_detect' multiply defined.
 
 
-No file main.aux.
+LaTeX Warning: Label `fig:fbgrasp_contact_detect@cref' multiply defined.
+
+) (./data/chap04.aux) (./data/chap05.aux) (./data/chap_exp.aux) (./data/chap_exp2.aux) (./data/publications.aux) (./data/acknowledgement.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
@@ -1026,10 +1080,9 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
-ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 34.
 
-Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
+Package fontspec Info: 
+(fontspec)             Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup10
@@ -1075,7 +1128,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
 (Font)                  OT1/cmss/m/n --> TU/texgyreheros(0)/m/n on input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/UbuntuMono(0)/m/n on input line 34.
+(Font)                  OT1/cmtt/m/n --> TU/CourierNew(0)/m/n on input line 34.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/texgyretermes(0)/m/n --> TU/texgyretermes(0)/b/n on input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
@@ -1083,36 +1136,22 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/texgyreheros(0)/b/n on input line 34.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/UbuntuMono(0)/b/n on input line 34.
+(Font)                  OT1/cmtt/m/n --> TU/CourierNew(0)/b/n on input line 34.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
- (/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
-Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
+ (d:/texlive/2025/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box82
+Package bicaption Info: Main language is not set on input line 34.
 Package hyperref Info: Link coloring ON on input line 34.
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
- (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
-Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
-Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-)
-\c@section@level=\count389
-)
-LaTeX Info: Redefining \ref on input line 34.
-LaTeX Info: Redefining \pageref on input line 34.
-LaTeX Info: Redefining \nameref on input line 34.
+ (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1181,33 +1220,36 @@ Package hyperref Warning: Rerun to get /PageLabels entry.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Missing character: There is no   in font [FZXBsong.ttf]/OT!
-Missing character: There is no   in font [FZXBsong.ttf]/OT!
 
+Missing character: There is no   (U+0020) in font [FZXBsong.ttf]/OT!
+Missing character: There is no   (U+0020) in font [FZXBsong.ttf]/OT!
 
-Package fontspec Warning: Font "FZXBsong" does not contain requested Script
-(fontspec)                "CJK".
+Package fontspec Info: 
+(fontspec)             Script 'CJK' not explicitly supported within font
+(fontspec)             'FZXBsong'. Check the typeset output, and if it is okay
+(fontspec)             then ignore this warning. Otherwise a different font
+(fontspec)             should be chosen.
 
-Missing character: There is no   in font [FZXBsong.ttf]/OT:language=dflt;!
+Missing character: There is no   (U+0020) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
 
-Package fontspec Info: Font family 'FZXBsong.ttf(0)' created for font
+Package fontspec Info: 
+(fontspec)             Font family 'FZXBsong.ttf(0)' created for font
 (fontspec)             'FZXBsong.ttf' with options [Script={CJK}].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[FZXBsong.ttf]/OT:language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             <->"[FZXBsong.ttf]/OT:script=hani;language=dflt;"
 
-Missing character: There is no   in font [FZXBsong.ttf]/OT:language=dflt;!
+Missing character: There is no   (U+0020) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 12.045pt on input line 61.
-Missing character: There is no 空 in font [FZXBsong.ttf]/OT:language=dflt;!
-Missing character: There is no 白 in font [FZXBsong.ttf]/OT:language=dflt;!
-Missing character: There is no 空 in font [FZXBsong.ttf]/OT:language=dflt;!
-Missing character: There is no 空 in font [FZXBsong.ttf]/OT:language=dflt;!
-Missing character: There is no 白 in font [FZXBsong.ttf]/OT:language=dflt;!
+Missing character: There is no 空 (U+7A7A) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
+Missing character: There is no 白 (U+767D) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
+Missing character: There is no 空 (U+7A7A) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
+Missing character: There is no 空 (U+7A7A) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
+Missing character: There is no 白 (U+767D) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
 File: figures/shu.pdf Graphic file (type pdf)
 <use figures/shu.pdf>
 File: figures/shulogo.pdf Graphic file (type pdf)
@@ -1215,7 +1257,8 @@ File: figures/shulogo.pdf Graphic file (type pdf)
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 57.21375pt on input line 61.
 
-Package fontspec Info: Font family 'FZLanTing.ttf(0)' created for font
+Package fontspec Info: 
+(fontspec)             Font family 'FZLanTing.ttf(0)' created for font
 (fontspec)             'FZLanTing.ttf' with options [Script={CJK}].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
@@ -1223,7 +1266,6 @@ Package fontspec Info: Font family 'FZLanTing.ttf(0)' created for font
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->"[FZLanTing.ttf]/OT:script=hani;language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 24.09pt on input line 61.
@@ -1234,37 +1276,40 @@ LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 6.0pt on input line 61.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(d:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+ (d:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+rsfs on input line 61.
- (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
+ (d:/texlive/2025/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 18.06749pt on input line 61.
-Missing character: There is no   in font [HanYikaishu.ttf]/OT!
-Missing character: There is no   in font [HanYikaishu.ttf]/OT!
 
+Missing character: There is no   (U+0020) in font [HanYikaishu.ttf]/OT!
+Missing character: There is no   (U+0020) in font [HanYikaishu.ttf]/OT!
 
-Package fontspec Warning: Font "HanYikaishu" does not contain requested Script
-(fontspec)                "CJK".
+Package fontspec Info: 
+(fontspec)             Script 'CJK' not explicitly supported within font
+(fontspec)             'HanYikaishu'. Check the typeset output, and if it is
+(fontspec)             okay then ignore this warning. Otherwise a different
+(fontspec)             font should be chosen.
 
-Missing character: There is no   in font [HanYikaishu.ttf]/OT:language=dflt;!
+Missing character: There is no   (U+0020) in font [HanYikaishu.ttf]/OT:script=hani;language=dflt;!
 
-Package fontspec Info: Font family 'HanYikaishu.ttf(0)' created for font
+Package fontspec Info: 
+(fontspec)             Font family 'HanYikaishu.ttf(0)' created for font
 (fontspec)             'HanYikaishu.ttf' with options [Script={CJK}].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[HanYikaishu.ttf]/OT:language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             <->"[HanYikaishu.ttf]/OT:script=hani;language=dflt;"
 
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 15.05624pt on input line 61.
@@ -1276,7 +1321,7 @@ LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <18.06749> not available
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <15.05624> not available
 (Font)              size <14.4> substituted on input line 61.
 
-Missing character: There is no   in font [HanYikaishu.ttf]/OT:language=dflt;!
+Missing character: There is no   (U+0020) in font [HanYikaishu.ttf]/OT:script=hani;language=dflt;!
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 22.08249pt on input line 61.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
@@ -1286,58 +1331,78 @@ LaTeX Font Warning: Font shape `TU/FZLanTing.ttf(0)/b/n' undefined
 (Font)              using `TU/FZLanTing.ttf(0)/m/n' instead on input line 61.
 
 
-Package fontspec Warning: Font "FandolHei-Regular" does not contain requested
-(fontspec)                Script "CJK".
+Package fontspec Info: 
+(fontspec)             Could not resolve font "SimHei/BI" (it probably doesn't
+(fontspec)             exist).
 
 
-Package fontspec Info: Font family 'FandolHei-Regular(0)' created for font
-(fontspec)             'FandolHei-Regular' with options
-(fontspec)             [Script={CJK},Extension={.otf},BoldFont={FandolHei-Bold}].
+Package fontspec Info: 
+(fontspec)             Could not resolve font "SimHei/B" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "SimHei/I" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'SimHei(0)' created for font 'SimHei' with
+(fontspec)             options [Script={CJK}].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[FandolHei-Regular.otf]/OT:language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[FandolHei-Bold.otf]/OT:language=dflt;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             <->"SimHei/OT:script=hani;language=dflt;"
 
 
 Underfull \hbox (badness 10000) detected at line 61
-\TU/FandolHei-Regular(0)/m/n/18.06749 作 者
+\TU/SimHei(0)/m/n/18.06749 作 者
  []
 
 
-Package fontspec Warning: Font "FandolKai-Regular" does not contain requested
-(fontspec)                Script "CJK".
+Package fontspec Info: 
+(fontspec)             Could not resolve font "KaiTi/BI" (it probably doesn't
+(fontspec)             exist).
 
 
-Package fontspec Info: Font family 'FandolKai-Regular(0)' created for font
-(fontspec)             'FandolKai-Regular' with options
-(fontspec)             [Script={CJK},Extension={.otf}].
+Package fontspec Info: 
+(fontspec)             Could not resolve font "KaiTi/B" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "KaiTi/I" (it probably doesn't
+(fontspec)             exist).
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'KaiTi(0)' created for font 'KaiTi' with
+(fontspec)             options [Script={CJK}].
 (fontspec)              
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[FandolKai-Regular.otf]/OT:language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             <->"KaiTi/OT:script=hani;language=dflt;"
 
 
 Underfull \hbox (badness 10000) detected at line 61
-\TU/FandolHei-Regular(0)/m/n/18.06749 导 师
+\TU/SimHei(0)/m/n/18.06749 导 师
  []
+
+
 
 [1
 
 
 
 ]
+
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 9.03374pt on input line 62.
- [2
+[2
 
 
 ]
@@ -1345,8 +1410,11 @@ LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 16.06pt on input line 62.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 14.05249pt on input line 62.
-Missing character: There is no   in font [FZXBsong.ttf]/OT:language=dflt;!
- [3
+
+Missing character: There is no   (U+0020) in font [FZXBsong.ttf]/OT:script=hani;language=dflt;!
+
+
+[3
 
 ]
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
@@ -1355,13 +1423,15 @@ LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 26.09749pt on input line 62.
 
 Underfull \hbox (badness 10000) detected at line 62
-\TU/FandolSong-Regular(0)/m/n/18.06749 作 者
+\TU/SimSun(0)/m/n/18.06749 作 者
  []
 
 
 Underfull \hbox (badness 10000) detected at line 62
-\TU/FandolSong-Regular(0)/m/n/18.06749 导 师
+\TU/SimSun(0)/m/n/18.06749 导 师
  []
+
+
 
 [4
 
@@ -1379,22 +1449,47 @@ LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <10.53937> not available
 
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 16.06pt on input line 62.
+
+
 [5
 
 ]
 
-Package fontspec Warning: Font "FandolHei-Regular" does not contain requested
-(fontspec)                Script "CJK".
+Package fontspec Info: 
+(fontspec)             Could not resolve font "Microsoft YaHei Bold/I" (it
+(fontspec)             probably doesn't exist).
+
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "Microsoft YaHei/I" (it probably
+(fontspec)             doesn't exist).
 
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/m/n' will be
 (Font)              scaled to size 10.84042pt on input line 62.
+
+Package fontspec Info: 
+(fontspec)             Font family 'MicrosoftYaHei(0)' created for font
+(fontspec)             'Microsoft YaHei' with options
+(fontspec)             [Script={CJK},BoldFont={* Bold}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"Microsoft
+(fontspec)             YaHei/OT:script=hani;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"Microsoft YaHei
+(fontspec)             Bold/OT:script=hani;language=dflt;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Microsoft
+(fontspec)             YaHei/BI/OT:script=hani;language=dflt;"
+
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/m/n' will be
 (Font)              scaled to size 16.26062pt on input line 62.
 
-Package Fancyhdr Warning: \footskip is too small (19.91692pt): 
-Make it at least 21.68097pt.
-We now make it that large for the rest of the document.
-This may cause the page layout to be inconsistent, however.
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [1
 
@@ -1408,22 +1503,64 @@ Underfull \hbox (badness 2384) in paragraph at lines 62--62
 []\TU/texgyretermes(0)/m/n/12.045 Point cloud processing; Geometrical feature detection; Neural network;
  []
 
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
 [2
 
 
+] (./main.toc
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[3
+
+
 ]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[4]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[5])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- (./data/denotation.tex [3
+ (./data/denotation.tex
 
 
-]
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[6]
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 8.0pt on input line 5.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 6.0pt on input line 5.
-) [4
+)
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[7
 
 
 ]
@@ -1448,6 +1585,13 @@ Package natbib Warning: Citation `miller_graspit_2021' on page 1 undefined on in
 
 Package natbib Warning: Citation `wan2020planning' on page 1 undefined on input line 15.
 
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
 [1
 
 
@@ -1459,22 +1603,13 @@ Package natbib Warning: Citation `bicchi2000robotic' on page 2 undefined on inpu
 LaTeX Font Info:    Font shape `TU/texgyreheros(0)/m/n' will be
 (Font)              scaled to size 12.64714pt on input line 22.
 
-Package natbib Warning: Citation `gumhold_feature_2001' on page 2 undefined on input line 27.
-
-
 Package natbib Warning: Citation `xia_fast_2017' on page 2 undefined on input line 27.
 
 
 Package natbib Warning: Citation `bazazian_fast_2015' on page 2 undefined on input line 27.
 
 
-Package natbib Warning: Citation `lin_line_2015' on page 2 undefined on input line 27.
-
-
 Package natbib Warning: Citation `nguyen_edge_2018' on page 2 undefined on input line 27.
-
-
-Package natbib Warning: Citation `demarsin_detection_2007' on page 2 undefined on input line 27.
 
 
 Package natbib Warning: Citation `daniels_robust_2007' on page 2 undefined on input line 29.
@@ -1497,6 +1632,13 @@ Package natbib Warning: Citation `ahmed_edge_2018' on page 2 undefined on input 
 
 Package natbib Warning: Citation `schmidt_detection_2023' on page 2 undefined on input line 31.
 
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
 [2]
 
 Package natbib Warning: Citation `wang_pienet_2020a' on page 3 undefined on input line 36.
@@ -1512,9 +1654,6 @@ Package natbib Warning: Citation `guerrero_pcpnet_2018' on page 3 undefined on i
 
 
 Package natbib Warning: Citation `jiao_mslnet_2024' on page 3 undefined on input line 36.
-
-
-Package natbib Warning: Citation `himeur_pcednet_2022' on page 3 undefined on input line 36.
 
 
 Package natbib Warning: Citation `bode_bounded_2023' on page 3 undefined on input line 36.
@@ -1558,6 +1697,13 @@ Package natbib Warning: Citation `miller_graspit_2021' on page 3 undefined on in
 
 Package natbib Warning: Citation `wan2020planning' on page 3 undefined on input line 52.
 
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
 [3]
 
 Package natbib Warning: Citation `mahler2019learning' on page 4 undefined on input line 55.
@@ -1595,14 +1741,25 @@ Package natbib Warning: Citation `ten2017grasp' on page 4 undefined on input lin
 
 Package natbib Warning: Citation `domae2014fast' on page 4 undefined on input line 60.
 
-[4]) [5]
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[4])
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[5]
 \openout2 = `data/chap02.aux'.
 
  (./data/chap02.tex
 第二章
-
-LaTeX Warning: Reference `fig:necdnet_framework' on page 6 undefined on input line 11.
-
 File: figures/NECDNet/workflow.jpg Graphic file (type bmp)
 <figures/NECDNet/workflow.jpg>
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
@@ -1610,343 +1767,343 @@ LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 
 LaTeX Warning: Reference `cha:xx' on page 6 undefined on input line 26.
 
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
 [6
 
-
-
-] [7]
-
-LaTeX Warning: Reference `eq:X_i' on page 8 undefined on input line 36.
-
-
-LaTeX Warning: Reference `' on page 8 undefined on input line 47.
-
-
-LaTeX Warning: Reference `eq:svd_Ki' on page 8 undefined on input line 51.
-
-
-LaTeX Warning: Reference `eq:center_Qi' on page 8 undefined on input line 58.
-
-[8]
-
-LaTeX Warning: Reference `eq:norm_Qi' on page 9 undefined on input line 64.
-
-
-LaTeX Warning: Reference `eq:svd_Ki' on page 9 undefined on input line 73.
-
-[9]
-
-LaTeX Warning: Reference `eq:curvature' on page 10 undefined on input line 86.
-
-
-LaTeX Warning: Reference `eq:projection_distance' on page 10 undefined on input line 96.
-
-
-LaTeX Warning: Reference `' on page 10 undefined on input line 102.
-
-[10]
-
-LaTeX Warning: Reference `eq:mean_center_distance' on page 11 undefined on input line 105.
-
-
-LaTeX Warning: Reference `sec:preprocessing' on page 11 undefined on input line 114.
-
-
-LaTeX Warning: Reference `eq:normal_angle' on page 11 undefined on input line 114.
-
-
-LaTeX Warning: Reference `eq:normal_angle_difference' on page 11 undefined on input line 114.
-
-[11]
-
-LaTeX Warning: Reference `eq:normal_value_difference' on page 12 undefined on input line 126.
-
-
-LaTeX Warning: Reference `eq:normal_distribution_variance' on page 12 undefined on input line 133.
-
-
-LaTeX Warning: Reference `eq:projectional_normal_norm' on page 12 undefined on input line 142.
-
-[12]
-
-LaTeX Warning: Reference `eq:feature_vector' on page 13 undefined on input line 152.
-
-
-LaTeX Warning: Reference `fig:feature_distribution' on page 13 undefined on input line 158.
-
-
-LaTeX Warning: Reference `sec:dataset' on page 13 undefined on input line 161.
-
-File: figures/NECDNet/feature_distribution.jpg Graphic file (type bmp)
-<figures/NECDNet/feature_distribution.jpg>
-
-Package natbib Warning: Citation `tolstikhin_mlpmixer_2021' on page 13 undefined on input line 174.
-
-
-LaTeX Warning: Reference `fig:necdnet_architecture' on page 13 undefined on input line 174.
-
-
-Package natbib Warning: Citation `xu_empirical_2015' on page 13 undefined on input line 174.
-
-
-Package natbib Warning: Citation `srivastava_dropout_2014' on page 13 undefined on input line 174.
-
-[13]
-File: figures/NECDNet/necdnet_architecture.jpg Graphic file (type bmp)
-<figures/NECDNet/necdnet_architecture.jpg>
- [14]
-
-Package natbib Warning: Citation `xu_empirical_2015' on page 15 undefined on input line 190.
-
-
-LaTeX Warning: Reference `fig:necdnet_architecture' on page 15 undefined on input line 192.
-
-
-LaTeX Warning: Reference `eq:secondary_fusion' on page 15 undefined on input line 192.
-
-
-Package natbib Warning: Citation `srivastava_dropout_2014' on page 15 undefined on input line 192.
-
-[15]
-
-LaTeX Warning: Reference `eq:secondary_fusion' on page 16 undefined on input line 205.
-
-
-Package natbib Warning: Citation `bishop_pattern_2006' on page 16 undefined on input line 205.
-
-
-LaTeX Warning: Reference `eq:softmax_result' on page 16 undefined on input line 213.
-
-
-Package natbib Warning: Citation `japkowicz_class_2002a' on page 16 undefined on input line 219.
-
-
-Package natbib Warning: Citation `lin_focal_2020' on page 16 undefined on input line 219.
-
-[16]
-
-LaTeX Warning: Reference `eq:ce_loss' on page 17 undefined on input line 221.
-
-
-Package natbib Warning: Citation `mao_crossentropy_2023' on page 17 undefined on input line 221.
-
-
-LaTeX Warning: Reference `eq:weighted_ce_loss' on page 17 undefined on input line 227.
-
-
-LaTeX Warning: Reference `eq:focal_loss' on page 17 undefined on input line 233.
-
-
-Package natbib Warning: Citation `lin_focal_2020' on page 17 undefined on input line 233.
-
-
-Package natbib Warning: Citation `krstinic_multilabel_2020' on page 17 undefined on input line 241.
-
-
-Package natbib Warning: Citation `chicco_advantages_2020' on page 17 undefined on input line 241.
-
-
-Package natbib Warning: Citation `japkowicz_class_2002a' on page 17 undefined on input line 241.
-
-
-Package natbib Warning: Citation `duntsch_confusion_2019' on page 17 undefined on input line 241.
-
-
-LaTeX Warning: Reference `cha:app_metrics' on page 17 undefined on input line 241.
-
-[17]
-
-LaTeX Warning: Reference `tab:confusion_matrix' on page 18 undefined on input line 243.
-
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 247.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 7.72884pt on input line 247.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
-(Font)              scaled to size 5.52061pt on input line 247.
-
-LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <5.52061> not available
-(Font)              size <6> substituted on input line 247.
-
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 11.04124pt on input line 247.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 7.72884pt on input line 247.
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 5.52061pt on input line 247.
-
-Package natbib Warning: Citation `erbani_confusion_2024' on page 18 undefined on input line 262.
-
-
-Package natbib Warning: Citation `krstinic_multilabel_2020' on page 18 undefined on input line 262.
-
-
-Package natbib Warning: Citation `japkowicz_class_2002a' on page 18 undefined on input line 262.
-
-
-LaTeX Warning: Reference `eq:macro_average' on page 18 undefined on input line 264.
-
-[18]
-
-Package natbib Warning: Citation `koch_abc_2019' on page 19 undefined on input line 273.
-
-
-Package natbib Warning: Citation `chang_shapenet_2015' on page 19 undefined on input line 275.
-
-
-Package natbib Warning: Citation `dai_scannet_2017' on page 19 undefined on input line 275.
-
-
-LaTeX Warning: Reference `fig:dataset_comparision' on page 19 undefined on input line 275.
-
-
-Underfull \hbox (badness 2635) in paragraph at lines 275--276
-[]\TU/FandolSong-Regular(0)/m/n/12.045 针 对 点 云 数 据 的 深 度 学 习 任 务，|  目 前 已 有 多 个 公 开 数 据 集 可 供 使 用，|  如
- []
-
-
-Package natbib Warning: Citation `koch_abc_2019' on page 19 undefined on input line 284.
-
-
-LaTeX Warning: Reference `' on page 19 undefined on input line 284.
-
-
-LaTeX Warning: Reference `fig:annotation_pipeline' on page 19 undefined on input line 294.
-
-[19]
-File: figures/NECDNet/annotation_pipeline.jpg Graphic file (type bmp)
-<figures/NECDNet/annotation_pipeline.jpg>
-
-
-LaTeX Warning: Reference `fig:annotation_pipeline' on page 20 undefined on input line 307.
-
-
-LaTeX Warning: Reference `fig:dataset_samples' on page 20 undefined on input line 309.
-
-[20]
-File: figures/NECDNet/dataset_samples.jpg Graphic file (type bmp)
-<figures/NECDNet/dataset_samples.jpg>
-) [21]
-\openout2 = `data/chap03.aux'.
-
- (./data/chap03.tex
-第三章
-
-LaTeX Warning: Reference `fig:fbgrasp_framework' on page 22 undefined on input line 10.
-
-File: figures/FBGrasp/framework.pdf Graphic file (type pdf)
-<use figures/FBGrasp/framework.pdf>
-[22
 
 
 
 ]
 
-LaTeX Warning: Reference `fig:fbgrasp_sampling' on page 23 undefined on input line 23.
 
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[7]
+
+LaTeX Warning: Reference `sec:xx' on page 8 undefined on input line 47.
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[8]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[9]
 File: example-image-a.pdf Graphic file (type pdf)
 <use example-image-a.pdf>
 
-LaTeX Warning: Reference `chap:necdnet' on page 23 undefined on input line 35.
 
 
-LaTeX Warning: Reference `fig:fbgrasp_feature_detection' on page 23 undefined on input line 35.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[10]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[11]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[12]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[13]
+File: figures/NECDNet/feature_distribution.jpg Graphic file (type bmp)
+<figures/NECDNet/feature_distribution.jpg>
+File: figures/NECDNet/necdnet_architecture.jpg Graphic file (type bmp)
+<figures/NECDNet/necdnet_architecture.jpg>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[14]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[15]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[16]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[17]
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 254.
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
+(Font)              scaled to size 7.72884pt on input line 254.
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
+(Font)              scaled to size 5.52061pt on input line 254.
+
+
+LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <5.52061> not available
+(Font)              size <6> substituted on input line 254.
+
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
+(Font)              scaled to size 11.04124pt on input line 254.
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
+(Font)              scaled to size 7.72884pt on input line 254.
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
+(Font)              scaled to size 5.52061pt on input line 254.
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[18]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[19]
+File: example-image-a.pdf Graphic file (type pdf)
+<use example-image-a.pdf>
+File: example-image-a.pdf Graphic file (type pdf)
+<use example-image-a.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[20]
+File: figures/NECDNet/annotation_pipeline.jpg Graphic file (type bmp)
+<figures/NECDNet/annotation_pipeline.jpg>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[21]
+File: figures/NECDNet/dataset_samples.jpg Graphic file (type bmp)
+<figures/NECDNet/dataset_samples.jpg>
+)
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[22]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [23]
+\openout2 = `data/chap03.aux'.
+
+ (./data/chap03.tex
+第三章
+File: figures/FBGrasp/framework.pdf Graphic file (type pdf)
+<use figures/FBGrasp/framework.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[24
+
+
+
+
+]
 File: example-image-a.pdf Graphic file (type pdf)
 <use example-image-a.pdf>
 
 
-LaTeX Warning: Reference `eq:dbscan' on page 24 undefined on input line 44.
 
-[24]
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-LaTeX Warning: Reference `fig:fbgrasp_sampling_strategy' on page 25 undefined on input line 55.
+[25]
+File: example-image-a.pdf Graphic file (type pdf)
+<use example-image-a.pdf>
 
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[26]
 File: figures/FBGrasp/sampling_strategy.pdf Graphic file (type pdf)
 <use figures/FBGrasp/sampling_strategy.pdf>
-[25]
 
-LaTeX Warning: Reference `fig:fbgrasp_contact_detect' on page 26 undefined on input line 72.
 
-File: figures/FBGrasp/contact_detect.pdf Graphic file (type pdf)
-<use figures/FBGrasp/contact_detect.pdf>
-[26]
 
-LaTeX Warning: Reference `fig:fbgrasp_contact_detect' on page 27 undefined on input line 84.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-File: figures/FBGrasp/contact_detect.pdf Graphic file (type pdf)
-<use figures/FBGrasp/contact_detect.pdf>
 [27]
+File: figures/FBGrasp/contact_detect.pdf Graphic file (type pdf)
+<use figures/FBGrasp/contact_detect.pdf>
 
-LaTeX Warning: Reference `fig:fbgrasp_detectors' on page 28 undefined on input line 95.
 
-File: example-image.pdf Graphic file (type pdf)
-<use example-image.pdf>
 
-LaTeX Warning: Reference `fig:fbgrasp_detectors' on page 28 undefined on input line 105.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [28]
-
-LaTeX Warning: Reference `fig:fbgrasp_detectors' on page 29 undefined on input line 109.
-
-
-LaTeX Warning: Reference `fig:fbgrasp_detectors' on page 29 undefined on input line 116.
-
-
-LaTeX Warning: Reference `sec:xx' on page 29 undefined on input line 116.
-
-[29]
+File: figures/FBGrasp/contact_detect.pdf Graphic file (type pdf)
+<use figures/FBGrasp/contact_detect.pdf>
 File: example-image.pdf Graphic file (type pdf)
 <use example-image.pdf>
 
 
-LaTeX Warning: Reference `fig:pairing_strategy' on page 30 undefined on input line 129.
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[29]
 
 
-LaTeX Warning: Reference `eq:proj_d' on page 30 undefined on input line 135.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [30]
 
-LaTeX Warning: Reference `eq:theta_j^s' on page 31 undefined on input line 147.
+LaTeX Warning: Reference `sec:xx' on page 31 undefined on input line 115.
+
+File: example-image.pdf Graphic file (type pdf)
+<use example-image.pdf>
 
 
-LaTeX Warning: Reference `sec:xx' on page 31 undefined on input line 152.
 
-
-LaTeX Warning: Reference `eq:j_j^s' on page 31 undefined on input line 158.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [31]
 
-LaTeX Warning: Reference `eq:v_j^s' on page 32 undefined on input line 169.
 
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-LaTeX Warning: Reference `fig:stability' on page 32 undefined on input line 189.
-
-File: figures/FBGrasp/stability.pdf Graphic file (type pdf)
-<use figures/FBGrasp/stability.pdf>
 [32]
-Underfull \hbox (badness 2197) in paragraph at lines 201--202
-[]\TU/FandolSong-Regular(0)/m/n/12.045 基 于 上 述 定 义，|  原 本 的 单 一 接 触 点 被 扩 展 为 一 个 离 散 的 接 触 点 簇 $[][] \OT1/cmr/m/n/12.045 =
- []
+
+LaTeX Warning: Reference `sec:xx' on page 33 undefined on input line 150.
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [33]
+File: figures/FBGrasp/stability.pdf Graphic file (type pdf)
+<use figures/FBGrasp/stability.pdf>
 
-LaTeX Warning: Reference `fig:augmentation' on page 34 undefined on input line 232.
 
 
-LaTeX Warning: Reference `fig:augmentation' on page 34 undefined on input line 232.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
+[34]
+Underfull \hbox (badness 2197) in paragraph at lines 199--200
+[]\TU/SimSun(0)/m/n/12.045 基 于 上 述 定 义，|  原 本 的 单 一 接 触 点 被 扩 展 为 一 个 离 散 的 接 触 点 簇 $[][] \OT1/cmr/m/n/12.045 =
+ []
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[35]
 File: figures/FBGrasp/augmentation.pdf Graphic file (type pdf)
 <use figures/FBGrasp/augmentation.pdf>
 
-LaTeX Warning: Reference `sec:xx' on page 34 undefined on input line 241.
 
-[34]) [35] [36]
+LaTeX Warning: Reference `sec:xx' on page 36 undefined on input line 239.
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[36])
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[37]
 \openout2 = `data/chap04.aux'.
 
  (./data/chap04.tex
 第四章
-) [37
+)
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[38
+
 
 
 
@@ -1955,7 +2112,15 @@ LaTeX Warning: Reference `sec:xx' on page 34 undefined on input line 241.
 
  (./data/chap05.tex
 第五章
-) [38
+)
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[39
+
 
 
 
@@ -1965,43 +2130,49 @@ LaTeX Warning: Reference `sec:xx' on page 34 undefined on input line 241.
  (./data/chap_exp.tex
 第六章
 
-Package natbib Warning: Citation `paszke_pytorch_2019' on page 39 undefined on input line 11.
+Package natbib Warning: Citation `paszke_pytorch_2019' on page 40 undefined on input line 11.
 
 
-Package natbib Warning: Citation `lin_focal_2020' on page 39 undefined on input line 15.
 
-[39
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[40
+
 
 
 
 ]
 
-Package natbib Warning: Citation `bazazian_fast_2015' on page 40 undefined on input line 25.
+Package natbib Warning: Citation `bazazian_fast_2015' on page 41 undefined on input line 25.
 
 
-Package natbib Warning: Citation `ahmed_edge_2018' on page 40 undefined on input line 25.
+Package natbib Warning: Citation `ahmed_edge_2018' on page 41 undefined on input line 25.
 
 
-Package natbib Warning: Citation `wang_pienet_2020a' on page 40 undefined on input line 25.
+Package natbib Warning: Citation `wang_pienet_2020a' on page 41 undefined on input line 25.
 
 
-Package natbib Warning: Citation `himeur_pcednet_2022' on page 40 undefined on input line 25.
+Package natbib Warning: Citation `bode_bounded_2023' on page 41 undefined on input line 25.
 
 
-Package natbib Warning: Citation `bode_bounded_2023' on page 40 undefined on input line 25.
 
 
-LaTeX Warning: Reference `tab:corner_result' on page 40 undefined on input line 29.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[40]
+[41]
 
-Package natbib Warning: Citation `bazazian_fast_2015' on page 41 undefined on input line 46.
-
-
-Package natbib Warning: Citation `ahmed_edge_2018' on page 41 undefined on input line 47.
+Package natbib Warning: Citation `bazazian_fast_2015' on page 42 undefined on input line 46.
 
 
-Package natbib Warning: Citation `wang_pienet_2020a' on page 41 undefined on input line 48.
+Package natbib Warning: Citation `ahmed_edge_2018' on page 42 undefined on input line 47.
+
+
+Package natbib Warning: Citation `wang_pienet_2020a' on page 42 undefined on input line 48.
 
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 5.0pt on input line 55.
@@ -2010,182 +2181,256 @@ LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 5.0pt on input line 55.
 
-Overfull \hbox (132.46985pt too wide) in paragraph at lines 40--61
- [] 
- []
-
-
-LaTeX Warning: Reference `fig:edge_corner_result' on page 41 undefined on input line 64.
-
-
-LaTeX Warning: Reference `tab:metrics_result_of_four_obj' on page 41 undefined on input line 64.
-
-
-LaTeX Warning: Reference `fig:edge_corner_result' on page 41 undefined on input line 64.
+LaTeX Warning: Reference `tab:metrics_result_of_four_obj' on page 42 undefined on input line 64.
 
 File: figures/NECDNet/result.jpg Graphic file (type bmp)
 <figures/NECDNet/result.jpg>
 
-LaTeX Warning: Reference `fig:edge_corner_result' on page 41 undefined on input line 77.
+Package natbib Warning: Citation `bazazian_fast_2015' on page 42 undefined on input line 118.
 
 
-LaTeX Warning: Reference `fig:edge_corner_result' on page 41 undefined on input line 77.
+Package natbib Warning: Citation `ahmed_edge_2018' on page 42 undefined on input line 119.
 
 
-Package natbib Warning: Citation `bazazian_fast_2015' on page 41 undefined on input line 86.
+Package natbib Warning: Citation `wang_pienet_2020a' on page 42 undefined on input line 120.
 
 
-Package natbib Warning: Citation `ahmed_edge_2018' on page 41 undefined on input line 87.
+Package natbib Warning: Citation `bazazian_fast_2015' on page 42 undefined on input line 150.
 
 
-Package natbib Warning: Citation `wang_pienet_2020a' on page 41 undefined on input line 88.
+Package natbib Warning: Citation `ahmed_edge_2018' on page 42 undefined on input line 151.
 
 
-Overfull \hbox (172.804pt too wide) in paragraph at lines 80--100
-[] 
- []
+Package natbib Warning: Citation `wang_pienet_2020a' on page 42 undefined on input line 152.
 
 
-LaTeX Warning: Reference `tab:edge_result' on page 41 undefined on input line 105.
-
-[41]
-
-Package natbib Warning: Citation `himeur_pcednet_2022' on page 42 undefined on input line 120.
-
-
-Package natbib Warning: Citation `bode_bounded_2023' on page 42 undefined on input line 121.
-
-
-Package natbib Warning: Citation `himeur_pcednet_2022' on page 42 undefined on input line 128.
-
-
-Package natbib Warning: Citation `bode_bounded_2023' on page 42 undefined on input line 128.
-
-
-Overfull \hbox (138.16942pt too wide) in paragraph at lines 113--133
+Overfull \hbox (2.69977pt too wide) in paragraph at lines 143--163
  [] 
  []
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [42]
 
-LaTeX Warning: Reference `fig:limitation' on page 43 undefined on input line 142.
+Package natbib Warning: Citation `bode_bounded_2023' on page 43 undefined on input line 183.
 
 
-LaTeX Warning: Reference `fig:limitation' on page 43 undefined on input line 142.
+Package natbib Warning: Citation `bode_bounded_2023' on page 43 undefined on input line 190.
 
 
-LaTeX Warning: Reference `fig:limitation' on page 43 undefined on input line 142.
 
-File: figures/NECDNet/limitation.jpg Graphic file (type bmp)
-<figures/NECDNet/limitation.jpg>
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
 [43]
 
-LaTeX Warning: Reference `tab:ablation_study' on page 44 undefined on input line 158.
 
-
-LaTeX Warning: Reference `tab:ablation_study' on page 44 undefined on input line 164.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [44]
-Overfull \hbox (115.46597pt too wide) in paragraph at lines 175--203
+File: figures/NECDNet/limitation.jpg Graphic file (type bmp)
+<figures/NECDNet/limitation.jpg>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[45]
+Overfull \hbox (19.46597pt too wide) in paragraph at lines 237--265
  [] 
  []
 
 
-LaTeX Warning: Reference `tab:additional_ablation_study' on page 45 undefined on input line 208.
 
 
-LaTeX Warning: Reference `tab:additional_ablation_study' on page 45 undefined on input line 210.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[45]
-Overfull \hbox (85.20607pt too wide) in paragraph at lines 218--235
- [][] 
- []
+[46])
 
-) [46]
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[47]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[48]
 \openout2 = `data/chap_exp2.aux'.
 
  (./data/chap_exp2.tex
 第七章
 File: figures/FBGrasp/setting.pdf Graphic file (type pdf)
 <use figures/FBGrasp/setting.pdf>
-[47
 
 
 
-] [48]
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-LaTeX Warning: Reference `tab:distribution_metrics' on page 49 undefined on input line 58.
-
-
-LaTeX Warning: Reference `exp:distribution' on page 49 undefined on input line 60.
-
-
-LaTeX Warning: Reference `exp:distribution' on page 49 undefined on input line 60.
+[49
 
 
-LaTeX Warning: Reference `exp:distribution' on page 49 undefined on input line 60.
 
 
-LaTeX Warning: Reference `exp:distribution' on page 49 undefined on input line 60.
+]
 
 
-LaTeX Warning: Reference `exp:distribution' on page 49 undefined on input line 62.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[49]
+[50]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[51]
 File: figures/FBGrasp/grasp_distribution_main.pdf Graphic file (type pdf)
 <use figures/FBGrasp/grasp_distribution_main.pdf>
- [50]
-
-LaTeX Warning: Reference `tab:statistical results' on page 51 undefined on input line 81.
 
 
-Package natbib Warning: Citation `wan2020planning' on page 51 undefined on input line 96.
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[52]
+
+Package natbib Warning: Citation `wan2020planning' on page 53 undefined on input line 96.
 
 
-Package natbib Warning: Citation `ten2017grasp' on page 51 undefined on input line 97.
+Package natbib Warning: Citation `ten2017grasp' on page 53 undefined on input line 97.
 
 
-Package natbib Warning: Citation `miller_graspit_2021' on page 51 undefined on input line 98.
+Package natbib Warning: Citation `miller_graspit_2021' on page 53 undefined on input line 98.
 
-[51]) [52]
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[53])
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[54] (./main.lof
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[55
+
+
+
+
+])
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
- [53
 
 
 
-]
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[56] (./main.lot
+Underfull \hbox (badness 4316) in paragraph at lines 8--8
+ [][] [][][]\TU/texgyretermes(0)/m/n/12.045 ABC-Corner \TU/SimSun(0)/m/n/12.045 数 据 集 上 各 边 缘 与 角 点 检 测 方 法 的 宏 平 均  |（\TU/texgyretermes(0)/m/n/12.045 Macro- 
+ []
+
+)
 \tf@lot=\write6
 \openout6 = `main.lot'.
 
- (./main.bbl [54
+ (./main.bbl
 
 
-] [55
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[57
 
 
 ]
-Underfull \hbox (badness 1590) in paragraph at lines 95--101
-\TU/texgyretermes(0)/m/n/12.045 geometric deep learning[C/OL]//2019 IEEE/CVF Conference on Computer Vi-
- []
 
 
-Underfull \hbox (badness 1038) in paragraph at lines 95--101
-\TU/texgyretermes(0)/m/n/12.045 sion and Pattern Recognition (CVPR).  2019: 9593-9603[2024-11-01].  DOI:
- []
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-) [56]
+[58
+
+
+]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[59])
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[60]
 \openout2 = `data/publications.aux'.
 
- (./data/publications.tex) [57
+ (./data/publications.tex)
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[61
 
 
 
 ]
 \openout2 = `data/acknowledgement.aux'.
 
- (./data/acknowledgement.tex) [58
+ (./data/acknowledgement.tex)
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[62
+
 
 
 
@@ -2197,48 +2442,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--20
 
  []
 
-[59
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[63
+
 
 
 
 ]
 附录 B
-
-LaTeX Warning: Reference `sec:metrics' on page 60 undefined on input line 23.
-
 )
-
-Package caption Warning: Unused \captionsetup[bi-second] on input line 35.
-See the caption package documentation for explanation.
-
 \tf@thm=\write7
 \openout7 = `main.thm'.
 
 
+
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 92.
-[60
-
-] [61]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 92.
- (./main.aux (./data/chap01.aux) (./data/chap02.aux) (./data/chap03.aux) (./data/chap04.aux) (./data/chap05.aux) (./data/chap_exp.aux) (./data/chap_exp2.aux)
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-(./data/publications.aux) (./data/acknowledgement.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 92.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 92.
 
 
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
 
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  06D4F6BB574CA3AC1E1B47300FAB1583;13070.
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[64
+
+]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[65] (./main.aux (./data/chap01.aux) (./data/chap02.aux) (./data/chap03.aux) (./data/chap04.aux) (./data/chap05.aux) (./data/chap_exp.aux) (./data/chap_exp2.aux) (./data/publications.aux) (./data/acknowledgement.aux))
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2022/08/05>
+ ***********
+
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.22pt have occurred.
@@ -2250,16 +2497,18 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 9FFBF060B72ED5ADE747B49B6A520039;13070.
  ) 
 Here is how much of TeX's memory you used:
- 27148 strings out of 479819
- 551572 string characters out of 5895846
- 854202 words of memory out of 5000000
- 43612 multiletter control sequences out of 15000+600000
- 566871 words of font info for 262 fonts, out of 8000000 for 9000
+ 28046 strings out of 473832
+ 599764 string characters out of 5733157
+ 1015602 words of memory out of 5000000
+ 50462 multiletter control sequences out of 15000+600000
+ 594518 words of font info for 282 fonts, out of 8000000 for 9000
  1349 hyphenation exceptions out of 8191
- 63i,16n,86p,1786b,723s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 107i,16n,125p,3254b,800s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (70 pages).
+Output written on main.pdf (77 pages).

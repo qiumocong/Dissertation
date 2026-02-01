@@ -20,7 +20,7 @@
 
 基于采样点进行抓取规划的方法，首先需要从物体表面获取潜在的接触点。然而，若直接采用全局采样方法，物体的面（Face）、边（Edge）和角（Corner）区域的采样分布将呈现严重的“长尾”特征：即由于面区域占据了绝大部分表面积，接触候选点将主要集中在面上，而极少落在边或角上。这种分布不均将导致抓取规划难以充分利用物体的几何边缘特性。
 
-为了解决这一问题，本文提出了一种类别感知的体素采样方法。该方法首先对物体表面的点云进行几何特征标记，随后在每个类别内独立进行采样。这不仅确保了不同几何区域（面、边、角）能获得数量近似的接触样本，避免了长尾问题，还有效提升了接触样本的多样性。本文将最终的采样点集记为 $\mathcal{S} = \{\mathbf{s}_i\}_{i=1}^m$，其中 $m$ 为采样点总数，$\mathbf{s}_i$ 对应的几何特征标签记为 $\mathbf{f}_i$，其取值范围为 $\{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$，分别代表面、边和角。基于类别的采样结果如图~\ref{fig:fbgrasp_sampling}所示，面区域（蓝色）、边区域（橙色）和角区域（红色）均得到了均衡的覆盖。
+为了解决这一问题，本文提出了一种类别感知的体素采样方法。该方法首先对物体表面的点云进行几何特征标记，随后在每个类别内独立进行采样。这不仅确保了不同几何区域（面、边、角）能获得数量近似的接触样本，避免了长尾问题，还有效提升了接触样本的多样性。本文将最终的采样点集记为 $\mathcal{S} = \{\mathbf{s}_i\}_{i=1}^m$，其中 $m$ 为采样点总数，$\mathbf{s}_i$ 对应的几何特征标签记为 $f_i$，其取值范围为 $\{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$，分别代表面、边和角。基于类别的采样结果如图~\ref{fig:fbgrasp_sampling}所示，面区域（蓝色）、边区域（橙色）和角区域（红色）均得到了均衡的覆盖。
 
 \begin{figure}
     \centering
@@ -32,7 +32,7 @@
 
 \subsection{几何特征检测}
 
-进行接触点采样前，首先利用第\ref{chap:necdnet}章介绍的 NECDNet 对物体的几何特征进行检测与分类。由于 NECDNet 的输入为点云信息，需先通过均匀采样将物体的三角网格模型转换为点云表示，随后将其输入预训练网络。NECDNet 输出每个点的类别标签 $\mathbf{f}_i$，将点云划分为面、边、角三类。由于基于模型的方法已知物体的真实法向量，上述网络选用了基于真实法向量训练的模型版本。检测结果如图~\ref{fig:fbgrasp_feature_detection}所示，不同颜色直观地表示了不同的几何特征类别。
+进行接触点采样前，首先利用第\ref{chap:necdnet}章介绍的 NECDNet 对物体的几何特征进行检测与分类。由于 NECDNet 的输入为点云信息，需先通过均匀采样将物体的三角网格模型转换为点云表示，随后将其输入预训练网络。NECDNet 输出每个点的类别标签 $f_i$，将点云划分为面、边、角三类。由于基于模型的方法已知物体的真实法向量，上述网络选用了基于真实法向量训练的模型版本。检测结果如图~\ref{fig:fbgrasp_feature_detection}所示，不同颜色直观地表示了不同的几何特征类别。
 
 \begin{figure}
     \centering
@@ -42,7 +42,6 @@
 \end{figure}
 
 考虑到角点在物体表面通常呈稀疏且孤立的分布，直接使用原始检测点可能造成冗余。为了使结果更适用于抓取规划，本文在 NECDNet 检测后引入 DBSCAN 算法对角点进行聚类处理。聚类后的每个簇代表一个角点区域，计算其质心位置作为该区域的代表点，并将类别标签设为角点类别 $\mathtt{c}$。处理后的角点表示更加紧凑，有利于后续的采样与配对。DBSCAN 聚类过程如公式~(\ref{eq:dbscan})所示，其中 $P$ 表示待聚类的点集，$\epsilon$ 为邻域半径，$MinPts$ 为最小邻域点数。
-
 \begin{equation}
     \text{DBSCAN}(P, \epsilon, MinPts)
     \label{eq:dbscan}
@@ -58,7 +57,7 @@
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{FBGrasp/sampling_strategy.pdf}
+    \includegraphics[width=0.6\textwidth]{FBGrasp/sampling_strategy.pdf}
     \bicaption{不同体素采样尺寸及采样策略下的采样结果}{Sampling results under different voxel sizes and sampling strategies.}
     \label{fig:fbgrasp_sampling_strategy}
 \end{figure}
@@ -92,7 +91,7 @@
 
 \subsection{特征化接触检测器设计}
 
-为了捕捉不同几何自由度下的潜在接触机会，本文定义了一组参数化的几何约束检测器 $\mathcal{D}$。检测器的几何形态与尺寸严格依赖于查询点的几何特征类别 $\mathbf{f}_i \in \{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$，其构建方向始终沿查询点法向量的负方向 $-\mathbf{n}_i^s$ 延伸，旨在搜索位于物体“对侧”的表面区域。三种检测器的几何定义及示意如图~\ref{fig:fbgrasp_detectors}所示。
+为了捕捉不同几何自由度下的潜在接触机会，本文定义了一组参数化的几何约束检测器 $\mathcal{D}$。检测器的几何形态与尺寸严格依赖于查询点的几何特征类别 $f_i \in \{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$，其构建方向始终沿查询点法向量的负方向 $-\mathbf{n}_i^s$ 延伸，旨在搜索位于物体“对侧”的表面区域。三种检测器的几何定义及示意如图~\ref{fig:fbgrasp_detectors}所示。
 
 \begin{figure}[htbp]
     \centering
@@ -117,7 +116,7 @@
 
 \subsection{对偶接触点配对策略}
 
-接触对检测的具体执行过程如下：首先，从采样集 $\mathcal{S}$ 中选取一个查询点 $\mathbf{s}_i$，根据其特征 $\mathbf{f}_i$ 生成对应的检测器 $\mathcal{D}_i$。计算 $\mathcal{D}_i$ 与点集 $\mathcal{S}$ 的空间交集，得到潜在的候选接触点集 $\mathcal{M}_i = \mathcal{S} \cap \mathcal{D}_i$。
+接触对检测的具体执行过程如下：首先，从采样集 $\mathcal{S}$ 中选取一个查询点 $\mathbf{s}_i$，根据其特征 $f_i$ 生成对应的检测器 $\mathcal{D}_i$。计算 $\mathcal{D}_i$ 与点集 $\mathcal{S}$ 的空间交集，得到潜在的候选接触点集 $\mathcal{M}_i = \mathcal{S} \cap \mathcal{D}_i$。
 
 \begin{figure}[htbp]
     \centering
@@ -133,11 +132,10 @@
 
 \subsubsection{角-边/面接触配对（$\mathtt{c}$-$\mathtt{e}$, $\mathtt{c}$-$\mathtt{f}$）}
 在此类组合中，一个接触点为角点（$\mathbf{s}_i$），另一个为边或面点（$\mathbf{m}_j^s$）。由于边和面对手指的姿态有较强的几何约束，且指腹尺寸有限，我们需要确保角点 $\mathbf{s}_i$ 能够稳定地落在对侧手指的有效接触区域内。为此，本文引入了“投影距离”指标 $d_{\text{proj}}$。该指标计算从 $\mathbf{s}_i$ 出发的射线在对侧点 $\mathbf{m}_j^s$ 的约束平面（对于面）或约束直线（对于边）上的投影偏离程度。具体计算如公式~(\ref{eq:proj_d})所示：
-
 \begin{equation}
     d_{\text{proj}} = \begin{cases}
-    \|\mathbf{d}_j^\text{s} - (\mathbf{d}_j^\text{s} \cdot \mathbf{n}_j^\text{s})\mathbf{n}_j^\text{s}\| & \text{若 } \mathbf{f}_j^\text{s} = \mathtt{f} \\
-    \|\mathbf{d}_j^\text{s} \cdot \mathbf{t}_j^\text{s}\| & \text{若 } \mathbf{f}_j^\text{s} = \mathtt{e}
+    \|\mathbf{d}_j^\text{s} - (\mathbf{d}_j^\text{s} \cdot \mathbf{n}_j^\text{s})\mathbf{n}_j^\text{s}\| & \text{若 } f_j^\text{s} = \mathtt{f} \\
+    \|\mathbf{d}_j^\text{s} \cdot \mathbf{t}_j^\text{s}\| & \text{若 } f_j^\text{s} = \mathtt{e}
     \end{cases}
     \label{eq:proj_d}
 \end{equation}
@@ -163,14 +161,14 @@
 
 对于进近向量 $\mathbf{v}_i$，它决定了机械手接近物体的方向。由于面特征（$\mathtt{f}$）对法向有严格的平行约束（指腹必须平行于面），而边和角特征允许一定的旋转自由度，因此在确定方向时必须遵循“约束优先”的原则：
 \begin{itemize}
-    \item 若接触对中包含面接触点（$\mathbf{f}_j^\text{s} = \mathtt{f}$），则优先采用面点的法向量 $\mathbf{n}_j^\text{s}$ 作为进近方向，以确保指腹与平面贴合。
-    \item 若接触对仅由边或角点组成（$\mathbf{f}_j^\text{s} \in \{\mathtt{e}, \mathtt{c}\}$），则缺乏明确的表面法向约束，此时采用两接触点的连线方向作为进近向量，以最大化抓取力的传递效率。
+    \item 若接触对中包含面接触点（$f_j^\text{s} = \mathtt{f}$），则优先采用面点的法向量 $\mathbf{n}_j^\text{s}$ 作为进近方向，以确保指腹与平面贴合。
+    \item 若接触对仅由边或角点组成（$f_j^\text{s} \in \{\mathtt{e}, \mathtt{c}\}$），则缺乏明确的表面法向约束，此时采用两接触点的连线方向作为进近向量，以最大化抓取力的传递效率。
 \end{itemize}
 计算方式归纳为公式~(\ref{eq:v_j^s})：
 \begin{equation}
     \mathbf{v}_i = \begin{cases}
-        \mathbf{n}_j^\text{s} & \text{若 } \mathbf{f}_j^\text{s} = \mathtt{f} \\
-        \mathbf{m}_j^\text{s} - \mathbf{s}_i & \text{若 } \mathbf{f}_j^\text{s} \in \{\mathtt{e}, \mathtt{c}\}
+        \mathbf{n}_j^\text{s} & \text{若 } f_j^\text{s} = \mathtt{f} \\
+        \mathbf{m}_j^\text{s} - \mathbf{s}_i & \text{若 } f_j^\text{s} \in \{\mathtt{e}, \mathtt{c}\}
     \end{cases}
     \label{eq:v_j^s}
 \end{equation}

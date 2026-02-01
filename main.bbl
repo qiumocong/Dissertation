@@ -1,102 +1,154 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
-\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+\expandafter\ifx\csname urlstyle\endcsname\relax\else
   \urlstyle{same}\fi
-\providecommand{\href}[2]{\url{#2}}
-\providecommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+\expandafter\ifx\csname href\endcsname\relax
+  \DeclareUrlCommand\doi{\urlstyle{rm}}
+  \def\eprint#1#2{#2}
+\else
+  \def\doi#1{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  \let\eprint\href
+\fi
 
-\bibitem[Tolstikhin et~al.(2021)Tolstikhin, Houlsby, Kolesnikov, Beyer, Zhai,
-  Unterthiner, Yung, Steiner, Keysers, Uszkoreit, Lucic, and
-  Dosovitskiy]{tolstikhin_mlpmixer_2021}
-TOLSTIKHIN~I~O, HOULSBY~N, KOLESNIKOV~A, et~al.
-\newblock Mlp-mixer: An all-mlp architecture for
-  vision\allowbreak[C/OL]//\allowbreak
-RANZATO~M, BEYGELZIMER~A, DAUPHIN~Y, et~al.
-\newblock Advances in Neural Information Processing Systems: volume~34.
+\bibitem[Gumhold et~al.(2001)Gumhold and Wang]{gumhold_feature_2001}
+GUMHOLD S, WANG X.
+\newblock Feature extraction from point clouds\allowbreak[J].
+\newblock Proceedings of 10th international meshing roundtable, 2001, 2001.
+
+\bibitem[Lin et~al.(2015)Lin, Wang, Cheng, Chen, Jia, Chen, and Li]{lin_line_2015}
+LIN Y, WANG C, CHENG J, et~al.
+\newblock Line segment extraction for large scale unorganized point clouds\allowbreak[J].
+\newblock ISPRS Journal of Photogrammetry and Remote Sensing, 2015, 102: 172-183.
+
+\bibitem[Demarsin et~al.(2007)Demarsin, Vanderstraeten, Volodine, and Roose]{demarsin_detection_2007}
+DEMARSIN K, VANDERSTRAETEN D, VOLODINE T, et~al.
+\newblock Detection of closed sharp edges in point clouds using normal estimation and graph theory\allowbreak[J].
+\newblock Computer-Aided Design, 2007, 39\allowbreak (4): 276-283.
+
+\bibitem[Himeur et~al.(2022)Himeur, Lejemble, Pellegrini, Paulin, Barthe, and Mellado]{himeur_pcednet_2022}
+HIMEUR C~E, LEJEMBLE T, PELLEGRINI T, et~al.
+\newblock Pcednet : A lightweight neural network for fast and interactive edge detection in 3d point clouds\allowbreak[J].
+\newblock ACM Transactions on Graphics, 2022, 41\allowbreak (1): 1-21.
+
+\bibitem[Mirzaei et~al.(2022)Mirzaei, Arashpour, Asadi, Masoumi, Bai, and Behnood]{mirzaei_3d_2022}
+MIRZAEI K, ARASHPOUR M, ASADI E, et~al.
+\newblock 3d point cloud data processing with machine learning for construction and infrastructure applications: A comprehensive review\allowbreak[J].
+\newblock ADVANCED ENGINEERING INFORMATICS, 2022, 51: 101501.
+
+\bibitem[Cover et~al.(1967)Cover and Hart]{cover_nearest_1967}
+COVER T, HART P.
+\newblock Nearest neighbor pattern classification\allowbreak[J/OL].
+\newblock IEEE Transactions on Information Theory, 1967, 13\allowbreak (1): 21-27.
+\newblock DOI: \doi{10.1109/TIT.1967.1053964}.
+
+\bibitem[Brown(2025)]{brown_review_2025a}
+BROWN R~A.
+\newblock Review of three algorithms that build k-d trees: arXiv:2506.20687\allowbreak[M/OL].
+\newblock arXiv, 2025.
+\newblock DOI: \doi{10.48550/arXiv.2506.20687}.
+
+\bibitem[Shlens(2014)]{shlens_tutorial_2014}
+SHLENS J.
+\newblock A tutorial on principal component analysis: arXiv:1404.1100\allowbreak[M/OL].
+\newblock arXiv, 2014.
+\newblock DOI: \doi{10.48550/arXiv.1404.1100}.
+
+\bibitem[Hoppe et~al.(1992)Hoppe, DeRose, Duchamp, McDonald, and Stuetzle]{hoppe_surface_1992}
+HOPPE H, DEROSE T, DUCHAMP T, et~al.
+\newblock Surface reconstruction from unorganized points\allowbreak[J/OL].
+\newblock SIGGRAPH Comput. Graph., 1992, 26\allowbreak (2): 71-78.
+\newblock DOI: \doi{10.1145/142920.134011}.
+
+\bibitem[Tolstikhin et~al.(2021)Tolstikhin, Houlsby, Kolesnikov, Beyer, Zhai, Unterthiner, Yung, Steiner, Keysers, Uszkoreit, Lucic, and Dosovitskiy]{tolstikhin_mlpmixer_2021}
+TOLSTIKHIN I~O, HOULSBY N, KOLESNIKOV A, et~al.
+\newblock Mlp-mixer: An all-mlp architecture for vision\allowbreak[C/OL]//\allowbreak
+RANZATO M, BEYGELZIMER A, DAUPHIN Y, et~al.
+\newblock Advances in Neural Information Processing Systems: Vol.~34.
 \newblock Curran Associates, Inc., 2021: 24261-24272.
-\newblock
-  \url{https://proceedings.neurips.cc/paper_files/paper/2021/file/cba0a4ee5ccd02fda0fe3f9a3e7b89fe-Paper.pdf}.
+\newblock \url{https://proceedings.neurips.cc/paper_files/paper/2021/file/cba0a4ee5ccd02fda0fe3f9a3e7b89fe-Paper.pdf}.
 
 \bibitem[Xu et~al.(2015)Xu, Wang, Chen, and Li]{xu_empirical_2015}
-XU~B, WANG~N, CHEN~T, et~al.
-\newblock Empirical evaluation of rectified activations in convolutional
-  network: arXiv:1505.00853\allowbreak[M/OL].
-\newblock arXiv, 2015\allowbreak[2026-01-18].
+XU B, WANG N, CHEN T, et~al.
+\newblock Empirical evaluation of rectified activations in convolutional network: arXiv:1505.00853\allowbreak[M/OL].
+\newblock arXiv, 2015.
 \newblock DOI: \doi{10.48550/arXiv.1505.00853}.
 
-\bibitem[Srivastava et~al.(2014)Srivastava, Hinton, Krizhevsky, Sutskever, and
-  Salakhutdinov]{srivastava_dropout_2014}
-SRIVASTAVA~N, HINTON~G, KRIZHEVSKY~A, et~al.
-\newblock Dropout: A simple way to prevent neural networks from
-  overfitting\allowbreak[J].
-\newblock Journal of Machine Learning Research, 2014, 15\penalty0
-  (56):\penalty0 1929-1958.
+\bibitem[Srivastava et~al.(2014)Srivastava, Hinton, Krizhevsky, Sutskever, and Salakhutdinov]{srivastava_dropout_2014}
+SRIVASTAVA N, HINTON G, KRIZHEVSKY A, et~al.
+\newblock Dropout: A simple way to prevent neural networks from overfitting\allowbreak[J].
+\newblock Journal of Machine Learning Research, 2014, 15\allowbreak (56): 1929-1958.
 
 \bibitem[Bishop(2006)]{bishop_pattern_2006}
-BISHOP~C~M.
+BISHOP C~M.
 \newblock Pattern recognition and machine learning\allowbreak[M].
 \newblock New York: Springer, 2006.
 
 \bibitem[Japkowicz et~al.(2002)Japkowicz and Stephen]{japkowicz_class_2002a}
-JAPKOWICZ~N, STEPHEN~S.
+JAPKOWICZ N, STEPHEN S.
 \newblock The class imbalance problem: A systematic study\allowbreak[J].
-\newblock Intell. Data Anal., 2002, 6\penalty0 (5):\penalty0 429-449.
+\newblock Intell. Data Anal., 2002, 6\allowbreak (5): 429-449.
 
 \bibitem[Lin et~al.(2020)Lin, Goyal, Girshick, He, and Dollar]{lin_focal_2020}
-LIN~T~Y, GOYAL~P, GIRSHICK~R, et~al.
+LIN T~Y, GOYAL P, GIRSHICK R, et~al.
 \newblock Focal loss for dense object detection\allowbreak[J/OL].
-\newblock IEEE transactions on pattern analysis and machine intelligence, 2020,
-  42\penalty0 (2):\penalty0 318-327.
+\newblock IEEE transactions on pattern analysis and machine intelligence, 2020, 42\allowbreak (2): 318-327.
 \newblock DOI: \doi{10.1109/TPAMI.2018.2858826}.
 
 \bibitem[Mao et~al.(2023)Mao, Mohri, and Zhong]{mao_crossentropy_2023}
-MAO~A, MOHRI~M, ZHONG~Y.
-\newblock Cross-entropy loss functions: Theoretical analysis and
-  applications\allowbreak[C]//\allowbreak
-ICML'23: volume 202\quad Proceedings of the 40th International Conference on
-  Machine Learning.
+MAO A, MOHRI M, ZHONG Y.
+\newblock Cross-entropy loss functions: Theoretical analysis and applications\allowbreak[C]//\allowbreak
+ICML'23: Vol. 202\quad Proceedings of the 40th International Conference on Machine Learning.
 \newblock Honolulu, Hawaii, USA: JMLR.org, 2023: 23803-23828.
 
-\bibitem[Krstini{\'c} et~al.(2020)Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c},
-  {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}, Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c},
-  and {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}]{krstinic_multilabel_2020}
-KRSTINI{\'C}~D, BRAOVI{\'C}~M, {\v S}ERI{\'C}~L, et~al.
-\newblock Multi-label classifier performance evaluation with confusion
-  matrix\allowbreak[J/OL].
-\newblock Computer Science \& Information Technology (CS \& IT), 2020,
-  10\penalty0 (8):\penalty0 1\allowbreak[2026-01-17].
+\bibitem[Krstini{\'c} et~al.(2020)Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c}, {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}, Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c}, and {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}]{krstinic_multilabel_2020}
+KRSTINI{\'C} D, BRAOVI{\'C} M, {\v S}ERI{\'C} L, et~al.
+\newblock Multi-label classifier performance evaluation with confusion matrix\allowbreak[J/OL].
+\newblock Computer Science \& Information Technology (CS \& IT), 2020, 10\allowbreak (8): 1.
 \newblock DOI: \doi{10.5121/csit.2020.100801}.
 
 \bibitem[Chicco et~al.(2020)Chicco and Jurman]{chicco_advantages_2020}
-CHICCO~D, JURMAN~G.
-\newblock The advantages of the matthews correlation coefficient (mcc) over f1
-  score and accuracy in binary classification evaluation\allowbreak[J/OL].
-\newblock BMC Genomics, 2020, 21:\penalty0 6\allowbreak[2026-01-17].
+CHICCO D, JURMAN G.
+\newblock The advantages of the matthews correlation coefficient (mcc) over f1 score and accuracy in binary classification evaluation\allowbreak[J/OL].
+\newblock BMC Genomics, 2020, 21: 6.
 \newblock DOI: \doi{10.1186/s12864-019-6413-7}.
 
-\bibitem[D{\"u}ntsch et~al.(2019)D{\"u}ntsch and
-  Gediga]{duntsch_confusion_2019}
-D{\"U}NTSCH~I, GEDIGA~G.
+\bibitem[D{\"u}ntsch et~al.(2019)D{\"u}ntsch and Gediga]{duntsch_confusion_2019}
+D{\"U}NTSCH I, GEDIGA G.
 \newblock Confusion matrices and rough set data analysis\allowbreak[J/OL].
-\newblock Journal of Physics: Conference Series, 2019, 1229\penalty0
-  (1):\penalty0 012055\allowbreak[2026-01-15].
+\newblock Journal of Physics: Conference Series, 2019, 1229\allowbreak (1): 012055.
 \newblock DOI: \doi{10.1088/1742-6596/1229/1/012055}.
 
-\bibitem[Erbani et~al.(2024)Erbani, Portier, {Egyed-Zsigmond}, and
-  Nurbakova]{erbani_confusion_2024}
-ERBANI~J, PORTIER~P~{\'E}, {Egyed-Zsigmond}~E, et~al.
+\bibitem[Erbani et~al.(2024)Erbani, Portier, {Egyed-Zsigmond}, and Nurbakova]{erbani_confusion_2024}
+ERBANI J, PORTIER P~{\'E}, {Egyed-Zsigmond} E, et~al.
 \newblock Confusion matrices: A unified theory\allowbreak[J/OL].
-\newblock IEEE Access, 2024, 12:\penalty0 181372-181419\allowbreak[2026-01-15].
+\newblock IEEE Access, 2024, 12: 181372-181419.
 \newblock DOI: \doi{10.1109/ACCESS.2024.3507199}.
 
-\bibitem[Koch et~al.(2019)Koch, Matveev, Jiang, Williams, Artemov, Burnaev,
-  Alexa, Zorin, and Panozzo]{koch_abc_2019}
-KOCH~S, MATVEEV~A, JIANG~Z, et~al.
-\newblock Abc: A big cad model dataset for geometric deep
-  learning\allowbreak[C/OL]//\allowbreak
+\bibitem[Koch et~al.(2019)Koch, Matveev, Jiang, Williams, Artemov, Burnaev, Alexa, Zorin, and Panozzo]{koch_abc_2019}
+KOCH S, MATVEEV A, JIANG Z, et~al.
+\newblock Abc: A big cad model dataset for geometric deep learning\allowbreak[C/OL]//\allowbreak
 2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR).
-\newblock 2019: 9593-9603\allowbreak[2024-11-01].
+\newblock 2019: 9593-9603.
 \newblock DOI: \doi{10.1109/CVPR.2019.00983}.
+
+\bibitem[Chang et~al.(2015)Chang, Funkhouser, Guibas, Hanrahan, Huang, Li, Savarese, Savva, Song, Su, Xiao, Yi, and Yu]{chang_shapenet_2015}
+CHANG A~X, FUNKHOUSER T, GUIBAS L, et~al.
+\newblock Shapenet: An information-rich 3d model repository: arXiv:1512.03012\allowbreak[M/OL].
+\newblock arXiv, 2015.
+\newblock DOI: \doi{10.48550/arXiv.1512.03012}.
+
+\bibitem[Dai et~al.(2017)Dai, Chang, Savva, Halber, Funkhouser, and Nie{\ss}ner]{dai_scannet_2017}
+DAI A, CHANG A~X, SAVVA M, et~al.
+\newblock Scannet: Richly-annotated 3d reconstructions of indoor scenes\allowbreak[C]//\allowbreak
+Proc. Computer Vision and Pattern Recognition (CVPR), IEEE.
+\newblock 2017.
+
+\bibitem[Lai et~al.(2011)Lai, Bo, Ren, and Fox]{lai_largescale_2011}
+LAI K, BO L, REN X, et~al.
+\newblock A large-scale hierarchical multi-view rgb-d object dataset\allowbreak[C/OL]//\allowbreak
+2011 IEEE International Conference on Robotics and Automation.
+\newblock 2011: 1817-1824.
+\newblock DOI: \doi{10.1109/ICRA.2011.5980382}.
 
 \end{thebibliography}

@@ -35,7 +35,7 @@
 \begin{table*}[ht]
     \centering
     \small
-    \setlength{\tabcolsep}{17.6pt}
+    \setlength{\tabcolsep}{8pt}
     \begin{threeparttable}
     \caption{ABC-Corner 数据集上各边缘与角点检测方法的宏平均（Macro-averaging）指标评分。}
     \label{tab:corner_result}
@@ -70,35 +70,97 @@
        \label{fig:edge_corner_result}
 \end{figure*}
 
+% \begin{table*}[ht]
+%         % \centering
+%         \small
+%         \setlength{\tabcolsep}{2.6pt}
+%         \caption{图~\ref{fig:edge_corner_result} 中四个点云对象的分类别详细指标评分。}
+%         \label{tab:metrics_result_of_four_obj}
+%         \begin{threeparttable}
+%             \begin{tabular}{lccc ccc ccc ccc ccc c}
+%             \toprule
+%             Method & \multicolumn{3}{c}{Precision($\uparrow$)} & \multicolumn{3}{c}{Recall($\uparrow$)} & \multicolumn{3}{c}{F1($\uparrow$)} & \multicolumn{3}{c}{Accuracy($\uparrow$)} & \multicolumn{3}{c}{IoU($\uparrow$)} & MCC($\uparrow$) \\
+%             \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} 
+%              & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner &  \\
+%             \midrule
+%             CA~\cite{bazazian_fast_2015} & 0.975 & 0.303 & 0.001 & 0.582 & 0.614 & 0.303 & 0.729 & 0.405 & 0.002 & 0.582 & 0.614 & 0.303 & 0.573 & 0.254 & 0.001 & 0.184 \\
+%             TECD~\cite{ahmed_edge_2018} & 0.986 & 0.705 & 0.062 & 0.980 & 0.762 & 0.158 & 0.983 & 0.732 & 0.089 & 0.980 & 0.762 & 0.158 & 0.967 & 0.578 & 0.046 & 0.707 \\
+%             PIE-NET~\cite{wang_pienet_2020a} & 0.995 & 0.673 & 0.278 & 0.950 & 0.898 & 0.964 & 0.972 & 0.770 & 0.432 & 0.950 & 0.898 & 0.964 & 0.946 & 0.626 & 0.275 & 0.759 \\
+%             NECDNet (Ours) & \textbf{0.999}& 0.970 & 0.519 & 0.998 & \textbf{0.987}& 0.921 & \textbf{0.999}& 0.978 & 0.664 & 0.998 & \textbf{0.987}& 0.921 & 0.997 & 0.957 & 0.496 & 0.972 \\
+%             NECDNet$\dagger$ (Ours) & \textbf{0.999}& \textbf{0.994}& \textbf{0.540}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.984}& \textbf{0.698}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.968}& \textbf{0.536}& \textbf{0.983}\\
+%             \bottomrule
+%         \end{tabular}
+%         \begin{tablenotes}
+%             \footnotesize
+%             \item PIE-Net 的数据基于其作者提供的评估结果整理得出。
+            
+%             \item $\dagger$ 表示使用从 Mesh 模型估计的法向量。 
+%          \end{tablenotes}
+%         \end{threeparttable}
+        
+%     \end{table*}
+
+% --- 表格 1：Precision, Recall, F1 ---
 \begin{table*}[ht]
-        % \centering
-        \small
-        \setlength{\tabcolsep}{2.6pt}
-        \caption{图~\ref{fig:edge_corner_result} 中四个点云对象的分类别详细指标评分。}
-        \label{tab:metrics_result_of_four_obj}
-        \begin{threeparttable}
-            \begin{tabular}{lccc ccc ccc ccc ccc c}
-            \toprule
-            Method & \multicolumn{3}{c}{Precision($\uparrow$)} & \multicolumn{3}{c}{Recall($\uparrow$)} & \multicolumn{3}{c}{F1($\uparrow$)} & \multicolumn{3}{c}{Accuracy($\uparrow$)} & \multicolumn{3}{c}{IoU($\uparrow$)} & MCC($\uparrow$) \\
-            \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} 
-             & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner &  \\
-            \midrule
-            CA~\cite{bazazian_fast_2015} & 0.975 & 0.303 & 0.001 & 0.582 & 0.614 & 0.303 & 0.729 & 0.405 & 0.002 & 0.582 & 0.614 & 0.303 & 0.573 & 0.254 & 0.001 & 0.184 \\
-            TECD~\cite{ahmed_edge_2018} & 0.986 & 0.705 & 0.062 & 0.980 & 0.762 & 0.158 & 0.983 & 0.732 & 0.089 & 0.980 & 0.762 & 0.158 & 0.967 & 0.578 & 0.046 & 0.707 \\
-            PIE-NET~\cite{wang_pienet_2020a} & 0.995 & 0.673 & 0.278 & 0.950 & 0.898 & 0.964 & 0.972 & 0.770 & 0.432 & 0.950 & 0.898 & 0.964 & 0.946 & 0.626 & 0.275 & 0.759 \\
-            NECDNet (Ours) & \textbf{0.999}& 0.970 & 0.519 & 0.998 & \textbf{0.987}& 0.921 & \textbf{0.999}& 0.978 & 0.664 & 0.998 & \textbf{0.987}& 0.921 & 0.997 & 0.957 & 0.496 & 0.972 \\
-            NECDNet$\dagger$ (Ours) & \textbf{0.999}& \textbf{0.994}& \textbf{0.540}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.984}& \textbf{0.698}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.968}& \textbf{0.536}& \textbf{0.983}\\
-            \bottomrule
+    \small
+    \centering
+    \setlength{\tabcolsep}{5.5pt} % 稍微增加了列间距，因为现在空间宽裕了
+    \caption{图~\ref{fig:edge_corner_result} 中四个点云对象的分类别详细指标评分：Precision, Recall, F1。}
+    \label{tab:metrics_result_part1}
+    \begin{threeparttable}
+        
+        \begin{tabular}{l ccc ccc ccc}
+        \toprule
+        Method & \multicolumn{3}{c}{Precision($\uparrow$)} & \multicolumn{3}{c}{Recall($\uparrow$)} & \multicolumn{3}{c}{F1($\uparrow$)} \\
+        \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} 
+         & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner \\
+        \midrule
+        CA~\cite{bazazian_fast_2015} & 0.975 & 0.303 & 0.001 & 0.582 & 0.614 & 0.303 & 0.729 & 0.405 & 0.002 \\
+        TECD~\cite{ahmed_edge_2018} & 0.986 & 0.705 & 0.062 & 0.980 & 0.762 & 0.158 & 0.983 & 0.732 & 0.089 \\
+        PIE-NET~\cite{wang_pienet_2020a} & 0.995 & 0.673 & 0.278 & 0.950 & 0.898 & 0.964 & 0.972 & 0.770 & 0.432 \\
+        NECDNet (Ours) & \textbf{0.999}& 0.970 & 0.519 & 0.998 & \textbf{0.987}& 0.921 & \textbf{0.999}& 0.978 & 0.664 \\
+        NECDNet$\dagger$ (Ours) & \textbf{0.999}& \textbf{0.994}& \textbf{0.540}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.984}& \textbf{0.698} \\
+        \bottomrule
+        \end{tabular}
+        % 如果需要在第一个表显示脚注，取消下面注释，或者统一在第二个表显示
+        % \begin{tablenotes}
+        %     \footnotesize
+        %     \item $\dagger$ 表示使用从 Mesh 模型估计的法向量。
+        % \end{tablenotes}
+    \end{threeparttable}
+\end{table*}
+
+% --- 表格 2：Accuracy, IoU, MCC ---
+\begin{table*}[ht]
+    \small
+    \centering
+    \setlength{\tabcolsep}{10pt}
+    % 使用 \addtocounter{table}{-1} 可以让两个表格共享同一个编号（例如都叫 Table 1），或者使用 (续) 来区分
+    % \addtocounter{table}{-1} 
+    \caption{图~\ref{fig:edge_corner_result} 中四个点云对象的分类别详细指标评分：Accuracy, IoU, MCC。（续表）}
+    \label{tab:metrics_result_part2}
+    \begin{threeparttable}
+        
+        \begin{tabular}{l ccc ccc c}
+        \toprule
+        Method & \multicolumn{3}{c}{Accuracy($\uparrow$)} & \multicolumn{3}{c}{IoU($\uparrow$)} & MCC($\uparrow$) \\
+        \cmidrule(lr){2-4} \cmidrule(lr){5-7} 
+         & Face & Edge & Corner & Face & Edge & Corner & \\
+        \midrule
+        CA~\cite{bazazian_fast_2015} & 0.582 & 0.614 & 0.303 & 0.573 & 0.254 & 0.001 & 0.184 \\
+        TECD~\cite{ahmed_edge_2018} & 0.980 & 0.762 & 0.158 & 0.967 & 0.578 & 0.046 & 0.707 \\
+        PIE-NET~\cite{wang_pienet_2020a} & 0.950 & 0.898 & 0.964 & 0.946 & 0.626 & 0.275 & 0.759 \\
+        NECDNet (Ours) & 0.998 & \textbf{0.987}& 0.921 & 0.997 & 0.957 & 0.496 & 0.972 \\
+        NECDNet$\dagger$ (Ours) & \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.968}& \textbf{0.536}& \textbf{0.983}\\
+        \bottomrule
         \end{tabular}
         \begin{tablenotes}
             \footnotesize
             \item PIE-Net 的数据基于其作者提供的评估结果整理得出。
-            
             \item $\dagger$ 表示使用从 Mesh 模型估计的法向量。 
          \end{tablenotes}
-        \end{threeparttable}
-        
-    \end{table*}
+    \end{threeparttable}
+\end{table*}
 
 \subsection{纯边缘检测结果分析}
 
@@ -110,7 +172,7 @@
     \centering
     \small
     \begin{threeparttable}
-    \setlength{\tabcolsep}{17pt}
+    \setlength{\tabcolsep}{7pt}
     \caption{ABC 数据集上各边缘检测方法的指标评分。}
     \label{tab:edge_result}
     \begin{tabular}{lcccccc}
@@ -168,7 +230,7 @@
 \begin{table*}[ht]
     \centering
     \small
-    \setlength{\tabcolsep}{7pt}
+    \setlength{\tabcolsep}{1pt}
     \caption{关于特征维度选择和多尺度参数选择的消融实验结果。}
     \label{tab:ablation_study}
     \begin{threeparttable}
@@ -212,7 +274,7 @@
 \begin{table*}[ht]
     \centering
     \small
-    \setlength{\tabcolsep}{10pt}
+    \setlength{\tabcolsep}{4.5pt}
     \caption{关于训练策略的消融实验结果。}
     \label{tab:additional_ablation_study}
     \begin{tabular}{llcccccc}

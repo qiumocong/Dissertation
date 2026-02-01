@@ -1,0 +1,107 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: data/chap01.aux
+A level-1 auxiliary file: data/chap02.aux
+A level-1 auxiliary file: data/chap03.aux
+A level-1 auxiliary file: data/chap04.aux
+A level-1 auxiliary file: data/chap05.aux
+A level-1 auxiliary file: data/chap_exp.aux
+A level-1 auxiliary file: data/chap_exp2.aux
+The style file: gbt7714-numerical.bst
+A level-1 auxiliary file: data/publications.aux
+A level-1 auxiliary file: data/acknowledgement.aux
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 150 items from 100.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: reference/refs.bib
+Warning--I didn't find a database entry for "li_surface_2023"
+Warning--I didn't find a database entry for "lavin-delgado_efficient_2024"
+Warning--I didn't find a database entry for "ahmed_edge_2018"
+Warning--I didn't find a database entry for "miller_graspit_2021"
+Warning--I didn't find a database entry for "wan2020planning"
+Warning--I didn't find a database entry for "bicchi2000robotic"
+Warning--I didn't find a database entry for "xia_fast_2017"
+Warning--I didn't find a database entry for "bazazian_fast_2015"
+Warning--I didn't find a database entry for "nguyen_edge_2018"
+Warning--I didn't find a database entry for "daniels_robust_2007"
+Warning--I didn't find a database entry for "guo_sglbp_2022"
+Warning--I didn't find a database entry for "zhang_multinormal_2019"
+Warning--I didn't find a database entry for "merigot_voronoibased_2011"
+Warning--I didn't find a database entry for "zhao_sharp_2023"
+Warning--I didn't find a database entry for "schmidt_detection_2023"
+Warning--I didn't find a database entry for "wang_pienet_2020a"
+Warning--I didn't find a database entry for "qi_pointnet_2017"
+Warning--I didn't find a database entry for "bazazian_edcnet_2021"
+Warning--I didn't find a database entry for "guerrero_pcpnet_2018"
+Warning--I didn't find a database entry for "jiao_mslnet_2024"
+Warning--I didn't find a database entry for "bode_bounded_2023"
+Warning--I didn't find a database entry for "matveev_def_2022"
+Warning--I didn't find a database entry for "yu_ecnet_2018"
+Warning--I didn't find a database entry for "zhu_nerve_2023"
+Warning--I didn't find a database entry for "hu_jsenet_2020"
+Warning--I didn't find a database entry for "miller2003automatic"
+Warning--I didn't find a database entry for "goldfeder2007grasp"
+Warning--I didn't find a database entry for "chen2022category"
+Warning--I didn't find a database entry for "harada2011grasp"
+Warning--I didn't find a database entry for "mahler2019learning"
+Warning--I didn't find a database entry for "cao2022efficient"
+Warning--I didn't find a database entry for "alliegro2022end"
+Warning--I didn't find a database entry for "ten2017grasp"
+Warning--I didn't find a database entry for "ferrari1992planning"
+Warning--I didn't find a database entry for "miller2004graspit"
+Warning--I didn't find a database entry for "yu2024mtgrasp"
+Warning--I didn't find a database entry for "kopicki2014learning"
+Warning--I didn't find a database entry for "domae2014fast"
+Warning--I didn't find a database entry for "paszke_pytorch_2019"
+You've used 24 entries,
+            5374 wiz_defined-function locations,
+            1273 strings with 14369 characters,
+and the built_in function-call counts, 218250 in all, are:
+= -- 5015
+> -- 24881
+< -- 30660
++ -- 8566
+- -- 1897
+* -- 1608
+:= -- 30363
+add.period$ -- 87
+call.type$ -- 24
+change.case$ -- 206
+chr.to.int$ -- 7620
+cite$ -- 24
+duplicate$ -- 708
+empty$ -- 2439
+format.name$ -- 846
+if$ -- 56636
+int.to.chr$ -- 1
+int.to.str$ -- 25
+missing$ -- 0
+newline$ -- 154
+num.names$ -- 73
+pop$ -- 10919
+preamble$ -- 1
+purify$ -- 24
+quote$ -- 0
+skip$ -- 22769
+stack$ -- 0
+substring$ -- 10816
+swap$ -- 27
+text.length$ -- 592
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 260
+warning$ -- 0
+while$ -- 636
+width$ -- 0
+write$ -- 373
+(There were 39 warnings)
