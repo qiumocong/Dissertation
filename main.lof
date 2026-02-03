@@ -10,22 +10,21 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces ABC-Corner 数据集中的部分样本及其标注结果。}}{22}{figure.caption.17}%
 \addvspace {10.0pt}
 \contentsline {figure}{\numberline {3.1}{\ignorespaces 基于几何特征的机器人抓取规划框架}}{25}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 基于类别的体素采样结果}}{25}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 基于类别的体素采样结果}}{26}{figure.caption.19}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces 基于NECDNet的几何特征检测结果}}{26}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces 不同体素采样尺寸及采样策略下的采样结果}}{27}{figure.caption.21}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces 基于几何特征的接触对检测流程}}{28}{figure.caption.22}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces 基于几何特征的接触对检测流程}}{29}{figure.caption.23}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces 基于几何特征的三种接触检测器：(a) 面接触圆柱体检测器；(b) 边接触扇形柱检测器；(c) 角接触圆锥体检测器}}{30}{figure.caption.24}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces 对偶接触点配对策略示意图}}{32}{figure.caption.25}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces 基于软接触变形的接触点集获取示意图}}{35}{figure.caption.26}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces 抓取构型增强示意图}}{36}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 不同体素采样尺寸及采样策略下的采样结果}}{28}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 凸性检测中凹凸查询点点对应 $\theta _i^\text {s}$ 对比}}{29}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 基于几何特征的接触对检测流程}}{30}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces 基于几何特征的三种接触检测器：(a) 面接触圆柱体检测器；(b) 边接触扇形柱检测器；(c) 角接触圆锥体检测器}}{31}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces 抓取构型增强示意图}}{35}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces 基于软接触变形的接触点集获取示意图}}{36}{figure.caption.26}%
 \addvspace {10.0pt}
 \addvspace {10.0pt}
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {6.1}{\ignorespaces ABC-Corner 数据集上各方法的边缘与角点检测结果可视化对比。本文方法（Ours）取得了最佳的检测效果。CA 和 TECD 缺乏鲁棒性，PIE-Net 检测精度不足，PCEDNet 表现出良好的边缘检测能力但无法检测角点。}}{43}{figure.caption.30}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces 法向量估计精度对检测结果的影响分析：(a) 检测结果真值（Ground Truth）；(b) 使用从 Mesh 估计的法向量得到的检测结果；(c) 使用从点云估计的法向量得到的检测结果。可以看出，使用点云估计的法向量会导致更多的边缘点被误分类为角点。}}{45}{figure.caption.37}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces ABC-Corner 数据集上各方法的边缘与角点检测结果可视化对比。本文方法（Ours）取得了最佳的检测效果。CA 和 TECD 缺乏鲁棒性，PIE-Net 检测精度不足，PCEDNet 表现出良好的边缘检测能力但无法检测角点。}}{44}{figure.caption.29}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces 法向量估计精度对检测结果的影响分析：(a) 检测结果真值（Ground Truth）；(b) 使用从 Mesh 估计的法向量得到的检测结果；(c) 使用从点云估计的法向量得到的检测结果。可以看出，使用点云估计的法向量会导致更多的边缘点被误分类为角点。}}{46}{figure.caption.36}%
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {7.1}{\ignorespaces (a) 真实物理实验场景设置；(b) 机器人运动规划路径示意：接近物体（绿色）、执行抓取（蓝色）及移动至目标位（绿色）。}}{50}{figure.caption.41}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces 抓取分布可视化对比。(a) 各方法生成的抓取位姿展示（蓝色：GraspIt，黄色：GPD，绿色：WRS，红色：本文方法）；(b) 抓取构型在 3D 空间中的分布散点图。}}{52}{figure.caption.43}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces (a) 真实物理实验场景设置；(b) 机器人运动规划路径示意：接近物体（绿色）、执行抓取（蓝色）及移动至目标位（绿色）。}}{51}{figure.caption.40}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces 抓取分布可视化对比。(a) 各方法生成的抓取位姿展示（蓝色：GraspIt，黄色：GPD，绿色：WRS，红色：本文方法）；(b) 抓取构型在 3D 空间中的分布散点图。}}{53}{figure.caption.42}%
 \addvspace {10.0pt}
 \addvspace {10.0pt}

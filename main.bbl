@@ -1,4 +1,4 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -150,5 +150,23 @@ LAI K, BO L, REN X, et~al.
 2011 IEEE International Conference on Robotics and Automation.
 \newblock 2011: 1817-1824.
 \newblock DOI: \doi{10.1109/ICRA.2011.5980382}.
+
+\bibitem[Ester et~al.(1996)Ester, Kriegel, Sander, and Xu]{ester_densitybased_1996}
+ESTER M, KRIEGEL H~P, SANDER J, et~al.
+\newblock A density-based algorithm for discovering clusters in large spatial databases with noise\allowbreak[C]//\allowbreak
+KDD'96: Proceedings of the Second International Conference on Knowledge Discovery and Data Mining.
+\newblock Portland, Oregon: AAAI Press, 1996: 226-231.
+
+\bibitem[Fischler et~al.(1981)Fischler and Bolles]{fischler_random_1981}
+FISCHLER M~A, BOLLES R~C.
+\newblock Random sample consensus: A paradigm for model fitting with applications to image analysis and automated cartography\allowbreak[J/OL].
+\newblock Commun. ACM, 1981, 24\allowbreak (6): 381-395.
+\newblock DOI: \doi{10.1145/358669.358692}.
+
+\bibitem[Murray et~al.(1994)Murray, Sastry, and Zexiang]{murray_mathematical_1994}
+MURRAY R~M, SASTRY S~S, ZEXIANG L.
+\newblock A mathematical introduction to robotic manipulation\allowbreak[M].
+\newblock 1st ed.
+\newblock USA: CRC Press, Inc., 1994.
 
 \end{thebibliography}
