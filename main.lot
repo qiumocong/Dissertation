@@ -5,14 +5,14 @@
 \addvspace {10.0pt}
 \addvspace {10.0pt}
 \addvspace {10.0pt}
-\contentsline {table}{\numberline {6.1}{\ignorespaces ABC-Corner 数据集上各边缘与角点检测方法的宏平均（Macro-averaging）指标评分。}}{42}{table.caption.29}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces 图~\ref {fig:edge_corner_result} 中四个点云对象的分类别详细指标评分：Precision, Recall, F1。}}{44}{table.caption.31}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces 图~\ref {fig:edge_corner_result} 中四个点云对象的分类别详细指标评分：Accuracy, IoU, MCC。（续表）}}{44}{table.caption.33}%
-\contentsline {table}{\numberline {6.4}{\ignorespaces ABC 数据集上各边缘检测方法的指标评分。}}{45}{table.caption.36}%
-\contentsline {table}{\numberline {6.5}{\ignorespaces 关于特征维度选择和多尺度参数选择的消融实验结果。}}{46}{table.caption.38}%
-\contentsline {table}{\numberline {6.6}{\ignorespaces 关于训练策略的消融实验结果。}}{47}{table.caption.40}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces ABC-Corner 数据集上各边缘与角点检测方法的宏平均（Macro-averaging）指标评分。}}{43}{table.caption.29}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces 图~\ref {fig:edge_corner_result} 中四个点云对象的分类别详细指标评分：Precision, Recall, F1。}}{45}{table.caption.31}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces 图~\ref {fig:edge_corner_result} 中四个点云对象的分类别详细指标评分：Accuracy, IoU, MCC。（续表）}}{45}{table.caption.33}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces ABC 数据集上各边缘检测方法的指标评分。}}{46}{table.caption.36}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces 关于特征维度选择和多尺度参数选择的消融实验结果。}}{47}{table.caption.38}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces 关于训练策略的消融实验结果。}}{48}{table.caption.40}%
 \addvspace {10.0pt}
-\contentsline {table}{\numberline {7.1}{\ignorespaces 不同抓取规划方法在三个测试物体上的分布统计指标对比}}{51}{table.caption.42}%
-\contentsline {table}{\numberline {7.2}{\ignorespaces 各抓取规划方法的抓取成功率统计}}{53}{table.caption.44}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces 不同抓取规划方法在三个测试物体上的分布统计指标对比}}{52}{table.caption.42}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces 各抓取规划方法的抓取成功率统计}}{54}{table.caption.44}%
 \addvspace {10.0pt}
 \addvspace {10.0pt}
