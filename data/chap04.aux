@@ -1,24 +1,83 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\pp@pagectr{footnote}{4}{51}{39}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第四章}实验结果与分析}{39}{chapter.4}\protected@file@percent }
+\citation{li_survey_2019,newbury_deep_2023a}
+\citation{tenpas_grasp_2017,wan_planning_2021}
+\pp@pagectr{footnote}{4}{44}{33}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第四章}考虑边缘与角点接触的机器人抓取规划}{33}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}实验环境及配置}{39}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}点云特征检测实验分析}{39}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}对比实验}{39}{subsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}消融实验}{39}{subsection.4.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}结果可视化}{39}{subsection.4.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}抓取规划仿真实验分析}{39}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}抓取分布多样性评估}{39}{subsection.4.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}典型物体抓取规划结果}{39}{subsection.4.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}参数敏感性分析}{39}{subsection.4.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}真实机器人抓取实验}{39}{section.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}本章小结}{39}{section.4.5}\protected@file@percent }
+\newlabel{cha:fbgrasp}{{四}{33}{考虑边缘与角点接触的机器人抓取规划}{chapter.4}{}}
+\newlabel{cha:fbgrasp@cref}{{[chapter][4][]四thechapter\endcsname }{[1][33][]33}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}引言}{33}{section.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces 基于几何特征的机器人抓取规划框架}}{34}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:fbgrasp_framework}{{4.1}{34}{基于几何特征的机器人抓取规划框架}{figure.caption.31}{}}
+\newlabel{fig:fbgrasp_framework@cref}{{[figure][1][4]4.1}{[1][33][]34}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}类别感知的接触点采样}{34}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}几何特征检测}{34}{subsection.4.2.1}\protected@file@percent }
+\citation{ester_densitybased_1996}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces 基于类别的体素采样结果}}{35}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:fbgrasp_sampling}{{4.2}{35}{基于类别的体素采样结果}{figure.caption.32}{}}
+\newlabel{fig:fbgrasp_sampling@cref}{{[figure][2][4]4.2}{[1][34][]35}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 基于NECDNet的几何特征检测结果}}{35}{figure.caption.33}\protected@file@percent }
+\newlabel{fig:fbgrasp_feature_detection}{{4.3}{35}{基于NECDNet的几何特征检测结果}{figure.caption.33}{}}
+\newlabel{fig:fbgrasp_feature_detection@cref}{{[figure][3][4]4.3}{[1][35][]35}{}{}{}}
+\newlabel{eq:dbscan}{{4.1}{36}{几何特征检测}{equation.4.1}{}}
+\newlabel{eq:dbscan@cref}{{[equation][1][4]4.1}{[1][35][]36}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}基于类别的体素采样}{36}{subsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}凸性检测}{36}{subsection.4.2.3}\protected@file@percent }
+\citation{wan_planning_2021}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces 不同体素采样尺寸及采样策略下的采样结果}}{37}{figure.caption.34}\protected@file@percent }
+\newlabel{fig:fbgrasp_sampling_strategy}{{4.4}{37}{不同体素采样尺寸及采样策略下的采样结果}{figure.caption.34}{}}
+\newlabel{fig:fbgrasp_sampling_strategy@cref}{{[figure][4][4]4.4}{[1][36][]37}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces 凸性检测中凹凸查询点点对应 $\theta _i^\text  {s}$ 对比}}{37}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:compare_of_theta_q}{{4.5}{37}{凸性检测中凹凸查询点点对应 $\theta _i^\text {s}$ 对比}{figure.caption.35}{}}
+\newlabel{fig:compare_of_theta_q@cref}{{[figure][5][4]4.5}{[1][37][]37}{}{}{}}
+\newlabel{eq:theta_convex}{{4.2}{37}{凸性检测}{equation.4.2}{}}
+\newlabel{eq:theta_convex@cref}{{[equation][2][4]4.2}{[1][37][]37}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}基于几何特征的接触对检测}{38}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}特征化接触检测器设计}{38}{subsection.4.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces 基于几何特征的接触对检测流程}}{39}{figure.caption.36}\protected@file@percent }
+\newlabel{fig:fbgrasp_contact_detect}{{4.6}{39}{基于几何特征的接触对检测流程}{figure.caption.36}{}}
+\newlabel{fig:fbgrasp_contact_detect@cref}{{[figure][6][4]4.6}{[1][38][]39}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}面接触检测器}{39}{subsubsection.4.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}边接触检测器}{39}{subsubsection.4.3.1.2}\protected@file@percent }
+\citation{fischler_random_1981}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces 基于几何特征的三种接触检测器：(a) 面接触圆柱体检测器；(b) 边接触扇形柱检测器；(c) 角接触圆锥体检测器}}{40}{figure.caption.37}\protected@file@percent }
+\newlabel{fig:fbgrasp_detectors}{{4.7}{40}{基于几何特征的三种接触检测器：(a) 面接触圆柱体检测器；(b) 边接触扇形柱检测器；(c) 角接触圆锥体检测器}{figure.caption.37}{}}
+\newlabel{fig:fbgrasp_detectors@cref}{{[figure][7][4]4.7}{[1][39][]40}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3）}角接触检测器}{40}{subsubsection.4.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}对偶接触点配对策略}{41}{subsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}角-角接触配对（$\mathtt  {c}$-$\mathtt  {c}$）}{41}{subsubsection.4.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}角-边/面接触配对（$\mathtt  {c}$-$\mathtt  {e}$, $\mathtt  {c}$-$\mathtt  {f}$）}{41}{subsubsection.4.3.2.2}\protected@file@percent }
+\newlabel{eq:proj_d}{{4.3}{42}{角-边/面接触配对（$\mathtt {c}$-$\mathtt {e}$, $\mathtt {c}$-$\mathtt {f}$）}{equation.4.3}{}}
+\newlabel{eq:proj_d@cref}{{[equation][3][4]4.3}{[1][42][]42}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3）}面/边-面/边接触配对（$\mathtt  {f}$-$\mathtt  {f}$, $\mathtt  {e}$-$\mathtt  {f}$, $\mathtt  {e}$-$\mathtt  {e}$）}{42}{subsubsection.4.3.2.3}\protected@file@percent }
+\newlabel{eq:theta_j^s}{{4.4}{42}{面/边-面/边接触配对（$\mathtt {f}$-$\mathtt {f}$, $\mathtt {e}$-$\mathtt {f}$, $\mathtt {e}$-$\mathtt {e}$）}{equation.4.4}{}}
+\newlabel{eq:theta_j^s@cref}{{[equation][4][4]4.4}{[1][42][]42}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}初步抓取配置生成}{42}{subsection.4.3.3}\protected@file@percent }
+\newlabel{eq:j_j^s}{{4.5}{42}{初步抓取配置生成}{equation.4.5}{}}
+\newlabel{eq:j_j^s@cref}{{[equation][5][4]4.5}{[1][42][]42}{}{}{}}
+\newlabel{eq:v_j^s}{{4.6}{43}{初步抓取配置生成}{equation.4.6}{}}
+\newlabel{eq:v_j^s@cref}{{[equation][6][4]4.6}{[1][43][]43}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}抓取构型增强及碰撞检测}{43}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}抓取构型增强策略}{43}{subsection.4.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 抓取构型增强示意图}}{44}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:augmentation}{{4.8}{44}{抓取构型增强示意图}{figure.caption.38}{}}
+\newlabel{fig:augmentation@cref}{{[figure][8][4]4.8}{[1][44][]44}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}碰撞检测策略}{44}{subsection.4.4.2}\protected@file@percent }
+\citation{}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}基于软接触模型的稳定性评估}{45}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}接触区域的离散化建模}{46}{subsection.4.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces 基于软接触变形的接触点集获取示意图}}{46}{figure.caption.39}\protected@file@percent }
+\newlabel{fig:stability}{{4.9}{46}{基于软接触变形的接触点集获取示意图}{figure.caption.39}{}}
+\newlabel{fig:stability@cref}{{[figure][9][4]4.9}{[1][46][]46}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}力学平衡与稳定性判据}{46}{subsection.4.5.2}\protected@file@percent }
+\citation{murray_mathematical_1994}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}本章小结}{47}{section.4.6}\protected@file@percent }
 \@setckpt{data/chap04}{
-\setcounter{page}{40}
-\setcounter{equation}{0}
+\setcounter{page}{49}
+\setcounter{equation}{8}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -27,12 +86,12 @@
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{4}
-\setcounter{section}{5}
+\setcounter{section}{6}
 \setcounter{subsection}{0}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{0}
+\setcounter{figure}{9}
 \setcounter{table}{0}
 \setcounter{parentequation}{0}
 \setcounter{caption@flags}{2}
@@ -40,7 +99,7 @@
 \setcounter{subfigure}{0}
 \setcounter{subtable}{0}
 \setcounter{pp@a@footnote}{4}
-\setcounter{endNonectr}{36}
+\setcounter{endNonectr}{39}
 \setcounter{currNonectr}{0}
 \setcounter{LT@tables}{0}
 \setcounter{LT@chunks}{0}
@@ -50,7 +109,7 @@
 \setcounter{Item}{0}
 \setcounter{Hfootnote}{0}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{56}
+\setcounter{bookmark@seq@number}{57}
 \setcounter{AlgoLine}{0}
 \setcounter{algocfline}{0}
 \setcounter{algocfproc}{0}

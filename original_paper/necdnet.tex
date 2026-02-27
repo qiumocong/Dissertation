@@ -1,0 +1,658 @@
+\documentclass[lettersize,journal]{IEEEtran}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{indentfirst}
+\usepackage{multirow}
+\usepackage[para,online,flushleft]{threeparttable}
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+% updated with editorial comments 8/9/2021
+
+\newcommand{\dudu}[1]{\textcolor{cyan}{#1}}
+\newcommand{\chenhao}[1]{\textcolor{green}{#1}}
+\newcommand{\hu}[1]{\textcolor{pink}{#1}}
+
+
+\begin{document}
+
+\title{NECDNet: A Neural Edge and Corner Detection Network for Point Clouds Using Multiple Local Features}
+
+% \author{
+% Mocong~Qiu,
+% Zhengtao~Hu,
+% Zhenyu~Zhang,
+% Hao~Chen,
+% Sheng~Bao,
+% Liang~Du,
+% Weiwei~Wan,~\IEEEmembership{Senior~Member,~IEEE, }
+% Kensuke~Harada,~\IEEEmembership{Fellow,~IEEE, }
+% and~Jianjun~Yuan,~\IEEEmembership{Senior~Member,~IEEE}
+% \thanks{Mocong~Qiu, Zhengtao~Hu, Sheng~Bao, Liang~Du, and Jianjun~Yuan are with the School of Mechatronic Engineering and Automation, Shanghai University, Shanghai, 200444, China, and also with the Shanghai Key Laboratory of Intelligent Manufacturing and Robotics, Shanghai University, Shanghai, 200444, China.}
+% \thanks{Zhenyu~Zhang is with the School of Intelligent Science and Technology, Nanjing University, Suzhou Campus, Suzhou, 215163, China.}
+% \thanks{Hao~Chen is with the College of Computer and Information Sciences, Fujian Agriculture and Forestry University, Fuzhou, 350002, China.}
+% \thanks{Weiwei~Wan and Kensuke~Harada are with the Department of Systems Innovation, Graduate School of Engineering Science.Osaka University, 1-3, Machikaneyama, Toyonaka, Osaka 560-0043, Japan.}
+% \thanks{Corresponding author: Zhengtao Hu, huzhengtao14z@gmail.com}
+% } 
+
+
+% The paper headers
+\markboth{IEEE Transactions on Visualization and Computer Graphics, submission for review}%
+{Shell \MakeLowercase{\textit{et al.}}: A Sample Article Using IEEEtran.cls for IEEE Journals}
+
+% \IEEEpubid{0000--0000/00\$00.00~\copyright~2021 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+\maketitle
+
+\begin{abstract}
+Geometrical feature detection in point clouds holds significance in fields such as model reconstruction, object recognition, and robotic manipulation. Edge extraction has been widely studied in recent years. However, precise identification of corner points remains challenging due to the subtle variations between edge and corner features. In this paper, we propose a method, Neural Edge and Corner Detection Network (NECDNet), that learns local statistical features to extract edge and corner points in point clouds. Specifically, we construct a multi-scale feature matrix for each point by analyzing the distribution of position and normal within the neighbor region across varying scales. We also introduce a point cloud dataset with the labels of edges and corners, ABC-Corner, derived from the models and feature information in the ABC dataset, to train and evaluate our method. Experimental results validate that the proposed approach can extract the edge and corner points of an object point cloud. It achieves competitive edge detection performance and superior corner detection performance compared to state-of-the-art (SOTA) methods. (Source code will be released soon)
+\end{abstract}
+
+\begin{IEEEkeywords}
+Point cloud processing, Geometrical feature detection, Multi-feature fusion, and Neural network.
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:intro}
+\IEEEPARstart{P}{rocessing} three-dimensional (3D) point cloud data is of considerable importance in obtaining inherent and interactive information, and it is becoming a hot research topic.
+Automatic detection of geometrical features such as edges and corners is an attractive research branch, which plays an essential role in model reconstruction, object recognition, segmentation, and robotic manipulation~\cite{mirzaei_3d_2022}. 
+The geometric features of an object, including edges and corners, define its boundary and contour information. In segmentation and reconstruction tasks, these features serve as segmentation boundaries~\cite{li_surface_2023}, while in recognition tasks, they act as key lines or points~\cite{lavin-delgado_efficient_2024}. Additionally, these features are valuable in applications that require contour information, such as grasping or welding~\cite{ahmed_edge_2018}. The geometric feature can improve the accuracy of these tasks and reduce their complexity.
+However, it remains a challenging work. 
+The 3D scanning point clouds usually lack sharp features in an absolute sense due to the smoothing of edges and corners in real-world objects and limitations in scanning precision. This leads to inherent ambiguity in the definition of geometrical features.
+
+Thus, the factors and feature values that differentiate edges and corners are too sensitive to determine and tune.
+Moreover, the samples on different features have unbalanced densities, for example, the samples on corners are significantly less than edges and faces. 
+Thus, in this paper, we develop to extract edges and corners in point clouds simultaneously (as shown in \Cref{fig: teaser}(a)), especially to solve problems in ambiguity definition and scale sensitivity described above.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{fig/teaser.jpg}
+    \caption{(a) The proposed NECDNet detects the geometric features: faces, edges, and corners from a raw object point cloud. (b) Comparison of detection results: (b.1) and (b.2) show analytical methods~\cite{bazazian_fast_2015, ahmed_edge_2018}, while (b.3) presents a data-driven method~\cite{himeur_pcednet_2022}.}
+    \label{fig: teaser}
+\end{figure}
+
+Conventionally, local geometrical descriptors such as the eigenvalues of the covariance matrix~\cite{gumhold_feature_2001}, normal vectors~\cite{demarsin_detection_2007} and curvature~\cite{lin_line_2015} are usually used to extract edges and corners with manually-tuned parameters and thresholds. And \Cref{fig: teaser}(b.1) and (b.2) show the detection results of two threshold-based methods. Their advantages lie in simplicity and computational efficiency. However, they often struggle with difficult-to-adjust thresholds, ambiguous features, and varying scales.
+Learning-based methods have the potential to address some of these shortcomings. The trained models can perform black-box classification to extract features without tuning parameters and thresholds~\cite{qi_pointnet_2017, bazazian_edcnet_2021}, showing superior adaptation and robustness. The edge features extraction has been widely studied~\cite{himeur_pcednet_2022, bode_bounded_2023}. They leverage networks to learn the mapping from local analytical features to geometry features, which presented a remarkable performance on edge detection (as shown in \Cref{fig: teaser}(b.3)). However, these methods did not conduct research on corner detection. Corner detection possesses unique characteristics such as its similarity with edge features, limited data availability, and more sensitivity to scales, so the accuracy of their methods may diminish when applied to corner detection. These issues are also evident in methods focused on corner detection~\cite{wang_pienet_2020a}, where there are more misclassified points for corners.
+
+In this paper, we developed the Neural Edge and Corner Detection Network (NECDNet) for geometrical feature detection, especially with the specialty of corner detection, as shown in \Cref{fig: teaser}(a). It takes a query point along with its neighbors as inputs, calculates the multi-scale feature matrix, and classifies the geometric features.
+We use four neighboring regions to extract multi-scale features, accommodating varying object scales. Additionally, we integrate positional-based and normal-based features to enhance the discriminative ability across the three categories. These analytical features are then combined to construct the multi-scale feature matrix. We also develop a multi-layer perception(MLP)-based hierarchy neural network to fuse the multi-scale features and classify the face, edge, and corner features simultaneously.
+Additionally, as the conventional dataset of geometric features only has the information of edge and surface labels, it is hard to train and validate the proposed method and also difficult to compare with other methods. Thus, we propose a dataset, ABC-Corner, which includes 1,000 objects selected from the ABC dataset~\cite{koch_abc_2019}, especially with the label of corners. We use it to train the proposed neural network and compare the performance with other state-of-the-art methods.
+
+The contributions in the paper are threefold:
+
+\begin{itemize}
+    % \setlength{\itemindent}{1em}
+    \item We propose a framework to extract edge and corner features in point clouds simultaneously, which takes multi-scale local statistical features as input and leverages a lightweight neural network to classify edges and corners.
+    \item We propose to use pointwise local positional and normal information to build a feature matrix that considers multiple scales, enhancing the discrimination of edges and corners.
+    \item We develop the ABC-Corner dataset containing 1,000 objects and the labels of geometric features based on the models in the ABC dataset. The conventional dataset of geometric features rarely includes the corner information.
+\end{itemize}
+
+The rest of this paper is organized as follows. In \Cref{sec:related_works}, we summarize analytical and data-driven methods for sharp feature detection in point clouds. In \Cref{sec:method}, we describe our method NECDNet, which involves computing a multi-scale feature matrix and detailing the structure of the neural network. In \Cref{sec:experiment and results}, we evaluate the performance of our method and present comparisons with different approaches. Finally, we conclude our work in \Cref{sec:conclusion and future work}.
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\linewidth]{fig/workflow.jpg}
+    \caption{Overview of the proposed NECDNet. For each query point (red) in a point cloud, we analyze positional and normal vector information across multi-scale neighbors (yellow) to obtain a multi-scale local feature matrix. MLP-based hierarchy network then fuses these features to classify points as face, edge, or corner.}
+    \label{fig:overview}
+\end{figure*}
+
+
+\section{Related Works}
+\label{sec:related_works}
+\subsection{Analytical Approaches}
+Analytical approaches analyze the local statistical information, calculate local features, and apply handcrafted thresholds to identify features. For example, principal component analysis (PCA) is commonly employed by computing the eigenvalues of neighboring covariance matrix~\cite{gumhold_feature_2001}. When the minimum eigenvalue exceeds the threshold, the query point can be classified as a sharp feature in point clouds. The local feature descriptors can be various, such as the ratio between eigenvalues on single scale~\cite{xia_fast_2017} or multi-scale~\cite{bazazian_fast_2015}, estimated curvature~\cite{lin_line_2015, nguyen_edge_2018} and normal vectors~\cite{demarsin_detection_2007}.
+
+Other methods such as those employing Moving Least Squares (MLS) for surface reconstruction~\cite{daniels_robust_2007}, can improve the detection of sharp features by utilizing local approximations. Moreover, graph-based approaches~\cite{guo_sglbp_2022} can further enhance feature extraction by incorporating global context. Additionally, Zhang et al.~\cite{zhang_multinormal_2019} proposed a geometry-based method, VAM, which utilizes a pair consistency voting scheme for normal vector estimation, effectively preserving sharp features during the reconstruction process. Mérigot et al.~\cite{merigot_voronoibased_2011} proposed a Voronoi-based approach that leverages normal-vector distributions within local Voronoi cells to extract sharp edges from point clouds. Zhao et al.~\cite{zhao_sharp_2023} propose a multi-task neural network architecture that identifies points in proximity to sharp features and forecasts displacement vectors directed towards the local sharp features.
+
+In corner detection, Ahmed et al.~\cite{ahmed_edge_2018} utilized a two-step extraction process, first extracting edge points and then recalculating features based on these edges to identify corners. Schmidt et al.~\cite{schmidt_detection_2023} proposed using RANSAC to extract straight lines or planes from the point cloud and detect corners at their intersections.
+
+Overall, these traditional methods can effectively distinguish sharp features through feature descriptors. However, they require precise threshold settings and struggle to achieve robust detection in real-world scenarios. Additionally, achieving high-precision corner detection often requires a two-step process, which is inefficient and challenging for threshold adjustment.
+
+\subsection{Data-driven Approaches}
+Data-driven methods for extracting sharp features from point clouds generally approach this as a classification task, distinguishing points as smooth or sharp features. PIE-Net~\cite{wang_pienet_2020a} utilizes two networks based on PointNet++~\cite{qi_pointnet_2017}, to separately extract edges and corners, which is inefficient and requires a uniform number of input points. EDC-Net~\cite{bazazian_edcnet_2021} employs a capsule network to classify points as non-edge or sharp-edge. PCPNet~\cite{guerrero_pcpnet_2018} and MSL-Net~\cite{jiao_mslnet_2024} use point patches and point clouds as inputs, respectively, and apply MLPs for classification. PCEDNet~\cite{himeur_pcednet_2022} and the more recent BoundED~\cite{bode_bounded_2023} use multi-scale local feature descriptors as input, performing feature fusion and classification through MLPs. Although these approaches excel at edge detection, the similarity between edge and corner features poses challenges for accurate corner detection.
+
+In addition to classification, DEFs~\cite{matveev_def_2022} and EC-Net~\cite{yu_ecnet_2018} redefine the task as regression, learning point coordinate residuals and estimating distances to edges for precise edge point identification. NerVE~\cite{zhu_nerve_2023} uses a voxelized point cloud to detect sharp features in a structured format. JSENet~\cite{hu_jsenet_2020} implemented 3D semantic edge detection utilizing a two-stream fully convolutional network, which simultaneously executed edge detection and semantic segmentation.
+
+Currently, learning-based methods mainly focus on edge feature extraction but rarely address corner detection. Among the methods that focus on point cloud edge detection, PCEDNet~\cite{himeur_pcednet_2022} and BoundED~\cite{bode_bounded_2023} have shown the effectiveness of edge detection by learning local feature descriptors through neural networks, and they achieved high-precision edge detection. Based on this, we have improved both the local feature descriptors and the network structure to facilitate corner detection. We increase the number of features and propose new features capable of distinguishing between edges and corners.
+The local feature descriptors are based on local positional and normal information and exhibit distinct values across geometric features. We then employ an MLP-based hierarchy network to learn these features, enabling the classification of face, edge, and corner features.
+
+\section{Method}
+\label{sec:method}
+
+\subsection{Overview}
+\Cref{fig:overview} shows the workflow of the proposed NECDNet, which consists of two main components: multi-scale local feature matrix computation and network-based classifier. 
+We apply this network to have a pointwise classification and result in a three-class point cloud.
+For each query point, NECDNet first selects neighbors from 4 different spatial scales, then computes six different analytical features in each scale, and generates a 4$\times$6 multi-scale feature matrix. This matrix is then processed by a network to learn the mapping from the matrix to geometrical classes, and output probability scores for the three geometrical classes, achieving simultaneous face, edge, and corner detection.
+
+\subsection{Multi-scale Neighbors}
+\label{sec:multi_scale}
+The scale for capturing neighbors influences the significance of analytical features. The applicable scales depend on many factors: size of objects, shape complexity, density of point cloud, observation scales, etc. To address the cases involving unknown objects, we compute multiple features for each query point in the input point cloud within its multi-scale neighbors. 
+This approach was presented in~\cite{himeur_pcednet_2022}. We employ it and analyze the significance for our method.
+
+Given a point cloud $\mathcal{P} = \{\mathbf{p}_i \mid i = 1, \dots, n\}$, for each query point $\mathbf{p}_i$, the $k$-nearest neighbors is used to obtain a local region $\mathcal{Q}_i = \{\mathbf{q}_j \mid j = 1, \dots, k\}$ containing $k$ points. By adjusting the value \( k \), the size of the neighboring region $\mathcal{Q}_i$ changes, allowing for feature computation across different neighboring regions to obtain multi-scale local features. For each local region \( \mathcal{Q}_i \), determined by a specific value \( k \), we calculate six features to obtain a 6D feature vector  \( \mathbf{x}_i \). 
+Varying the \( k \) value yields neighboring regions at different scales. By calculating the features within each region, the corresponding \( \mathbf{x}_{i,k} \) values are obtained. Combining all these \( \mathbf{x}_{i,k} \) values produces a multi-scale feature matrix \( \mathbf{X}_i \), which serves as the input to the network.
+
+\begin{equation}
+    \mathbf{X}_i = \begin{bmatrix} 
+\mathbf{x}_{i,k_1} & \mathbf{x}_{i,k_2} & \cdots & \mathbf{x}_{i,k_m} \end{bmatrix}^T
+\end{equation}
+
+The number of scales $m$ and the size of scales $k$ in the multi-scale feature matrix directly influence the learning results of the neural network. Specifically, $k$ affects the applicability of the results to the different sparsity of the point cloud, while $m$ impacts the dimensionality of the data learned by the network. Selecting appropriate scale sizes and numbers of scales can optimize the detection accuracy of our method. Therefore, in \Cref{sec:ablation_study}, we conducted ablation experiments on neighbor scale selection to determine the parameters and selected four values of \( k \): 8, 16, 32, and 64 for feature computation.
+
+\subsection{Feature Computation}
+\label{sec:feature_computation}
+    \begin{figure*}
+      \centering
+      \includegraphics[width = \linewidth]{fig/feature_visualize.jpg}
+      \caption{Visualization of feature values: (a) Feature values are visualized on a single point cloud, with different colors representing varying values, clearly distinguishing different geometric features; (b) The distribution of feature values across the ABC-Corner dataset, with points colored according to category, showing a clear distinction among the three categories.}
+      \label{fig:feature_visualize}
+    \end{figure*}
+
+    % \begin{figure}
+    %     \centering
+    %     \includegraphics[width=\linewidth]{fig/feature.jpg}
+    %     \caption{Visualization of feature values of a single point cloud, with different colors representing varying values, clearly distinguishing different geometric features.}
+    %     \label{fig:features_PC}
+    % \end{figure}
+    % \begin{figure*}
+    %     \centering
+    %     \includegraphics[width=\linewidth]{fig/dataset_feature.jpg}
+    %     \caption{Visualization of the distribution of feature values across the ABC-Corner dataset, with points colored according to category, showing a clear distinction among the three categories.}
+    %     \label{fig:features_dataset}
+    % \end{figure*}
+
+We compute six analytical features to mitigate misclassification in challenging categories and reduce reliance on specific features. Our method combines spatial features from positional data with directional features from normal vectors and captures distinctive characteristics across scales. Position-based features describe spatial distribution and neighborhood structure, while normal vector-based features provide critical insights into surface orientation. This comprehensive feature set strengthens the model's ability to differentiate geometric feature types.
+
+We first normalize \( \mathcal{Q}_i \) to ensure consistency in subsequent feature computations. The normalization process follows the approach described in BoundED \cite{bode_bounded_2023}, which begins by calculating the covariance matrix \( K_i = \mathrm{cov}(\mathcal{Q}_i) \). Singular Value Decomposition (SVD) is then applied to \( K_i \), yielding the decomposition:
+\begin{equation}
+    K_i = U_i \Sigma_i V_i^T
+    \label{eq:SVD}
+\end{equation}
+
+The singular values \(\mathbf{\sigma}_i\) are extracted from the diagonal entries of the matrix \(\Sigma_i\). To facilitate subsequent descriptions, the singular values are sorted in descending order: \(\sigma_{i,1}, \sigma_{i,2}, \sigma_{i,3}\). And \(\sigma_{i,1}, \sigma_{i,2}\) represent the scales of \( \mathcal{Q}_i \) along the two principal directions, which cloud be used to normalize \( \mathcal{Q}_i \) as follows:
+\begin{equation}
+    \bar{\mathcal{Q}}_i = \frac{1}{|\mathcal{Q}_i|} \sum_{j=1}^{k} \mathbf{q}_j
+    \label{eq:center_Qi}
+\end{equation}
+\begin{equation}
+    \hat{\mathcal{Q}}_i = \left\{ \frac{2}{\sqrt{\sigma_{i,1}} + 
+    \sqrt{\sigma_{i,2}}} \left( \mathbf{q}_j - \bar{\mathcal{Q}}_i \right) \mid 
+    \mathbf{q}_j\in \mathcal{Q}_i \right\}
+    \label{eq:norm_Qi}
+\end{equation}
+Among them, \eqref{eq:center_Qi} decentralizes \( \mathcal{Q}_i \), and \eqref{eq:norm_Qi} performs scale normalization on the coordinates. 
+
+\textbf{Curvature:} Curvature $\kappa_i$ is a measure of how much a geometric object deviates from being flat. In the context of a query point $\mathbf{p}_i$ in the point cloud, the curvature can be estimated based on the previously obtained \(\mathbf{\sigma}_i\), which characterizes the flatness of the \( \mathcal{Q}_i \). We normalized \(\mathbf{\sigma}_i\) to $\hat{\mathbf{\sigma}_i}$ and calculated the curvature as follows:
+\begin{equation}
+    \kappa_i = \frac{\hat{\sigma_{i,3}}}{\sum \hat{\mathbf{\sigma}_i}}
+    \label{eq:curvature}
+\end{equation}
+
+\textbf{Projectional Distance:} Projectional distance $\bar{d_i}$ measures the spatial distribution of neighboring points relative to a query point's normal plane. It is calculated as the mean distance of neighboring points $\mathbf{q}_j$ to the projection plane defined by the query point \(\hat{\mathbf{p}_i} \) and its normal vector \( \mathbf{n}_i \), as shown in \cref{eq:mean_dist}. The normal vector \(\mathbf{n}_i\) is derived from the right singular vector associated with the smallest singular value \(\sigma_{i,3}\) of \(\mathbf{\sigma}_i\), which reflects the distribution of \(\mathcal{Q}_i\) along each corresponding vector. Although this normal vector does not specify an inward or outward direction, this ambiguity does not impact coordinate-based feature calculations. Using \(\mathbf{n}_i\), we constructed a projection plane through \(\hat{\mathbf{p}_i}\) and computed the mean distance of neighboring points to this plane. As shown in \Cref{fig:feature_visualize}(b), this projection distance varies distinctly across three classes.
+\begin{equation}
+    \bar{d_i} = \frac{1}{\hat{|\mathcal{Q}_i|}} \sum_{j=1}^k |(\hat{\mathbf{q}_j} - \hat{\mathbf{p}_i}) \cdot \mathbf{n}_i|
+    \label{eq:mean_dist}
+\end{equation}
+
+
+\textbf{Mean Center Distance:} The mean center distance $r_i$ is a metric that quantifies the relative spatial position of a query point within its local neighborhood. It evaluates the distance of the query point to the centroid of its neighboring points and compares it to the distance of its nearest neighbor. This measure provides insight into the local geometric structure around the query point. We applied the sigmoid function to normalize it, ensuring that the variation in its numerical distribution remains minimal. The centroid of the neighborhood is calculated as \cref{eq:norm_center} and the mean center distance is then computed as \cref{eq:mean_center_dist}. The method was originally proposed in \cite{ahmed_edge_2018} and has been adapted for this context.
+\begin{equation}
+    \hat{\mathbf{c}_i} = \frac{1}{\hat{|\mathcal{Q}_i|}} \sum_{j=1}^{k} \hat{\mathbf{q}_j}
+    \label{eq:norm_center}
+\end{equation}
+
+\begin{equation}
+    r_i=\operatorname{Sigmoid}\left(\frac{\left\|\hat{\mathbf{p}}_{i}-\hat{\mathbf{c}}_{i}\right\|_{2}}{\min _{\hat{\mathbf{q}}_{j} \in \hat{\mathcal{Q}}_{i}}\left\|\hat{\mathbf{p}}_{i}-\hat{\mathbf{q}}_{j}\right\|_{2}}\right)
+    \label{eq:mean_center_dist}
+\end{equation}
+
+
+To capture the distribution of normal vectors in a neighborhood, we compute three features based on consistently oriented normals. Two approaches are used to estimate normals: the first estimates from the locally fitted least-squares plane at each query point, oriented by a minimum spanning tree, while the second estimates from mesh. The first method, which relies solely on the point cloud, may be influenced by local noise and scale variations. The second, utilizing mesh information, provides more accurate normals closer to the ground truth.
+
+\textbf{Normal Angle Difference:} The normal angle difference $\mu_{\theta,i}$ measures the variation in angles between the normal vectors of neighboring points and the query point, which is particularly pronounced around edge or corner regions. This metric is derived by first estimating the unit normal vectors for all points in the local neighborhood \( \mathcal{Q}_i \), denoted as \(\hat{\mathcal{N}_i} = \{\hat{\mathbf{n}_j} \mid j = 1, \dots, k\} \). The mean difference between the normal vectors is calculated as follows:
+\begin{equation}
+    \bar{\Delta \mathbf{n}_i} = \frac{1}{|\mathcal{N}_i|} \sum_{\hat{\mathbf{n}_j} \in \mathcal{N}_i} ( \hat{\mathbf{n}_i} - \hat{\mathbf{n}_j} )
+    \label{eq:normal_vector_difference}
+\end{equation}
+
+Next, the angle between the normal vectors in \( \mathcal{N}_i \) and the query point's normal vector \( \hat{\mathbf{n}_i} \) is computed using the inverse cosine function as shown in \cref{eq:theta_j}. Finally, the mean of these angles is calculated to obtain the normal angle difference \cref{eq:mu_theta}.
+
+\begin{equation}
+    \theta_j = \cos^{-1}(\hat{\mathbf{n}_i} \cdot \hat{\mathbf{n}_j})
+    \label{eq:theta_j}
+\end{equation}
+\begin{equation}
+    \mu_{\theta,i} = \frac{1}{|\mathcal{N}_i|} \sum_{j = 1}^k \theta_j
+    \label{eq:mu_theta}
+\end{equation}
+
+% The angle difference between neighbor points $\mathbf{q}_j$ and query point $\mathbf{p}_i$ tends to exhibit more pronounced directional variation around the edge or corner query points. Normal estimation provides the point cloud's unit normal vectors, enabling us to retrieve the unit normal vectors \(\hat{\mathcal{N}_i} = \{\hat{\mathbf{n}_j} \mid j = 1, \dots, k\} \) for all points within each local region \( \mathcal{Q}_i \). We calculate the mean of the differences between the normal vector values as the original difference.
+% \begin{equation}
+%     \bar{\Delta \mathbf{n}_i} = \frac{1}{|\mathcal{N}_i|} \sum_{\hat{\mathbf{n}_j} \in \mathcal{N}_i} ( \hat{\mathbf{n}_i} - \hat{\mathbf{n}_j} )
+%     \label{eq:normal_vector_difference}
+% \end{equation}
+
+% We calculate the angle between the normal vectors in \( \mathcal{N}_i \) and the query point's normal vector \( \hat{\mathbf{n}_i} \), and compute the mean of these angles as the normal angle difference.
+% \begin{equation}
+%     \theta_j = \cos^{-1}(\hat{\mathbf{n}_i} \cdot \hat{\mathbf{n}_j})
+%     \label{eq:theta_j}
+% \end{equation}
+% \begin{equation}
+%     \mu_{\theta,i} = \frac{1}{|\mathcal{N}_i|} \sum_{j = 1}^k \theta_j
+%     \label{eq:mu_theta}
+% \end{equation}
+
+\textbf{Normal Distribution:} The normal distribution $\sigma^2_{\theta,i}$ is conducted by calculating the variance of the angles $\theta_j$ between the normal vectors of neighboring points and the query point's normal vector. When the query point is an edge or corner point, the normal vectors of neighboring points exhibit greater dispersion, reflecting abrupt changes in surface direction. This dispersion can be quantified by the variance, where a higher value indicates a wider spread in the orientations of the normal vectors. The variance of $\theta_j$ is computed as follows:
+\begin{equation}
+    \sigma^2_{\theta,i} = \frac{1}{|\mathcal{N}_i|} \sum_{j = 1}^k (\theta_j - \mu_{\theta,i})^2
+    \label{eq:sigma_theta}
+\end{equation}
+
+% The distribution of normal vectors tends to be more dispersed when the query point is a corner. This dispersion can be quantified by calculating the variance of the angles $\theta_j$ between the normal vectors of neighboring points and the query point's normal vector. A higher variance indicates a greater spread in the orientations of the normal vectors, which is characteristic of corner points where the surface changes direction more abruptly. We compute the variance of $\theta_j$ to describe the distribution of normal vectors within the neighborhood.
+% \begin{equation}
+%     \sigma^2_{\theta,i} = \frac{1}{|\mathcal{N}_i|} \sum_{j = 1}^k (\theta_j - \mu_{\theta,i})^2
+%     \label{eq:sigma_theta}
+% \end{equation}
+
+\textbf{Projectional Normal Norm:} The projectional normal norm $\bar{\text{proj}_i}$ quantifies the alignment between the normal vector of a query point, $\mathbf{n}_j$, and the normal vectors of its neighboring points. Specifically, it measures the magnitude of the projection of the normal vector $\mathbf{n}_j$ onto $\mathbf{n}_i$. This norm tends to be larger when $\mathbf{p}_i$ is a face point, as face points generally lie on flat surfaces where the normal vectors of neighboring points are more aligned with the query point's normal vector. The projection of one normal vector onto another is calculated using the dot product of the two unit normal vectors, and the magnitude of this projection helps distinguish between different types of points (e.g., face, edge, corner). To characterize the difference between the three classes, we compute the average projectional normal norm as follows:
+\begin{equation}
+    \bar{\text{proj}_i} = \frac{1}{|\mathcal{N}_i|} \sum_{j = 1}^k |\hat{\mathbf{n}_i} \cdot \hat{\mathbf{n}_j}|
+    \label{eq:proj_i}
+\end{equation}
+
+% of $\mathbf{n}_j$ to $\mathbf{n}_i$ tend to be larger when $\mathbf{p}_i$ is a face point. This is because face points typically lie on flat surfaces where the normal vectors of neighboring points are more aligned with the query point's normal vector. The projection of one normal vector onto another is given by the dot product of the two vectors, and the magnitude of this projection can be used to distinguish between different types of points (e.g., face, edge, corner). We calculated their average to describe the difference between the three classes.
+% \begin{equation}
+%     \bar{\text{proj}_i} = \frac{1}{|\mathcal{N}_i|} \sum_{j = 1}^k |\hat{\mathbf{n}_i} \cdot \hat{\mathbf{n}_j}|
+%     \label{eq:proj_i}
+% \end{equation}
+
+After calculating the series of features based on the positional and normal vector information within each query point’s neighborhood, we combined all selected features into a 6D feature vector \( \mathbf{x}_i \): 
+\begin{equation}
+    \mathbf{x}_i = (\kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})
+    \label{eq:x_i}
+\end{equation}
+
+Throughout the computational process, in addition to the six features mentioned above, there are two additional three-dimensional vector features, PCA eigenvalues $\mathbf{\sigma}_i$ and normal vector differences $\bar{\Delta \mathbf{n}_i}$. The final features used for network learning required selection from these options. In \Cref{sec:ablation_study}, a comparison of training results using different feature combinations was conducted, ultimately leading to the selection of the aforementioned six features for the final combination.
+
+We visualized the feature values across different geometric features within a single point cloud (as shown in \Cref{fig:feature_visualize}(a)), revealing clear distinctions between them. \Cref{fig:feature_visualize}(b) illustrates the feature value distributions across three categories in the entire ABC-Corner dataset, highlighting the features' effectiveness in classification. The computational features clearly differentiate among the three detection categories. However, using these features directly for detection resembles the analytical method, which requires parameter tuning and may not guarantee robust results. To address this, we utilize neural networks to learn from the computed feature matrices. This approach allows us to combine the strengths of analytical methods and learning-based techniques for detection.
+
+\subsection{Network Architecture}
+\begin{figure*}
+    \centering
+    \includegraphics[width = 0.85\linewidth]{fig/network.jpg}
+    \caption{The network architecture proposed in this study: Feature vectors at four scales are processed through parallel layers and fused. MLP are then employed to classify edge points while filtering out face points. The remaining edge points are further classified using the same MLP structure, producing the final output, which includes separate scores for face, edge, and corner.}
+    \label{fig:network}
+\end{figure*}
+The neural network architecture of NECDNet, as illustrated in \Cref{fig:network}, is composed of two main components: multi-scale feature fusion and classification. The input to the network is the multi-scale feature matrix \( \mathbf{X}_i \) corresponding to the query points. Within \( \mathbf{X}_i \), two pairs of 6D feature vectors \( \mathbf{x}_{i,k_m} \) are extracted and fused through parallel fully connected (FC) layers, each followed by leaky ReLU activation functions. This fusion process generates a 16-dimensional (16D) feature representation that encapsulates multi-scale information. 
+Subsequently, the fused features are fed into an MLP for classification, producing a 2D output that represents the confidence scores for the face and edge classes.
+
+To refine the feature representation, the 16D fused features are filtered based on the edge classification results, retaining only the features of points predicted as edges. These filtered features are then passed through a corner classification module, which shares an identical structure with the edge classification module, to compute the final scores for both edge and corner classes. The resulting scores are combined with the previously obtained surface classification scores to generate the final output, which represents the confidence scores for the three-class classification task (i.e., face, edge, and corner).
+
+To mitigate the risk of overfitting, Dropout~\cite{srivastava_dropout_2014} is incorporated after the activation functions in the classification layers. Finally, the softmax function is applied to the output scores to normalize them into probabilistic values, representing the likelihood of each class. This comprehensive architecture ensures robust feature extraction, effective classification, and reliable performance in distinguishing between the three classes.
+
+\section{Experiment and Results}
+\label{sec:experiment and results}
+
+In this section, we carried out experiments on edge and corner detection in point clouds and presented the detection results of our method, NECDNet. 
+We compared our results with those of other edge and corner detection methods and conducted a separate comparison of edge detection with that of some methods that are only capable of edge detection.
+Additionally, we conducted ablation studies to evaluate the influence of feature dimension and scale selection on our method performance. Lastly, we pointed out the limitations of our method.
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\linewidth]{fig/dataset_process.jpg}
+    \caption{The annotation processing for building the ABC-Corner dataset: (a) Raw model used for annotation; (b) Point cloud with edge labels extracted from (a); (c) Coarse corner labels identified through triple-edge intersections; (d) Final fine corner labels after manual correction.}
+    \label{fig:dataset_process}
+\end{figure*}
+\begin{figure*}
+    \centering
+    \includegraphics[width=\linewidth]{fig/dataset.jpg}
+    \caption{Selected 12 examples in the proposed ABC-Corner dataset. The ID of the object in the figure corresponds to its number in chunk00 of the ABC dataset.}
+    \label{fig:dataset}
+\end{figure*}
+
+\subsection{ABC-Corner Dataset}
+\label{sec:abc-corner dataset}
+An object dataset that uses point clouds to represent each object and contains the labels of surface, edge, and corner is required. However, because of how CAD models are constructed, standard models only include indices for face and edge points and cannot directly provide labels for corner points. The widely used ABC dataset~\cite{koch_abc_2019} for point cloud edge detection does not include labels for corner points.
+Therefore, we created the ABC-Corner dataset, which includes the annotation of corner points for 1,000 point clouds. The point clouds and their edge point labels are obtained from the ABC dataset~\cite{koch_abc_2019}. We use an approach that combines algorithmic assistance with manual screening for annotation. 
+
+The annotation processing begins by generating a point cloud with sharp edge labels derived from a mesh model and edge point indices, as illustrated from (a) to (b) in \Cref{fig:dataset_process}. 
+If a point lies in the intersection of three or more edges, this point can be labeled as a corner. This principle can solve a major proportion of the corner labels. However, this principle cannot be fully applicable to all cases. The apex of a cone is a negative example. The apex should be labeled as a corner, but it is shaped by a curved surface without any edges. So the aforementioned edge-based principle is limited and can only yield coarse corner labels, as shown in \Cref{fig:dataset_process}(c). In addition, some intersection points don't have the shared edge indices because of the modeling uncertainty. 
+Thus, after obtaining coarse labels, we used the point cloud processing software CloudCompare to manually refine the corner labels. And the final fine labels are shown in \Cref{fig:dataset_process}(d). 
+
+Some selected examples of the annotated point clouds are shown in \Cref{fig:dataset}. 
+Given the costs associated with manual labeling and the demands of the task, we consequently annotated 1,000 point clouds to develop the ABC-Corner dataset.
+We trained and evaluated our network using the ABC-Corner dataset. We used 200 point clouds for training, 50 for validation, and the remaining 750 for evaluation.
+
+\subsection{Experiment Setup}
+\label{sec:experiment setup}
+
+\begin{table*}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{17.6pt}
+    \begin{threeparttable}
+    \caption{Marco-averaging metric scores of edge and corner detection methods evaluated on the ABC-Corner dataset.}
+    \label{tab:corner_result}
+    \begin{tabular}{lcccccc}
+        \toprule
+        Method & Precision($\uparrow$) & Recall($\uparrow$) & F1($\uparrow$) & Accuracy($\uparrow$) & IoU($\uparrow$) & MCC($\uparrow$) \\
+        \midrule
+        CA~\cite{bazazian_fast_2015} & 0.415 & 0.616 & 0.420 & 0.616 & 0.346 & 0.276 \\
+        TECD~\cite{ahmed_edge_2018} & 0.472 & 0.642 & 0.513 & 0.642 & 0.438 & 0.526 \\
+        PIE-NET~\cite{wang_pienet_2020a} & 0.615 & 0.814 & 0.686 & 0.935 & 0.577 & 0.718 \\
+        NECDNet (Ours)  & 0.646 & 0.857 & 0.715 & 0.983 & 0.616 & 0.833 \\
+        NECDNet$\dagger$ (Ours)  & \textbf{0.765} & \textbf{0.933} & \textbf{0.815} & \textbf{0.995} & \textbf{0.743} & \textbf{0.943} \\
+        \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+        \footnotesize
+        Data regarding PIE-Net is adapted from the evaluation results provided by its authors.
+        
+        $\dagger$ Using the normals estimated from mesh models. 
+     \end{tablenotes}
+    
+    \end{threeparttable}
+    
+\end{table*}
+\begin{table*}[ht]
+    \centering
+    \small
+    \begin{threeparttable}
+    \setlength{\tabcolsep}{17pt}
+    \caption{Metric scores of edge detection methods evaluated on the ABC dataset.}
+    \label{tab:edge_result}
+    \begin{tabular}{lcccccc}
+        \toprule
+        Method & Precision($\uparrow$) & Recall($\uparrow$) & F1($\uparrow$) & Accuracy($\uparrow$) & IoU($\uparrow$) & MCC($\uparrow$) \\
+        \midrule
+        PCEDNet-2c$\dagger$~\cite{himeur_pcednet_2022} & 0.735 & 0.984 & 0.822 & 0.970 & 0.597 & 0.808 \\
+        BoundED-2c~\cite{bode_bounded_2023} & \textbf{0.959} & 0.857 & 0.875 & 0.987 & 0.778 & 0.869 \\
+        NECDNet-2c (Ours) & 0.708 & 0.988 & 0.825 & 0.980 & 0.702 & 0.827 \\
+        NECDNet-2c$\dagger$ (Ours) & 0.922 & \textbf{0.992} & \textbf{0.956} & \textbf{0.996} & \textbf{0.915} & \textbf{0.954} \\
+        \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+        \footnotesize
+         Data regarding PCEDNet and BoundED is adapted from~\cite{himeur_pcednet_2022} and~\cite{bode_bounded_2023} respectively.
+         
+        $\dagger$ Using the normals estimated from mesh models. 
+     \end{tablenotes}
+     \end{threeparttable}
+    
+\end{table*}
+
+\textbf{Implementation: } 
+The implementation was conducted on an NVIDIA RTX 3090 GPU with 256 GB of memory, utilizing the Windows 10 operating system and PyCharm as the integrated development environment. The proposed algorithm was implemented using PyTorch~\cite{paszke_pytorch_2019}. To optimize the training efficiency, the model was trained for 64 epochs with a batch size of 20,000, and the data loader was configured with 8 worker threads to improve performance. The Adam optimizer was employed with hyperparameters set to $\beta_1 = 0.9$, $\beta_2 = 0.999$, and a learning rate of 0.001. Additionally, focal loss~\cite{lin_focal_2020} was adopted as the loss function to address class imbalance during training.
+
+\textbf{Oversampling Datasets: }
+Due to the inherent geometric properties of 3D objects, the ABC-Corner dataset exhibits a highly imbalanced label distribution across the three categories. The objects consistently have a significantly larger number of face points than the edge and, especially, corner points. This class imbalance can lead to biased model performance, where the majority class (face points) is over-prioritized during training, resulting in poor generalization and inaccurate predictions for the minority classes (edge and corner points).
+Thus, to mitigate the effects, we combined oversampling corner point data with setting class weights in the loss function.
+
+Given that there are three distinct categories, the choice of which classes to oversample warrants careful consideration. For instance, if only corner points (the rarest class) are oversampled, the imbalance between face and edge points may remain unresolved. On the other hand, oversampling both corner and edge points could introduce excessive redundancy into the training data, particularly for corner points, which may lead to overfitting due to the repeated use of identical samples. To explore these trade-offs, we conducted a comparative analysis of different oversampling strategies, the details of which are discussed in~\Cref{sec:ablation_study}. 
+Following the ablation study, we oversample only corner samples to match the number of edge samples and apply class weights to address the remaining data imbalance.
+The calculation method for the class weights is provided below:
+\begin{equation}
+    w_i = \sqrt{\frac{N}{n_i}}
+    \label{eq:label_weights}
+\end{equation}
+
+where \( N \) is the total number of samples, \( n_i \) is the number of samples in each category, and \( w_i \) is the class weight. During training and validation, we employed the focal loss~\cite{lin_focal_2020}, with the gamma parameter set to 2.5 to enhance learning in hard examples. The evaluation data maintains the original imbalanced distribution.
+
+\textbf{Metrics: }
+We prioritized Precision and Recall as the primary evaluation metrics, alongside Accuracy, to evaluate the model's performance. We also included the Matthews Correlation Coefficient (MCC), F1 score, and Intersection over Union (IoU) to compare with other methods.
+For the edge-only detection task, we derived results using standard metric formulas. For the joint edge and corner detection task, a multi-class classification problem, we employed macro-averaging for Precision, Recall, and F1 score. This ensures that the metrics reflect the detection performance across all categories.
+Specifically, the metrics for each category are calculated based on the statistics of True Positives (TP), False Positives (FP), True Negatives (TN), and False Negatives (FN) for that category. The macro-averaging metric is derived by averaging the results of each category’s metrics, giving equal weight to each category. If \( M_c \) represents the metric value (e.g., Precision, Recall, F1-score) for category \( c \), and there are \( C \) categories in total, the macro-averaging formula is:
+\begin{equation}
+    M_{\text{macro}} = \frac{1}{C} \sum_{c=1}^{C} M_c
+\end{equation}
+
+\begin{figure*}[t]
+      \centering
+       \includegraphics[width=\linewidth]{fig/result.jpg}
+       
+       \caption{Comparison of edge and corner detection results on point clouds from the ABC-Corner dataset. Our method achieves the best detection performance. CA and TECD lack robustness, PIE-Net has insufficient detection accuracy, and PCEDNet performs well in edge detection but cannot detect corner points. Data regarding PIE-Net is adapted from the evaluation results provided by its authors. Methods marked with $\dagger$ use mesh models to estimate normals.}
+       \label{fig:edge_corner_result}
+\end{figure*}
+
+\subsection{Results and Comparisons}
+
+We compared the performance of our method for edge and corner detection on point clouds with state-of-the-art (SOTA) methods. 
+For corner detection, we compared with methods: covariance analysis (CA)~\cite{bazazian_fast_2015}, two-step edge and corner detection  (TECD)~\cite{ahmed_edge_2018} and PIE-Net~\cite{wang_pienet_2020a} on the ABC-Corner dataset. For edge-only detection, we compared with the recent edge detection methods, PCEDNet~\cite{himeur_pcednet_2022} and BoundED~\cite{bode_bounded_2023}. 
+Among them, CA and TECD are analytical methods that require manually set thresholds for detection. We set thresholds of 0.085 for edge detection and 0.14 for corner detection in the CA method. TECD includes a corner-specific analysis, so we only set the edge threshold \(\lambda\) to 1.0, while retaining the original corner threshold in~\cite{ahmed_edge_2018}. PIE-Net is a learning-based method that performs separate detection of edges and corners. Using the evaluation results provided by its authors, we combined the edge and corner detection results to obtain its performance under the three-class classification setting. 
+Since PCEDNet and BoundED have not released their code, we compare our edge-only detection metrics with the data provided in their papers. We validated both normals estimated from locally fitted least-squares surfaces and the original mesh models in our method.
+
+\Cref{tab:corner_result} presents the comparison of our evaluation metrics on corner detection with baseline methods, demonstrating that our approach outperforms the baselines across all metrics. Similarly, \Cref{tab:edge_result} shows that our method achieves superior performance in edge-only detection, particularly using normals estimated from meshes. The visualization of detection results on point clouds from the ABC-Corner dataset (shown in \Cref{fig:edge_corner_result}) illustrates that our method misclassifies the fewest points and closely aligns with the ground truth. Given that only partial network validation results for PIE-Net are available from its authors, we computed metrics for all methods on the four objects depicted in \Cref{fig:edge_corner_result} to enable a more effective comparison. The detection metrics for each category across methods are summarized in \Cref{tab:metrics_result_of_four_obj}.
+
+Among these methods for simultaneous edge and corner detection, CA depends on a single feature and scale for threshold-based detection. When applied to thin objects, such as object 3383, its neighborhood analysis may include two facets, resulting in a high number of misclassified points (shown in \Cref{fig:edge_corner_result}). TECD first performs edge detection through an initial feature computation and then recalculates features at the edge points for corner detection. Its thresholding is more complex, and the accuracy of corner detection is highly dependent on the results of edge detection. PIE-Net employs two PointNet++-like networks for separate edge and corner detection, requiring a uniform number of input point clouds. However, due to the lack of feature differentiation between edges and corners, PIE-Net exhibits lower detection precision and produces more false positives without additional filtering. 
+
+PCEDNet and BoundED leverage neural networks to learn local feature descriptors of point clouds for point cloud edge detection. Our method is based on their concept, incorporating improvements during the feature computation and network learning processes. It has been applied to corner detection, resulting in superior detection outcomes. Our method outperforms PCEDNet and achieves competitive performance to BoundED in edge-only detection. Additionally, it demonstrates superior results in corner point detection compared to SOTA methods.
+
+\begin{table*}[ht]
+        % \centering
+        \small
+        \setlength{\tabcolsep}{2.6pt}
+        \caption{Category-wise metric scores of edge and corner detection methods evaluated on the point clouds in \Cref{fig:edge_corner_result}.}
+        \label{tab:metrics_result_of_four_obj}
+        \begin{threeparttable}
+            \begin{tabular}{lccc ccc ccc ccc ccc c}
+            \toprule
+            Method & \multicolumn{3}{c}{Precision($\uparrow$)} & \multicolumn{3}{c}{Recall($\uparrow$)} & \multicolumn{3}{c}{F1($\uparrow$)} & \multicolumn{3}{c}{Accuracy($\uparrow$)} & \multicolumn{3}{c}{IoU($\uparrow$)} & MCC($\uparrow$) \\
+            \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} 
+             & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner &  \\
+            \midrule
+            CA~\cite{bazazian_fast_2015} & 0.975 & 0.303 & 0.001 & 0.582 & 0.614 & 0.303 & 0.729 & 0.405 & 0.002 & 0.582 & 0.614 & 0.303 & 0.573 & 0.254 & 0.001 & 0.184 \\
+            TECD~\cite{ahmed_edge_2018} & 0.986 & 0.705 & 0.062 & 0.980 & 0.762 & 0.158 & 0.983 & 0.732 & 0.089 & 0.980 & 0.762 & 0.158 & 0.967 & 0.578 & 0.046 & 0.707 \\
+            PIE-NET~\cite{wang_pienet_2020a} & 0.995 & 0.673 & 0.278 & 0.950 & 0.898 & 0.964 & 0.972 & 0.770 & 0.432 & 0.950 & 0.898 & 0.964 & 0.946 & 0.626 & 0.275 & 0.759 \\
+            NECDNet (Ours) & \textbf{0.999}& 0.970 & 0.519 & 0.998 & \textbf{0.987}& 0.921 & \textbf{0.999}& 0.978 & 0.664 & 0.998 & \textbf{0.987}& 0.921 & 0.997 & 0.957 & 0.496 & 0.972 \\
+            NECDNet$\dagger$ (Ours) & \textbf{0.999}& \textbf{0.994}& \textbf{0.540}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.984}& \textbf{0.698}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.968}& \textbf{0.536}& \textbf{0.983}\\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \footnotesize
+             Data regarding PIE-Net is adapted from the evaluation results provided by its authors.
+             
+            $\dagger$ Using the normals estimated from mesh models. 
+         \end{tablenotes}
+        \end{threeparttable}
+         
+    \end{table*}
+
+\begin{table*}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{7pt}
+    \caption{Results of ablation studies on feature dimension and number of scales selection.}
+    \label{tab:ablation_study}
+    \begin{threeparttable}
+    \begin{tabular}{llcccccc}
+            \toprule
+            &  & Precision($\uparrow$) & Recall($\uparrow$)  & F1($\uparrow$) & Accuracy($\uparrow$) & IoU($\uparrow$) & MCC($\uparrow$) \\
+            \midrule
+    
+            \multirow{6}{*}{Feature Dimension}
+            & $(\hat{\mathbf{\sigma}_i}, \kappa_i, \bar{d_i}, r_i)$ & 0.647 & 0.847 & 0.654 & 0.977 & 0.601 & 0.790 \\
+            & $(\bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.680 & 0.922 & 0.719 & 0.986 & 0.656 & 0.886 \\
+            & $(\kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & \textbf{0.754} & \textbf{0.946} & \textbf{0.805} & \textbf{0.996} & \textbf{0.735} & \textbf{0.946} \\
+            & $(\kappa_i, \bar{d_i}, r_i, \bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.714 & 0.935 & 0.758 & 0.994 & 0.693 & 0.929 \\
+            & $(\hat{\mathbf{\sigma}_i}, \kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.739 & 0.946 & 0.793 & 0.995 & 0.720 & 0.934 \\
+            & $(\hat{\mathbf{\sigma}_i}, \kappa_i, \bar{d_i}, r_i, \bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.743 & 0.940 & 0.797 & 0.994 & 0.722 & 0.929 \\
+            
+            \midrule
+            
+            \multirow{4}{*}{Scale Selection}
+            & (8, 16) & 0.704 & 0.913 & 0.751 & 0.993 & 0.680 & 0.910 \\
+            & (8, 16, 32, 64) & \textbf{0.743} & \textbf{0.940} & \textbf{0.797} & 0.994 & \textbf{0.722} & 0.929 \\
+            & (8, 16, 32, 48, 80, 128) & 0.723 & 0.927 & 0.770 & \textbf{0.995} & 0.702 & \textbf{0.932} \\
+            & (8, 16, 24, 32, 48, 64, 96, 128) & 0.740 & 0.935 & 0.795 & 0.994 & 0.718 & 0.930 \\
+            
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \footnotesize
+             The computation methods for each feature and the definition of scale are detailed in \Cref{sec:feature_computation} and \Cref{sec:multi_scale}.
+        \end{tablenotes}
+        \end{threeparttable}
+        
+\end{table*}
+\begin{table*}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{10pt}
+    \caption{Results of ablation studies on training strategies.}
+    \label{tab:additional_ablation_study}
+    \begin{tabular}{llcccccc}
+            \toprule
+            & & Precision($\uparrow$) & Recall($\uparrow$) & F1($\uparrow$)& Accuracy($\uparrow$)& IoU($\uparrow$)& MCC($\uparrow$)\\
+            \midrule
+    
+            \multirow{2}{*}{Oversampling Strategy}
+            & Edges and corners & 0.741& \textbf{0.941}& 0.795& \textbf{0.994}& 0.721& 0.923\\
+            & Corners only & \textbf{0.743}& 0.940& \textbf{0.797}& \textbf{0.994}& \textbf{0.722}& \textbf{0.929}\\
+            
+            \midrule
+            
+            \multirow{2}{*}{Smooth-Corner}
+            & With smoothing & 0.706& 0.874& 0.736& 0.989& 0.670& 0.868\\
+            & No smoothing & \textbf{0.743}& \textbf{0.940}& \textbf{0.797}& \textbf{0.994}& \textbf{0.722}& \textbf{0.929}\\
+            % \midrule
+
+            % \multirow{2}{*}{Network architecture}
+            % & Single-step & 0.735& \textbf{0.946}& 0.785& \textbf{0.995}& 0.716& 0.926\\
+            % & Two-step & \textbf{0.743}& 0.940& \textbf{0.797}& 0.994& \textbf{0.722}& \textbf{0.929}\\
+            
+            \bottomrule
+        \end{tabular}
+        
+        
+\end{table*}
+
+\subsection{Ablation Study}
+\label{sec:ablation_study}
+
+We conducted ablation experiments on parameter selection for feature computation and network training strategies. For parameter selection, we focused on the feature dimension and neighbor scale of the computed features. For training strategies, we primarily experimented with different dataset preprocessing techniques. In ablation experiments, we randomly selected 200 objects from the ABC-Corner dataset, using 100 for training and validation and the remaining 100 for evaluation.
+
+\textbf{Feature Dimension: }
+The selection of the computed features determines the input data of the network, so the impact of different feature combinations on the results is worth exploring. In \Cref{sec:feature_computation}, we calculated six features, namely $\kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i}$. During the computation process, two additional features were also considered: PCA eigenvalues $\mathbf{\sigma}_i$ and normal vector differences $\bar{\Delta \mathbf{n}_i}$. In all eight of these features, $\mathbf{\sigma}_i$ and $\bar{\Delta \mathbf{n}_i}$ are 3D vectors, while the remaining six features are 1D scalar values. Combining these features yields many possible combinations, from which we chose six specific ones to conduct our experiments.
+
+The feature dimension column of \Cref{tab:ablation_study} shows the evaluation metrics across different feature combinations. Our method achieved the highest metric scores when $\mathbf{\sigma}_i$ and $\bar{\Delta \mathbf{n}_i}$ were excluded. We suspect that the inclusion of these vector-based features adds complexity to the network input data without providing sufficient additional information to improve performance. Consequently, NECDNet uses the combination of six numerical features as the multi-feature set.
+
+\textbf{Scale Selection: }
+The number and value of the feature matrix scale are also worthy of discussion. The number of scales determines the dimensionality of the feature matrix, while the size of the scales influences the range of target detection scales that the method can effectively handle.
+In the experiment, we varied the values of \( k \) from 8 to 128 and tested the number of scales from 2 to 8, with a step size of 2. The results and corresponding configurations are shown in the scale selection column of \Cref{tab:ablation_study}, where the best performance was achieved with 4 scales. Increasing the number of scales beyond 4 introduced greater data complexity, which could impede the network's learning ability. Therefore, 4 scales (8, 16, 32, 64) were selected as the optimal configuration.
+
+\begin{figure*}
+    \centering
+    % \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+    \includegraphics[width=\linewidth]{fig/limitation.jpg}
+    \caption{The limitation of our method: (a) Ground truth of the detection results; (b) Detection results using normals estimated from the mesh; (c) Detection results using normals estimated from the point cloud. Using normals estimated from the point cloud tends to cause more edge points to be misclassified as corner points.}
+    \label{fig:limitation}
+
+\end{figure*}
+
+\textbf{Oversampling Strategy: }
+% Edge corner surface, number of them, inheret problem.
+% 这种特性给导致我们数据集样本的不平衡。这导致再训练中发什么XXX问题，导致XXX后果。
+The distribution of point cloud data obtained from 3D objects inherently exhibits an imbalance across face, edge, and corner points. 
+The ABC-Corner dataset also exhibits such an imbalance phenomenon. During the training process, the imbalance in the dataset hinders the model's ability to effectively learn the features of the minority classes~\cite{zhang_deep_2023a}.
+Therefore, we implemented an oversampling strategy to preprocess the dataset to balance the amount of data among three classes.
+However, since our dataset comprises three categories—where edge and corner points are the minority classes—the specific approach to oversampling can impact the training results. We investigated two oversampling methods: (1) only corner points are oversampled to match the number of edge points; (2) both edge and corner points are oversampled to match the number of face points.
+
+In the first approach, class weights were set based on the final data distribution of each category, while in the second approach, the weights for all three categories were equal. The comparison results are shown in the oversampling strategy column of \cref{tab:additional_ablation_study}. The metrics of the two methods are similar, but oversampling both edge and corner points significantly increases the training data size, reducing efficiency. Therefore, we only oversample corner points.
+
+\textbf{Smooth-Corner: }
+% 什么是smooth corner
+% 别人考虑了它，做了什么，效果如何。edge
+% 我们本文再研究corner的时候也考虑了这个情况，用了什么方法，做了XXX
+% 结果怎么样
+% 原因是什么
+The smooth-corner method refers to the sampling of a certain number of points around each corner in point clouds and treating them as part of the corner points. Research has employed the smooth-edge method for edges: sampling around sharp edges and treating them as smooth edges, which has been proven to significantly enhance edge detection accuracy~\cite{himeur_pcednet_2022}. Thus, this paper also considers this approach for corner detection and utilizes the smooth-corner method during training.
+This method increases the number of corner points, alleviating the issue of the imbalanced dataset, and it is expected to reduce the difficulty of corner detection.
+However, the experimental results (as shown in the smooth-corner column of \cref{tab:additional_ablation_study}) indicate that the validation metrics decreased after applying the smooth-corner method.
+After analysis, we believe that the application of smooth-corner blurred the feature differences between edge and corner points, leading to a decline in performance metrics. Therefore, we chose not to apply smoothing to corner points.
+
+% \textbf{Network Architecture.} We investigated the effect of employing a two-step detection process in the classification component of network architecture (\cref{fig:network}), where edges are first detected and then filtered for corner detection. In the one-step structure, the same number of FC layers is used to classify all three categories simultaneously. The comparison results are shown in the network architecture column of \cref{tab:additional_ablation_study}. The two-step classification network outperforms in comprehensive metrics, including F1, IoU, and MCC, and is thus adopted as the final classification network structure.
+
+\subsection{Discussion}
+Our method is capable of accurate differentiation of face, edge, and corner features. However, the accuracy of the normal vector information significantly impacts the detection precision.
+As delineated in \Cref{sec:feature_computation}, our method incorporates the normal vector of point clouds in the computation of normal angle difference, normal distribution, and projectional normal norm. These features constitute pivotal elements in the network's learning process. Consequently, the precise estimation of normal orientations can enhance the detection accuracy of NECDNet.
+
+In our method, we conducted experiments using both local least squares surface and mesh information to estimate normal vectors, with the results summarized in \Cref{tab:corner_result}. The normal vectors estimated from the local surface tend to have orientation errors near sharp features, making it difficult to distinguish between edge and corner features. \Cref{fig:limitation}(c) presents validation results from both estimation methods on the same point cloud. The sharpness and proximity of edges cause direct normal estimation from the point cloud to misclassify edge points as corners. 
+In contrast, mesh-based normal estimation closely matches the true orientation, allowing NECDNet to achieve accurate classification even in the presence of complex edge information, as shown in \Cref{fig:limitation}(b). Thus, accurate normal vector estimation can improve our corner detection performance.
+
+\section{Conclusion and Future Work}
+\label{sec:conclusion and future work}
+In this paper, we propose the NECDNet, a learning-based approach for detecting edges and corners in point clouds. This approach achieves high efficiency and accuracy by learning local analytical features across multiple scales. We present using a neural network to fuse six different analytical features and classify the geometric features of each point. This multi-dimension feature fusion makes the ambiguous cases distinguishable. The features are computed from four local regions to decrease the influence of the model size.
+% 因为之前的数据集不行，所以XXXX
+The datasets commonly used for edge and corner detection in point clouds lack annotations for corner points. To enable the training and validation of the proposed model, we annotated the corner points for 1000 objects from the ABC dataset, developing the ABC-Corner dataset.
+% 首先，验证了什么，然后，比较了什么，最后实验了什么，讨论了什么，证明了XXXX
+In the experiments, we validated the effectiveness of our method for edge and corner detection in point clouds. Specifically, we compared its performance in simultaneous edge and corner detection and solely on edge detection with SOTA methods. The comparison results demonstrate that our method outperforms the others in terms of evaluation metrics and visual representation. Additionally, we conducted ablation studies on parameter selection and training strategies within our method, highlighting its limitations and further verifying its scientific rigor.
+
+In the future, we will explore the technique of optimizing local feature descriptors that can more accurately distinguish the geometric features. We will also increase feature dimensions to enhance distinction while considering computation efficiency. Additionally, we will study the normal estimation methods for point clouds to help increase the accuracy of feature detection.
+
+% \section*{Acknowledgments}
+% This work was supported by the National Natural Science Foundation of China [grant number 62403297] and the Shanghai Municipal Commission of Science and Technology [grant number 23550790702].
+
+\bibliographystyle{IEEEtran}
+\bibliography{main}{}
+
+% \newpage
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Mocong Qiu.jpg}}]{Mocong Qiu}
+% % received the B.Eng. degree in Mechanical Design Manufacturing and Automation from Shantou University, Guangdong, China, in 2023. 
+% is currently working toward the M.Eng. degree in Mechanical with the School of Mechatronic Engineering and Automation, Shanghai University, Shanghai, China. His current research projects is sharp feature detection in point clouds. His research interests include computer graphics and deep learning.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Zhengtao Hu.jpg}}]{Zhengtao Hu} (Member, IEEE)
+% received the Ph.D. degree from the Graduate School of Engineering Science, Osaka University, Suita, Japan, in 2022. And he received the B.Eng. and M.S. from Xi’an Jiaotong University, Xi’an, China, in 2015 and 2018, respectively. From 2022 to 2023, he was a research assistant professor in Osaka University. Since 2023, he has been a lecture with the School of Mechatronic Engineering and Automation, Shanghai University, Shanghai, China. His research interests focus on robotic manipulation.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Zhenyu Zhang.jpg}}]{Zhenyu Zhang}
+% received his Ph.D. degree from the Department of Computer Science and Engineering, Nanjing University of Science and Technology, in 2020. In 2019, he visited the Multimedia and Human Understanding Group at the University of Trento, Italy. During 2020-2023, he served as a senior researcher at Tencent YouTu Lab. He is currently an associate professor at the School of Intelligent Science and Technology, Nanjing University, Suzhou campus. His research interests focus on computer vision, computer graphics, and machine learning.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Hao Chen.jpg}}]{Hao Chen}
+% received his Ph.D. in System Innovation from Osaka University in 2024. He earned his M.Sc. in System Innovation from Osaka University in 2021 and his B.Sc. in Electrical and Computer Engineering from the University of Macau in 2018. He is currently a Lecturer at the College of Computer and Information Sciences, Fujian Agriculture and Forestry University. His research interests include manipulation planning and robotic vision.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Liang Du.jpg}}]{Liang Du}
+% received his B.E., M.E. and Ph.D. degrees in Mechanical Engineering from Shanghai Jiao Tong University, China, in 2011, 2015 and 2019, respectively. From 2019 to 2021, he was a Senior Researcher with Ritsumeikan University, Japan. He is currently a lecturer at the School of Mechatronic Engineering and Automation at Shanghai University, China. His research interests include field robotics and artificial intelligence.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Shen Bao.jpg}}]{Sheng Bao}
+% received her B.E., M.E. and Ph.D. degrees in Electrical engineering from Harbin Institute of Technology, China. She was a Senior Researcher with Tsinghua University, China. She is currently a lecturer at the School of Mechatronic Engineering and Automation at Shanghai University, China. Her research interests include SLAM, multi-sensor fusion, and robot dynamics.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Weiwei Wan.jpg}}]{Weiwei Wan} (Senior Member, IEEE)
+% received the Ph.D. degree from the Department of Mechano Informatics, the University of Tokyo, Tokyo, Japan, in 2013. He is currently an Associate Professor working with the Graduate School of Engineering Science, Osaka University, Suita, Japan. From 2013 to 2015, he did his postdoc research with Carnegie Mellon University, Pennsylvania, PA, USA, under the support of Japanese Society for the Promotion of Science. From 2015 to 2017, he was a Research Scientist with the National Institute of AIST, Tsukuba, Japan. 
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Kensuke Harada.jpg}}]{Kensuke Harada} (Fellow, IEEE)
+% received the Ph.D. degree from Kyoto University, Kyoto, Japan, in 1997. He is currently a Professor working with the Graduate School of Engineering Science, Osaka University. From 1997 to 2002, he was a Research Associate with Hiroshima University, Hiroshima, Japan. From 2005 to 2006, he was a Visiting Scholar with the Computer Science Department, Stanford University, Stanford, CA, USA. Before joining Osaka University, he was a Researcher with the National Institute of AIST, Tsukuba, Japan.
+% \end{IEEEbiography}
+
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{fig/author/Jianjun Yuan.jpg}}]{Jianjun Yuan} (Senior Member, IEEE)
+% received the B.Eng. and M.S. degrees in precise instrument and mechanism from Tsinghua University, Beijing, China, in 1999 and 2001, respectively, and the Ph.D. degree in mechanical and aerospace engineering from the Tokyo Institute of Technology, Tokyo, Japan, in 2005. Since 2006, he has been an Associate Professor with the Research Institute of Robotics, Shanghai Jiao Tong University, Shanghai, China. His major research is related to robotic manipulators and robotic systems.
+% \end{IEEEbiography}
+
+
+
+% \vfill
+
+\end{document}
+
+

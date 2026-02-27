@@ -1,28 +1,261 @@
 % !Mode:: "TeX:UTF-8"
-\chapter{实验结果与分析}
+\chapter{考虑边缘与角点接触的机器人抓取规划}
+\label{cha:fbgrasp}
 
-\section{实验环境及配置}
-% 硬件平台（GPU、机械臂型号、手爪参数）。
-% 软件环境与评价指标（Precision, Recall, F1, Success Rate, 抓取分布统计指标）。
+\section{引言}
+机器人抓取规划是机器人操作中不可或缺的步骤，其目标是确定机械手与目标物体之间的接触点，以实现稳定且可靠的抓取。抓取规划的方法多种多样，涵盖了从基于模型的方法到基于学习的方法。其中基于模型的方法通常依赖于物体的几何信息，通过分析物体表面的形状特征来选择合适的接触点。基于学习的方法则利用大量的抓取数据，通过训练神经网络等机器学习模型来预测最佳的抓取位置。在已知物体几何模型的情况下，例如工业场景下的零件分拣、码垛任务，基于模型的抓取规划方法因其解释性强、计算效率高和精确性而被广泛应用~\cite{li_survey_2019,newbury_deep_2023a}。
 
-\section{点云特征检测实验分析}
-\subsection{对比实验}
-% 与 PIE-Net, PCEDNet, BoundED 等 SOTA 方法在 ABC-Corner 数据集上的对比（重点展示角点检测的优越性）。
-\subsection{消融实验}
-% 特征维度选择的影响、邻域尺度数量的影响、过采样策略的有效性。
-\subsection{结果可视化}
-% 展示不同物体点云的边缘与角点分割效果。
+在基于模型的抓取规划方法中，传统的规划方法通常侧重于面接触，忽略了边缘和角点等几何特征的潜在优势~\cite{tenpas_grasp_2017,wan_planning_2021}。然而，在实际应用中，边缘和角点接触往往能够提供更高的抓取适应性和灵活性，特别是在处理复杂形状，或物体所处环境不适用面接触时。因此，本文针对物体的几何特征，提出了一种接触点采样与配对方法，结合软接触模型对抓取稳定性进行评估，并引入抓取增强策略以提升整体抓取性能。
 
-\section{抓取规划仿真实验分析}
-\subsection{抓取分布多样性评估}
-% 引入标准差(STD)、极差(R)等指标，对比本文方法与 GraspIt!, GPD, WRS 的抓取空间覆盖能力。
-\subsection{典型物体抓取规划结果}
-% 针对四面体、不规则棱柱、日用品等物体的规划结果展示（突出六种接触组合）。
-\subsection{参数敏感性分析}
-% 采样体素大小、检测器角度阈值等参数对规划结果的影响。
+基于模型的抓取规划方法，输入的物体模型通常以三角网格的形式表示，最后输出一系列的手爪相对物体的6自由度位姿以及对应的手爪宽度、抓取稳定评分等参数。本文的方法采用基于采样点进行抓取规划，如图~\ref{fig:fbgrasp_framework}，规划流程包含几何特征检测、抓取配置检测及稳定性评估等关键步骤。图中的物体为本文单独进行构建的，命名为箭头（Arrow），目的是展示三种不同几何特征（面、边、角）能实现的六种接触方式（面-面，面-边，面-角，边-边，边-角，角-角），后续的相关方法具体介绍也将以该物体为示例。
 
-\section{真实机器人抓取实验}
-% 实验设置与流程（物体放置、运动规划、抓取执行）。
-% 多类别物体（工业件、日用品、异形件）的抓取成功率统计。
-% 对边缘和角点接触抓取的实际效果验证。
+本文的抓取规划算法具体而言，首先通过类别感知的体素采样方法，均衡地从物体表面的面、边、角区域采样潜在接触点。其次，本文设计了特征化的接触检测器，分别针对面接触、边接触和角接触进行检测，得到各种查询点对应的潜在接触点对。随后，基于法向量约束和几何位置的筛选规则，实现对偶接触点的配对。之后通过抓取增强策略提升抓取数量并进行手爪与被抓物体的碰撞检测。最后，采用软接触模型对生成的抓取配置进行稳定性评估，得到最终的稳定抓取配置。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{FBGrasp/framework.pdf}
+    \bicaption{基于几何特征的机器人抓取规划框架}{Robotic grasp planning framework based on geometric features.}
+    \label{fig:fbgrasp_framework}
+\end{figure}
+
+\section{类别感知的接触点采样}
+
+基于采样点进行抓取规划的方法，首先需要从物体表面获取潜在的接触点。然而，若直接采用全局采样方法，物体的面（Face）、边（Edge）和角（Corner）区域的采样分布将呈现严重的“长尾”特征：即由于面区域占据了绝大部分表面积，接触候选点将主要集中在面上，而极少落在边或角上。这种分布不均将导致抓取规划难以充分利用物体的几何边缘特性，有悖于本文的研究目标。
+
+为此，本文提出了一种类别感知的体素采样方法。该方法首先对物体表面的点云进行几何特征标记，随后在每个类别内独立进行采样。这不仅确保了不同几何区域（面、边、角）能获得数量近似的接触样本，避免了长尾问题，还有效提升了接触样本的多样性。本文将最终的采样点集记为 $\mathcal{S} = \{\mathbf{s}_i\}_{i=1}^m$，其中 $m$ 为采样点总数，$\mathbf{s}_i$ 对应的几何特征标签记为 $f_i$，其取值范围为 $\{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$，分别代表面、边和角。基于类别的采样结果如图~\ref{fig:fbgrasp_sampling}所示，面区域（蓝色）、边区域（橙色）和角区域（红色）均得到了均衡的覆盖。
+
+\begin{figure}
+    \centering
+    % \includegraphics[width=1.0\textwidth]{FBGrasp/sampling.pdf}
+    \includegraphics[width=0.5\textwidth]{example-image-a}
+    \bicaption{基于类别的体素采样结果}{Voxel sampling results based on categories.}
+    \label{fig:fbgrasp_sampling}
+\end{figure}
+
+\subsection{几何特征检测}
+
+进行接触点采样前，首先利用第\ref{chap:necdnet}章介绍的 NECDNet 算法架构对物体的几何特征进行检测与分类。由于 NECDNet 的输入为点云信息，需先通过均匀采样将物体的三角网格模型转换为点云表示，随后将其输入预训练网络。NECDNet 输出每个点的类别标签 $f_i$，将点云划分为面、边、角三类。由于基于模型的方法已知物体的真实法向量，上述网络选用了基于真实法向量训练的模型版本。检测结果如图~\ref{fig:fbgrasp_feature_detection}所示，不同颜色直观地表示了不同的几何特征类别。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{example-image-a}
+    \bicaption{基于NECDNet的几何特征检测结果}{Geometric feature detection results based on NECDNet.}
+    \label{fig:fbgrasp_feature_detection}
+\end{figure}
+
+考虑到角点在物体表面通常呈稀疏且孤立的分布，直接使用原始检测点可能造成冗余。为了使结果更适用于抓取规划，本文在 NECDNet 检测后引入 DBSCAN（Density-Based Spatial Clustering of Applications with Noise）聚类算法对角点进行聚类处理~\cite{ester_densitybased_1996}。
+DBSCAN 聚类过程如公式~(\ref{eq:dbscan})所示，其中 $P$ 表示待聚类的点集，$\epsilon$ 为邻域半径，$MinPts$ 为最小邻域点数。其核心思想是通过考察数据点的邻域密度，将密度较高的数据区域识别为簇，并能有效识别噪声点。算法首先随机选择一个未被访问的数据点，若其 $\epsilon$ 邻域内的点数不少于 $MinPts$，则以该点为核心，扩展形成一个新簇；否则，该点被标记为噪声。该过程不断重复，直到所有数据点均被处理，从而实现对数据点的聚类。
+\begin{equation}
+    \text{DBSCAN}(P, \epsilon, MinPts)
+    \label{eq:dbscan}
+\end{equation}
+
+聚类得到的每个簇对应一个角点区域。为简化表示并便于后续算法处理，首先计算各簇中点的质心，将其作为该区域的代表点。随后，为保持点云数据的一致性，利用原始点云的 KD-树检索距离质心最近的实际点，并将其标记为该区域的角点 $\mathtt{c}$。这样不仅确保后续规划算法使用的仍为原始点云中的有效点，同时使角点的表达更加紧凑，有利于进一步的采样和配对操作。
+
+\subsection{基于类别的体素采样}
+
+在获得带有几何特征标签的点云后，本文采用基于体素的均衡采样方法。具体而言，首先将点云按几何类别划分为三个子集，随后分别对每个子集进行体素化处理：将空间划分为体素网格，并在每个非空体素内随机选择一个点作为采样点 $\mathbf{s}_i$。这种方法确保了采样点在空间上的均匀分布，并强制保证了数量较少的边缘和角点类别也能被充分采样，从而为后续的抓取规划提供均衡的候选集。
+
+在本方法中，体素网格的尺寸是影响采样效果的关键参数。由于抓取规划过程中模型尺寸需与实际物体尺寸保持一致，不能对物体进行归一化处理，因此体素采样参数 $v$ 的定义参考了归一化物体的尺寸。具体而言，物体的实际尺寸通过其包围盒对角线长度进行度量。将实际尺寸与归一化参考尺寸的比值乘以设定的 $v$，即可获得用于点云采样的体素网格尺度。这种方式能够适应不同物体的尺寸变化，确保采样点数量处于合理区间。体素尺寸 $v$ 可根据需求进行调节：较小的 $v$ 生成更密集的采样点 $\mathcal{S}$，可拓展抓取规划的搜索空间但增加计算负担；较大的 $v$ 则减少采样点，可能遗漏部分关键几何信息。图~\ref{fig:fbgrasp_sampling_strategy} 展示了同一物体在不同体素尺寸与采样策略下的对比结果。图中结果表明，相较于全局采样，基于类别的体素采样能够在不同几何区域实现更均匀的分布。
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{FBGrasp/sampling_strategy.pdf}
+    \bicaption{不同体素采样尺寸及采样策略下的采样结果}{Sampling results under different voxel sizes and sampling strategies.}
+    \label{fig:fbgrasp_sampling_strategy}
+\end{figure}
+
+\subsection{凸性检测}
+此外，为确保接触点具备物理可行性，本文引入了凸性检测（Convexity Check）机制，以剔除位于凹陷区域的点。具体方法为：对于每个下采样点 $\mathbf{s}_i \in \mathcal{S}$，首先定义其在采样前点云中 $k$ 个最近邻点组成的局部邻域 $\mathcal{Q}_i^\text{s}$，并计算邻域点的质心 $\mathbf{c}_i^\text{s}$。然后，构造指向质心的向量 $\mathbf{v}_i^\text{s} = \mathbf{c}_i^\text{s} - \mathbf{s}_i$。通过计算该点法向量 $\mathbf{n}_i^\text{s}$ 与 $\mathbf{v}_i^\text{s}$ 之间的夹角 $\theta_i^\text{s}$，用于判断其几何属性，如公式~(\ref{eq:theta_convex}) 所示：
+\begin{equation}
+    \theta_i^\text{s} = \arccos \left( \frac{\mathbf{n}_i^\text{s} \cdot \mathbf{v}_i^\text{s}}{\|\mathbf{n}_i^\text{s}\|\|\mathbf{v}_i^\text{s}\|} \right)
+    \label{eq:theta_convex}
+\end{equation}
+
+如图~\ref{fig:compare_of_theta_q} 所示，位于凹陷区域的点，其 $\theta_i^\text{s}$ 通常较小，而位于凸起区域的点则具有较大的夹角。选取阈值 $\theta_{th}$，当 $\theta_i^\text{s} < \theta_{th}$ 时，将该点判定为凹陷点并从采样集合 $\mathcal{S}$ 中剔除。由于平坦的指腹难以在凹陷位置实现稳定有效的接触，经过凸性筛选后得到的采样点集 $\mathcal{S}$ 既具备几何均衡性，又满足基本的物理接触约束，有效提升了抓取灵活性与成功率。
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{example-image-a}
+    % \includegraphics[width=0.6\textwidth]{FBGrasp/compare_of_theta_q.pdf}
+    \bicaption{凸性检测中凹凸查询点点对应 $\theta_i^\text{s}$ 对比}{Comparison of $\theta_i^\text{s}$ for concave and convex query points in convexity check.}
+    \label{fig:compare_of_theta_q}
+\end{figure}
+
+\section{基于几何特征的接触对检测}
+
+在通过体素均衡采样获得具有类别标签的点集 $\mathcal{S}$ 后，抓取规划的下一阶段任务是搜索能够形成稳定力封闭（Force Closure）的对偶接触点对（Antipodal Contact Pairs）。传统的接触检测方法，如基于射线投射（Ray-shooting）的采样策略，通常假设接触表面为理想平面，这极大地限制了机械手在复杂几何物体表面的抓取灵活性~\cite{wan_planning_2021}。然而，在实际操作中，物体的边缘和角点往往提供了关键的几何特征，允许手指绕接触点或接触轴进行一定程度的旋转，从而在受限空间内实现有效抓取。
+
+为了突破传统平面假设的局限，本文提出了一种基于几何特征的自适应接触对检测方法。该方法不再单一地依赖法向射线，而是针对面（$\mathtt{f}$）、边（$\mathtt{e}$）、角（$\mathtt{c}$）三种不同的几何特征，分别构建了与之拓扑结构相适应的空间检测器：圆柱体、扇形柱和圆锥体。这一过程本质上是将接触点对的寻找转化为一个带几何约束的空间搜索问题。对于每一个作为查询点的采样点，算法利用其对应的检测器在物体空间中搜索潜在的对偶点。随后，结合法向量共线性约束和几何投影规则，对候选点集进行严格的筛选与配对，以确保生成的抓取配置在物理上满足指腹接触的稳定性要求。
+
+图~\ref{fig:fbgrasp_contact_detect} 展示了基于几何特征的接触对具体检测流程。首先，从采样集 $\mathcal{S}$ 中选取一个查询点 $\mathbf{s}_i$，根据其特征 $f_i$ 生成对应的检测器 $\mathcal{D}_i$（圆柱、扇形柱、圆锥体）。计算 $\mathcal{D}_i$ 与点集 $\mathcal{S}$ 的空间交集，得到潜在的候选接触点集 $\mathcal{M}_i = \mathcal{S} \cap \mathcal{D}_i$，图~\ref{fig:fbgrasp_contact_detect}(b)中红色点。之后对 $\mathcal{M}_i$ 中的每个候选点 $\mathbf{m}_j^s$，根据其特征 $f_j$ 以及与查询点 $\mathbf{s}_i$ 的几何关系，应用相应的配对策略进行筛选，最终得到符合稳定性要求的对偶接触点对 $\mathcal{C}_i$，图~\ref{fig:fbgrasp_contact_detect}(c)中黑色线段表示的单个查询点抓取对组合。遍历所有查询点，组合所有单个查询点的结果 $\mathcal{C}_i$ 为最终对偶接触点对规划结果 $\mathcal{P}$。
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{FBGrasp/contact_detect.pdf}
+    \bicaption{基于几何特征的接触对检测流程}{Contact pair detection process based on geometric features.}
+    \label{fig:fbgrasp_contact_detect}
+\end{figure}
+
+检测流程中的关键步骤包含：针对不同几何特征设计适配的空间检测器，以捕捉潜在的接触机会；利用几何约束对候选点进行筛选，确保生成的抓取配置满足物理稳定性要求。通过上述方法，本文能够有效地从复杂的物体几何中提取出高质量的抓取配置。下文将详细介绍特征化接触检测器的设计以及对偶接触点的配对策略。
+
+\subsection{特征化接触检测器设计}
+
+为了捕捉不同几何自由度下的潜在接触机会，本文定义了一组参数化的几何约束检测器 $\mathcal{D}$。检测器的几何形态与尺寸严格依赖于查询点的几何特征类别 $f_i \in \{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$，其构建方向始终沿查询点法向量的负方向 $-\mathbf{n}_i^s$ 延伸，旨在搜索位于物体“对侧”的表面区域。三种检测器的几何定义及示意如图~\ref{fig:fbgrasp_detectors}所示。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{example-image} % 占位符，请替换为包含(a)(b)(c)三个子图的大图
+    \bicaption{基于几何特征的三种接触检测器：(a) 面接触圆柱体检测器；(b) 边接触扇形柱检测器；(c) 角接触圆锥体检测器}{Three types of contact detectors based on geometric features: (a) Cylindrical detector for face; (b) Sector detector for edge; (c) Conical detector for corner.}
+    \label{fig:fbgrasp_detectors}
+\end{figure}
+
+\subsubsection{面接触检测器}
+面接触受限于半空间几何约束，要求手指指腹平面尽可能与物体表面平行。因此，面特征点的对偶搜索主要沿法线反方向进行。考虑到机械手并不能总是完美垂直于表面，且指腹具有一定的物理面积，本文将传统的射线模型扩展为圆柱体检测器，如图~\ref{fig:fbgrasp_detectors}(a)所示。
+圆柱体的直径 $d$ 对应指腹的有效接触直径（对于平行夹爪，取 $d$ 为指腹最大内切圆直径），代表了允许的横向接触容差。圆柱体的长度 $l$ 决定了搜索的深度范围，为了确保能够覆盖物体的整体几何结构，本文将 $l$ 设定为物体点云包围盒（Bounding Box）的最大对角线长度 $d_{bb}$。此时，检测器 $\mathcal{D}$ 定义为一个半径为 $d/2$、高为 $l$ 的圆柱空间，凡是落入该区域的点均被视为潜在的对偶面接触点。
+
+\subsubsection{边接触检测器}
+与面接触不同，边接触属于线接触模型。当手指与物体边缘接触时，机械手具备绕边缘轴线旋转的一个自由度。为了适应这种额外的旋转灵活性并捕捉边缘走向，检测器 $\mathcal{D}$ 被设计为扇形柱（Cylindrical Sector），如图~\ref{fig:fbgrasp_detectors}(b)所示。该检测器在法向截面上呈扇形，半径为 $l$，厚度为指腹直径 $d$。扇形的张角 $\theta_{\mathrm{sec}}$ 决定了允许的旋转搜索范围，考虑到抓取稳定性，防止过大的倾角导致滑脱，本文限制实际使用时 $\theta_{\mathrm{sec}} < 90^\circ$。
+
+在构建扇形柱检测器时，确定扇形的展开方向（即边缘切线方向）是关键步骤。由于原始点云具有较强的离散性，传统差分法推算法向量的鲁棒性较差，难以获得准确的切向信息。针对这一问题，本文采用随机采样一致性（Random Sample Consensus, RANSAC）算法对边缘点进行局部直线拟合，以获取高精度的切向量~\cite{fischler_random_1981}。
+
+具体而言，以当前查询边缘特征点 $\mathbf{s}_i$ 为中心，在仅包含边缘点的点云（采样前）中检索其半径 $r$ 范围内的邻域点，形成局部点集。在局部点集中，通过RANSAC算法迭代执行直线拟合：每次随机选取两点确定一条直线模型，计算其他点到该直线的欧氏距离，并将距离小于一定阈值的点标记为局内点（inliers）。重复上述迭代过程一定次数，最终选取局内点数量最多的直线作为最优拟合结果。该直线的方向向量即作为边缘点 $\mathbf{s}_i$ 局部范围内的切向量。据此，可调整扇形柱检测器的姿态，使其厚度方向与该切向量保持平行，从而保证检测器能够沿着边缘的法平面准确展开，实现对边缘方向的鲁棒感知与拟合。
+
+\subsubsection{角接触检测器}
+角接触近似为点接触模型，理论上允许手指绕接触点在三维空间内进行球面旋转。为了最大化搜索范围，检测器 $\mathcal{D}$ 被设计为圆锥体，如图~\ref{fig:fbgrasp_detectors}(c)所示。圆锥的高为 $l$，顶角 $\theta_{\mathrm{cone}}$ 为可调参数。较大的 $\theta_{\mathrm{cone}}$ 能够覆盖更广阔的对偶区域，但也可能引入几何上不稳定或发生干涉的抓取配置。与边检测器类似，$\theta_{\mathrm{cone}}$ 的取值需在覆盖率与稳定性之间进行权衡。
+
+上述检测器的设计充分考虑了不同几何特征下的接触自由度与机械手的物理限制，其尺寸参数主要包括$d$、$l$、$\theta_{\mathrm{sec}}$ 和 $\theta_{\mathrm{cone}}$。其中，$d$ 和 $l$ 直接关联机械手的指腹尺寸与物体的整体尺度，在手爪与物体确定的情况下无需进行参数调节。而 $\theta_{\mathrm{sec}}$ 和 $\theta_{\mathrm{cone}}$ 则反映了接触点的几何灵活性，可以进行调节以适应不同的抓取任务需求。章节~\ref{cha:} 中的实验将探讨这些参数对抓取规划结果的影响。
+
+\subsection{对偶接触点配对策略}
+设计完成上述特征化接触检测器后，即可开展对偶接触点对的检测工作。具体可以分为两个步骤：首先，利用检测器在物体空间中搜索潜在的接触点对；其次，对潜在的接触点对进行对偶筛选，以确保生成的抓取配置在物理上满足稳定性要求。针对潜在接触点对的筛选工作，本文设计了一套基于几何特征的分类配对策略，对不同的接触点组合制定了相应的筛选规则，以确保生成的抓取配置在物理上满足稳定性要求。
+
+如图~\ref{fig:fbgrasp_contact_detect}所示，对于 $\mathcal{M}_i$ 中的任意候选点 $\mathbf{m}_j^s$，虽然其空间位置满足检测器的几何约束，但仍需进一步验证其法向量和局部几何特征是否能与 $\mathbf{s}_i$ 构成稳定的力封闭抓取。为此，本文根据接触点对 $(\mathbf{s}_i, \mathbf{m}_j^s)$ 的特征组合，制定了不同的分类配对策略。后续配对特征描述中，点对特征表示为 ($f_i$-$f_j$)，其中 $f_i$ 和 $f_j$ 分别为查询点 $\mathbf{s}_i$ 和候选点 $\mathbf{m}_j^s$ 的几何特征类别。根据三种基本特征（面$\mathtt{f}$、边$\mathtt{e}$、角$\mathtt{c}$）的组合，存在六种可能的接触对类型：$\mathtt{f}$-$\mathtt{f}$、$\mathtt{f}$-$\mathtt{e}$、$\mathtt{f}$-$\mathtt{c}$、$\mathtt{e}$-$\mathtt{e}$、$\mathtt{e}$-$\mathtt{c}$、$\mathtt{c}$-$\mathtt{c}$。针对每种类型，本文设计了相应的配对规则，以确保生成的抓取配置在物理上满足稳定性要求。
+
+\subsubsection{角-角接触配对（$\mathtt{c}$-$\mathtt{c}$）}
+当两个接触点均为角点时，由于角接触提供了最大的旋转自由度，且角点处的法向量通常具有较大的不确定性，过于严格的法向约束会导致可行解丢失。因此，对于 $\mathtt{c}$-$\mathtt{c}$ 组合，只要点 $\mathbf{m}_j^s$ 落入圆锥检测器内，本文即认为该配对在几何上是可行的。
+
+\subsubsection{角-边/面接触配对（$\mathtt{c}$-$\mathtt{e}$, $\mathtt{c}$-$\mathtt{f}$）}
+在此类组合中，一个接触点为角点（$\mathbf{s}_i$），另一个为边或面点（$\mathbf{m}_j^s$）。由于边和面对手指的姿态有较强的几何约束，且指腹尺寸有限，我们需要确保角点 $\mathbf{s}_i$ 能够稳定地落在对侧手指的有效接触区域内。为此，本文引入了指标 $d_{\text{proj}}$。该指标计算从 $\mathbf{s}_i$ 出发的射线在对侧点 $\mathbf{m}_j^s$ 的约束平面（对于面）或约束直线（对于边）上的投影偏离程度。具体计算如公式~(\ref{eq:proj_d})所示：
+\begin{equation}
+    d_{\text{proj}} = \begin{cases}
+    \|\mathbf{d}_j^\text{s} - (\mathbf{d}_j^\text{s} \cdot \mathbf{n}_j^\text{s})\mathbf{n}_j^\text{s}\| & \text{若 } f_j^\text{s} = \mathtt{f} \\
+    \|\mathbf{d}_j^\text{s} \cdot \mathbf{t}_j^\text{s}\| & \text{若 } f_j^\text{s} = \mathtt{e}
+    \end{cases}
+    \label{eq:proj_d}
+\end{equation}
+
+其中，$\mathbf{d}_j^\text{s} = \mathbf{m}_j^\text{s} - \mathbf{s}_i$ 为接触连线向量，$\mathbf{n}_j^\text{s}$ 为面点的单位法向量，$\mathbf{t}_j^\text{s}$ 为边点的单位切向量。若 $d_{\text{proj}} < d$（指腹直径），说明角点处于对侧指腹的有效覆盖范围内，判定该配对有效。
+
+\subsubsection{面/边-面/边接触配对（$\mathtt{f}$-$\mathtt{f}$, $\mathtt{e}$-$\mathtt{f}$, $\mathtt{e}$-$\mathtt{e}$）}
+当接触对中不包含角点时，两个接触点均具有相对准确的法向量估计，且受到较强的几何约束。为了保证抓取的对指性质（Antipodal property），两点的法向量应近似相反，以抵消抓取力。定义法向夹角 $\theta_j^\text{s}$ 如公式~(\ref{eq:theta_j^s})：
+\begin{equation}
+    \theta_j^\text{s} = \arccos \left( \frac{\mathbf{n}_i^\text{s} \cdot \mathbf{n}_j^\text{s}}{\|\mathbf{n}_i^\text{s}\| \|\mathbf{n}_j^\text{s}\|} \right)
+    \label{eq:theta_j^s}
+\end{equation}
+设定阈值 $\theta_{\text{th}}$，若 $\theta_j^\text{s} > \theta_{\text{th}}$，则认为两点法向足够对立，配对有效。$\theta_{\text{th}}$ 直接影响生成抓取的数量与质量：阈值越大，约束越严格，生成的配置越少但对指度越高。实验章节~\ref{sec:xx}展示了不同 $\theta_{\text{th}}$ 下的实验对比结果。
+
+\subsection{初步抓取配置生成}
+
+在完成接触点对的筛选与配对后，最后一步是根据确认有效的接触对 $(\mathbf{s}_i, \mathbf{m}_j^s)$ 计算机械手的 6D 抓取位姿。一个完整的抓取配置通常由抓取中心位置 $\mathbf{j}_i$ 和抓取方向（即接触向量 $\mathbf{v}_i$）决定。
+
+抓取中心 $\mathbf{j}_i$ 定义为两个接触点的几何中心，代表了机械手闭合时的理想中心位置，如公式~(\ref{eq:j_j^s})所示：
+\begin{equation}
+    \mathbf{j}_i = \frac{\mathbf{m}_j^\text{s} + \mathbf{s}_i}{2}
+    \label{eq:j_j^s}
+\end{equation}
+
+对于接触向量 $\mathbf{v}_i$，它决定了机械手接近物体的方向。由于面特征（$\mathtt{f}$）对法向有严格的平行约束，即机械手必须沿着面法线的反方向接近以确保指腹贴合。而边和角特征允许一定的旋转自由度，手爪指腹可以绕接触点进行旋转以适应边缘或角点的几何特性。因此，针对不同的接触对类型，本文设计了不同的接触向量计算策略。
+
+若接触对中包含面接触点（$f_j^\text{s} = \mathtt{f}$），则优先采用面点的法向量 $\mathbf{n}_j^\text{s}$ 作为接触方向，以确保指腹与平面贴合。若接触对仅由边或角点组成（$f_j^\text{s} \in \{\mathtt{e}, \mathtt{c}\}$），则缺乏明确的表面法向约束，此时采用两接触点的连线方向作为接触向量，以最大化抓取力的传递效率。计算方式归纳为公式~(\ref{eq:v_j^s})：
+\begin{equation}
+    \mathbf{v}_i = \begin{cases}
+        \mathbf{n}_j^\text{s} & \text{若 } f_j^\text{s} = \mathtt{f} \\
+        \mathbf{m}_j^\text{s} - \mathbf{s}_i & \text{若 } f_j^\text{s} \in \{\mathtt{e}, \mathtt{c}\}
+    \end{cases}
+    \label{eq:v_j^s}
+\end{equation}
+
+通过上述策略，本文能够从复杂的几何特征中高效地提取出满足物理约束的高质量抓取配置，为后续的运动规划奠定基础。
+
+\section{抓取构型增强及碰撞检测}
+在得到初步的抓取配置后，下一阶段的任务是对这些配置进行增强和筛选，以确保其在实际操作中的可行性与稳定性。具体而言，在上文得出的包含抓取中心和接触向量的抓取构型上进行旋转增强，以增加规划出的抓取数量，防止在运动规划阶段因环境避障或运动学奇异点而导致无解的情况。同时，由于初步抓取配置的生成过程并未显式考虑机械手与物体之间的空间干涉，因此需要引入碰撞检测机制，以剔除那些在几何上不可行的抓取构型，提升整体规划的成功率。该步骤在抓取规划流程中起到了关键的过滤作用，确保后续的稳定性评估和运动规划仅针对物理上可行的抓取配置进行，从而提升整体效率与成功率。
+
+\subsection{抓取构型增强策略}
+经过稳定性筛选的接触对仅确定了机械手的空间接触位置 $\mathbf{j}_i$ 和轴向接触矢量 $\mathbf{v}_i$。为了构建完整的 6D 抓取构型，需进一步确定机械手绕接触轴（即夹爪坐标系 x 轴）的旋转角度 $\beta$，以定义机械手的姿态。不同的 $\beta$ 角对应机械手在接触点周围的不同旋转位置，能够显著增加抓取配置的数量。
+
+如图~\ref{fig:augmentation}(a)所示，机械手坐标系原点定位于抓取中心 $\mathbf{j}_i$，其 x 轴与接触向量 $\mathbf{v}_i$ 重合。此时，机械手仍保留一个绕 $\mathbf{v}_i$ 旋转的自由度。通过在 $[0, 2\pi)$ 范围内对旋转角 $\beta$ 进行离散化采样，可基于单一几何接触对生成一系列具备不同末端姿态的抓取构型，如图~\ref{fig:augmentation}(b)所示。该策略显著扩充了候选抓取集，赋予了机器人在运动规划阶段应对环境避障及运动学奇异点时更大的解空间。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{FBGrasp/augmentation.pdf}
+    \bicaption{抓取构型增强示意图}{Schematic of grasp configuration augmentation.}
+    \label{fig:augmentation}
+\end{figure}
+
+值得注意的是，尽管不同的 $\beta$ 角对应不同的机械手末端位姿，其本质上基于同一组几何接触特征。因此，在后续章节（详见第~\ref{sec:xx}节）对抓取分布多样性进行评估时，为避免统计数据的冗余与偏差，评估指标将主要聚焦于接触向量 $\mathbf{v}_i$ 的空间分布（表征 3D 旋转多样性）以及抓取中心的位置分布（表征 3D 空间覆盖率），而非单纯统计增强后的配置总数。同理，在结果的可视化呈现中，为保持图像的清晰度，对于每个接触对仅随机选取一个 $\beta$ 角生成代表性构型进行渲染，省略了密集的旋转增强结果。
+
+\subsection{碰撞检测策略}
+完成抓取构型增强后，每个候选抓取构型均对应一个确定的夹爪 6D 位姿，由上文中的抓取中心 $\mathbf{j}_i$ 和接触向量 $\mathbf{v}_i$ 以及旋转角 $\beta$ 共同定义。由于抓取对规划及增强过程并未显式考虑夹爪实体几何与目标物体的空间干涉，部分抓取构型可能会与物体发生几何干涉，无法作为合理的抓取规划结果。因此需要执行碰撞检测以剔除几何上不可行的候选构型，降低后续稳定性求解的计算负担并提升整体规划成功率。
+
+碰撞检测的目标是在给定两组刚体几何模型及其空间位姿的情况下，判断二者是否发生几何干涉（interference）。对任意一对几何体 $\mathcal{A}$ 与 $\mathcal{B}$，碰撞检测通常可表述为：若存在至少一对点 $(\mathbf{x}\in\mathcal{A},\mathbf{y}\in\mathcal{B})$ 使得两者在空间中相交或产生穿透，则判定为碰撞；反之则为无碰撞。
+本文在几何层面采用三角网格对场景物体进行建模，目标物体直接使用精细 CAD 网格以准确表征表面细节与局部凹凸结构。对于夹爪模型，为兼顾检测精度与批量筛选效率，本文将夹爪掌部、指体与指尖等刚体部件用多个有向包围盒（Oriented Bounding Box, OBB）进行组合近似。该组合式 OBB 表示能够在保留姿态相关外形特征的同时显著降低碰撞测试复杂度，适合对大量增强构型进行快速判定。
+
+在碰撞求解器层面，本文采用 Open Dynamics Engine (ODE) 提供的碰撞检测机制，并将参与检测的几何体分别表示为 ODE 的碰撞几何对象：夹爪端执行器由若干 OBB 碰撞体组合构成，目标物体则由其 CAD 三角网格构建为 TriMesh 碰撞体~\cite{}。在给定候选构型的 6D 位姿后，首先对夹爪各 OBB 碰撞体施加相应的刚体变换，使其与当前抓取姿态一致；随后调用 ODE 的碰撞查询在夹爪与目标物体之间生成接触信息（contact manifold）。若碰撞查询返回的接触点集合非空，则说明夹爪碰撞体与目标物体 TriMesh 在该构型下发生几何接触或穿透，该候选构型被判定为不可行并从候选集中剔除；反之，若无接触点生成，则认为该构型在几何上无干涉并被保留，用于后续的稳定性评估与规划求解。
+
+通过上述基于 ODE 的碰撞检测策略，本文能够在抓取构型增强产生的大规模候选集合中高效滤除与目标物体发生几何干涉的构型，确保后续计算仅针对空间上可执行的抓取配置进行，从而提升整体抓取规划流程的效率与鲁棒性。
+
+\section{基于软接触模型的稳定性评估}
+
+在初步获取潜在接触点对后，需对其进行物理层面的力学稳定性评估。实际应用中，机械手末端通常配备柔性指腹（Soft Finger Pad），其在接触物体时发生的弹性形变能够有效拟合目标表面的边、角等不规则几何特征。这种形变不仅显著增加了有效接触面积，还能通过接触面间的微观互锁提供额外的摩擦力矩，从而大幅提升抓取的鲁棒性。然而，柔性材料与复杂几何特征（特别是锐边与尖角）之间的接触力学呈现出高度的非线性，对其进行精确的有限元建模将带来巨大的计算开销，难以满足抓取规划的实时性要求。
+
+为此，本文提出一种基于离散化近似的软接触模型。该模型在保留指腹物理厚度与压缩特性的基础上，将复杂的连续软接触简化为一组分布式的硬点接触集合，进而利用经典的力封闭（Force Closure）理论进行高效的稳定性判别。
+
+\subsection{接触区域的离散化建模}
+
+指腹的变形能力在模型中被量化为沿法向的有效压缩深度。如图~\ref{fig:stability}所示，对于任意给定的接触对 $(\mathbf{s}_i, \mathbf{m}_j^s)$，以其接触向量 $\mathbf{v}_i$ 为轴向、接触点位置为中心，构建指腹的几何包围体（图中绿色圆柱所示）。设 $t_{\mathrm{pad}}$ 为指腹的物理厚度，引入无量纲参数 $\eta \in [0, 1]$ 作为有效压缩系数，用于表征指腹在特定抓取力作用下的最大形变率。
+在此模型下，凡是落入指腹投影区域内且与指腹表面的距离小于有效变形阈值 $d_{\mathrm{eff}} = \eta t_{\mathrm{pad}}$ 的物体表面点，均被判定为有效接触点。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{FBGrasp/stability.pdf}
+    \bicaption{基于软接触变形的接触点集获取示意图}{Obtaining contact points for stability estimation considering soft contact.}
+    \label{fig:stability}
+\end{figure}
+
+由于依赖于许多耦合因素，准确建模参数 $\eta$ 数值较为困难。在物理场景中，柔性指腹材料的特性、施加的握力、物体材料以及接触区域的几何形状都会影响有效压缩，其中许多效应是非线性的。为此，本文选择采用实际实验进行参数标定。通过实验标定（以配备 3 mm 橡胶指腹的 DH-ROBOTICS PGC 夹爪为例，施加 100 N 抓取力），对于角接触与边接触，$\eta$ 的经验值分别取约为 0.7 与 0.4。
+
+基于上述定义，原本的单一接触点被扩展为一个离散的接触点簇 $\mathbf{C}_i = \{\mathbf{x}_{i,1}, \mathbf{x}_{i,2}, \ldots, \mathbf{x}_{i, |\mathbf{C}_i|}\}$（如图中红色点集所示）。对于簇中任意一点 $\mathbf{x}_{i,j}$，其局部接触法向量近似统一为指腹的进近方向 $\mathbf{n}_{\mathrm{fp}}$。尽管物体表面的局部法向可能存在微小扰动，但在指腹包裹变形的假设下，该近似能够有效反映接触力的主传递方向。
+
+\subsection{力学平衡与稳定性判据}
+
+抓取稳定性的评估核心在于验证接触力空间中是否存在满足物理约束的可行解，以平衡重力及潜在的外力扰动。假设接触面摩擦系数 $\mu$ 均匀分布，对于点簇 $\mathbf{C}_i$ 中的任意离散点 $\mathbf{x}_{i,j}$，其接触力 $\mathbf{f}_{i,j}$ 需满足库仑摩擦定律（Coulomb Friction Law）约束：
+\begin{equation}
+\begin{cases}
+    \mathbf{f}_{i,j} \cdot \mathbf{n}_{\mathrm{fp}} \leq 0 & \text{(单向压力约束)} \\
+    \|\mathbf{f}_{i,j} - (\mathbf{f}_{i,j} \cdot \mathbf{n}_{\mathrm{fp}})\mathbf{n}_{\mathrm{fp}}\| \leq \mu | \mathbf{f}_{i,j} \cdot \mathbf{n}_{\mathrm{fp}} | & \text{(摩擦锥约束)}
+\end{cases}
+\end{equation}
+上述约束保证了接触作用力仅表现为压力，且切向分量受限于最大静摩擦力。
+
+系统的力矩平衡方程定义为：
+\begin{equation}
+    \sum_{i=1}^2 \sum_{j=1}^{|\mathbf{C}_i|}
+    \begin{bmatrix}
+    \mathbf{f}_{i,j} \\[6pt]
+    \mathbf{r}_{i,j} \times \mathbf{f}_{i,j}
+    \end{bmatrix}
+    + \mathbf{w}_{\mathrm{g}} + \mathbf{w}_{\mathrm{ext}} = \mathbf{0}
+\end{equation}
+其中，$\mathbf{r}_{i,j}$ 表示接触点 $\mathbf{x}_{i,j}$ 相对于物体质心的位置矢量；$\mathbf{w}_{\mathrm{g}} \in \mathbb{R}^6$ 为重力旋量（Wrench），包含重力及其产生的力矩；$\mathbf{w}_{\mathrm{ext}} \in \mathbb{R}^6$ 代表外部扰动旋量（本研究中设为零向量，但模型保留其通用性）。
+
+若线性规划求解器能在约束范围内找到一组可行力解 $\{\mathbf{f}_{i,j}\}$，则判定该抓取配置具备力封闭稳定性。
+需特别指出，与经典软指模型将接触简化为单点并附加显式扭转摩擦约束不同~\cite{murray_mathematical_1994}，本文采用的分布式多点接触模型通过积分离散点集产生的力矩（即 $\sum \mathbf{r}_{i,j} \times \mathbf{f}_{i,j}$ 项），能够隐式且更真实地捕捉软指腹抵抗旋转扭矩的物理特性，避免了对扭转摩擦系数的显式约束。
+
 \section{本章小结}
+
+本章针对机器人操作中复杂几何物体的抓取难题，特别是传统方法在处理非平面特征时的局限性，提出了一种融合面、边、角多维几何特征的系统化抓取规划方法。
+
+针对物体表面几何特征分布不均导致的采样“长尾”问题，提出了类别感知的体素均衡采样策略。通过结合 NECDNet 深度学习特征推理与 DBSCAN 聚类算法，实现了对面、边、角区域的独立体素化采样，确保了稀疏特征（如角点）在候选集中的有效覆盖，为多样化抓取奠定了数据基础。
+
+其次，依据不同几何特征的自由度约束特性，设计了特征化的空间接触检测器（圆柱体、扇形柱及圆锥体），并制定了相应的对偶接触点配对策略。通过引入基于投影距离与法向夹角的筛选机制，有效解决了混合特征下的接触点配对问题，从几何层面保证了候选抓取的合理性。
+
+为了准确评估柔性指腹在边缘与角点处的接触稳定性，本文建立了基于离散化近似的软接触力学模型。该模型通过将连续的非线性软接触简化为分布式硬点接触簇，实现了基于力封闭理论的高效稳定性判别。此外，结合抓取构型增强策略，通过沿接触轴的旋转采样，进一步扩充了机器人的可行解空间。
+
+综上所述，本章所提出的方法有效突破了传统平面接触假设的束缚，显著提升了抓取规划算法对物体复杂几何外形的适应性，为后续章节的实验验证与实际应用提供了坚实的理论与算法支撑。

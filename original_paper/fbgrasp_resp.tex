@@ -1,0 +1,1283 @@
+% \documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+\documentclass[journal]{IEEEtran}
+% \makeatletter
+% \def\bstctlcite{\@ifnextchar[{\@bstctlcite}{\@bstctlcite[@auxout]}}
+% \def\@bstctlcite[#1]#2{\@bsphack
+%   \@for\@citeb:=#2\do{%
+%     \edef\@citeb{\expandafter\@firstofone\@citeb}%
+%     \if@filesw\immediate\write\csname #1\endcsname{\string\citation{\@citeb}}\fi}%
+%   \@esphack}
+% \makeatother
+
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\definecolor{chred}{rgb}{0.8,0,0}
+\definecolor{chgrey}{rgb}{0.5,0.5,0.5}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{dblfloatfix}
+\usepackage{eqlist}
+\usepackage{bbding}
+\usepackage{txfonts}
+\usepackage{url}
+\usepackage{footmisc}
+\usepackage{booktabs}
+\usepackage{dirtytalk}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+% \DeclareMathOperator*{\argmin}{arg\, min}
+% \DeclareMathOperator*{\argmax}{arg\, max}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+\usepackage[para,online,flushleft]{threeparttable}
+\hyphenation{op-tical net-works semi-conduc-tor}
+\usepackage{supertabular}
+\usepackage{longtable}
+\usepackage{cancel}
+\usepackage{ulem}
+\usepackage{here}
+\usepackage{booktabs,makecell,tabularx}
+\renewcommand\theadfont{\small}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\usepackage{siunitx}
+%\documentclass{article}
+\usepackage{adjustbox}
+\usepackage{array,booktabs}
+\usepackage{cleveref}
+\usepackage{easyReview}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+
+
+
+
+\newcommand{\bb}[1]{\textcolor{blue}{#1}}
+\newcommand{\br}[1]{\textbf{\textcolor{magenta}{#1}}}
+\newcommand{\brt}[1]{\textcolor{magenta}{#1}}
+\newcommand{\bg}[1]{\textcolor{brown}{#1}}
+\newcommand{\gr}[1]{\textcolor{gray}{#1}}
+\newcommand{\bsf}[1]{\textbf{\textsf{#1}}}
+\newcommand{\rev}[1]{\textcolor{red}{#1}}
+\newcommand{\rez}[1]{\textcolor{blue}{#1}}
+\newcommand{\emp}[1]{\uline{red}{#1}}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\newcommand{\kpt}[1]{\textcolor{darkblue}{#1}}
+\newcommand{\subtt}[1]{\textcolor{gray}{#1}}
+
+\usepackage{CJKutf8}
+\newcommand{\wan}[1]{{\color{blue}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+\newcommand{\wanextra}[1]{{\color{magenta}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+\definecolor{darkgreen}{rgb}{0.0, 0.65, 0.0}
+\newcommand{\hu}[1]{{\color{darkgreen}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+\newcommand{\chen}[1]{{\color{blue}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+% \DeclareMathOperator{\sgn}{sgn}
+
+\newcommand{\ornamentbreak}{%
+\begin{center}
+    $\longrightarrow$~$\clubsuit$~$\longleftarrow$
+  \end{center}
+}
+% \renewcommand{\refname}{Newly Added Citations}
+\title{\uline{Response to the Reviewers' Comments}\\
+\subtt{Planning 6D Grasps for Two-Finger Grippers considering Edge and Corner Contacts}}
+\author{Zhengtao Hu$^{1}$, Ruishuang Liu$^{2}$, Mocong Qiu$^{1}$, Hao Chen$^{3}$, Liang Du$^{1*}$, Takuya Kiyokawa$^{2}$,\\ Weiwei Wan$^{2}$, Jiangjun Yuan$^{1}$, and Kensuke Harada$^{2}$
+\thanks{$^{1}$ School of Mechatronic Engineering and Automation, Shanghai University. $^{2}$ Graduate School of Engineering Science, Osaka University. $^{3}$ Fujian Agriculture and Forestry University.}
+\thanks{$^{*}$ Corresponding author: Liang Du, {\tt\small du\_liang@shu.edu.cn}}%        
+}
+
+\begin{document}
+\maketitle
+
+Meaning of colors:
+\begin{itemize}
+\item \color{gray}{Comments and suggestions from the reviewers.}
+\item \color{black}{Our response.}
+\item \color{red}{Revisions in the manuscript.}
+\end{itemize}
+
+We appreciate the editors' and reviewers' comments, questions, and inspiring suggestions. Based on these, we rewrote and revised the manuscript. The detailed answers, discussion, explanation, and revision are shown below.
+% Please also refer to the highlighted text (red color) of the newly submitted manuscript.
+
+% *Whether the comments from the editor is correct or not. If it is not correct, what is the source of misunderstanding? 
+% *What is our mistake, misunderstanding, lack of explanation etc..
+% *According to the comment, how you modified the paper.
+
+\section{Senior Editor}
+
+\noindent
+{\textbf{\color{black}SE}\color{gray}~ For this paper, a total of 4 review comments were collected. Based on these comments and TE's recommendation, this paper should be rejected and resubmitted after detailed and careful revisions.
+}
+
+Thank you for providing this opportunity to rewrite and resubmit the paper. We have rewritten the manuscript according to the editors' and reviewers' questions and comments. We hope all the questions are addressed, and we are ready for further revision if there are any unclear and problematic expressions.
+
+\ornamentbreak
+
+\section{Technical Editor}
+
+\noindent
+{\textbf{\color{black}TE}\color{gray}~ Four experts reviewed this paper. The comments about the strength and drawback of the work are aligned. Reviewers recommend two main things:  
+
+1) To perform a more comprehensive statistical evaluation showing the superiority of the method in comparison with other approaches.
+
+2) Comment about the real-world applicability of the method by both commenting on the computing capabilities and clarifying empirical parameters' choices.
+
+In addition, I suggest the authors to careful proofread their paper.
+}
+
+Thank you very much for providing us with this opportunity to rewrite and resubmit the paper. We agree with the reviewers' and your opinions and realized the problems and inadequacies. In the revised manuscript, we address the problems according to the reviewers' comments and questions. In particular, we improved the comparison by conducting simulations on grasp distributions and real-world experiments on grasp success rates to clearly demonstrate the superiority of the proposed method. We also analyzed parameter sensitivity, explained the meaning and tuning guidance for each threshold, and clarified the computational capabilities. In addition, we corrected typos and improved the clarity and expression.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+\ornamentbreak
+\section{Reviewer 1}
+
+\noindent
+{\textbf{\color{black}R1-1}\color{gray}~
+In this work, the authors develop a method to perform grasping planning for two-finger grippers exploiting, in addition to contact with the faces, also contact with edges and corners, to improve the flexibility of grasp poses. The method is based on three main modules:
+
+-geometric feature extraction, which extracts object faces, edges and corners given the object CAD;
+
+-contact detection, which identifies the possible contact points exploiting geometrically constrained detectors, depending on the type of feature (face, edge or corners);
+
+-stability estimation, which finds the respective clusters of effective contact points and for each of them verifies that a combination of contact forces exists to counteract gravity and external disturbances. These forces are subject to Coulomb friction constraints.
+
+The methods is compared to the state-of-the-art and experimentally evaluated.
+}
+
+Thank you very much for your conclusion!
+\\
+\bigskip
+
+\noindent
+{\textbf{\color{black}R1-2}\color{gray}~
+The paper is well-written, very clear in its structure and in all its passages. The idea is interesting and it can be a valid novelty. However, I have two main concerns regarding this work.
+}
+
+We appreciate your positive and constructive comments. We agree with your concerns. In the revised manuscript, we have carefully addressed these issues and improved the two main points. 
+\\
+\begin{table*}[t]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \caption{\rev{Success rate of grasp planning methods.}}
+    \rev{
+    \label{tab:statistical results}
+    \begin{threeparttable}
+    \begin{tabular}{l|ccccccccc|c}
+        \toprule
+        Method & Tetrahedron & Amicelli & Seal & LEGO & Sprocket & Milk box & Cup noodle & Motor bracket & Gear &  Average \\
+        \midrule
+        Ours & 100\% & 100\% & 90\% & 100\% & 100\% & 95\% & 95\% & 100\% & 100\% & \textbf{97.8\%} \\
+        WRS~\cite{wan2020planning} & 0\%   & 100\% & 100\% & 100\% & 95\%  & 95\% & 0\%  & 100\% & 100\% & 76.7\% \\
+        GPD~\cite{ten2017grasp}& 35\%  & 85\%  & 75\%  & 85\%  & 85\%  & 70\% & 75\% & 70\%  & 55\%  & 70.6\% \\
+        Graspit~\cite{miller_graspit_2021} & 55\%  & 90\%  & 70\%  & 90\%  & 80\%  & 80\% & 90\% & 75\%  & 70\%  & 77.8\% \\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}
+    }
+\end{table*}
+
+\noindent
+{\textbf{\color{black}R1-3}\color{gray}~
+Regarding the method, all the designed modules depend on parameters empirically chosen. If the authors justify how they choose that parameters and if they provide detailed tuning guidelines to make an user able to use this method in a generic case, the paper can be improved a lot.
+}
+
+Thank you very much for your comment and constructive suggestion. We fully agree with your idea. In the initial submission, several parameters were empirically set, but we did not clearly explain the tuning procedure. In the revised manuscript, we have added a parameter sensitivity analysis and provided a guideline for parameter selection (see Appendix II and III). This addition clarifies how the parameters influence the performance and offers practical guidance for applying the method to different cases. 
+
+Thank you for listing all the unclear parameters in your review report. To avoid unnecessary repetition, we do not provide the full explanation of each parameter in this specific answer. Instead, we address these issues in detail in the following responses to the related questions. Please refer to \textbf{R1-8}$\sim$\textbf{R1-12} for the complete discussions.
+
+To be noted, the proposed method is developed to generate grasp datasets for various robotic grasping tasks. The parameter setting here is inherently task-dependent and customizable. Different tasks have different requirements: for instance, grasping in open and uncluttered environments may only need a small number of grasp candidates, prioritizing computation efficiency, while grasping in narrow or constrained environments requires more flexible and diverse grasps to handle collisions and unsolvable configurations. Consequently, the task orientation naturally determines how the parameters should be set.
+
+Therefore, it is hard to define a universal ``optimal” parameter set in the current paper. This idea is also the same as you mentioned, ``...if they provide detailed tuning guidelines...". In future work, we may adopt advanced fundamental artificial intelligence approaches and combine task planning and grasp optimization to realize a more autonomous and end-to-end grasp planning pipeline.
+
+\rev{(Supplementary Materials, Appendix II)...}
+
+\rev{(Supplementary Materials, Appendix III)...}
+\\
+
+% \begin{table*}[t] 
+%     \centering
+%     \small
+%     \setlength{\tabcolsep}{4pt} 
+%     \label{tab:statistical results} 
+%     \captionsetup{labelfont={color=red}, font={color=red}}
+%     \caption{Success rate of grasp planning methods.}
+%     \rev{
+%     \begin{threeparttable}  
+%         \begin{tabular}{cccc ccc ccc ccc ccc c}
+%         \toprule
+%         & Methods & \multicolumn{3}{c}{Ours} & \multicolumn{3}{c}{WRS} & \multicolumn{3}{c}{GPD} & \multicolumn{3}{c}{Graspit}\\
+%         \cmidrule(lr){3-5} \cmidrule(lr){6-8} \cmidrule(lr){9-11} \cmidrule(lr){12-14}
+%          & Objects & SG & AG & SR($\uparrow$) & SG & AG & SR($\uparrow$) & SG & AG & SR($\uparrow$) & SG & AG & SR($\uparrow$) & \\
+%         \midrule
+%         \multirow{6}{*}{Printed objects}
+%         &Tetrahedron & 20 & 20 & 100.00\% & 0 & 0 & 0.00\% & 7 & 20 & 35.00\% & 11 & 20 & 55.00\% \\ 
+%         &Arrow & 19 & 20 & 95.00\% & 19 & 20 & 95.00\% & 14 & 20 & 70.00\% & 15 & 20 & 75.00\% \\ 
+%         &Amicelli & 20 & 20 & 100.00\% & 20 & 20 & 100.00\% & 17 & 20 & 85.00\% & 18 & 20 & 90.00\% \\ 
+%         &Seal & 18 & 20 & 90.00\% & 20 & 20 & 100.00\% & 15 & 20 & 75.00\% & 14 & 20 & 70.00\% \\ 
+%         &LEGO & 20 & 20 & 100.00\% & 20 & 20 & 100.00\% & 17 & 20 & 85.00\% & 18 & 20 & 90.00\%\\
+%         &Sprocket & 20 & 20 & 100.00\% &19 & 20 & 95.00\% & 17 & 20 & 85.00\% & 16 & 20 & 80.00\%\\
+%         \midrule
+%         \multirow{4}{*}{Off-the-shelf objects}
+%         &Milk box & 19 & 20 & 95.00\% & 19 & 20 & 95.00\% & 14 & 20 & 70.00\% & 16 & 20 & 80.00\% \\ 
+%         &Cup noodle & 19 & 20 & 95.00\% & 0 & 0 & 0.00\% & 15 & 20 & 75.00\% & 18 & 20 & 90.00\% \\ 
+%         &Motor bracket & 20 & 20 & 100.00\% & 20 & 20 & 100.00\% & 21 & 30 & 70.00\% & 15 & 20 & 75.00\% \\ 
+%         % &Dodecahedron Cube & 87 & 96 & 90.63\% & 41 & 42 & 97.62\% & 13 & 20 & 65.00\% & 15 & 20 & 75.00\% \\ 
+%         &Gear & 20 & 20 & 100.00\% & 20 & 20 & 100.00\% & 11 & 20 & 55.00\% & 14 & 20 & 70.00\% \\ 
+%         \bottomrule
+%     \end{tabular}
+%     \begin{tablenotes}
+%         \footnotesize
+%          SG: Success grasps; AG: All grasps; SR: Success rate.
+%         % $\dagger$ Using the normals estimated from mesh models. 
+%      \end{tablenotes}
+%     \end{threeparttable}
+%     }
+% \end{table*}
+
+
+
+
+\begin{figure*}[th!]
+\begin{center}
+% \includegraphics[width=0.75\linewidth]{pic/distribution.pdf}
+\includegraphics[width=0.75\linewidth]{pic_response/grasp_distribution_main.pdf}
+\caption{\rev{Comparative results of planning candidates, grasp distributions, and grasp success rates.} (a)Visualized grasps generated for three objects by different planners. (a.1) Tetrahedron. (a.2) Amicelli (KIT, ID: 10). (a.3) Seal (KIT, ID: 132). (b) 
+Visualized grasp distributions (3D rotation) using different planners. Blue triangle: GraspIt, yellow times sign: GPD, green star: WRS, and red dot: the proposed method. To make the results concise and easy to observe, we didn't include grasp augmentation in this experiment. \rev{Please find more results in Appendix V.}}    
+\label{exp:distribution}
+\end{center}
+\end{figure*} 
+
+\noindent
+{\textbf{\color{black}R1-4 }\color{gray}~
+Regarding the validation, the Distribution of Grasp criteria shows only that this method is able to generate a wider set of possible grasp poses with respect to the other methods, but there is not a validation about the degree of grasp success or failure in that poses. The method can generate more candidate poses, but if the grasp success using this planner is not experimentally and statistically evaluated and compared with respect to the success of the other methods, the paper is not strong enough. In other words, I think that the adopted metrices (STD, R, MAD) referred to distribution of grasp configurations are not enough to show effectively the planner flexibility, nor to assert that this method is better than the state-of-the-art ones, since its grasp success rate is not statistically evaluated nor compared with the other methods' one. The paper strength can improve a lot if the authors perform a new experimental campaign showing a statistical validation about the success rate of the grasp obtained through their planner, compared with the state-of-the-art.
+}
+
+Thank you for your comments and constructive suggestions. We fully agree that evaluating only the distribution of grasp configurations is not sufficient to demonstrate the effectiveness of the proposed method.
+
+In the original version, we focused on emphasizing the advantage of our planner in generating a larger number of grasp candidates with diverse orientations, thereby providing more options for execution. To quantitatively reflect this, we analyzed the distribution of the generated grasp candidates. The metrics (STD, R, and MAD) were used to characterize distributions, and we compared our method with existing approaches using them. However, we now recognize the limitation of relying solely on these metrics. The grasp success rate is always an essential factor for evaluating grasp planners.
+
+In the revised manuscript, we have addressed this issue by adding real-world experimental evaluations of grasp success rates, using both 3D-printed objects and common daily objects. These experiments provide a more comprehensive and statistically meaningful validation of the planner’s performance.
+
+We used 9 objects for experiments and validations, which include the models from open data sets, off-the-shelf items from both industries and daily life, and the manually designed model. The reasons for selecting these samples are explained in Appendix IV. And please also find the answer to \textbf{R3-10} as a reference. 
+% Amicelli (ID: 10) and Seal (ID: 132) are selected from the KIT dataset, demonstrating the applicability to open-source object models. 
+% The Tetrahedron and Arrow objects are manually designed. The tetrahedron has no parallel faces, which highlights the advantages of the proposed planner under challenging geometric conditions. The arrow object is specifically designed to exhibit all six possible contact pairs, as discussed in the introduction. The remaining five objects are off-the-shelf items. These objects help validate the practical applicability in real-world scenarios and further demonstrate the robustness across both industry and daily life.
+
+We compared the performance with representative state-of-the-art methods, including WRS \cite{wan2020planning}, GPD \cite{ten2017grasp}, and GraspIt \cite{miller_graspit_2021}.
+To ensure fair comparisons, each planner first generated more than 20 grasp candidates, and we then downsampled them to 20 candidates to eliminate the influence of differing candidate numbers (GraspIt outputs exactly 20 candidates). We subsequently executed physical grasp trials for all selected candidates.
+After testing all candidates, the grasp success rate for each object was computed. To avoid the influence of the vision system, all objects were placed at known positions and orientations prior to grasp execution. Due to collisions or unsolvable IK configurations, some objects needed to be placed in multiple poses to ensure that all candidates were reachable. A grasp trial was considered successful if the robot could lift the object without failure while maintaining a stable in-hand orientation. The main failure cases are: (1) the fingers push the object before establishing antipodal contact, (2) insufficient or misaligned contact, and (3) unstable grasp configurations that cannot hold the weight.
+
+The planning results are visualized in Fig. \ref{exp:distribution} and Fig. \ref{fig:planning_compare_results}. We placed Fig. \ref{exp:distribution} in the main manuscript, and Fig. \ref{fig:planning_compare_results} in the attached supplementary materials because of the strict page limits.
+
+The success rates are concluded in Table. \ref{tab:statistical results}. Overall, the proposed method demonstrates the highest average success rate of 97.8\%, demonstrating strong robustness and reliability, while WRS performs an average success rate of 76.7\%, and GPD and GraspIt reach 70.6\% and 77.8\%, respectively. WRS also shows competitive performance for the objects for which it can obtain feasible grasps. However, it fails to generate grasp candidates that don't include parallel faces, such as the tetrahedron and cup noodle, which represents a main limitation. In contrast, although GPD and GraspIt can generate candidates for all objects, they exhibit lower success rates in most cases, particularly for objects with sharp edges or complex geometries. For instance, on the tetrahedron, the success rates drop to 35\% for GPD and 55\% for GraspIt; on the gear, they are 55\% and 70\%, respectively. Our methods have special consideration for the edges and corners, thus can also achieve over 95\% grasp success rates on these two objects. For objects such as the Sprocket, Lego, and Amicelli, where grasping primarily relies on face contacts, all methods exhibit relatively higher performance. This comparison demonstrates the advantages of our method in grasping objects with diverse contact types and highlights its superior adaptability and success rates. The photos of physical grasping experiments are shown in Appendix VI. Please also find the demonstrations in the attached video.
+
+% To be noticed, we also attempted to perform the evaluation in a physical simulator. However, it is hard to accurately simulate edge contacts, corner interactions, and nonlinear soft-finger contact behaviors, though the parallel fact contacts are feasible in simulation. Therefore, we decided to conduct the physical experiments to obtain statistically meaningful and convincing results.
+
+In the revised manuscript, we rewrote Section VI.B. The revisions were explained as above. To avoid repetition, we didn't show all the revisions in this response letter. Please find the detailed revisions according to the following index.
+
+\rev{(Section VI.B)...}
+
+\rev{(Supplementary Materials, Appendix V)...}
+
+\begin{figure*}[!t]
+    \begin{center}
+    \includegraphics[width=0.9\linewidth]{pic_response/grasp_distribution.pdf}
+    \caption{\rev{Additional comparisons of planning candidates, distributions, and success rates. We compared our work with Graspit\cite{miller_graspit_2021}, GPD\cite{ten2017grasp}, and WRS\cite{wan2020planning}. (a) Visualized grasps generated. (b) Visualized grasp distributions (3D rotation) using different planners. (-.1) LEGO. (-.2) Sprocket. (-.3) Milk box. (-.4) Cup noodle. (-.5) Motor bracket. (-.6) Gear.}}    
+    \label{fig:planning_compare_results}
+    \end{center}
+\end{figure*}
+
+% We also attempted to perform grasp success estimation in simulation; however, accurately simulating edge contacts, corner interactions, and nonlinear soft-finger contact behaviors proved to be highly unreliable. Therefore, we decided to conduct physical experiments to obtain statistically meaningful and trustworthy results. 
+
+% In particular, a statistical validation of the grasp success rate is essential to assess whether the generated grasp candidates lead to reliable executions and whether the method truly outperforms existing approaches.
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R1-5}\color{gray}~
+In Abstract, add a short proposition to justify why using only face contacts ``limit adaptation and flexibility"
+}
+
+Thank you for your advice. Here, we make an explanation and show the revision.
+
+With the face-contact constraint, a two-fingered grasp requires the opposing surfaces to satisfy the condition of opposite normals before evaluating grasp stability. Consequently, objects without parallel surface samples are difficult to generate feasible grasps for. For example, pentagram-shaped parts, tetrahedra, gears with numerous edges, or objects with multiple bulges often lack such parallel surfaces, making grasp planning challenging.
+
+In the original version, strictly limited by the number of words of the abstract, we made the abstract overly concise and induced this problem. In the revised manuscript, we revised the abstract and added a short proposition to explain our claim. 
+
+(Abstract)...which ensure superior grasp stability, but \rev{inherently restrict the geometric versatility of feasible grasp configurations.}\\
+
+% w form constraint. As shown in Figure XX, the rotation on X axis, rotation on Y axis and the displacement on Z axis are physically determined. So in two-fingered antipocal grasping, the oppsite two faces must have the parallel normals. Satisfying this constrain can be considered as grasp candidates, however, 
+% XXXXX
+\bigskip
+
+\noindent
+{\textbf{\color{black}R1-6}\color{gray}~
+In Abstract, the proposition ``enhancing the ability to resist external disturbance" is never shown in the paper
+}
+
+Thank you for pointing out this problem. We agree that the expression in the abstract was inaccurate. What we intended to describe is the ability of the grasp to resist gravity and, more generally, to withstand external forces and torques acting on the grasped object. In the original draft, we intended to explicitly use ``forces and torques”; however, due to the word limit of the abstract, we replaced this with the more general term ``disturbance”, which led to ambiguity.
+
+In the revised manuscript, the associated revision can be found as follows:
+
+(Abstract)...enhancing the ability to resist \rev{gravity}.\\
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R1-7}\color{gray}~
+In IV, the authors should specify the reason why they develop a custom geometric feature detection module instead of using one of the state-of-the-art. Furthermore, if they want to consider this module as a contribution, they should compare it with respect to the existing ones.
+}
+
+% Thank you for your question. We also noticed this problem. The method used for geometric feature detection is inspired by the exsit methods. But we found some limitation and we develop to improve them in the proposed method. But we didn't count it in our three contributions. Although we proposed the improvements in the algorithm, we think it is not so significant and not a major contribution in this paper. We will elaborate our development about the feature detection in the next paragraph.
+
+Thank you for your question. 
+We did not include this part as one of our three contributions, since we consider that the improvement is not significant as a main contribution. However, we developed several enhancements to improve the detection performance, particularly for thin objects. And it is also an important process in the grasp planning.
+
+Firstly, we developed the analytical detection approach instead of using learning-based methods, as they provide only end-to-end results, which are difficult to customize for task-dependent applications. In grasp planning, different tasks often require tuning or adjustment of intermediate results, so a black-box approach is not suitable. Conventionally, the analytical methods have limitations when detecting features with thin geometry, concavity, protuberance, etc. These methods typically rely only on positional information for classification. As a result, point clouds on both sides of a thin object may be misclassified as belonging to the same surface. To address this issue, we also incorporate surface normal information. Although the positional difference between the two sides is small, the difference in normal direction is significant, which helps accurately distinguish the point clouds and improves the robustness of feature detection.
+
+In the revised manuscript, we rewrote Section IV and added a comparison with several existing methods to demonstrate the improvement. Due to the strict page limitation, the added part is included in the supplementary materials. The following \textbf{R1-8} and \textbf{R1-9} are also related to this question. To avoid repetition, we didn't elaborate on the details here. Please find the explanation and revision in the following two questions.\\
+\bigskip
+
+% We will further explain our developments related to feature detection in the following paragraph.
+
+% We developed the analytical detection approach as the learning-based methods provide only end-to-end results, which are difficult to customize for task-dependent applications. In grasp planning, different tasks often require tuning or adjustment of intermediate results, so a black-box approach is not suitable. Conventionally, the analytical methods have limitations when detecting geometric features on thin objects. These methods typically rely only on positional information for classification. As a result, point clouds on both sides of a thin object may be misclassified as belonging to the same surface. To address this issue, we also incorporate surface normal information. Although the positional difference between the two sides is small, the difference in normal direction is significant, which helps accurately distinguish the point clouds and improves the robustness of feature detection.
+
+% Another reason for our detailed elaboration on the feature detection process is that it is closely related to candidate sampling and has a significant impact on the grasp planning results. Therefore, we provide an in-depth explanation of the method, together with illustrative examples, to help readers better understand both the process and the parameter sensitivity. 
+
+% The parameter settings are also important, as you pointed out and emphasized. The detailed descriptions and tuning guidelines can be found in RXXXX.
+\begin{figure*}[ht!]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{pic_response/feature_detection_compare.pdf}
+\caption{\rev{Comparative results of feature detection using different methods and different objects. Left: Ours. Middle: CA\cite{bazazian_fast_2015b}. Right: MS\cite{ahmed2018edge}. Upper rows: The arrow-shaped objects. Middle rows: the hexagonal object (ABC, ID:3383). Bottom rows: the curved object (ABC, ID: 0197).}}
+\label{fig:feature_detection_results}
+\end{center}
+\end{figure*} 
+
+
+\noindent
+{\textbf{\color{black}R1-8}\color{gray}~
+In IV-A and IV-B, two thresholds are mentioned but an explanation about how to tune them misses.
+}
+
+Thank you for your question, and we are sorry for missing the explanation. In the original submission, we used $\tau_1$ and $\tau_2$ to denote the two detection thresholds. However, we realized that the subscripts “1” and “2” were not descriptive. Therefore, in the revised manuscript, we replaced $\tau_1$ with $\tau_\text{e}$ to indicate that it corresponds to edge detection, and $\tau_2$ with $\tau_\text{c}$ to indicate that it corresponds to corner detection.
+
+We added detailed explanations on parameter tuning guidelines and detection comparisons with other methods in the revised version. Due to the strict page limit, we placed them in the supplementary materials. In the revised version, the corresponding revision can be found as follows.
+
+(Supplementary Materials, Appendix II)
+\rev{We define $\tau_\text{e}$ as a threshold used for filtering the edge points from all points, and $\tau_\text{c}$ as a threshold used for filtering the corner points from the edge points. Increasing $\tau_\text{e}$ makes fewer points being classified as edge points. And a higher $\tau_\text{c}$ can increase the number of points classified as corners.
+In general, higher thresholds generate sharper features that more distinctly capture the object’s overall contour, whereas lower thresholds result in smoother features.
+For regular objects with relatively simple geometry, the acceptable detection results can be obtained across a broad range of thresholds. However, for complex objects with diverse geometric structures, the threshold settings become more sensitive. Satisfactory results can only be achieved within a narrower range of parameter values.}
+
+\rev{We illustrate changes with varying $\tau_\text{e}$ and $\tau_\text{c}$ to give an intuitive guide for tuning these parameters, as shown in the left part of Fig. \ref{fig:feature_detection_results}. We use three different objects, the arrow-shaped object, the hexagonal object (ABC, ID:3383), and the curved object (ABC, ID: 0197), to validate the adaptation to diverse geometries. For each model, we first fix $\tau_\text{c}$ and vary $\tau_\text{e}$ across 0.6, 0.9, and 1.2. We can find that as $\tau_\text{e}$ increases, fewer points are detected as edge points. Then we fix $\tau_\text{e}$ and change $\tau_\text{c}$ across 0.5, 0.6, and 0.7. It can be observed that increasing $\tau_\text{c}$ results in more classified corner points. 
+Besides $\tau_\text{e}$ and $\tau_\text{c}$, we also show the results of varying $k$ across 16, 32, and 64 for a clearer explanation and comparison, as shown in the upper rows of Fig. \ref{fig:feature_detection_results}(a.1), Fig. \ref{fig:feature_detection_results}(b.1), and Fig. \ref{fig:feature_detection_results}(c.1). It can be observed that a larger $k$ leads to more points being classified as edge points, consequently increasing the number of detected corner points as well.}
+
+\rev{We also compared our method with two representative analytical detection approaches, CA~\cite{bazazian_fast_2015b} and MS~\cite{ahmed2018edge}. Since these methods rely on different parameters and thresholds, we evaluated their performance under different parameter settings to ensure a fair comparison. Overall, our method shows superior detection performance across the three tested objects.
+The CA method cannot properly handle objects with thin-wall geometries, resulting in a large number of misclassifications. The MS method, on the other hand, is highly sensitive to parameter tuning, requiring users to identify a very precise configuration to obtain acceptable results. Moreover, its detection performance remains unsatisfactory, particularly for thin-wall shapes and curved features.}
+
+% We also compared our method with the representative analytical detection methods, CA~\cite{bazazian_fast_2015b}, and MS~\cite{ahmed2018edge}. As different methods use different parameters and thresholds, so we should the comparisons of varying different parameters and thresholds. Overall, our methods produce the superior detection performance on three different objects. The CA cannot solve the ``thin wall" shapes, thus, generates many misidentification on XXX. The MS is too sensitive on the parameter tuning, which means the user have to find an accurate parameter setting to obtain the results. Besides, the detection results are to satisfying, especially for the ``thin wall" shapes and the curved features.
+
+% These two thresholds, $\tau_\text{e}$ is used for filtering the edge and corner points from face points and $\tau_\text{c}$ is used for filtering the corner points from edge points.
+% As illustrated in Sec XX, if the computed $r_i$ for a query point exceeds $\tau_\text{e}$, the point will be classified as an edge point. As shown in Fig. XX(a), with all other parameters kept constant, increasing $\tau_\text{e}$ reduces the number of points classified as edge points.
+% As for $\tau_\text{c}$, if the computed $\kappa_i$ is lower than $\tau_\text{c}$, the query point will be classified as a corner point. As shown in Fig. XX(b), with all other parameters kept constant, increasing $\tau_\text{c}$ increases the number of points classified as corner points.
+
+(Section IV.A, paragraph 4) ...if \( r_i \) exceeds \rev{$\tau_\text{e}$, which is a threshold used to filter the results of edge detection}, the point is considered an edge point. \rev{Comparative results of tuning $\tau_\text{e}$ are shown in Appendix II.}
+
+(Section IV.B, paragraph 2) ...
+\rev{We define $\tau_\text{c}$ as a threshold for filtering the detected corners.} If $\kappa_i < \tau_\text{c}$, the point is classified as a corner. \rev{Comparative results of tuning $\tau_\text{c}$ are shown in Appendix II.}\\
+
+\noindent
+{\textbf{\color{black}R1-9}\color{gray}~
+In IV-B, when specifying ``Based on the outcomes,
+the best performance is observed when $\lambda_1$ is set to 0.9, $\lambda_2$ to
+0.7, and k to 32.", the authors should specify how they obtained these numbers basing on what kind of outcome and specifying what they mean with ``best performance". Furthermore, they should specify if these numbers are selected only with reference to some specific case or if this choice can work for a generic-shaped object.
+}
+
+Thank you for your question and suggestions. First, we are sorry for the typo that caused confusion. In Section IV.B, the symbols, $\lambda_1$ and $\lambda_2$, should be revised to $\tau_\text{e}$ and $\tau_\text{c}$. We have corrected it in the revised manuscript.
+
+And, we should apologize that “best performance" is an improper expression. 
+In our application, the parameter settings are inherently task-dependent. Different tasks, preferences, and grasping objectives may require different parameter values, even for the same object. Therefore, a single fixed parameter set cannot universally fit all tasks or all objects.
+We then proceed with the full planning pipeline. If the resulting grasp candidates are not acceptable, we return to the feature detection step and adjust the parameters again to improve the subsequent planning results. 
+
+Thus, the parameter choices are specific to the task requirements and desired behavior.
+Although it is difficult to determine a parameter setting that works optimally for every generic-shaped object, our empirical experiments indicate that the set ( $\tau_\text{e}:0.9$, $\tau_\text{c}:0.7$, and $k:32$) consistently produces acceptable results for almost all cases evaluated in this work. So, we adopted this parameter set for the following analysis and experiments in the paper.
+
+In the revised manuscript, the related revision can be found as follows.
+
+(Section IV.B, paragraph 4) The key parameters in the feature detection process are: 
+\rev{$\tau_\text{e}$, $\tau_\text{c}$, and $k$. These parameters are inherently task-dependent and are empirically tuned. We experimentally explored that the set ($\tau_\text{e}:0.9$, $\tau_\text{c}:0.7$, and $k:32$) consistently produces acceptable results for almost all cases evaluated in this work. Please find the detailed tuning guide and comparative experimental results in Appendix II.}\\
+% \rev{$\tau_\text{e}$, $\tau_\text{c}$, and $k$. These parameters are inherently task-dependent. Different tasks, preferences, and grasping objectives may require different parameter values. Therefore, a single fixed parameter set cannot universally fit all tasks or all objects. Although it is difficult to determine a parameter setting that works optimally for every generic-shaped object, our empirical experiments indicate that the set $\tau_\text{e}:0.9$, $\tau_\text{c}:0.7$, and $k:32$ produces consistently acceptable results for almost all cases evaluated in this work. So, we adopted this parameter set for the following analysis and experiments in the paper. Finally, an example of detected features is shown in Fig. \ref{}(a). Please find the detailed parameter tuning guide and comparative experimental results in Supplementary Materials Appendix II.}\\
+\begin{figure}[!th]
+    \centering
+\includegraphics[width=\linewidth]{pic_response/detector_para.jpg}
+    \caption{\rev{Comparative results of detected antipodal points using different detectors with varying parameters. (a) Varying $d$ for face contacts. (b) Varying $\theta_\mathrm{sec}$ for edge contacts. (c) Varying $\theta_\mathrm{cone}$ for corner contacts.}}
+    \label{fig:detector}
+\end{figure}
+
+\noindent
+{\textbf{\color{black}R1-10}\color{gray}~
+In V-B-2 and V-B-3, two empirical parameters are mentioned but an explanation about how to tune them misses. Again, a more detailed explanation should be provided about the choice of $d$, $l$, $\theta_\mathrm{sec}$, $\theta_\mathrm{cone}$.
+}
+
+Thank you for pointing out this problem, and we are sorry for the omission. In Section V.B, we propose using different detectors for different types of contact points, and the sizes of these detectors are mainly determined by the four parameters as you mentioned: $d$, $l$, $\theta_\mathrm{sec}$, and $\theta_\mathrm{cone}$. In the following, we explain them in detail.
+
+First, $d$ represents the diameter of the contact region. In this paper, we used a circular fingerpad, which directly reflects the contact area. For various finger shapes, we approximate the contact patch using an equivalent circle, typically the maximum inscribed circle. Thus, for a given gripper, $d$ is a fixed value and does not require tuning during planning. In this paper, the finger pads we used have a $d$ of 28 mm. Although it is a fixed value, we also illustrate the changes of varying $d$ for understanding the changes of using different finger pads, as shown in Fig. \ref{fig:detector}(a). 
+
+Second, $l$ is the length of the detector, set to the longest edge length of the object model (bounding box). This ensures that the detector fully covers the point cloud and can correctly identify opposite points. It is determined by the object model, so it is also not tuned during planning.
+
+Third, $\theta_\mathrm{sec}$ is the angle of the cylindrical sector. It is a tunable parameter. A larger angle allows the detector to cover a wider region and find more candidates. However, we constrain it to be less than 90°. If $\theta_\mathrm{sec}$ is larger than 90°, the fingers may exert outward forces that decrease the grasp stability and produce invalid candidates. We illustrate the changes of varying $\theta_\mathrm{sec}$ as shown in Fig. \ref{fig:detector}(b).
+
+Fourth, $\theta_\mathrm{cone}$ is the apex angle of the cone detector and is also a tunable parameter. Similar to $\theta_\mathrm{sec}$, a larger value increases the detection range and helps identify more grasp candidates. For the same stability considerations, we limit $\theta_\mathrm{cone}$ to less than 90°, as larger angles may introduce outward forces that compromise grasp stability. We illustrate the changes of varying $\theta_\mathrm{cone}$ as shown in Fig. \ref{fig:detector}(c).
+
+In the revised manuscript, the related revision can be found as follows.
+
+(Section V.B-1, paragraph 1) ...\rev{Here, $d$ also represents the diameter of the contact region. In this paper, we used a circular fingerpad, which directly reflects the contact area. For various finger shapes, we approximate the contact patch using an equivalent circle (maximum inscribed circle). Thus, for a given gripper, $d$ is a fixed value and does not require tuning during planning. And $l$ is set to the longest edge length of the object model (bounding box). It is determined by the object model, so it is also not tuned during planning.}
+
+(Section V.B-3, paragraph 2) ...In this paper, \rev{with a given fingerpad, $d$ is a fixed value of 28 mm. And} $l$ is obtained from each target object \rev{model, which is not a tunable parameter. Besides, $\theta_\mathrm{sec}$ and $\theta_\mathrm{cone}$ are tunable parameters. A larger value allows the detector to cover a wider region and find more candidates. However, we constrain it to be less than 90°. If $\theta_\mathrm{sec}$ is larger than 90°, the fingers may exert outward forces that decrease the grasp stability and produce invalid candidates. We illustrate the change of tuning parameters in Appendix III.B.}
+
+(Supplementary Material, Appendix III.B) ... (\rev{To avoid repetition, please see the Appendix according to this index.})\\
+
+
+
+% the choice of $d$ mainly represents the contact area between the gripper fingers and the object, so we selected size XX based on our experimental setup. For $l$, our intention is that the detector should fully cover the point opposite the contact point, so we designed $l$ according to the maximum dimension of the object point cloud. 
+
+
+
+% In particular, for contacts at edges and corners, because there is no well-defined normal, the finger can rotate around the point to some extent while maintaining contact with the opposing point. Therefore we designed $\theta_{sec}$ and $\theta_{cone}$ to represent the finger’s allowable motion margin for edge and corner contacts. When these angles are larger, the detector is larger, can include more opposing detection points, and yields more grasp pairs; conversely, smaller angles reduce the number of generated grasp pairs. We validated different values of $\theta_{sec}$ and $\theta_{cone}$, and the grasp-planning results are shown in Fig.  XX.\\
+
+\noindent
+{\textbf{\color{black}R1-11}\color{gray}~
+In V-C, a specific threshold is mentioned but an explanation about how to tune it misses.
+}
+% 说明contact vector怎么得到的
+
+Thank you for your question. We rewrote this part and explained the related parameters and thresholds. The specific threshold is $\theta_{\text{th}}$, which is used to filter the antipodal grasp pair considering the angle between the two normals. 
+
+\rev{For $\mathtt{c}$-$\mathtt{c}$ contacts, since both contact points are at corners, fingers have substantial rotational freedom. Therefore, any existing pair $\mathbf{p}_i = (\mathbf{s}_i, \mathbf{m}_j^\text{s})$ is deemed viable for grasping.}
+
+\rev{For $\mathtt{c}$-$\mathtt{e}$ and $\mathtt{c}$-$\mathtt{f}$ contacts, fingers are constrained at edge and face contact points, limiting rotational margin. Additionally, normal vectors at corners are relatively inaccurate.  
+To address this, we introduce a metric $d_{\text{proj}}$: the projected distance from vector $\mathbf{d}_j^\text{s} = \mathbf{m}_j^\text{s} - \mathbf{s}_i$ onto the target vector.  
+For face contacts, the target vector is the face normal; for edge contacts, it is the local edge tangent.  Thus, $d_{\text{proj}}$ is computed as:}
+
+\begin{equation}
+    \rev{d_{\text{proj}} = \begin{cases}
+    \|\mathbf{d}_j^\text{s} - (\mathbf{d}_j^\text{s} \cdot \mathbf{n}_j^\text{s})\mathbf{n}_j^\text{s}\| & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{f} \\
+    \|\mathbf{d}_j^\text{s} \cdot \mathbf{t}_j^\text{s}\| & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{e}
+    \end{cases}}
+    \label{eq:proj_d}
+\end{equation}
+\rev{where $\mathbf{n}_j^\text{s}$ is the unit normal vector at the face contact point, $\mathbf{f}_j^\text{s}$ is the feature of $\mathbf{m}_j^\text{s}$, and $\mathbf{t}_j^\text{s}$ is the unit tangent vector along the edge.  A contact pair is valid when $d_{\text{proj}} < d$, where $d$ denotes the contact region diameter.}
+
+\rev{For $\mathtt{f}$-$\mathtt{f}$, $\mathtt{e}$-$\mathtt{f}$, and $\mathtt{e}$-$\mathtt{e}$ contacts, both contact points are constrained with relatively accurate normal estimates. We denote $\theta_j^\text{s}$ as the angle between the normal vectors at the two points, shown in Eq.~\ref{eq:theta_j^s}.
+If $\theta_j^\text{s}$ exceeds the threshold $\theta_{\text{th}}$, the contact pair $\mathbf{p}_i$ is considered valid. The tunable threshold $\theta_{\text{th}}$ is used to filter the antipodal grasp pair considering the angle between the two normals, which affects the number of generated grasping configurations. A larger threshold imposes stricter constraints, resulting in fewer configurations. Please find the comparative results of tuning $\theta_{\text{th}}$ in Appendix III.C.} (Fig. \ref{fig:threshold_theta_th} in the response letter) 
+
+\begin{equation}
+    \rev{\theta_j^\text{s} = \arccos \left( \frac{\mathbf{n}_i^\text{s} \cdot \mathbf{n}_j^\text{s}}{\|\mathbf{n}_i^\text{s}\| \|\mathbf{n}_j^\text{s}\|} \right)}
+    \label{eq:theta_j^s}
+\end{equation}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{pic/contact_pairing_para.pdf}
+%     \caption{Caption}
+%     \label{fig:contact_pairing_para}
+% \end{figure}
+
+\rev{After obtaining each contact pair, we determine the contact vector $\mathbf{v}_i$ and gripper center $\mathbf{j}_i$.  For $\mathbf{m}_j^\text{s}$ on faces ($\mathtt{f}$), which experience strict parallel constraints from the faces, we use their normal as $\mathbf{v}_i$. For the pairs without $\mathtt{f}$, $\mathbf{v}_i$ is constructed by connecting the two points (Eq.~\ref{eq:v_j^s}). And $\mathbf{j}_i$ is the mean of these two points (Eq.~\ref{eq:j_j^s}).}
+
+\begin{equation}
+\rev{
+    \mathbf{v}_i = \begin{cases}
+        \mathbf{n}_j^\text{s} & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{f} \\
+        \mathbf{m}_j^\text{s} - \mathbf{s}_i & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{e} \text{ or } \mathtt{c}
+    \end{cases}}
+    \label{eq:v_j^s}
+\end{equation}
+
+\begin{equation}
+    \rev{\mathbf{j}_i = (\mathbf{m}_j^\text{s} + \mathbf{s}_i)/2}
+    \label{eq:j_j^s}
+\end{equation}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{pic_response/theta_th.pdf}
+    \caption{\rev{Comparative results of pairing contact pairs with varying $\theta_{\text{th}}$. Increasing $\theta_{\text{th}}$ strengthens the constraint on the angle between normals from antipodal contacts, thus decreasing the paired contacts.}}
+    \label{fig:threshold_theta_th}
+\end{figure}
+The related revision can be found according to the following index.
+
+\rev{(Supplementary Materials, Appendix III.C)...}
+
+(Section V.C, paragraph 3)...
+(\rev{The revision is similar to the answer in this question. To avoid
+repetition, please find the revision in the manuscript according to this index.})
+\bigskip
+
+\noindent
+{\textbf{\color{black}R1-12}\color{gray}~
+In V-D, an empirical parameter is mentioned but an explanation about how to tune it misses. Again, it is not clear how the authors decided its specific value.
+}
+
+Thank you for your question, and we are sorry for the omission. 
+In Section V.D, $\eta \in [0,1]$ is an empirical parameter that represents the proportion of the finger pad thickness that can be compressed during contact.
+It is hard to accurately model $\eta$ because it depends on many coupled factors. In physical scenarios, the properties of the soft finger material, the applied gripping force, the object materials, and the geometry of the contact region all influence the effective compression, and many of these effects are nonlinear. 
+
+A compromise approach is to determine 
+$\eta$ experimentally using the specific gripper and the preferred gripping force in the intended application. In our experiments, we evaluated the contact behavior using a DH-ROBOTICS PGC gripper equipped with 3 mm rubber finger pads, with the test object providing an edge contact with a 90$^\circ$ angle. The gripping force was set to 100 N. We found that 
+$\eta$ =0.7 provides a good approximation for the corner contacts and $\eta$ =0.4 provides a good approximation for the edge contacts using this setup.
+
+In the revised manuscript, the corresponding revision can be found as follows.
+
+(Section V.D, paragraph 1)...
+\rev{represents the proportion of the finger pad thickness that can be compressed during contact.} We assume that any points near the object's edge and corners lying within $\eta t_\mathrm{pad}$ of the contact region can participate in the contact. 
+\rev{It is hard to accurately model $\eta$ because it depends on many coupled factors. In physical scenarios, the properties of the soft finger material, the applied gripping force, the object materials, and the geometry of the contact region all influence the effective compression, and many of these effects are nonlinear. Thus, we can use a compromised approach to experimentally measure $\eta$. In this paper, we used a DH-ROBOTICS PGC gripper equipped with 3 mm rubber finger pads to grasp the object that has an edge contact with a 90$^\circ$ angle. The gripping force was set to 100 N. We can obtain $\eta$ is about 0.7 for corner contacts and is 0.4 for edge contacts using this setting.}\\
+
+% It is hard to determine an optimal value as it depends on too many factors. In the physical cases, the nature of the soft materials, the gripping force, the object materials, the shape of the contact feature all coupled to determing the value, and many factors are nonlinear influence. So it is hard to solve the problem. The most accurate way is the contact experiment using the specific gripper with the prefered gripping force. In our cases, we examed using XX gripper with a XXX finger pad, and $\eta$ is 0.7.
+
+
+\noindent
+{\textbf{\color{black}R1-13}\color{gray}~
+In V-D, in eq. (9), it is not clear if $w_\mathrm{g}$ and $w_\mathrm{ext}$ are measured quantities.
+}
+
+Thank you for point out this question. First, $w_\mathrm{g}$ is generated by the gravitational force acting on the target object. It is computed based on the object’s weight, which can be obtained from its CAD model with known material properties or provided by the user input. Second, if a task involves a specific and defined external load, it can be represented in the equation as $w_\mathrm{ext}$. In this paper, we do not consider a particular external load. Instead, we only consider the resistance to gravity. So $w_\mathrm{ext}$ is set to zero in our analysis and experiments.
+
+Additionally, we agree that the notation $w_\mathrm{g}$ is more concise than our original $w_\mathrm{grav}$ in the initial manuscript. We have updated the notation throughout the manuscript and added a footnote in Section V.D to explicitly clarify the source of these values.
+
+The related revision can be found as follows.
+
+(Section V.D, equation 9)
+\begin{equation}
+    \sum_{i=1}^2 \sum_{j=1}^{|\mathbf{C}_i|}
+\begin{bmatrix}
+\mathbf{f}_{i,j} \\[6pt]
+\mathbf{r}_{i,j} \times \mathbf{f}_{i,j}
+\end{bmatrix}
+\;+\;
+\rev{\mathbf{w}_{\mathrm{g}}}
+\;+\;
+\mathbf{w}_{\mathrm{ext}}
+\;=\;
+\mathbf{0}. \nonumber
+\end{equation}
+
+(Section V.D, paragraph 4) To assess grasp stability, we \rev{determine if a feasible set of contact forces $\{\mathbf{f}_\mathrm{i,j}\}$ exists that balances the system against gravity and external disturbances.} \ldots Here,  $\rev{\mathbf{w}_\mathrm{g}}\in\mathbb{R}^6$ \rev{denotes} the gravitational \rev{wrench}, and $\mathbf{w}_\mathrm{ext}\in\mathbb{R}^6$ \rev{represents} the external \rev{disturbance} wrench$^\dagger$. \ldots
+
+(Section V.D, footnote $\dagger$) 
+\rev{$\mathbf{w}_\mathrm{g}$ includes the gravitational force and the torque induced by the center of mass offset. In our implementation, this is computed using mass properties derived from the object's CAD model or user input. In this paper, we assume no additional external disturbances. Thus, $\mathbf{w}_\mathrm{ext}$  is set to zero, though the formulation remains general.} \\
+
+% Also the disturbance can be reflected in this item. However, the actual disturbance can not be obtained withough experimental measurement. We can use a percentage of weight to built a virtual disturbance to simulate and estimate a stability.  
+
+\noindent
+{\textbf{\color{black}R1-14}\color{gray}~
+In VI and VII, as already stated in the general comment, in my opinion the distribution of grasp configurations as criteria to establish this method is better than the state-of-the-art is not enough. To show this method gives more flexible grasp poses candidates, a statistical validation of the grasp success rate would be necessary, compared with the state-of-the-art methods. This can help to show, for example, that there could be some cases in which traditional methods cannot find a feasible and successful grasping pose relying only on face-to-face contacts, while the introduced method can.
+}
+
+Thank you for your questions and constructive advice. We agree with your opinion, and we recognize the limitation in the original manuscript. In the revision, we conducted physical experiments using nine objects and compared our method with three state-of-the-art baseline methods. \textbf{R1-4} is similar to this question. The experiments and discussions are provided in the response, and we avoid repeating them here again for conciseness. Please refer to \textbf{R1-4} for more details.
+
+We appreciate your idea to highlight the advances of the proposed method. 
+Using an object that our planner can handle while traditional methods fail is indeed an effective way to demonstrate the benefit. In the original manuscript, we attempted to use the arrow object for this purpose. The arrow contains a tetrahedral head which don't have parallel faces. Our method performs well on this region. But its tail is a prism with parallel surfaces. So the overall results fail to clearly demonstrate the difference. Therefore, in the revised manuscript, we use the pure tetrahedron as the test object to better highlight the advantage of our method. The experimental results show that WRS fail to generate feasible grasps for the tetrahedron, while GPD and GraspIt can produce candidates, but with lower success rates. In contrast, our method achieves high success rates, which validates its advantage in handling objects that require non-parallel or no face-face contacts. The related discussions are also shown in \textbf{R1-4}.
+\\
+
+\begin{table*}[ht]
+    \centering
+    \small
+    \rev{
+    \begin{threeparttable}
+    \setlength{\tabcolsep}{5pt}
+    \caption{\rev{Tests of computation cost using different objects (in seconds).}}
+    \label{tab:computation_time_r2}
+    \begin{tabular}{l|cccccccccc|c}
+        \toprule
+        \textbf{Stage} & Tetrahedron & Amicelli & Seal & LEGO & Sprocket & Milk box & Cup noodle & Bracket & Gear & Arrow & \textbf{Avg.} \\
+        \midrule
+        Feature Detection & 1.766 & 2.109 & 4.105 & 6.844 & 1.845 & 1.631 & 3.697 & 4.131 & 2.542 & 2.322 & 3.016 \\
+        Contact Detection & 0.078 & 0.032 & 0.082 & 0.051 & 0.071 & 0.129 & 0.141 & 0.059 & 0.038 & 0.075 & 0.089 \\
+        Stability Analysis & 0.626 & 0.591 & 0.724 & 0.092 & 0.601 & 0.523 & 0.301 & 0.091 & 0.475 & 0.461 & 0.481\\
+        Total Time & 2.469 & 2.732 & 4.911 & 6.987 & 2.517 & 2.284 & 4.139 & 4.281 & 3.054 & 2.859 & 3.585\\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}}
+    
+\end{table*}
+
+
+\noindent
+{\textbf{\color{black}R1-15}\color{gray}~
+In VII-B, real world experiments results are not properly shown, neither in the paper nor in the appendix. I suggest to merge that subsection with the previous one, showing all the results of real experiments in a proper form, with all the required statistical validations (see previous comment). The authors could think about substituting this real worlds result with a new experimental campaign showing the flexibility and the success of their framework, statistically evaluated and compared with the state-of-the-art.
+}
+
+Thank you for your comments and constructive suggestions. We agree that the presentation of the real-world experimental results should be clearer and more integrated with the comparative analysis. In the revised manuscript, we have reorganized the experimental section. Within a single visualization, we show the planned grasp candidates, the distributions of grasp orientations, and the grasp success rates. This integration helps readers understand the advantages of the proposed method and follow the comparison with the other methods.
+
+Due to the page limitation, we include the results for three representative objects in the main manuscript, while the results for the remaining six objects are provided in Appendix V.
+
+Regarding your suggestion to merge the distribution analysis and real-world success-rate experiments into one subsection, we tried this reorganization. However, combining them made an overly long subsection with many details. To maintain readability, we separate them into two subsections, but the corresponding results are jointly visualized in a single figure to emphasize their connection.
+
+\uline{We are open to further discussion on this point and are fully prepared to revise again if needed.}
+
+We didn't show all the details of the revision to avoid repetition. The corresponding revisions can be found according to the following indices. 
+
+\rev{(Section VI.A)...}
+
+\rev{(Section VI.B)...}
+\\
+
+
+\noindent
+{\textbf{\color{black}R1-16}\color{gray}~
+MINOR COMMENTS
+-All the figures representing conceptual schemes, illustrations and plots (every figure but photos) should be in vectorial format (EPS, SVG, PDF, …).
+}
+
+Thank you for your suggestion. In the revised manuscript, we have replaced the figures with high-resolution PDF versions to improve clarity. However, some images were captured directly from the simulator, where exporting in vector format is not supported. For those figures, we have optimized the bitmap resolution to ensure they remain as clear as possible.
+\\
+
+\noindent
+{\textbf{\color{black}R1-17}\color{gray}~
+-In V-B-2 there is a typo: ``Unlike the face contact, the corner contact
+offers ..." should be substituted with "Unlike the face contact, the edge contact
+offers ..."
+}
+
+Thank you for pointing out this mistake. We revised it in the updated version. The revision can be found as follows.
+
+(Section V.B, second paragraph)...Unlike the face contact, the \rev{edge} contact
+offers...
+\\
+\ornamentbreak
+
+\section{Reviewer 2}
+
+
+\noindent
+{\textbf{\color{black}R2-1 }\color{gray}~
+The paper makes three primary contributions, clearly outlined in the introduction and supported throughout the methodology and experiments:
+
+1. Inclusion of Edge and Corner Contacts in Grasp Planning
+• Unlike conventional planners that focus solely on face contacts, this work explicitly treats edges and corners as viable contact regions.
+• This expands the grasping possibilities, especially for complex, asymmetric, or sharp-angled objects, enhancing flexibility and dexterity.
+
+2. Feature-Specific Contact Detectors
+The authors propose a principled method to generate contact detectors tailored to the geometric features:
+Cylinder detectors for face contacts
+Cylindrical sector detectors for edge contacts
+Cone detectors for corner contacts
+These detectors help identify antipodal contact pairs across different regions of the object.
+
+3. Statistical Evaluation of Grasp Distribution
+The paper introduces statistical metrics—Standard Deviation (STD), Range (R), and Mean Absolute Deviation (MAD)—to quantify the 6D distribution of grasp configurations.
+This provides a new benchmark for grasp flexibility, allowing comparison across planners regardless of their contact region preferences.
+}
+
+Thank you very much for your succinct summary. In the revised manuscript, according to your guidance, we emphasized the contributions, compared our proposal with related work and highlighted the advantages, explained the structures and configurations, and modified the mistakes and typos. We hope the proposed issues were well solved. We will be ready for further revision if there are any unclear or problematic parts.
+\bigskip
+
+\noindent
+{\textbf{\color{black}R2-2 }\color{gray}~
+Several ways the paper could be improved to enhance its clarity, robustness, and applicability:
+
+1. Computational Efficiency
+
+• Issue: The planner is designed for offline use and may be too slow for real-time applications.
+
+• Improvement: Include runtime benchmarks and discuss potential optimizations (e.g., GPU acceleration, parallel processing).
+}
+
+Thank you very much for your comments and questions. Since we proposed this method for offline use, we didn't report the computational cost in the original version. We agree that it is a useful reference for audiences. We explained this point in the discussion part and added the related experimental values in the revised manuscript. We applied parallel processing to accelerate it. 
+
+In the revised manuscript, the related revision can be found as follows.
+
+(Section VI.D-1)...
+was not prioritized. \rev{But we also experimentally studied the computation time of the proposed method. The related results and analysis can be found in Appendix VII.}
+
+(Supplementary Materials, Appendix II)
+\rev{We carried out statistical experiments to test the computation time. All tests were performed on an Intel Core Ultra 9 Processor 285K, using the ten objects described in the experimental section. Each object was evaluated five times, and the average computational costs were obtained.}
+
+\rev{The results are shown in Table. \ref{tab:computation_time_r2}. On average, the total computation time per object is 3.585 s, of which 3.016 s is spent on feature detection, 0.089 s on contact detection, and 0.481 s on stability analysis. The variation across different objects is not significant, indicating stable performance. Overall, the complete planning pipeline can be completed in a few seconds, suggesting potential applicability in online scenarios without the strict takt-time requirements. However, it remains insufficient for high-frequency real-time applications.
+Future optimization efforts will primarily focus on improving the efficiency of the feature detection stage, which is currently the main computational bottleneck.}
+
+% Thank you for your questions and advice. We added the related experiments in the revised version.
+
+% We indeed designed this planner for offline application and we have mentioned is in the discussion. The proposed planner is indeed designed for offline use, as its primary purpose is to generate a grasp dataset. In actual applications, the online performance depends mainly on object registration and model matching, while the planner itself is not intended to be executed online. Therefore, computational efficiency was not the main focus of this work.
+% But we acknowledge the importance of computational efficiency. In the revised manuscript, we measured the computation cost. Please see the results in the following revision.
+
+% In the revised manuscript, the associated revision can be found as follows:
+
+% (Section VII.C-1) ...\rev{However, we also experimentally measured the time cost for the algorithms for reference. The results are shown in Table.\ref{tab:computation_time_r2}. It can be observed that }
+
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R2-3 }\color{gray}~
+2. Handling Partial or Noisy Data
+
+• Issue: The method assumes complete and clean CAD models, which limits its use in real-world scenarios with occlusions or sensor noise.
+
+• Improvement: Integrate model completion techniques or point cloud denoising to make the planner more robust to partial observations.
+}
+
+Thank you for your comment and summary. Your conclusion is correct that our current method is designed for known and complete CAD models. A complete model is necessary for accurate analysis of contact and grasp configurations. Our method aims to generate grasp datasets offline. Therefore, we did not consider incomplete or partial point clouds in this current work. This limitation has been noted and listed as future work in the manuscript. Also, it represents a different research focus from the main contribution of the present paper. Additionally, since our dataset is built from known object models, most of them are either CAD-based or obtained from high-precision 3D scans, where the noise is relatively low. Nevertheless, minor surface noise is already present in the object datasets, YCB and KIT, that we used for analysis and experiments in the paper. But we will include more analysis and solutions for the cases with noise and occlusion in our future work. 
+
+The related revision can be found as follows.
+
+(Section VI.D.3)...real-time applications. 
+\rev{For unknown objects, we can manually model the objects, perform 3D scanning to capture the shapes, or apply point-cloud completion methods to reconstruct the models from partial observations.}
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R2-4 }\color{gray}~
+3. Parameter Sensitivity and Generalization
+
+• Issue: Many thresholds (e.g., for edge/corner detection, detector angles) are manually tuned and dataset-specific.
+
+• Improvement: Conduct a sensitivity analysis or use adaptive thresholding or learning-based parameter tuning.
+}
+
+Thank you very much for your comment and constructive suggestion. We fully agree with your idea. In the initial submission, several parameters were empirically set, but we did not clearly explain the tuning procedure. In the revised manuscript, we have added a parameter sensitivity analysis and provided a guideline for parameter selection (see Appendix II and III). 
+
+The related revisions are too long to be well arranged here. To avoid repetition and make the response letter concise, please find the corresponding revisions according to the following indices. Please also refer to \textbf{R1-8}$\sim$\textbf{R1-12} for more details and discussions. 
+
+\rev{(Supplementary Materials, Appendix II)...}
+
+\rev{(Supplementary Materials, Appendix III)...}
+
+\rev{(Section IV)...}
+
+\rev{(Section V)...}
+\bigskip
+
+\noindent
+{\textbf{\color{black}R2-5 }\color{gray}~
+4. Evaluation Metrics
+
+• Issue: The paper focuses on grasp distribution metrics (STD, Range, MAD) but lacks traditional grasp success metrics.
+
+• Improvement: Include grasp success rate, force closure percentage, or robustness under perturbations to provide a more comprehensive evaluation.
+}
+
+Thank you for your comments and constructive suggestions. We fully agree that evaluating only the distribution of grasp
+configurations is not sufficient to demonstrate the effectiveness
+of the proposed method. In the revised manuscript, we have rewritten the subsections on real-world experiments and conducted repeated grasp attempts on 9 objects to obtain traditional grasp success rates. We compared the proposed method with three representative approaches: WRS \cite{wan2020planning}, GPD \cite{ten2017grasp}, and GraspIt \cite{miller_graspit_2021}. The results clearly show that our method achieves superior performance across all these baselines.
+
+The related revisions can be found according to the following indices. To avoid repetition, and in order to make the response letter concise and easy to follow, we don't place the details here. And Reviewer 1 has similar concerns. Please also take \textbf{R1-4} as a reference.
+
+\rev{(Section VI.B)...}
+
+\rev{(Supplementary Materials, Appendix V)...}
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R2-6 }\color{gray}~
+5. Comparison Fairness
+
+• Issue: The comparison with other planners may not be entirely fair due to differing assumptions and parameter settings.
+
+• Improvement: Standardize evaluation conditions or include ablation studies to isolate the impact of edge/corner contact modeling.
+}
+
+Thank you for your comment. Achieving perfectly fair comparisons across different planners is inherently challenging, as each method is designed with different assumptions, objectives, and parameter settings (Section VII.C.3). Therefore, a completely uniform comparison is not feasible.
+Nevertheless, we made best-effort parameter tuning for all baseline methods to ensure that each planner performs as well as possible under its own design constraints. We believe this provides a reasonable and practical basis for comparison.
+
+Moreover, some results can also validate the advantage of the proposed method regardless of parameter tuning.  For example, WRS cannot generate any feasible grasp for the tetrahedron regardless of how the parameters are tuned, because of its strict reliance on parallel contact pairs. This naturally highlights a core advantage of our method that can handle edge and corner contacts and plan grasps for objects that lack parallel faces.
+
+In addition, different grasp planners may generate different numbers of grasp candidates, which may influence the comparative evaluations on grasp distributions and success rate. To ensure fair comparisons, each planner first generated more
+than 20 grasp candidates, and we then downsampled them to 20 candidates to eliminate the influence of differing candidate numbers (GraspIt outputs exactly 20 candidates).
+
+In the revised manuscript, the corresponding revision is as follows.
+
+(Section VI.C.4)...Each method requires \rev{separate} fine-tuning of multiple parameters and thresholds, which vary substantially across approaches and are subjectively determined. Consequently, \rev{a perfectly uniform comparison is difficult to achieve}. Nonetheless, \rev{the main conclusion remains valid}. Since all parameters were tuned on a best-effort basis, the comparative results \rev{still provide a meaningful reference and demonstrate that the proposed method offers superior performance in generating diverse grasp configurations. Furthermore, WRS cannot generate any feasible grasp for the tetrahedron, regardless of parameter tuning, because it relies on parallel contact pairs. This naturally highlights a core advantage of our method.}
+
+(Section VI.A.1, paragraph 3)...\rev{To ensure fair comparisons, each planner first generated more
+than 20 grasp candidates, and we then downsampled them to 20 candidates to eliminate the influence of differing candidate numbers (GraspIt outputs exactly 20 candidates).}
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R2-7 }\color{gray}~
+6. Writing and Presentation
+
+• Issue: Some sections contain minor grammatical errors and dense technical language.
+
+• Improvement: A final proofreading pass and clearer visual summaries (e.g., flowcharts or tables) would improve readability.
+}
+
+Thank you for your advice. In the revised manuscript, we have thoroughly improved the writing, corrected grammatical errors, and refined the technical discussions to make them clearer and easier to understand.
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R2-8 }\color{gray}~
+7. Real-World Deployment Discussion
+
+• Issue: The paper lacks discussion on integration with full robotic systems (e.g., perception, motion planning).
+
+• Improvement: Add a section on how the planner could be embedded in a real-time robotic pipeline, including challenges and future directions.}
+
+Thank you for your question.
+In our real-world experiments, we used an ABB GOFA-5 robot equipped with a DH-ROBOTICS PGC gripper. In addition to the hardware configuration, we employed an RTT–Connect based method for robotic arm motion planning. We acknowledge that this may not have been emphasized sufficiently, which could make it less noticeable to readers. 
+
+We would like to clarify that the purpose of our real-world experiments was to evaluate the quality of the planned grasp candidates. To isolate the performance of the grasp planner and avoid external influences, we did not integrate a perception system or a real-time robotic pipeline. Object poses were assumed to be known to ensure that the evaluation focused solely on the grasp planning component.
+
+Real-time execution is useful but is beyond the scope of the current paper. In our future work, we will explore embedding the proposed planner into an online robotic system, including perception modules and real-time execution.
+
+In the revised manuscript, we added the following part to clarify this point. Please find the related revision as follows.
+
+(Section VI.B, paragraph 1)...
+\rev{the motion planner was based on RRT-connect. We applied this planner to} generate robot motions to approach the object (green motions), grasp it (blue object), and move it to a target position marked as red (green motions). \rev{The purpose of this setup and pipeline was to isolate and evaluate the performance of the proposed grasp planner, independent of perception noise or influence from a dynamically online system.}
+\bigskip
+\ornamentbreak
+
+\section{Reviewer 3}
+\noindent
+{\textbf{\color{black}R3-1}\color{gray}~
+Grasp planner for parallel grippers which computes grasps not only considering opposing faces of an object, but also edges and corners.
+}
+
+Thank you very much for your conclusion!
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-2}\color{gray}~
+This paper proposes a model-based grasp planning method that takes into account also corners and edges as possible contact locations. Indeed this is interesting, however the method is mostly based on empirically chosen thresholds which should be possibly more clearly listed in a table with their description and the value (or values) that were used in the experiments.
+}
+
+Thank you for your conclusion, positive comment, and constructive suggestion! 
+We fully agree with your idea. We noticed the limitation that we used many empirical parameters without detailed explanations. 
+In the revised manuscript, we have added a parameter sensitivity analysis and provided a guideline for parameter selection (see Appendix II and III). We have also summarized all tunable parameters, thresholds, and variables in a table with detailed descriptions. The table is too long to be arranged in this response letter, and in order to keep the letter concise and readable, we have provided it in Appendix I.
+
+The related revisions are too long to be well arranged here. To avoid repetition and make the response letter concise, please find the corresponding revisions according to the following indices. Please also refer to \textbf{R1-8}$\sim$\textbf{R1-12} for more details and discussions. 
+
+\rev{(Supplementary Materials, Appendix I)...}
+
+\rev{(Supplementary Materials, Appendix II)...}
+
+\rev{(Supplementary Materials, Appendix III)...}
+
+\rev{(Section IV)...}
+
+\rev{(Section V)...}
+
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-3}\color{gray}~
+In addition, some other parts require clarifications.
+
+In the introduction (and also in other parts of the paper) terms like ``intelligent manipulation", ``flexible grasp candidates", ``more dexterous configurations", ``functional grasps" are too general and may benefit from a more technical and clear definition.
+}
+
+Thank you for pointing out the need for more precise terminology in our writing. Following the suggestion, we have carefully revised the relevant expressions to replace general or ambiguous terms with clearer, technical descriptions that better reflect the contributions of our method.
+
+Specifically, we have updated the following phrases:
+
+(Abstract) ``more flexible configurations" → The face contacts ensure superior grasp stability, but \rev{inherently restrict the geometric versatility of feasible grasp configurations.}
+
+% ``dexterous grasp and manipulation" → Consequently, \rev{the method expands the range of feasible grasp configurations for robust manipulation.}
+
+(Section I, paragraph 1) ``intelligent and teachless manipulation"  → ... \rev{autonomous} manipulation.
+
+(Section I, paragraph 3) ``flexible grasp candidates" → Instead of eliminating the potential edge and corner contacts, we especially take advantage of them to generate \rev{grasp candidates with greater configuration variability}. 
+
+(Section I, paragraph 3) ``more dexterous configurations" → Compared with the conventional analytical grasp planner, the proposed planner can generate candidates with \rev{more geometrically versatile grasp configurations and overcome the limitations of conventional planners when handling geometrically irregular objects.}
+
+(Section I, paragraph 4) ``flexibility of planned grasps" → ..., which increases the \rev{the geometric versatility} of planned grasps and adapts to various objects;
+
+(Section II.B) ``functional grasps" → Moreover, the affordance was considered to build \rev{task-oriented grasps} for further robotic manipulation. 
+
+(Section VI) ``more flexible results" → From this \rev{perspective}, the proposed planner \rev{produces grasp candidates with greater configuration variability}, allowing grippers to handle objects with more variable positions and rotations.
+
+(Section VII.A) ``more flexible grasps" → It can be observed that the grippers in ours cover more space, \rev{exhibiting greater configuration diversity.}
+
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-4}\color{gray}~
+Among the contributions authors list the use of statistical metrics to evaluate the 6D grasp distributions. Since the used metrics are relatively standard (Standard Deviation (STD), Range (R), and Mean Absolute Deviation (MAD)), this does not seem a contribution but rather a way to conduct a comparative analysis.
+}
+
+Thank you for your question. We agree with your opinion. We acknowledge that this does not constitute an independent contribution. The statistical metrics are tools for comparative analysis rather than a contribution. In the original version, we proposed to highlight the importance of grasp distribution and expressed that the proposed method can generate a more diverse set of grasp configurations. A wider distribution indicates that the planner provides more execution options for the robot to grasp from different directions and orientations.
+
+Conventionally, grasp stability is the primary factor in evaluating grasp quality. We believe that using grasp distribution as a quantitative measure to evaluate the quality and flexibility of planned grasps is meaningful and offers a novel perspective. Therefore, instead of emphasizing the statistical metrics themselves, we just mention the quantitative grasp distribution analysis. Also, we integrated this point with the physical experiments and updated the contribution as follows. 
+
+(Section I, paragraph 4)...(3)
+\rev{We conducted comparative physical experiments to validate the proposed method and introduced 6D grasp distribution analysis as quantitative metrics to evaluate the flexibility of planned grasp results.}
+
+\uline{We are open to further discussion on this point and are fully prepared to revise the contribution item again if needed.}
+
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-5}\color{gray}~
+The sentence ``Moreover, the affordance was considered to build functional grasps for further robotic manipulation." is not clear.
+}
+
+Thank you for your question. We agree that the original description was unclear. We have removed this confusing sentence in the revised manuscript. And limited by the strict page requirement, this revision helps make this part concise. 
+% If you prefer a more detailed discussion on this point, we would be ready for a further revision.
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-6}\color{gray}~
+Authors write ``The planner takes a CAD model of a target object and a gripper as input [...]", however, the gripper is not mentioned in Fig. 2 and it seems the only gripper that has been considered by the authors is a parallel-jaw gripper. Did authors extend the planner to other grippers (e.g., multifingered, soft, ...)? How difficult would this be?}
+
+Thank you for your question. First, we apologize for the mistakes in the workflow illustration. In the revised manuscript, we have updated Fig. \ref{rev_workflow} by explicitly adding the gripper model as part of the input. For clarity, the inputs are highlighted in red.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=0.97\linewidth]{pic_response/workflow.pdf}
+\caption{Overview of the proposed planner. \rev{The input includes an object model and a gripper model.} The output is a set of grasp configurations.}    
+\label{rev_workflow}
+\end{center}
+\end{figure}
+
+Regarding the extension to other grippers, the current planner is designed for grippers that can perform antipodal parallel grasping, regardless of finger configurations. For multi-fingered grippers, our planner can be applied when the fingers behave similarly to a parallel gripper, for example, when two fingers are grouped to act as one and execute a parallel grasp with the remaining finger (Robotiq 3-finger gripper). A related discussion can be found in \cite{wan2020planning}.
+
+However, if a multi-fingered gripper performs dexterous grasps involving multiple synergies, non-uniform contact distributions, or more than two contact points, the current framework cannot be directly used as a complete planner. Even so, our contact detection strategy can still serve as a useful submodule for identifying high-quality contact regions (especially on edges and corners), which may improve contact distribution for dexterous grasp planners. The main difficulty in extending our framework lies in contact pairing: while pairing two contacts is relatively tractable, enumerating and pairing three or more contacts introduces substantial computational complexity. We cannot address these issues in this current paper. Similarly, the planner can be applied to soft grippers when they execute antipodal parallel grasps. But for more advanced behaviors, such as envelope grasping, power grasping, or underactuated grasping, the current approach cannot be directly applied without substantial modification.
+
+The related revision can be found as follows.
+
+(Section VI.C.2)
+\setcounter{subsubsection}{1}
+\subsubsection{\rev{Extension to multi-fingered gripper}}
+\rev{The current planner is for antipodal parallel grasping, regardless of finger configurations. For multi-fingered grippers, our planner can be applied when the fingers behave similarly to a parallel gripper, for example, when two fingers are grouped to act as one and execute a parallel grasp with the remaining finger (Robotiq 3-finger gripper). However, if they performs dexterous grasps involving multiple synergies, non-uniform contact distributions, or more than two contact points, the planner cannot be directly used. But the detection part can still serve as a submodule for identifying contact regions. The primary challenge is the pairing of multiple contact points, which becomes computationally expensive.}
+
+\bigskip
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.9\linewidth]{pic_response/feature_visualize.pdf}
+    \caption{\rev{Illustration of the process of feature detection. (a) Input model and query points. (b) Detected edges. (c) Detected corners.}}
+    \label{fig:feature_visualize}
+\end{figure*}
+
+\begin{figure*}[ht!]
+\begin{center}
+\includegraphics[width=0.85\linewidth]{pic_response/contact.pdf}
+% 图中改为s_i
+\caption{The process of detecting contacts. The planner selects a query point $\mathbf{s}_{i}$ from input $\mathcal{S}_i$ and generates a detector \rev{$\mathcal{D}_{i}$} according to the feature $\mathbf{f}_{i}$ of $\mathbf{s}_{i}$. (a.1) Cylinder detector for face contacts; (a.2) Cylindrical sector detector for edge contacts; (a.3) Cone detector for point contacts. (b) The detector searches the antipodal contact candidates $\mathcal{M}_i$. (c) The planner pairs the contacts $\mathcal{C}_i$ considering the geometrical constraints. Finally, it traverses the input set and outputs all paired contacts $\mathcal{P}$.}
+\label{detect_contacts}
+\end{center}
+\end{figure*} 
+\noindent
+{\textbf{\color{black}R3-7}\color{gray}~
+To make the content of Section IV clearer for readers, authors could think of adding images reporting the introduced quantities and tables summarizing the notation.
+}
+
+Thank you very much for your advice. 
+
+First, as for the table summarizing the notation, we added a table showing all the involved symbols (not limited to Section IV) in this paper (refer to the answer to \textbf{R3-2}). The table is too long to include in this response letter, and in order to keep the letter concise and readable, we have provided it in Appendix I. 
+Second, for easy following and understanding, we illustrated the detection process in Section IV as shown in Fig. \ref{fig:feature_visualize}. 
+
+In the revised manuscript, the related revisions can be found as follows. 
+
+\rev{(Supplementary Materials, Appendix I)...}
+
+(Section IV.A, paragraph 4)
+...\rev{As shown in Fig. \ref{fig:feature_visualize}(a) and (b)}, when \rev{$\mathbf{p}_i^\text{c}$} is...
+
+(Section IV.B, paragraph 2)
+...\rev{Fig. \ref{fig:feature_visualize}(b) and (c) show the difference in PCA results between edge and corner points...}
+% As illustrated in the Fig. \ref{fig:feature_visualize}, edge detection primarily relies on the distance between the query point \( p_i \) and its neighboring region’s center \( c_i \). When \( p_i \) is located at an edge or corner, the distance \( \|p_i - c_i\| \) tends to be larger compared to when \( p_i \) lies on a flat surface. This characteristic enables us to distinguish between edges/corners and surface points.
+
+% Corner detection utilizes PCA to differentiate between corners and edges. At corner points, the distribution of principal components is more uniform due to the geometric structure. Conversely, at edge points, one principal component (e.g., \( PC_1 \)) tends to dominate significantly. The distinction of principal components allows for the effective separation of edge and corner features.
+
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-8}\color{gray}~
+What do authors mean by preparameter?
+}
+
+Thank you for your question. The term ``preparameter" was a redundant and confusing expression. In the revised manuscript, we have removed this word to avoid misunderstanding. The corresponding revision can be found as follows.
+
+(Section V.A.1)
+...$v$ \rev{represents the} voxel size ...
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-9}\color{gray}~
+Authors could make explicit YES/NO arrow labels in Fig. 5
+}
+
+Thank you for your comments. We apologize for the mistake. We missed adding the YES/NO arrow labels in the figure.
+
+In the revised manuscript, we modified Fig. 5 (old manuscript). The revised picture is also shown as Fig. \ref{detect_contacts} (response letter).
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-10}\color{gray}~
+Since authors use the Soft Finger contact model, do they consider also the torsional friction? From the paper it seems not. Why?
+}
+
+% Thank you for your question. The soft finger contact model represents surface contact that can resist forces and torques due to local deformation between the object and the finger.In essence, this model extends the classical point contact by adding the ability to resist torque generated through the moment arm formed within the contact area.
+
+Thank you for your question. 
+The classical "Soft Finger" model is typically formulated as a point contact with an explicit torsional friction constraint about the contact normal, e.g. $|m_n|\leq \gamma f_n$ \cite{murray1994mathematical}. 
+
+However, in our proposed method, we do not model the finger-object contact as a single contact point with a lumped torsional parameter $\gamma$. Instead, we approximate the soft pad contact as a small contact patch by discretizing the local region into a cluster of distributed point contacts $\mathbf{C}_i$.
+Each point $\mathbf{x}_{i,j}$ of the cluster $\mathbf{C}_i$ contributes a contact force $\mathbf{f}_{i,j}$ constrained by Coulomb friction, and the resulting total moment
+\begin{equation}
+\sum_{j}(\mathbf{r}_{i,j}\times \mathbf{f}_{i,j})
+\end{equation} 
+naturally includes torsional resistances about the contact normal. Therefore, torsional friction is accounted for implicitly through the distributed frictional forces and their moment arms, without introducing an additional torsional constraint/parameter that would require extra calibration and may double-count the same effect.
+ 
+% In our method, each contact is represented by multiple points (neighbors of the sample point in the point cloud). For each of these points, we compute the corresponding \chen{contact force vector}. Since these points are distributed around the contact region, they naturally have different moment arms with respect to the potential rotation center. \chen{When we calculate the total equilibrium (Eq. 9), the integration of these moments ($\sum \mathbf{r}_{i,j} \times \mathbf{f}_{i,j}$) naturally generates the resistive torque.}
+
+To summarize, we did not explicitly model torsional friction at a single point contact. Instead, we account for torsional resistance implicitly through the frictional effects of multiple contact points within the local surface region, which collectively provide the torque resisting capability characteristic of soft-finger contact.
+
+
+To emphasize this point, in the revised manuscript, we made the following revision.
+
+(Section V.D, paragraph 5)... A grasp is deemed stable if there exists a feasible set $\{\mathbf{f}_\mathrm{i,j}\}$ satisfying the friction constraints at every contact point and the equilibrium conditions.
+\rev{Note that unlike the classical soft finger model \cite{murray1994mathematical}, which simplifies the contact to a single point with an explicit torsional friction about the contact normal, we model the soft pad--object contact as a distributed set of hard point contacts $\mathbf{C}_i$. The torsional resistance is captured \emph{implicitly} by the aggregate moment of these distributed contact forces (via the $\mathbf{r}_{i,j} \times \mathbf{f}_{i,j}$ terms), eliminating the need for an explicit torsional constraint.} 
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-11}\color{gray}~
+Section V.E remains a bit unclear from how it is written and the need for ``Grasp configuration augmentation" should be better explained.
+}
+
+Thank you for your question, and we apologize for the unclear explanation. In general, the grasp planner is designed to generate as many grasp candidates as possible with varying positions and orientations. The planner generates the contact vector $\mathbf{v}_{i}$ and the jaw center $\mathbf{j}_{i}$ in the previous step. To compute the gripper configuration, the center of the gripper should align with $\mathbf{j}_{i}$ and the x-axis of the gripper should align with $\mathbf{v}_{i}$, as shown in Fig. \ref{fig:augmentation}(a). However, the z-axis of the gripper is not yet determined at this stage. With the x-axis and gripper center fixed, the gripper can rotate about the x-axis, producing different z-axis directions, as shown in Fig. \ref{fig:augmentation}(b). The rotation angle is $\beta$. More comparative results of varying $\beta$ are shown in Fig. \ref{fig:beta}. This rotation results in multiple grasps that share the same contact position but differ in orientation, thereby enriching the set of grasp candidates. As it enhances the diversity of grasp rotations, we refer to this process as grasp configuration augmentation.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.95\linewidth]{pic_response/augmentation.pdf}
+    \caption{Grasp augmentation. The planner can rotate the candidates along the contact vector, \rev{$\mathbf{v}_i$} (x-axis of the gripper), to increase the grasp candidates.}
+    \label{fig:augmentation}
+\end{figure}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.95\linewidth]{pic_response/beta_para.jpg}
+    \caption{\rev{Comparative results of grasp augmentation with varying $\beta$. Decreasing $\beta$ can increase the number of planned grasp candidates.}}
+    \label{fig:beta}
+\end{figure}
+In the revised manuscript, we clarify this point in Section V.E. The associated revision can be found as follows.
+
+(Section VI.E, paragraph 1)...
+\rev{The planner generates the contact vector $\mathbf{v}_{i}$ and the jaw center $\mathbf{j}_{i}$ in the previous step. To obtain the grasp configuration, the center of the gripper should align with $\mathbf{j}_{i}$ and the x-axis of the gripper should align with $\mathbf{v}_{i}$, as shown in Fig. \ref{fig:augmentation}(a). To specify a gripper configuration, we need to specify a rotation angle $\beta$ along \rev{$\mathbf{v}_i$} (the x-axis of the gripper).}
+We can set multiple angles to generate augmentative configurations\cite{wan2020planning}, as shown in Fig. \ref{fig:augmentation}. \rev{The illustrations of varying $\beta$ are shown in Appendix III.D. This rotation results in multiple grasps that share the same contact position but differ in orientation, thereby enriching the set of grasp candidates.}
+\bigskip
+
+\begin{table*}[!ht]
+    \centering
+    \small
+    \rev{
+    \begin{threeparttable}
+    \setlength{\tabcolsep}{5pt}
+    % \captionsetup{labelfont={color=red}, font={color=red}}
+    \caption{\rev{Weight and volume measurements of experimental objects.}}
+    \label{tab:object_measurements}
+    \begin{tabular}{l|ccccccccccccccc}
+        \toprule
+        \textbf{Object} & Tetrahedron & Amicelli & Seal & LEGO & Sprocket & Milk box & Cup noodle & Motor bracket & Gear & Arrow\\
+        \midrule
+        Weight (g) & 59.27 & 52.68 & 29.63 & 49.72 & 33.58 & 213.91 & 106.50 & 152.71 & 19.90 & 69.81\\
+        Volume (cm$^3$) & 155.16 & 505.06 & 226.29 & 627.66 & 404.21 & 3124.80 & 5134.24 & 569.90 & 226.98 & 258.56\\
+        \bottomrule
+    \end{tabular}
+     \end{threeparttable}}
+    
+\end{table*}
+\noindent
+{\textbf{\color{black}R3-12}\color{gray}~
+In general, the reasons behind the selection of the single objects should be better clarified. Also, for reproducibility, it would be useful if authors could include weight and size of each of the used objects.
+}
+
+Thank you for your comment and advice. We added the related explanation of object selection and a table of the weight and size of each object (Table. \ref{tab:object_measurements}). Due to the strict page limitation, we placed this part in the supplementary materials. Please find the following revision.
+
+(Supplementary Material, Appendix IV)
+\rev{The experimental objects were carefully chosen to cover a wide range of geometric and structural characteristics, enabling a thorough evaluation of adaptability and robustness. Specifically, the set includes 4 off-the-shelf objects (two daily-life and two industrial items), 4 objects from public datasets, and 1 manually designed object. Besides these 9 objects, we used an arrow-shaped object in the analysis and demonstration as a representative example. Each object was selected for a specific reason, as detailed below.}
+\rev{
+\begin{enumerate}
+    \item Tetrahedron: This object has no parallel faces, which makes it challenging for conventional face contact-based planners. It helps to validate the adaptation to edge and corner contact.
+    \item Amicelli: A hexagonal prism object from the KIT object (ID: 10). It is a scanned object used to evaluate the planner’s performance on scanned models and objects containing multiple potential edge and corner contact regions.
+    \item Seal: A model of seal-like shape from the KIT object (ID: 132). It is composed entirely of curved surfaces. This tests the method’s adaptability to curved and smooth geometries.
+    \item LEGO brick: A model from YCB (ID: 073-b). It is a combination of a cuboid and multiple cylindrical protrusions. It examines performance on objects with complex local concave–convex features.
+    \item Sprocket gear: A model from the ABC data set (ID: 1090). Similar to the LEGO brick, it contains many local concavities and convexities, offering a challenging test for handling highly complex local surface structures.
+    \item Milk box: a representative daily life object with parallel faces, multiple inclined surfaces, and corners with varying angles. It evaluates the planner on typical packaging geometries.
+    \item Cup noodle: A representative daily life object. It is a truncated cone with a thin top edge. It presents challenges due to the slope, thin rim, and curved–flat transitions.
+    \item Motor bracket: A representative industrial object with thin plates and multiple parallel surfaces. It reflects the planner’s performance on structural parts commonly found in manufacturing settings.
+    \item Gear: A representative industrial object containing many teeth, generating abundant edges and corners. It challenges methods that cannot handle diverse non-parallel contact types effectively.
+    \item Arrow: An arrow-shaped object formed by a regular tetrahedron and a pentagonal prism. This manually designed object provides six distinct combinations of contact pairs, which typical off-the-shelf objects cannot offer. It allows us to clearly demonstrate grasping under various contact types.
+\end{enumerate}}
+
+\rev{And we have weighed and measured the volume of all experimental objects. The results are presented in Table \ref{tab:object_measurements}.}
+
+
+
+
+
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-13}\color{gray}~
+Out of curiosity, although it is not the main point of the paper, what is the Computation time of the planner? How far is the method for being applicable online?
+}
+
+Thank you very much for your comments and questions. Since we proposed this method for offline use, we didn't report the computational cost in the original version. We agree that it is a useful reference for audiences. We explained this point in the discussion part and added the related experimental values in the revised manuscript.
+
+In the revised manuscript, the related revision can be found as follows.
+
+(Section VI.D-1)...
+was not prioritized. \rev{But we also experimentally studied the computation time of the proposed method. The related results and analysis can be found in Appendix VII.}
+
+(Supplementary Materials, Appendix II)
+\rev{We carried out statistical experiments to test the computation time. All tests were performed on an Intel Core Ultra 9 Processor 285K and 256 GB of RAM, using the ten objects described in the experimental section. Each object was evaluated five times, and the average computational costs were obtained. The results are shown in Table. \ref{tab:computation_time}. On average, the total computation time per object is 3.585 s, of which 3.016 s is spent on feature detection, 0.089 s on contact detection, and 0.481 s on stability analysis. The variation across different objects is not significant, indicating stable performance.}
+
+\rev{Overall, the complete planning pipeline can be completed in a few seconds, suggesting potential applicability in online scenarios without the strict takt-time requirements. However, it remains insufficient for high-frequency real-time applications.
+Future optimization efforts will primarily focus on improving the efficiency of the feature detection stage, which is currently the main computational bottleneck.}
+
+% For online planning applications, the primary optimization effort should focus on the feature detector module. Specifically, we need to optimize time-consuming components such as k-nearest neighbor (KNN) and clustering algorithms.
+
+% the average computation time across all objects is 3.015 seconds in the feature detector stage, 0.088 seconds in the contact detector stage, and 0.480 seconds in the stability analysis stage, with a total time of 3.585 seconds. 
+\begin{table*}[ht]
+    \centering
+    \small
+    \rev{
+    \begin{threeparttable}
+    \setlength{\tabcolsep}{5pt}
+    \caption{\rev{Tests of computation cost using different objects (in seconds).}}
+    \label{tab:computation_time}
+    \begin{tabular}{l|cccccccccc|c}
+        \toprule
+        \textbf{Stage} & Tetrahedron & Amicelli & Seal & LEGO & Sprocket & Milk box & Cup noodle & Bracket & Gear & Arrow & \textbf{Avg.} \\
+        \midrule
+        Feature Detection & 1.766 & 2.109 & 4.105 & 6.844 & 1.845 & 1.631 & 3.697 & 4.131 & 2.542 & 2.322 & 3.016 \\
+        Contact Detection & 0.078 & 0.032 & 0.082 & 0.051 & 0.071 & 0.129 & 0.141 & 0.059 & 0.038 & 0.075 & 0.089 \\
+        Stability Analysis & 0.626 & 0.591 & 0.724 & 0.092 & 0.601 & 0.523 & 0.301 & 0.091 & 0.475 & 0.461 & 0.481\\
+        Total Time & 2.469 & 2.732 & 4.911 & 6.987 & 2.517 & 2.284 & 4.139 & 4.281 & 3.054 & 2.859 & 3.585\\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}}
+    
+\end{table*}
+
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R3-14}\color{gray}~
+MINOR ISSUES
+
+- $c_i$ and $p_{nearest}$ at page 3 lines 22, 35 should probably be bold
+
+- check ``more minor", page 4
+
+- "In the future, we will develop to solve the weakness as shown in the discussion section." This sentence could be phrased in a better way.
+}
+
+Thank you for your questions. In the revised manuscript, the related revision can be found as follows.
+
+(Section IV.A, paragraph 3)...
+neighboring region \rev{\( \mathbf{c}_i \)} is computed...
+
+(Section IV.A, paragraph 4)...
+where \rev{\( \mathbf{p}_{\text{nearest}} \)} is the nearest point...
+
+(Section V.A, paragraph 1)...
+As the corner and edge \rev{occupy much smaller regions than the faces, the contact candidates will mainly lie on the faces and rarely on the edges or corners when} using global sampling methods.
+
+(Section VII, paragraph 2)
+\rev{Future work will focus on improving computational efficiency by reducing the feature detection cost, extending the planner to multi-fingered grippers and dexterous grasping, and enabling the use of incomplete models through reconstruction or point-cloud completion techniques.}
+\bigskip
+
+\ornamentbreak
+\section{Reviewer 4}
+{\textbf{\color{black}R4-1}\color{gray}~
+This paper is about grasp planning, particularly beyond face contact.
+The effectiveness of the algorithm is shown by the real experiments. In general, the paper is well written and structured. After my reading, my concerns are as follows:
+}
+
+Thank you very much for your conclusion and positive comments! In the revised version, we modified the manuscript and addressed your concerns.
+\bigskip
+
+\noindent
+{\textbf{\color{black}R4-2}\color{gray}~
+As the planner starts with a CAD model, I wonder how to synthesize a grasp when a CAD model is not available?
+}
+
+Thank you for your questions. The input CAD model is a requirement for running this planner. We need the point cloud of the object to complete the computation. We can extract a point cloud from a mesh model. And it is also acceptable with a direct point cloud input. 
+If a CAD model is not available, the object geometry must first be obtained through other means, for example, by manually modeling the object, performing 3D scanning to capture its shape, or applying point-cloud completion techniques to reconstruct a full model from partial observations. Once a complete point cloud is obtained, the proposed planner can be applied in the same manner.
+
+In the revised manuscript, the related revision can be found as follows.
+
+(Section VI.D-3, paragraph 1) 
+...in real-time applications. 
+\rev{For unknown objects, we can manually model the objects, perform 3D scanning to capture the shapes, or apply point-cloud completion methods to reconstruct the models from partial observations.}
+\bigskip
+
+\noindent
+{\textbf{\color{black}R4-3}\color{gray}~
+I am confused by Eq.5. How is vector division performed?
+}
+
+Thank you for your question, and we apologize for the lack of clarity in our writing. We also apologize for the error in the original manuscript where we mistakenly wrote $\lambda_{\min}$ instead of $\lambda_{\max}$. 
+
+Vectors cannot be divided; our Eq.5 performs scalar division rather than vector division. Here, $\boldsymbol{\lambda}$ represents eigenvalues: $\lambda_{\max}$ in the numerator is the largest eigenvalue, and $\sum{\lambda}$ in the denominator is the sum of all eigenvalues. This equation characterizes the proportion of the largest principal component after PCA. 
+
+For clarity, we define $\boldsymbol{\lambda} = \{\lambda_1, \lambda_2, \lambda_3\}$. The corrected equation is:
+
+\begin{equation}
+    \kappa_i = \frac{\lambda_{\max}}{\lambda_1 + \lambda_2 + \lambda_3}
+    \label{eq:pca_ratio}
+\end{equation}
+
+In the revised manuscript, the related revision can be found as follows.
+
+(Section IV.B, paragraph 2)
+...to obtain the eigenvalues \rev{$\boldsymbol{\lambda} = \{\lambda_1, \lambda_2, \lambda_3\}$}. For corner detection, we use the ratio of the \rev{largest} eigenvalue \rev{$\lambda_{\max}$} to the sum of all eigenvalues \( \kappa_i\) as \cref{kappa_i}. \rev{Figure~\ref{fig:feature_visualize}(b) to (c) shows the difference in PCA results between edge and corner points. The largest principal component (PC1) for edge points is larger, which increases the proportion of $\lambda_{\max}$.} If \rev{$\kappa_i < \tau_\text{c}$}, \rev{a threshold filtering the detected corners}, the point is classified as a corner.  \rev{Corresponding illustrations are shown in Appendix III.}
+\begin{equation}
+\rev{
+    \kappa_i = \frac{\lambda_{\max}}{\lambda_1 + \lambda_2 + \lambda_3}
+    \label{kappa_i}
+    }
+\end{equation}
+
+\bigskip
+
+\noindent
+{\textbf{\color{black}R4-4}\color{gray}~
+Section VI. is quite short; I think it could be better to extend its length.
+}
+
+Thank you for your question. We agree that Section VI in the original version was too short to function as an independent section. Our intention was to highlight the importance of the proposed grasp distribution metric. In the revised manuscript, we have merged Section VI (original version) into Section VI.A (revised version), where the content is integrated more coherently. The complete revised section is too long to include in the response letter, and in order to keep the letter concise and readable, please refer to Section VI.A in the revised manuscript to see the updated structure.
+
+The revisions can be found according to the following index.
+
+\rev{(Section VI.A)...}
+\bigskip
+
+\noindent
+{\textbf{\color{black}R4-5}\color{gray}~
+The resolution of Fig. 8 should be improved.
+}
+
+We apologize for the mistake in processing this figure. We convert the picture to a higher-resolution PDF version to improve clarity. 
+\bigskip
+
+\noindent
+{\textbf{\color{black}R4-6}\color{gray}~
+The open source of the code and the grasped objects models is expected.
+}
+
+Thank you for your advice! Upon obtaining formal approval from the funding agency and institutions, we will soon open source the code and the related object models on GitHub, and also provide the generated dataset of grasp candidates.
+\bigskip
+\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{IEEEtran}
+\bibliography{references.bib}
+\end{document}

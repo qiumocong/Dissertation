@@ -1,0 +1,99 @@
+\documentclass[lettersize,journal]{IEEEtran}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{indentfirst}
+\usepackage{multirow}
+\usepackage[para,online,flushleft]{threeparttable}
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+% updated with editorial comments 8/9/2021
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{\Alph{section}} % 子节编号为 A.1, A.2 等
+\let\titleold\title
+\renewcommand{\title}[1]{\titleold{#1}\newcommand{\thetitle}{#1}}
+\def\maketitlesupplementary
+   {
+   \newpage
+       \twocolumn[
+        \centering
+        \Large
+        \textbf{\thetitle}\\
+        \vspace{0.5em}Supplementary Material \\
+        \vspace{1.0em}
+       ] %< twocolumn
+   }
+
+\begin{document}
+
+\title{NECDNet: A Neural Edge and Corner Detection Network for Point Clouds Using Multiple Local Features}
+\maketitlesupplementary
+
+\author{
+Mocong~Qiu,
+Zhengtao~Hu,
+Zhenyu~Zhang,
+Hao~Chen,
+Sheng~Bao,
+Liang~Du,
+Weiwei~Wan,~\IEEEmembership{Senior~Member,~IEEE, }
+Kensuke~Harada,~\IEEEmembership{Fellow,~IEEE, }
+and~Jianjun~Yuan,~\IEEEmembership{Senior~Member,~IEEE}
+}
+
+The supplementary materials contain the following three parts:  
+\vspace{0.5em}
+\begin{itemize}
+    \item A set of selected samples from the ABC-Corner dataset (the folder, \texttt{ABC-Corner}).
+    \item A video of comparative experiments that visualize the results of edge and corner detection using different methods (\textit{comparison\_of\_results.mp4}).  
+    \item A supplementary material document that presents more visualized experimental results ( \textit{supplementary\_material.pdf}).  
+\end{itemize}
+\vspace{0.5em}
+The detailed explanation of dataset specification and annotation process is introduced in \cref{sec:dataset_details}. Further explanations of the marco-averaging metrics and additional detection results of NECDNet are presented in \cref{sec:experiment_details}.
+
+
+
+\section{ABC-Corner Dataset}
+\label{sec:dataset_details}
+
+The selected samples in the proposed ABC-Corner dataset are attached in the folder \texttt{ABC-Corner}, which includes the following subfolders:
+\vspace{0.5em}
+\begin{itemize}
+    \item \texttt{meshes}: This folder contains the 3D meshes of the objects (\texttt{.stl}).
+    \item \texttt{point clouds}: This folder contains point cloud data (\texttt{.ply}), including the coordinates, normal vectors (estimated from the mesh), and color information. The colors correspond to their categories: gray (face), blue (edge), and brown (corner).
+    \item \texttt{labels}: This folder contains text files that map each point to a label: 0 (face), 1 (edge), or 2 (corner).
+\end{itemize}
+\vspace{0.5em}
+
+The file names correspond to the model indices in the ABC dataset chunk00. The supplementary material includes data for 30 objects (mentioned in this paper), and we plan to release information for all 1,000 objects in the future.
+
+
+
+\section{Additional Implementation Results}
+\label{sec:experiment_details}
+
+More visualization results of the proposed NECDNet are provided in \Cref{fig:additional_result} for reference.
+
+
+\begin{figure*}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{fig/NECD_result.jpg}
+    \caption{Selected visualization of feature detection results using the proposed method. Methods marked with $\dagger$ use mesh models to estimate normals.}
+    \label{fig:additional_result}
+\end{figure*}
+
+\end{document}

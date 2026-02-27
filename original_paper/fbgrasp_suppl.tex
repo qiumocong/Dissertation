@@ -1,0 +1,383 @@
+\documentclass[onecolumn]{IEEEtran}
+
+\let\labelindent\relax
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{pifont}
+\usepackage{subcaption}
+\usepackage{eqlist}
+\usepackage{amsfonts}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{enumitem}
+\usepackage{threeparttable}
+\usepackage[lined, ruled, linesnumbered, commentsnumbered]{algorithm2e}
+\usepackage{lipsum}
+\usepackage{dashrule}
+\usepackage{pifont}
+\usepackage{adjustbox}
+\usepackage{longtable}
+
+\newcommand\rurl[1]{
+  \href{http://#1}{\nolinkurl{#1}}
+}
+\def\mathbi#1{\textbf{\em #1}}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{comment}
+\newcommand{\rev}[1]{\textcolor{red}{#1}}
+
+\newcommand{\harada}[1]{\textcolor{green}{#1}}
+\newcommand{\recheck}[1]{\textcolor{olive}{#1}}
+\newcommand{\subtt}[1]{\textcolor{gray}{#1}}
+\definecolor{cpurple}{rgb}{0.93,0.098,0.584}
+\usepackage{multirow}
+\newcommand\dunderline[3][-2pt]{{%
+  \setbox0=\hbox{#3}
+  \ooalign{\copy0\cr\rule[\dimexpr#1-#2\relax]{\wd0}{#2}}}}
+\hyphenation{}
+\usepackage{url}
+\usepackage{CJKutf8}
+\definecolor{bleudefrance}{rgb}{0.19, 0.55, 0.91}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+
+\DeclareRobustCommand*{\ora}{\overrightarrow}
+
+\begin{document}
+\title{\uline{Supplementary Materials for}\\
+\subtt{Planning 6D Grasps for Two-Finger Grippers considering Edge and Corner Contacts}}
+
+
+\author{Zhengtao Hu$^{1}$, Ruishuang Liu$^{2}$, Mocong Qiu$^{1}$, Hao Chen$^{3}$, Liang Du$^{1*}$, Takuya Kiyokawa$^{2}$, Weiwei Wan$^{2}$, Jiangjun Yuan$^{1}$, and Kensuke Harada$^{2}$
+\thanks{$^{1}$ School of Mechatronic Engineering and Automation, Shanghai University. $^{2}$ Graduate School of Engineering Science, Osaka University. $^{3}$ Fujian Agriculture and Forestry University.}
+\thanks{$^{*}$ Corresponding author: Liang Du, {\tt\small du\_liang@shu.edu.cn}}%        
+}
+\markboth{IEEE/ASME Transactions on Mechatronics, submission for review}
+{Hu \MakeLowercase{et al.}: Planning 6D Grasps for Two-Finger Grippers considering Edge and Corner Contacts} 
+
+
+
+\maketitle
+\section{Appendix I: Table of the symbols and parameters}
+
+\begin{longtable}{p{1cm} p{10cm} p{1cm} p{1.8cm} p{2 cm}}
+ \captionsetup{labelfont={color=black}, font={color=black}}
+\caption{\rev{List of Symbols and Parameters}}
+
+\label{tab:symbols} \\
+\toprule
+\textbf{Symbol} & \textbf{Explanation} & \textbf{Class} & \textbf{Values} & \textbf{Location} \\
+\midrule
+\endfirsthead
+
+\multicolumn{5}{c}%
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+\toprule
+\textbf{Symbol} & \textbf{Explanation} & \textbf{Class} & \textbf{Values} & \textbf{Location} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{{Continued on next page}} \\
+\bottomrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+$n$ & The number of points sampled from the mesh model. & Var. & 10000 & Sec. IV-A \\
+
+$\mathcal{P}^\text{c}$ & The point cloud sampled from the mesh model. & Var. & $\{\mathbf{p}_i^\text{c}\}_{i=1}^n$ & Sec. IV-A\\
+
+$k$ & The number of nearest neighbors used for feature extraction. & Para. & $32$ & Sec. IV-A \\
+
+$\mathcal{Q}_i$ & The set of $k$-nearest neighbors for a query point $\mathbf{p}_i^\text{c}$. & Var. & $\{\mathbf{q}_j\}_{j=1}^k$ & Sec. IV-A\\
+
+$\mathcal{N}_i$ & The set of refined normal vectors corresponding to points in $\mathcal{Q}_i$. & Var. & $\{\mathbf{n}_j\}_{j=1}^k$ & Sec. IV-A\\
+
+$C_{\text{query}}$ & The cluster of normals containing the normal of the query point $\mathbf{p}_i^\text{c}$. & Var. & / & Sec. IV-A\\
+
+$\mathcal{Q}_i'$ & The filtered set of neighboring points after normal clustering (outlier removal). & Var. & / & Eq. (1) \\
+
+$\mathbf{c}_i$ & The centroid (geometric center) of the filtered neighboring region $\mathcal{Q}_i'$. & Var. & / & Eq. (2) \\
+
+$\mathbf{p}_{\text{nearest}}^\text{c}$ & The nearest neighbor point to the query point $\mathbf{p}_i^\text{c}$. & Var. & / & Sec. IV-A \\
+
+$r_i$ & The distance ratio metric used for edge detection. & Var. & / & Eq. (3) \\
+
+$\tau_\text{e}$ & The threshold for classifying a point as an edge point based on $r_i$. & Thres. & $0.9$ & Sec. IV-A \\
+
+$k_1$ & A smaller number of nearest neighbors used specifically for corner detection. & Para. & $k/2$ & Sec. IV-B \\
+
+$\mathcal{Q}_{\text{edge}, i}$ & The neighboring region for a point identified as an edge. & Var. & / & Sec. IV-B \\
+
+$\mathcal{Q}_{\text{edge}, i}'$ & The filtered neighboring region from $\mathcal{Q}_{\text{edge}, i}$. & Var. & / & Sec. IV-B \\
+
+% $\mathbf{C}_i$ & The covariance matrix of the filtered edge neighborhood $\mathcal{Q}_{\text{edge}, i}'$. & Var. & / & Sec. IV-B, Eq. (4) \\
+
+$\boldsymbol{\lambda}$ & The set of eigenvalues obtained from SVD. & Var. & $\{\lambda_1, \lambda_2, \lambda_3\}$ & Sec. IV-B \\
+
+$\lambda_{\text{max}}$ & The largest eigenvalue in $\boldsymbol{\lambda}$. & Var. & / & Sec. IV-B \\
+
+$\kappa_i$ & The ratio metric used for corner detection. & Var. & / & Eq. (5) \\
+
+$\tau_\text{c}$ & The threshold for classifying an edge point as a corner point based on $\kappa_i$. & Thres. & $0.7$ & Sec. IV-B \\
+
+$\epsilon$ & Neighborhood radius for DBSCAN clustering of corners. & Para. & $0.005$ & Sec. IV-B \\
+
+$v$ & Voxel size used for sampling points from the original point cloud $\{\mathbf{p}_i\}_{i=1}^n$ (normalized point cloud). & Para. & 0.025 & Sec. V-A \\
+
+$\mathcal{S}$ & The set of points sampled from the original point cloud $\{\mathbf{p}_i\}_{i=1}^n$. & Var. & $\{\mathbf{s}_i\}_{i=1}^m$ & Sec. V-A \\
+
+$\mathbf{f}_i$ & The geometric feature label of point $\mathbf{s}_i$ ($\mathtt{f}$, $\mathtt{e}$, or $\mathtt{c}$). & Var. & $\in \{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$ & Sec. V-A \\
+
+$\mathbf{n}_i^\text{s}$ & The normal vector of the sampled point $\mathbf{s}_i$. & Var. & / & Sec. V-A \\
+
+$\mathtt{f}$ & Represents an ``Face" feature type. & Const. & / & Sec. V-A \\
+$\mathtt{e}$ & Represents an ``Edge" feature type. & Const. & / & Sec. V-A \\
+$\mathtt{c}$ & Represents a ``Corner" feature type. & Const. & / & Sec. V-A \\
+
+$\mathcal{D}$ & The geometric detector (cylinder, sector, or cone) used to find antipodal contacts. & Var. & / & Sec. V-B \\
+
+$d$ & Diameter of the contact region (also thickness for sector detector). & Const. & $0.028$ m & Sec. V-B \\
+
+$l$ & Length of the detector (cylinder/cone height or sector radius), defined by the largest scale of the point cloud. & Var. & / & Sec. V-B \\
+
+$\theta_{\text{sec}}$ & The angle of the cylindrical sector detector for edge contacts. & Para. & $90^\circ$ & Sec. V-B \\
+
+$\theta_{\text{cone}}$ & The apex angle of the cone detector for corner contacts. & Para. & $90^\circ$ & Sec. V-B \\
+
+$\mathcal{P}$ & The final set of all paired contact candidates output by the planner. & Var. & / & Sec. V-C \\
+
+$\mathcal{M}_i$ & The set of potential antipodal contact points found by detector $\mathcal{D}_i$. & Var. & / & Sec. V-C \\
+
+$\mathbf{m}_j^\text{s}$ & The $j$-th potential contact point in $\mathcal{M}_i$ corresponding to $\mathbf{s}_i$. & Var. & / & Sec. V-C \\
+
+$\mathbf{p}_i$ & A potential contact pair $(\mathbf{s}_i, \mathbf{m}_{i, j})$. & Var. & / & Sec. V-C \\
+
+$\mathbf{f}_j^\text{s}$ & The geometric feature label of point $\mathbf{m}_j^\text{s}$. & Var. & $\in \{\mathtt{f}, \mathtt{e}, \mathtt{c}\}$ & Sec. V-C \\
+
+$\mathbf{n}_j^\text{s}$ & The normal vector of the potential contact point $\mathbf{m}_{i,j}$. & Var. & / & Sec. V-C \\
+
+$\mathbf{d}_j^\text{s}$ & The vector connecting ${s}_i$ to $\mathbf{m}_j^\text{s}$ ($\mathbf{m}_j^\text{s} - \mathbf{s}_i$). & Var. & / & Sec. V-C \\
+
+$d_{\text{proj}}$ & Projected distance metric for validating $\mathtt{c}$-$\mathtt{e}$ and $\mathtt{c}$-$\mathtt{f}$ contacts. & Var. & / & Eq. (6) \\
+
+$\mathbf{t}_j^\text{s}$ & Unit tangent vector along an edge (when $\mathbf{f}_j^\text{s}$ is $\mathtt{e}$). & Var. & / & Sec. V-C \\
+
+$\theta_j^\text{s}$ & Angle between normal vectors at two contact points. & Var. & / & Eq. (7) \\
+
+$\theta_{\text{th}}$ & Threshold for $\theta_j^\text{s}$ to validate a contact pair. & Thres. & $170^\circ$ & Sec. V-C \\
+
+$\mathbf{v}_i$ & The contact vector of a valid grasp. & Var. & / & Eq. (8) \\
+
+$\mathbf{j}_i$ & The center position of the gripper jaws. & Var. & / & Eq. (9) \\
+
+$\mathcal{C}_i$ & The set of valid antipodal contact pairs for point $\mathbf{s}_i$. & Var. & / & Sec. V-C \\
+
+$t_{\text{pad}}$ & Thickness of the soft finger pad. & Const. & $3$ mm & Sec. V-D \\
+
+$\eta$ & Proportion of finger pad thickness that can be compressed. & Para. & $0.7$ & Sec. V-D \\
+
+$\mathbf{C}_i$ & Cluster of distributed point contacts approximating the soft contact area. & Var. & / & Sec. V-D \\
+
+$\mathbf{x}_{i,j}$ & A specific point within the contact cluster $\mathbf{C}_i$. & Var. & / & Sec. V-D \\
+
+$\mathbf{n}_{\text{fp}}$ & The contact normal assigned to the finger pad. & Var. & / & Eq. (10) \\
+
+$\mu$ & Friction coefficient. & Const. & $0.25$ & Eq. (10) \\
+
+$\mathbf{f}_{i,j}$ & Contact force vector at point $\mathbf{x}_{i,j}$. & Var. & / & Eq. (10) \\
+
+$\mathbf{w}_{\text{g}}$ & Gravitational wrench (force and torque) acting on the object. & Var. & / & Eq. (11) \\
+
+$\mathbf{w}_{\text{ext}}$ & External disturbance wrench. & Var. & $0$ & Eq. (11) \\
+
+$\mathbf{r}_{i,j}$ & Position vector of contact point $\mathbf{x}_{i,j}$ relative to reference frame. & Var. & / & Eq. (11) \\
+
+$\beta$ & Rotation angle along the contact vector for grasp augmentation. & Para. & $60^\circ$ & Sec. V-E \\
+\end{longtable}
+
+\begin{figure*}[!h]
+\begin{center}
+\includegraphics[width=1.0\linewidth]{pic/feature_detection_compare.pdf}
+\caption{\rev{Comparative results of feature detection using different methods and different objects. Left: Ours. Middle: CA\cite{bazazian_fast_2015b}. Right: MS\cite{ahmed2018edge}. Upper rows: The arrow-shaped objects. Middle rows: the hexagonal object (ABC, ID:3383). Bottom rows: the curved object (ABC, ID: 0197).}}    
+\label{fig:feature_detection_results}
+\end{center}
+\end{figure*}
+
+\section{Appendix II: Comparison of the results of feature detection}
+% We illustrate changes with varying $\tau_\text{e}$ and $\tau_\text{c}$ to give an intuitive guide for tuning these parameters, as shown in the left part of Fig.\ref{fig:feature_detection_results}. Fig.\ref{fig:feature_detection_results}(a.1), Fig.\ref{fig:feature_detection_results}(b.1), and Fig.\ref{fig:feature_detection_results}(c.1) visualize the detection results of our method, CA~\cite{bazazian_fast_2015b}, and MS~\cite{ahmed2018edge}, respectively. 
+% For each model, we first fix $\tau_\text{c}$ and vary $\tau_\text{e}$ across 0.6, 0.9, and 1.2. We can find that as $\tau_\text{e}$ increases, fewer points are detected as edge points. Then we fix $\tau_\text{e}$ and change $\tau_\text{c}$ across 0.5, 0.6, and 0.7. It can be observed that increasing $\tau_\text{c}$ results in more classified corner points. 
+% Besides $\tau_\text{e}$ and $\tau_\text{c}$, we also show the results of varying $k$ across 16, 32, and 64 for a clearer explanation and comparison, as shown in the upper rows of Fig.\ref{fig:feature_detection_results}(a.1), Fig.\ref{fig:feature_detection_results}(b.1), and Fig.\ref{fig:feature_detection_results}(c.1). It can be observed that a larger $k$ leads to more points being classified as edge points, consequently increasing the number of detected corner points as well.
+
+\rev{We define $\tau_\text{e}$ as a threshold used for filtering the edge points from all points, and $\tau_\text{c}$ as a threshold used for filtering the corner points from the edge points. Increasing $\tau_\text{e}$ makes fewer points being classified as edge points. And a higher $\tau_\text{c}$ can increase the number of points classified as corners.
+In general, higher thresholds generate sharper features that more distinctly capture the object’s overall contour, whereas lower thresholds result in smoother features.
+For regular objects with relatively simple geometry, the acceptable detection results can be obtained across a broad range of thresholds. However, for complex objects with diverse geometric structures, the threshold settings become more sensitive. Satisfactory results can only be achieved within a narrower range of parameter values.}
+
+\rev{We illustrate changes with varying $\tau_\text{e}$ and $\tau_\text{c}$ to give an intuitive guide for tuning these parameters, as shown in the left part of Fig.\ref{fig:feature_detection_results}. We use three different objects, the arrow-shaped object, the hexagonal object (ABC, ID:3383), and the curved object (ABC, ID: 0197), to validate the adaptation to diverse geometries. For each model, we first fix $\tau_\text{c}$ and vary $\tau_\text{e}$ across 0.6, 0.9, and 1.2. We can find that as $\tau_\text{e}$ increases, fewer points are detected as edge points. Then we fix $\tau_\text{e}$ and change $\tau_\text{c}$ across 0.5, 0.6, and 0.7. It can be observed that increasing $\tau_\text{c}$ results in more classified corner points. 
+Besides $\tau_\text{e}$ and $\tau_\text{c}$, we also show the results of varying $k$ across 16, 32, and 64 for a clearer explanation and comparison, as shown in the upper rows of Fig.\ref{fig:feature_detection_results}(a.1), Fig.\ref{fig:feature_detection_results}(b.1), and Fig.\ref{fig:feature_detection_results}(c.1). It can be observed that a larger $k$ leads to more points being classified as edge points, consequently increasing the number of detected corner points as well.}
+
+\rev{We also compared our method with two representative analytical detection approaches, Covariance Analysis (CA)~\cite{bazazian_fast_2015b} and Mean Shift based detector (MS)~\cite{ahmed2018edge}. Since these methods rely on different parameters and thresholds, we evaluated their performance under different parameter settings to ensure a fair comparison. Overall, our method shows superior detection performance across the three tested objects.
+The CA method cannot properly handle objects with thin-wall geometries, resulting in a large number of misclassifications. The MS method, on the other hand, is highly sensitive to parameter tuning, requiring users to identify a very precise configuration to obtain acceptable results. Moreover, its detection performance remains unsatisfactory, particularly for thin-wall shapes and curved features.}
+
+
+\section{Appendix III: Effects of Varying Tunable Parameters and Thresholds}
+
+\subsection{\rev{Voxel size: $v$}}
+\rev{The voxel size $v$ determines the density of the point cloud sampling, which directly impacts the number of candidate points available for grasp planning. As shown in Fig.~\ref{fig:sampling}, we compared the effects of varying $v$ across 0.02, 0.025, and 0.03.
+It is observed that as $v$ increases, the sampling density decreases, resulting in a sparse point cloud with fewer candidate points. Conversely, a smaller $v$ yields a denser representation, offering more potential contact locations but at a higher computational cost.}
+% Comparing the ``Global'' sampling with our ``Category-wise'' sampling under the same $v$, the global method tends to omit features on edges and corners as the voxel size increases. In contrast, our method ensures that points on edges (blue) and corners (pink) are retained even at larger voxel sizes ($v=0.03$), guaranteeing that critical geometric features are not lost during the downsampling process.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{pic/sampling_strategy.pdf}
+    \caption{\rev{Comparative results of sampling contact points. Upper row: The conventional global sampling. Lower row: The proposed category-wise sampling method. Yellow: face points; Blue: edge points; Pink: Corner points.}}
+    \label{fig:sampling}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{pic/detector_para.jpg}
+    \caption{\rev{Comparative results of detected antipodal points using different detectors with varying parameters. (a) Varying $d$ for face contacts. (b) Varying $\theta_\mathrm{sec}$ for edge contacts. (c) Varying $\theta_\mathrm{cone}$ for corner contacts.}}
+    \label{fig:detector}
+\end{figure}
+
+
+\subsection{\rev{Parameters related to the detector dimensions: $d$, $\theta_\text{sec}$, $\theta_\text{cone}$}}
+
+\rev{The dimensions of the contact detectors determine the searched region for potential antipodal contact points. We analyzed the sensitivity of related parameters, as illustrated in Fig.~\ref{fig:detector}:}
+
+\rev{\begin{itemize}
+    \item \textbf{Parameter $d$:} It represents the diameter of the cylindrical detector (\textbf{for fact contacts}). As shown in Fig. \ref{fig:detector}(a), increasing $d$ from 0.020 to 0.044 expands the searched region of the cylinder, resulting in an increase in the number of detected inner points (from 1 to 4).
+    \item \textbf{Parameter $\theta_\text{sec}$:} It defines the opening angle of the sector detector (\textbf{for edge contacts}). As shown in Fig. \ref{fig:detector}(b), widening $\theta_\text{sec}$ from $30^\circ$ to $120^\circ$ significantly enlarges the coverage area around the edge, leading to a rise in detected inner points from 3 to 13.
+    \item \textbf{Parameter $\theta_\text{cone}$:} It controls the apex angle of the cone detector (\textbf{for corner contacts}). As shown in Fig. \ref{fig:detector}(c), increasing $\theta_\text{cone}$ from $30^\circ$ to $120^\circ$ substantially increases the searched region, resulting in a sharp increase in inner points from 10 to 123.
+\end{itemize}}
+
+\rev{In summary, larger detector sizes allow for finding more potential antipodal candidates (inner points), thereby increasing the likelihood of forming a grasp pair, though excessively large sizes may introduce invalid contacts.}
+
+\subsection{\rev{Threshold to validate a contact pair: $\theta_\text{th}$}}
+
+\rev{The threshold $\theta_\text{th}$ serves as a filter for the alignment quality of contact pairs, enforcing the antipodal constraint. Fig.~\ref{fig:threshold_theta_th} demonstrates the effect of varying $\theta_\text{th}$ from $150^\circ$ to $180^\circ$ while keeping the rotation step $\beta$ fixed.
+It is observed that $\theta_\text{th}$ is inversely proportional to the number of valid pairs. When $\theta_\text{th}$ is lower ($150^\circ$), the constraint is looser, allowing for contact pairs that are less perfectly opposed, resulting in a higher number of valid contact pairs (82) and final grasps (403).
+As $\theta_\text{th}$ increases towards $180^\circ$, the criterion becomes stricter, requiring the surface normals to be nearly perfectly collinear. Consequently, the number of validated contact pairs decreases (dropping to 40 at $180^\circ$), ensuring higher grasp stability but reducing the total number of available grasp candidates.}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{pic/theta_th.pdf}
+    \caption{\rev{Comparative results of pairing contact pairs with varying $\theta_{\text{th}}$. Increasing $\theta_{\text{th}}$ strengthens the constraint on the angle between normals from antipodal contacts, thus decreasing the paired contacts.}}
+    \label{fig:threshold_theta_th}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{pic/beta_para.jpg}
+    \caption{\rev{Comparative results of grasp augmentation with varying $\beta$. Decreasing $\beta$ can increase the number of planned grasp candidates.}}
+    \label{fig:threshold_beta}
+\end{figure}
+
+\subsection{\rev{Rotation angle along the contact vector for grasp augmentation: $\beta$}}
+
+\rev{The parameter $\beta$ defines the angular step size used to rotate the gripper around the contact vector (approach axis) to generate multiple grasp orientations for a single contact pair. Fig.~\ref{fig:threshold_beta} illustrates the impact of varying $\beta$ from $30^\circ$ to $180^\circ$ with a fixed $\theta_\text{th}$.
+The number of valid contact pairs remains constant (56) because $\beta$ is applied after pairing. However, the total number of generated grasps is highly sensitive to $\beta$. A smaller $\beta$ (e.g., $30^\circ$) implies a finer sampling resolution, generating a dense set of grasp configurations (595 grasps) covering $360^\circ$ range. As $\beta$ increases to $180^\circ$, the sampling becomes coarser, significantly reducing the total grasp count to 106. Therefore, a smaller $\beta$ enhances grasp diversity and dexterity by providing more orientation options for the robot.}
+
+
+\section{Appendix IV: Reasons for selecting the nine objects}
+\rev{The experimental objects were carefully chosen to cover a wide range of geometric and structural characteristics, enabling a thorough evaluation of adaptability and robustness. Specifically, the set includes 4 off-the-shelf objects (two daily-life and two industrial items), 4 objects from public datasets, and 1 manually designed object. Besides these 9 objects, we used an arrow-shaped object in the analysis and demonstration as a representative example. Each object was selected for a specific reason, as detailed below.}
+
+\rev{\begin{enumerate}
+    \item Tetrahedron: This object has no parallel faces, which makes it challenging for conventional face contact-based planners. It helps to validate the adaptation to edge and corner contact.
+    \item Amicelli: A hexagonal prism object from the KIT object (ID: 10). It is a scanned object used to evaluate the planner’s performance on scanned models and objects containing multiple potential edge and corner contact regions.
+    \item Seal: A model of seal-like shape from the KIT object (ID: 132). It is composed entirely of curved surfaces. This tests the method’s adaptability to curved and smooth geometries.
+    \item LEGO brick: A model from YCB (ID: 073-b). It is a combination of a cuboid and multiple cylindrical protrusions. It examines performance on objects with complex local concave–convex features.
+    \item Sprocker gear: A model from the ABC data set (ID: 1090). Similar to the LEGO brick, it contains many local concavities and convexities, offering a challenging test for handling highly complex local surface structures.
+    \item Milk box: A representative daily life object with parallel faces, multiple inclined surfaces, and corners with varying angles. It evaluates the planner on typical packaging geometries.
+    \item Cup noodle: A representative daily life object. It is a truncated cone with a thin top edge. It presents challenges due to the slope, thin rim, and curved–flat transitions.
+    \item Motor bracket: A representative industrial object with thin plates and multiple parallel surfaces. It reflects the planner’s performance on structural parts commonly found in manufacturing settings.
+    \item Gear: A representative industrial object containing many teeth, generating abundant edges and corners. It challenges methods that cannot handle diverse non-parallel contact types effectively.
+    \item Arrow: An arrow-shaped object formed by a regular tetrahedron and a pentagonal prism. This manually designed object provides six distinct combinations of contact pairs, which typical off-the-shelf objects cannot offer. It allows us to clearly demonstrate grasping under various contact types.
+\end{enumerate}}
+
+\rev{And we have weighed and measured the volume of all experimental objects. The results are presented in Table \ref{tab:object_measurements}.}
+
+\begin{table*}[!ht]
+    \centering
+    \small
+    \rev{
+    \begin{threeparttable}
+    \setlength{\tabcolsep}{5pt}
+    \captionsetup{labelfont={color=black}, font={color=black}}
+    \caption{\rev{Weight and volume measurements of experimental objects.}}
+    \label{tab:object_measurements}
+    \begin{tabular}{l|ccccccccccccccc}
+        \toprule
+        \textbf{Object} & Tetrahedron & Amicelli & Seal & LEGO & Sprocket & Milk box & Cup noodle & Motor bracket & Gear & Arrow\\
+        \midrule
+        Weight (g) & 59.27 & 52.68 & 29.63 & 49.72 & 33.58 & 213.91 & 106.50 & 152.71 & 19.90 & 69.81\\
+        Volume (cm$^3$) & 155.16 & 505.06 & 226.29 & 627.66 & 404.21 & 3124.80 & 5134.24 & 569.90 & 226.98 & 258.56\\
+        \bottomrule
+    \end{tabular}
+     \end{threeparttable}}
+    
+\end{table*}
+
+\section{Appendix V: Additional comparisons of planning candidates, distributions, and success rates}
+
+\rev{We used a total of 9 objects in the experiments. Three of them are placed in the main manuscript. Here, we show the additional experimental illustrations of the other 6 objects in Fig.\ref{fig:planning_compare_results}: (-.1) LEGO. (-.2) Sprocket. (-.3) Milk box. (-.4) Cup noodle. (-.5) Motor bracket. (-.6) Gear.}
+
+\begin{figure*}
+    \begin{center}
+    \includegraphics[width=0.95\linewidth]{pic/grasp_distribution.pdf}
+    \caption{\rev{Additional comparisons of planning candidates, distributions, and success rates. We compared our work with Graspit\cite{miller_graspit_2021}, GPD\cite{ten2017grasp}, and WRS\cite{wan2020planning}. (a) Visualized grasps generated. (b) Visualized grasp distributions (3D rotation) using different planners. (-.1) LEGO. (-.2) Sprocket. (-.3) Milk box. (-.4) Cup noodle. (-.5) Motor bracket. (-.6) Gear.}}    
+    \label{fig:planning_compare_results}
+    \end{center}
+\end{figure*}
+
+
+\section{Appendix VI: Real-World Grasping Demonstrations}
+
+\begin{figure*}[h]
+\begin{center}
+\includegraphics[width=0.95\linewidth]{pic/real_obj_exp.pdf}
+\caption{\rev{Real-world grasp demonstrations. Selected grasp demonstrations for the 9 objects.}}
+\label{fig:real_obj_exp}
+\end{center}
+\end{figure*} 
+
+\rev{Fig.\ref{fig:real_obj_exp} shows the real-world grasping experiments for all tested objects. For each item we present example executed grasps: Tetrahedron ($\mathtt{c}$–$\mathtt{c}$, $\mathtt{c}$–$\mathtt{e}$, $\mathtt{c}$–$\mathtt{f}$), Amicelli ($\mathtt{c}$–$\mathtt{c}$, $\mathtt{e}$–$\mathtt{e}$, $\mathtt{f}$–$\mathtt{f}$), Seal ($\mathtt{c}$–$\mathtt{f}$, $\mathtt{e}$–$\mathtt{e}$), LEGO brick ($\mathtt{c}$–$\mathtt{c}$, $\mathtt{e}$–$\mathtt{e}$, $\mathtt{f}$–$\mathtt{f}$), Sprocket ($\mathtt{c}$–$\mathtt{c}$, $\mathtt{e}$–$\mathtt{e}$, $\mathtt{f}$–$\mathtt{f}$), Milk box ($\mathtt{c}$–$\mathtt{c}$, $\mathtt{e}$–$\mathtt{f}$, $\mathtt{f}$–$\mathtt{f}$), Cup noodle ($\mathtt{e}$–$\mathtt{e}$, $\mathtt{e}$–$\mathtt{f}$), Motor bracket ($\mathtt{e}$–$\mathtt{e}$, $\mathtt{f}$–$\mathtt{f}$), and Gear ($\mathtt{c}$–$\mathtt{c}$, $\mathtt{e}$–$\mathtt{e}$). These real-world trials illustrate a variety of contact modes (center, edge, and fingertip contacts) and hand configurations captured in the photos; the demonstrated grasps and executable robot motions confirm the planner’s ability to produce diverse, physically realizable grasps across different shapes and geometries and validate the method’s adaptability and robustness in physical execution.}
+
+
+\section{Appendix VII: Computation cost}
+\rev{We carried out statistical experiments to test the computation time. All tests were performed on an Intel Core Ultra 9 Processor 285K and 256 GB of RAM, using the ten objects described in the experimental section. Each object was evaluated five times, and the average computational costs were obtained.
+The results are shown in Table.\ref{tab:computation_time}.  On average, the total computation time per object is 3.585 s, of which 3.016 s is spent on feature detection, 0.089 s on contact detection, and 0.481 s on stability analysis. The variation across different objects is not significant, indicating stable performance.}
+\begin{table*}[ht]
+    \centering
+    \small
+    \rev{\begin{threeparttable}
+    \setlength{\tabcolsep}{5pt}
+    \captionsetup{labelfont={color=black}, font={color=black}}
+    \caption{\rev{Tests of computation cost using different objects (in seconds).}}
+    \label{tab:computation_time}
+    \begin{tabular}{l|cccccccccc|c}
+        \toprule
+        \textbf{Stage} & Tetrahedron & Amicelli & Seal & LEGO & Sprocket & Milk box & Cup noodle & Bracket & Gear & Arrow & \textbf{Avg.} \\
+        \midrule
+        Feature Detection & 1.766 & 2.109 & 4.105 & 6.844 & 1.845 & 1.631 & 3.697 & 4.131 & 2.542 & 2.322 & 3.016 \\
+        Contact Detection & 0.078 & 0.032 & 0.082 & 0.051 & 0.071 & 0.129 & 0.141 & 0.059 & 0.038 & 0.075 & 0.089 \\
+        Stability Analysis & 0.626 & 0.591 & 0.724 & 0.092 & 0.601 & 0.523 & 0.301 & 0.091 & 0.475 & 0.461 & 0.481\\
+        Total Time & 2.469 & 2.732 & 4.911 & 6.987 & 2.517 & 2.284 & 4.139 & 4.281 & 3.054 & 2.859 & 3.585\\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}}
+    
+\end{table*}
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+\end{document} 
+
+

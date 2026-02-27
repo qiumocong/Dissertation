@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -150,6 +150,30 @@ LAI K, BO L, REN X, et~al.
 2011 IEEE International Conference on Robotics and Automation.
 \newblock 2011: 1817-1824.
 \newblock DOI: \doi{10.1109/ICRA.2011.5980382}.
+
+\bibitem[Li et~al.(2019)Li and Qiao]{li_survey_2019}
+LI R, QIAO H.
+\newblock A survey of methods and strategies for high-precision robotic grasping and assembly tasks---some new trends\allowbreak[J/OL].
+\newblock IEEE/ASME Transactions on Mechatronics, 2019, 24\allowbreak (6): 2718-2732.
+\newblock DOI: \doi{10.1109/TMECH.2019.2945135}.
+
+\bibitem[Newbury et~al.(2023)Newbury, Gu, Chumbley, Mousavian, Eppner, Leitner, Bohg, Morales, Asfour, Kragic, Fox, and Cosgun]{newbury_deep_2023a}
+NEWBURY R, GU M, CHUMBLEY L, et~al.
+\newblock Deep learning approaches to grasp synthesis: A review\allowbreak[J/OL].
+\newblock Trans. Rob., 2023, 39\allowbreak (5): 3994-4015.
+\newblock DOI: \doi{10.1109/TRO.2023.3280597}.
+
+\bibitem[Ten~Pas et~al.(2017)Ten~Pas, Gualtieri, Saenko, and Platt]{tenpas_grasp_2017}
+TEN~PAS A, GUALTIERI M, SAENKO K, et~al.
+\newblock Grasp pose detection in point clouds\allowbreak[J/OL].
+\newblock The International Journal of Robotics Research, 2017, 36\allowbreak (13-14): 1455-1473.
+\newblock DOI: \doi{10.1177/0278364917735594}.
+
+\bibitem[Wan et~al.(2021)Wan, Harada, and Kanehiro]{wan_planning_2021}
+WAN W, HARADA K, KANEHIRO F.
+\newblock Planning grasps with suction cups and parallel grippers using superimposed segmentation of object meshes\allowbreak[J/OL].
+\newblock IEEE Transactions on Robotics, 2021, 37\allowbreak (1): 166-184.
+\newblock DOI: \doi{10.1109/TRO.2020.3014036}.
 
 \bibitem[Ester et~al.(1996)Ester, Kriegel, Sander, and Xu]{ester_densitybased_1996}
 ESTER M, KRIEGEL H~P, SANDER J, et~al.

@@ -1,0 +1,641 @@
+\documentclass[journal]{IEEEtran}
+\def\IEEEtitletopspace{18pt}
+\IEEEoverridecommandlockouts
+% \overrideIEEEmargins
+% \IEEEsettopmargin{t}{54pt}
+
+% \usepackage[vlined, ruled, linesnumbered, commentsnumbered]{algorithm2e}
+\usepackage[table]{xcolor}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{cite}
+\usepackage{color}
+\usepackage{xcolor}
+\definecolor{chred}{rgb}{0.8,0,0}
+\definecolor{chgrey}{rgb}{0.5,0.5,0.5}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{dblfloatfix}
+\usepackage{eqlist}
+\usepackage{txfonts}
+\usepackage{url}
+
+\usepackage{footmisc}
+\usepackage{booktabs}
+\usepackage{balance}
+\usepackage{wrapfig}
+\usepackage{float}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\DeclareMathOperator*{\argmin}{arg\, min}
+\DeclareMathOperator*{\argmax}{arg\, max}
+\usepackage{multirow}
+\usepackage[para,online,flushleft]{threeparttable}
+% \hyphenation{op-tical net-works semi-conduc-tor}
+\usepackage[final]{pdfpages}
+% \usepackage{flushend}
+\usepackage[normalem]{ulem}
+\usepackage{wrapfig}
+% \usepackage{algorithmic}
+\usepackage{pifont}
+
+\usepackage[capitalise,nameinlink]{cleveref}
+\usepackage[lined, ruled, linesnumbered, commentsnumbered, noend]{algorithm2e}
+\newcommand{\bb}[1]{\textcolor{blue}{#1}}
+\newcommand{\br}[1]{\textbf{\textcolor{magenta}{#1}}}
+\newcommand{\brt}[1]{\textcolor{magenta}{#1}}
+\newcommand{\bg}[1]{\textcolor{brown}{#1}}
+\newcommand{\gr}[1]{\textcolor{gray}{#1}}
+\newcommand{\bsf}[1]{\textbf{\textsf{#1}}}
+\newcommand{\rev}[1]{\textcolor{red}{#1}}
+\newcommand{\bl}[1]{\textcolor{black}{#1}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\newcommand{\ctext}[1]{\raise0.2ex\hbox{\textcircled{\scriptsize{#1}}}}
+
+\usepackage{CJKutf8}
+\definecolor{bleudefrance}{rgb}{0.19, 0.55, 0.91}
+\definecolor{awesome}{rgb}{1.0, 0.13, 0.32}
+% \newcommand{\hu}[1]{{\color{bleudefrance}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+\newcommand{\hu}[1]{{\color{magenta}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+\newcommand{\liu}[1]{{\color{darkgreen}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+\newcommand{\chen}[1]{{\color{blue}\begin{CJK*}{UTF8}{gkai}#1\end{CJK*}}}
+\definecolor{darkgreen}{rgb}{0.0, 0.65, 0.0}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\DeclareMathOperator{\sgn}{sgn}
+
+
+\begin{document}
+\title{Planning 6D Grasps for Two-Finger Grippers considering Edge and Corner Contacts}
+\author{Zhengtao Hu$^{1}$, Ruishuang Liu$^{2}$, Mocong Qiu$^{1}$, Hao Chen$^{3}$, Liang Du$^{1*}$, Takuya Kiyokawa$^{2}$, Weiwei Wan$^{2}$, Jiangjun Yuan$^{1}$, and Kensuke Harada$^{2}$
+\thanks{$^{1}$ School of Mechatronic Engineering and Automation, Shanghai University. $^{2}$ Osaka University. $^{3}$ Fujian Agriculture and Forestry University.}
+\thanks{$^{*}$ Corresponding author: Liang Du, {\tt\small du\_liang@shu.edu.cn}}%        
+}
+\markboth{IEEE/ASME Transactions on Mechatronics, submission for review}
+{Hu \MakeLowercase{\textit{et al.}}: Planning 6D Grasps for Two-Finger Parallel Grippers Considering Edge and Corner Contacts} 
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+This paper presents a novel model-based algorithm for planning antipodal grasps, especially considering the edge and corner contacts. Conventional model-based \rev{planners} search for face contacts to build grasp synergies, which ensure superior grasp stability, but \rev{inherently restrict the geometric versatility of feasible grasp configurations.}
+With soft contact, edges and corners can reshape fingerpads to form equivalent face contacts, enhancing the ability to resist \rev{gravity}. This allows candidates with \rev{greater configuration variability, rather than being constrained solely by face normals.}
+The \rev{developed planner} detects regions of faces, edges, and corners from a CAD model, samples contacts from each region, detects paired contacts using contact detectors corresponding to contact types, \rev{and} screens the pairs by stability and collision checking. 
+It generates grasp candidates with qualified stability and flexible configurations, breaking the limits of planning for polyhedra, asymmetric objects, and objects with
+various sharp angles, etc. \rev{Experimental results quantitatively demonstrate that the proposed method has superior performance on grasp distributions and success rates} using the selected objects from open datasets and off-the-shelf items.
+\end{abstract}
+
+\begin{IEEEkeywords}
+    Grasp planning, Contact, Edge detection, Corner detection  
+\end{IEEEkeywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\textsc{Introduction}}
+\IEEEPARstart{G}{rasp} configurations generated for target objects are crucial for planning robot motions in manipulation tasks \cite{li2019survey}. Conventional robotic systems need manual grasp annotation or grasp teaching, which relies on expertise and time investment. In recent years, robotic grasp planning algorithms have been extensively studied \cite{newbury2023deep}, enabling \rev{autonomous} manipulation.
+Robotic grasp planning focuses on generating stable and flexible grasp candidates. Early research laid the groundwork with a theoretical framework that forms the basis of analytical approaches to grasping \cite{asada1979studies}. Researchers have developed planning algorithms based on known models, using techniques such as primitive fitting \cite{miller2003automatic}\cite{goldfeder2007grasp} or surface segmentation \cite{harada2011grasp}\cite{wan2020planning}. These analytical methods have played vital roles in robotics, as they can be used to execute online manipulation tasks by model matching \cite{chen2022category}, such as assembly, bin-picking, machine-tending, etc., as well as prepare an offline database for training end-to-end grasp planners. 
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.85\linewidth]{pic/teaser.pdf}
+\caption{Planned grasps (left) and real-world implementations (right), which include all six different contact pairs: (a) Corner-corner; (b) Corner-edge;  (c) Corner-face; (d) Edge-edge; (e) Edge-face; (f) Face-face.}    
+\label{teaser}
+\end{center}
+\end{figure}
+These algorithms primarily emphasize the significance of face contacts, ensuring better performance and grasp stability. Some end-to-end methods also have similar behavior, as they are trained by the face-contact focused grasp dataset \cite{mahler2017dex}\cite{lenz2015deep} or predefined grasp pose with the intuition of face-contact priority. Face contacts, achieved by aligning gripper fingerpads with the object's face normals, provide a stable grasp but often at the cost of flexibility. In a worst case, this rigidity becomes problematic when dealing with complex polyhedral objects, asymmetric shapes, and objects with sharp angles or intricate geometries. Researchers solve this problem by designing fingertips \cite{song2018fingertip}\cite{ringwald2023towards} or utilizing multi-finger grippers \cite{grady2021contactopt} to maximize contact areas. The inherent limitations of face-contact-focused approaches have spurred the exploration of alternative grasp strategies that can accommodate a wider range of object shapes and configurations. 
+
+Edges and corners, typically deemed unstable, are often excluded from grasp sampling. Under rigid body contact assumptions, contacts on edges or corners are reduced to point contacts, offering limited resistance to torques and thus weaker stability \cite{bicchi2000robotic}. However, in soft-contact models, fingerpads can deform to conform to these features, effectively simulating face contact. This paradigm shift allows grasps involving edges and corners to become viable, enhancing dexterity and extending applicability to objects beyond the reach of face-contact-focused planners.
+
+In this paper, we develop an analytical planner for antipodal grasping that considers face, edge, and corner contacts. Instead of eliminating the potential edge and corner contacts, we especially take advantage of them to generate \rev{grasp candidates with greater configuration variability}. The planner receives an object CAD model as input and generates a set of grasp candidates as output. It first creates point clouds from a given CAD model and extracts geometric features from the point cloud using a proposed PCA-based method. The features include the three different contact regions. Then, it detects antipodal grasp pairs among sample points from different contact regions. Consequently, it estimates the stability of the paired grasp candidates and selects the qualified ones that build a set of planned grasps. Compared with the conventional analytical grasp planner, the proposed planner can generate candidates with \rev{more geometrically versatile grasp configurations and overcome the limitations of conventional planners when handling geometrically irregular objects.} Fig. \ref{teaser} visualizes the planned grasps and real-world tests using an arrow-shaped object formed by a regular tetrahedron and a pentagonal prism. This is a specially designed object, which can provide six different combinations of contact: corner-corner contact (a), corner-edge contact (b), corner-face contact (c), edge-edge contact (d), edge-face contact (e), face-face contact (f).
+
+The contributions of this paper are threefold: (1) we proposed a grasp planner that especially treats edges and corners as potential contacts, which increases \rev{the geometric versatility} of planned grasps and adapts to various objects; (2) we developed a principle to generate contact detectors that search feasible contact pairs for different contact regions; (3) \rev{We conducted comparative physical experiments to validate the proposed method and introduced 6D grasp distribution analysis as quantitative metrics to evaluate the flexibility of planned grasp results.}
+
+% The paper is organized as follows: Section II reviews related work. Section III introduces the overall method. Section IV details the proposed method of extracting geometric features. Section V elaborates on the proposed grasp planning methods. Section VI explains the distribution of grasp configurations for evaluating grasps. Section VII presents the experiments, comparisons, and discussion. Finally, Section VIII concludes this work and outlines future work.
+
+\section{Related Work}
+\label{sec:related}
+\subsection{Grasp planning}
+Grasp planning methods can generally be categorized into model-based and learning-based approaches. Model-based methods rely on object geometry and physical rules to generate grasp configurations and analytically compute the stability to screen them. They can be further divided into two primary strategies: 1) primitive fitting \cite{chen2022category} and 2) surface segmentation \cite{harada2011grasp}\cite{wan2020planning}. Primitive fitting approximates objects using geometric primitives (e.g., cylinders, spheres, boxes) to simplify grasp synthesis. 
+Chen et al. \cite{chen2022category} employed word embeddings to quantify semantic similarities between categories of known models and real-world objects, facilitating the matching of novel objects with models in the database.
+Surface segmentation identifies meaningful surface regions to guide grasp generation. Harada et al. \cite{harada2011grasp} clustered triangle meshes based on contact softness, enabling grasp planning for grippers with soft finger pads. Wan et al. \cite{wan2020planning} introduced superimposed segmentation, segmenting each triangle into various facets with controlled overlap and thickness based on surface normals. On the other hand, learning-based methods leverage neural networks and data-driven techniques to enhance grasping flexibility and adaptability \cite{mahler2019learning}\cite{cao2022efficient}. 
+
+The previous model-based grasp planning methods emphasize and rely on the surface contacts \cite{miller_graspit_2021} while avoiding the contact on or near the edges and corners \cite{wan2020planning}. This trade-off increases the stability but lowers the diversity and flexibility. The learning based methods also rely on the grasp datasets that are always generated using the same rules of model-based grasps \cite{ten2017grasp}. The proposed method introduces soft contact to extend the potential stable contacts on the edges and corners, and develops algorithms to plan grasps, including edge and corner contacts to increase the grasp distributions and flexibility. 
+
+% Dexterity Network (Dex-Net) 4.0 \cite{mahler2019learning} explored a hybrid approach that uses models from geometry and mechanics to generate synthetic training datasets. Learning to Grasp (L2G) \cite{alliegro2022end} employs a differentiable sampling procedure guided by a multi-task optimization objective, which identifies a set of diverse and reliable grasps by jointly solving for contact point sampling, grasp regression, and grasp classification. 
+
+% Graspit! \cite{miller2004graspit}
+% Graspability \cite{domae2014fast}
+
+\subsection{Grasp criteria}
+Various grasp criteria have been proposed to evaluate the feasibility and quality of grasp candidates. The most common measure is grasp stability, typically assessed via force closure or form closure conditions. Analytical approaches evaluate wrench space coverage, torque resistance, or minimum force requirements to determine grasp reliability \cite{bicchi2000robotic}\cite{ferrari1992planning}. 
+% To support such analysis, several simulation tools have been developed. Among them, GraspIt! \cite{miller2004graspit} is a widely used platform that provides detailed simulations of robotic hands and grasping interactions. It enables users to compute force closure, visualize contact points, and optimize grasp poses using various search strategies. GraspIt! has become a standard for evaluating grasp hypotheses generated by both model-based and learning-based methods.
+In contrast, data-driven methods often train models to predict grasp quality scores directly from visual or geometric input, using supervision from human annotations or simulation-based metrics \cite{yu2024mtgrasp}. While these learned models may lack formal guarantees like force closure, they have demonstrated superior adaptability in unstructured and real-time settings. Moreover, some hybrid approaches combine analytical metrics with data-driven models to enhance generalization and robustness \cite{kopicki2014learning}\cite{ten2017grasp}. 
+% Moreover, the affordance was considered to build \rev{task-oriented grasps} for further robotic manipulation. 
+
+Beyond this, this paper introduces a statistical metric that quantifies the distribution of grasp configurations and serves as a proxy for grasp flexibility. This metric enables quantitative and intuitive comparisons of grasp flexibility across different planners, regardless of their varying priorities for selecting contact regions.
+
+
+
+\section{Overview of grasp planner}
+\label{sec:overview}
+The planner takes a CAD model of a target object and a gripper as input and outputs a set of gripper configurations. The concise overview of the planner is shown in Fig. \ref{workflow}, which consists of three submodules: geometric feature extraction, contact detection, and stability estimation. 
+The submodule of geometric feature extraction (See Section IV) obtains the point cloud of the target object by converting the mesh model, traverses each point, computes metrics using the geometric parameters of its neighbors, and uses the metrics to classify the points into three different geometric features: face, edge, and corner. Its output is a list labeling the points using three features.
+The submodule of contact detection (See Section V) receives the output from the upper submodule, samples contact points in different labels, generates three different detectors according to different labels of features, uses the pair detectors to find qualified contacts on the opposite sides, and outputs the feasible pair candidates.
+The submodule of stability estimation (See Section VI) receives the pair candidates as input, generates the directions of grippers, screens the gripper configurations by the collision-free factor, obtains the potential contact regions, and computes the grasp stability according to soft contact assumption and Grasp Wrench Space (GWS). Consequently, the feasible grasp configurations are packed as the output of the planner. 
+The following three sections will elaborate on the aforementioned three submodules.
+\begin{figure}[!t]
+\begin{center}
+\includegraphics[width=0.97\linewidth]{pic/workflow.pdf}
+\caption{Overview of the proposed planner. \rev{The input includes an object model and a gripper model.} The output is a set of grasp configurations.
+% The input is a CAD model of an object, and the output is a set of grasp configurations. The planner first extracts the geometrical features of the input model, then detects feasible antipodal contacts, especially considering the constraints from different features, and estimates the stabilities considering soft contacts. The qualified configurations are collected as the output.
+}    
+\label{workflow}
+\end{center}
+\end{figure}
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.85\linewidth]{pic/feature_visualize.pdf}
+    \caption{\rev{Illustration of the process of geometric feature detection. (a) Input model and query points. (b) Detected edges. (c) Detected corners.}}
+    \label{fig:feature_visualize}
+\end{figure*}
+
+\section{Geometric feature extraction}
+\label{sec:method}
+The submodule of geometric feature extraction operates to classify the elements in a point cloud into three different features: face, edge, and corner, which indicate different contact regions for planning grasp candidates.
+This question can be modeled as a feature detection task, which has been widely discussed in the past decades. 
+Each point in the point cloud can be classified by computing the geometrical and statistical feature values of its neighbors. Various features and algorithms were presented \cite{ahmed2018edge}\cite{zhu2023nerve}\cite{matveev2022def}, adapting to different models and applications. Learning-based methods were also presented \cite{himeur2021pcednet}\cite{bode_bounded_2023}, but they also rely on the feature computation to preprocess point cloud input. An end-to-end detection approach based on PointNet++ backbone was reported \cite{wang_pienet_2020a}. It is rid of manual parameter tuning but provides lower accuracy.
+
+In this paper, we use the computed feature values and empirical thresholds to detect the geometric features. Especially, instead of considering the statistical metrics of position values, we include the local feature of normal to reduce the ambiguity. Furthermore, we use a hierarchy framework \cite{ahmed2018edge} to differentiate edges and corners, respectively. \rev{The visualized detection process is shown in Fig. \ref{fig:feature_visualize}}.
+% The proposed method first detects all edge points from a raw point cloud and then extracts corner points from the edge points.
+
+% We consider using a hierarchy framework to differentiate edges and corners. The proposed method first detects all edge points from a raw point cloud and then extracts corner points from the edge points. A similar method was presented in \cite{ahmed2018edge}. Based on this, we propose to further include the feature values of normal to increase the detection performance.
+
+\subsection{Edge detection}
+We employ locally computed features combined with manual tuning thresholds for edge detection. In addition, we use normal vector information to filter out irrelevant points in local regions.
+
+Specifically, we sample \( n \) points from a mesh model to obtain a point cloud \rev{$\mathcal{P}^\text{c}=\{\mathbf{p}_i^\text{c}\}_{i=1}^n$}. Each point's normal vector corresponds to the normal of the associated triangular face in the mesh. However, these normals may not accurately reflect the true orientation near the edges, as no triangles exist to define the normal direction. So we compute the average normal vector within each point's local neighboring region, yielding the refined normal vectors. 
+For each query point \rev{$\mathbf{p}_i^\text{c}$}, we retrieve its \( k \)-nearest neighbors \( \mathcal{Q}_i = \{\mathbf{q}_j\}_{j=1}^k \) and their corresponding refined normal vectors \( \mathcal{N}_i = \{\mathbf{n}_j\}_{j=1}^k \).
+\rev{Here, $k$ denotes the neighborhood size: it is the positive integer number of nearest neighbors}
+
+% 避免取到对面的点
+Since the chosen $k$ is a fixed value, it may include points from different surfaces when dealing with small-scale structures (e.g., thin objects). To address this, we perform DBSCAN clustering on the normal vectors \( \mathcal{N}_i \). If multiple clusters \( C_1, C_2, \dots, C_m \) are detected (i.e., \( m > 1 \)), we filter out points whose normals belong to clusters that do not contain the normal of the query point. The filtered neighboring region \(\mathcal{Q}_i' \) is illustrated as \cref{eq:Q_i}, and the center of neighboring region \rev{\( \mathbf{c}_i \)} is computed as \cref{eq:c_i}.
+\begin{equation}
+   \mathcal{Q}_i' = \{\mathbf{q}_j \in\mathcal{Q}_i \mid \mathbf{n}_j \in C_{\text{query}} \}
+   \label{eq:Q_i}
+\end{equation}
+\begin{equation}
+    \mathbf{c}_i = \frac{1}{|\mathcal{Q}_i'|} \sum_{\mathbf{q}_j \in\mathcal{Q}_i'} \mathbf{q}_j
+    \label{eq:c_i}
+\end{equation}
+
+We use the feature proposed by Ahmed \textit{et al.} \cite{ahmed2018edge}, which calculates the distance ratio $r_i$ between the query point, the center of the neighboring region, and the nearest point as follows:
+\begin{equation}
+\rev{
+    r_i = \frac{\| \mathbf{p}_i^\text{c} - \mathbf{c}_i \|}{\| \mathbf{p}_i^\text{c} - \mathbf{p}_{\text{nearest}} \|}
+    }
+\end{equation}
+% 描述下含义
+where \rev{\( \mathbf{p}_{\text{nearest}} \)} is the nearest point to \rev{$\mathbf{p}_i^\text{c}$}. 
+\rev{As shown in Fig. \ref{fig:feature_visualize}(a) and (b)}, when \rev{$\mathbf{p}_i^\text{c}$} is a face point, its neighboring region is largely confined to a 2D plane, resulting in a shorter distance between \rev{$\mathbf{p}_i^\text{c}$} and \( \mathbf{c}_i \). In contrast, for an edge point, the neighborhood extends into 3D space, leading to a greater distance. 
+Thus, we evaluate the \( r_i \) values for each query point, and if \( r_i \) exceeds \rev{$\tau_\text{e}$, which is a threshold used to filter the results of edge detection}, the point is considered an edge point. \rev{Comparative results of tuning $\tau_\text{e}$ are shown in Appendix II.}
+
+\subsection{Corner Detection}
+Based on edge detection results, we compute new features and extract corner points using manual thresholds. We use smaller nearest neighbors \( k_1 \) at edge points to obtain the neighboring region \( \mathcal{Q}_{\text{edge}, i} \). We apply the same outlier filtering method used in edge detection to obtain the filtered neighboring region \( \mathcal{Q}_{\text{edge}, i}' \). For each neighboring region, the covariance matrix \( \mathbf{C}_i \) is computed as \cref{covariance}, where \( \mathbf{c}_i \) represents the center of the neighboring region.
+\begin{equation}
+    \mathbf{C}_i = \frac{1}{|\mathcal{Q}_{\text{edge}, i}'|} \sum_{\mathbf{q}_j \in \mathcal{Q}_{\text{edge}, i}'} (\mathbf{q}_j - \mathbf{c}_i)(\mathbf{q}_j - \mathbf{c}_i)^T
+    \label{covariance}
+\end{equation}
+
+Next, SVD is applied to the covariance matrix \( \mathbf{C}_i \) to obtain the eigenvalues \rev{$\boldsymbol{\lambda} = \{\lambda_1, \lambda_2, \lambda_3\}$}. For corner detection, we use the ratio of the \rev{largest} eigenvalue \rev{$\lambda_{\max}$} to the sum of all eigenvalues \( \kappa_i\) as \cref{kappa_i}. \rev{Fig. \ref{fig:feature_visualize}(b) and (c) show the difference in PCA results between edge and corner points. The largest principal component (PC1) for edge points is larger, which increases the proportion of $\lambda_{\max}$. We define $\tau_\text{c}$ as a threshold for filtering the detected corners.} If $\kappa_i < \tau_\text{c}$, the point is classified as a corner. \rev{Comparative results of tuning $\tau_\text{c}$ are shown in Appendix II.}
+\begin{equation}
+\rev{
+    \kappa_i = \frac{\lambda_{\max}}{\lambda_1 + \lambda_2 + \lambda_3}
+    \label{kappa_i}
+    }
+\end{equation}
+
+Finally, we employed the DBSCAN clustering algorithm to group the detected corner points. The clustering parameters were specified with a neighborhood radius $\epsilon$ of 0.005 and a minimum cluster size of 1 sample point.
+
+The key parameters in the feature detection process are: \rev{$\tau_\text{e}$, $\tau_\text{c}$, and $k$. These parameters are inherently task-dependent and are empirically tuned. We experimentally explored that the set ($\tau_\text{e}:0.9$, $\tau_\text{c}:0.7$, and $k:32$) consistently produces acceptable results for almost all cases evaluated in this work. Please find the detailed tuning guide and comparative experimental results in Appendix II.}
+
+% Different tasks, preferences, and grasping objectives may require different parameter values. Therefore, a single fixed parameter set cannot universally fit all tasks or all objects. Although it is difficult to determine a parameter setting that works optimally for every generic-shaped object, our empirical experiments indicate that the set $\lambda_1:0.9$, $\lambda_2:0.7$, and $k:32$ produces consistently acceptable results for almost all cases evaluated in this work. So, we adopted this parameter set for the following analysis and experiments in the paper. Finally, an example of detected features is shown in Fig. \ref{}(a). Please find the detailed parameter tuning guide and comparative experimental results in Supplementary Materials Appendix II.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth]{pic/feature_detection.pdf}
+%     \caption{The procession and results of feature detection.}
+%     \label{fig:feature_detection}
+% \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth]{pic/feature_detection_threshold.pdf}
+%     \caption{Results of feature detection and comparisons of using different parameters and thresholds. Blue: edge points; Pink: corner points.}
+%     \label{fig:feature_detection_threshold}
+% \end{figure}
+
+
+\section{Grasp planning}
+We propose a sampling-based approach to detect contact and plan grasp candidates. It samples contacts, generates detectors considering different geometric features, pairs antipodal \rev{contacts}, and screens the poses \rev{based on grasp stability}.
+
+\subsection{Sampling}
+We use a sample-based method to obtain contact candidates. The feature detection mentioned in the upper section labels all the elements in a point cloud with three categories.
+Thus, we can sample the contact candidates within each label, respectively. This helps obtain approximately similar numbers of contact samples in different regions, avoiding long-tailed problems. 
+As the corner and edge \rev{occupy much smaller regions than the faces, the contact candidates will mainly lie on the faces and rarely on the edges or corners when} using global sampling methods.
+Furthermore, we use the voxel-based approach to make the samples have balanced distributions. Here, $v$ \rev{represents the} voxel size (for a normalized model), which is empirically selected and can be manually fine-tuned.
+The sampled points are denoted as \( \mathcal{S} = \{\mathbf{s}_i\}_{i=1}^m \), where \( m \) is the number of samples. The feature of $\mathbf{s}_i$ is marked as $\mathbf{f}_i$, which could be $\mathtt{f}$ for faces, $\mathtt{e}$ for edges, and $\mathtt{c}$ for corners. 
+
+\rev{We show an example of $\mathcal{S}$ in Fig. \ref{detect_contacts}. More comparative results using different parameters, parameter tuning guide, and discussion are shown in Appendix III.A. The voxel-based approach achieves more balanced sampling over geometric features, thereby enhancing the diversity of contact pairs and improving grasp flexibility.}
+
+% Our objective is to obtain evenly distributed samples covering the three geometric features. We can observe that our method generates a balanced number of samples across different features, whereas the global sampling method produces few edge samples and no corner samples. \rev{Moreover, decreasing the parameter $v$ increases the total number of samples, providing a reference for tuning the planning results.} These results suggest that our method achieves \rev{more balanced sampling over geometric features, thereby enhancing the diversity of contact pairs and improving grasp flexibility}.
+
+% The results of sampling are shown in Fig. \ref{fig:sampling}. Our objective is to obtain evenly distributed samples that cover three geometric features. We can observe that our method generates a balanced number of samples across different features, whereas the global sampling method produces fewer samples on the edges and fails to generate any samples on the corners. Additionally, reducing the parameter $v$ increases the overall number of samples, which provides a reference for tuning planning results. These results suggest that our method can generate more balanced and effective sampling across geometric features, enhancing the diversity of contact pairs and improving grasp flexibility.
+
+\rev{Additionally, we check the convexity of each sampled point using local surface normals. The points lying in concave regions are removed, as a flat finger pad cannot make valid contact there.}
+% To be noted, we also check the convexity of samples according to the normals of local neighbors. A flat finger pad cannot touch a point from concave features, so we remove these samples to facilitate the computation.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth]{pic/sampling_strategy.pdf}
+%     \caption{Results of sampling. Upper row: The conventional global sampling. Lower row: The proposed category-wise sampling method. Yellow: face points; Blue: edge points; Pink: Corner points.}
+%     \label{fig:sampling}
+% \end{figure}
+
+
+\begin{figure*}[t]
+\begin{center}
+\includegraphics[width=0.85\linewidth]{pic/contact.pdf}
+% 图中改为s_i
+\caption{The process of detecting contacts. The planner selects a query point $\mathbf{s}_{i}$ from input $\mathcal{S}_i$ and generates a detector \rev{$\mathcal{D}_{i}$} according to the feature $\mathbf{f}_{i}$ of $\mathbf{s}_{i}$. (a.1) Cylinder detector for face contacts; (a.2) Cylindrical sector detector for edge contacts; (a.3) Cone detector for point contacts. (b) The detector searches the antipodal contact candidates $\mathcal{M}_i$. (c) The planner pairs the contacts $\mathcal{C}_i$ considering the geometrical constraints. Finally, it traverses the input set and outputs all paired contacts $\mathcal{P}$.}
+\label{detect_contacts}
+\end{center}
+\end{figure*} 
+
+\subsection{Generating detector}
+Conventional contact detection relies on ray shot approaches \cite{wan2020planning}. It derives from the constraints of parallel face contacts. As we include the contacts on edges and corners where inclined contacts are also potentially qualified, different detection rules should be considered according to the features of the candidates. 
+Essentially, this step requires detectors to find the potential antipodal contacts. 
+The features of sample candidates inherently constrain the potential antipodal contacts on geometry, thus determining the dimensions of the detector. 
+
+Our contact detection employs geometrically constrained detectors \( \mathcal{D} \), whose configurations are determined by the type of features (face, edge, or corner), as shown in Fig. \ref{detect_contacts}(a):
+\subsubsection{Face contact}
+As the face contact constrains the half-space, the finger that contacts the sampled face point should be vertical to the face normal. In this case, the face normal guides the antipodal searching, and a ray-shooting method can be used to locate the potential antipodal contacts to the sampled point from a face. Considering the size of fingerpads, $\mathcal{D}$ is expanded to a cylindrical shape with a diameter $d$ and a length $l$. 
+\rev{Here, $d$ also represents the diameter of the contact region. In this paper, we used a circular fingerpad, which directly reflects the contact area. For various finger shapes, we approximate the contact patch using an equivalent circle (maximum inscribed circle). Thus, for a given gripper, $d$ is a fixed value and does not require tuning during planning. And $l$ is set to the longest edge length of the object model (bounding box). It is determined by the object model, so it is also not tuned during planning.} The illustration is shown in Fig. \ref{detect_contacts}(a.1)
+
+\subsubsection{Edge contact}
+Unlike the face contact, the \rev{edge} contact offers a line contact, which allows the fingers to rotate according to the line (edge). To accommodate this additional degree of freedom, the detector \( \mathcal{D} \) expands into a sector shape, enabling antipodal search within a 2D plane. With a similar idea of the coverage of the fingerpad, the sector shape further extends to a cylindrical sector. Its thickness relates to the size of the fingerpad, while its radius relates to the size of objects. So the cylindrical sector has a radius of $l$ and a thickness of $d$, and a sector angle of $\theta_\mathrm{sec}$, which \rev{is a tunable parameter}. The illustration is shown in Fig. \ref{detect_contacts}(a.2).
+\subsubsection{Corner contact}
+Similarly, the corner contact builds a point contact, which allows the fingers to rotate according to the point (corner). With the idea of increasing dimensions, the detector \( \mathcal{D} \) of the sampled corner point needs to be cone-shaped to search the antipodals. The corner is only constrained by the size of objects. Its height is equal to $l$. \rev{And $\theta_\mathrm{cone}$ is the apex angle of the cone detector and is a tunable parameter.} The illustration is shown in Fig. \ref{detect_contacts}(a.3).
+
+Each detector needs to encompass all points within a certain region opposite to the sampled point's normal vector. Consequently, the detector is oriented along the inverse direction of the sampled point's normal. To determine the rotational orientation of the sector shape of the edge detector around the normal vector, we perform line fitting in the neighboring region of the sampled edge point. The top and bottom surfaces of the sector are then aligned to be perpendicular to the fitted line. In this paper, \rev{with a given fingerpad, $d$ is a fixed value of 28 mm. And} $l$ is obtained from each target object \rev{model, which is not a tunable parameter. Besides, $\theta_\mathrm{sec}$ and $\theta_\mathrm{cone}$ are tunable parameters. A larger value allows the detector to cover a wider region and find more candidates. However, we constrain it to be less than 90°. If $\theta_\mathrm{sec}$ is larger than 90°, the fingers may exert outward forces that decrease the grasp stability and produce invalid candidates. We illustrate the change of tuning parameters in Appendix III.B.}
+% , with its dimensional extent along the normal direction set to the maximum scale of the point cloud $L_{max}$.
+% To define the spatial coverage of included points: for cylindrical detectors (face points), the cylinder radius is set to 0.01 meter; for sector-shaped detectors (edge points), the sector thickness is 0.02 meter with a 90° angular span; and for conical detectors (corner points), the cone angle is specified as 90°. This parameter configuration ensures comprehensive coverage of potential contact regions while maintaining detection efficiency.
+
+
+\subsection{Pairing antipodal contact points}
+Fig. \ref{detect_contacts} illustrates the pairing process. The algorithm begins by selecting a query point $\mathbf{s}_i$ from the sampled set  $\mathcal{S}$ and generates a feature-specific detector $\mathcal{D}$ (ray, sector, or cone) according to the feature $\mathbf{f}_i$ of $\mathbf{s}_i$.
+The constructed detector $\mathcal{D}_i$ performs a spatial intersection with the sampled point set $\mathcal{S}$, extracting all points within its valid region to form a potential contact set $\mathcal{M}_i$, as shown in Fig. \ref{detect_contacts}(b). 
+
+
+The potential contact points are then evaluated by analyzing their surface normals and relative spatial configurations to identify valid antipodal contact pairs $\mathcal{C}_i$, as shown in Fig. \ref{detect_contacts}(c). 
+
+\rev{For $\mathtt{c}$-$\mathtt{c}$ contacts, since both contact points are at corners, fingers have substantial rotational freedom. Therefore, any existing pair $\mathbf{p}_i = (\mathbf{s}_i, \mathbf{m}_j^\text{s})$ is deemed viable for grasping.}
+
+\rev{For $\mathtt{c}$-$\mathtt{e}$ and $\mathtt{c}$-$\mathtt{f}$ contacts, fingers are constrained at edge and face contact points, limiting rotational margin. Additionally, normal vectors at corners are relatively inaccurate.  
+To address this, we introduce a metric $d_{\text{proj}}$: the projected distance from vector $\mathbf{d}_j^\text{s} = \mathbf{m}_j^\text{s} - \mathbf{s}_i$ onto the target vector.  
+For face contacts, the target vector is the face normal; for edge contacts, it is the local edge tangent.  Thus, $d_{\text{proj}}$ is computed as:}
+
+\begin{equation}
+    \rev{d_{\text{proj}} = \begin{cases}
+    \|\mathbf{d}_j^\text{s} - (\mathbf{d}_j^\text{s} \cdot \mathbf{n}_j^\text{s})\mathbf{n}_j^\text{s}\| & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{f} \\
+    \|\mathbf{d}_j^\text{s} \cdot \mathbf{t}_j^\text{s}\| & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{e}
+    \end{cases}}
+    \label{eq:proj_d}
+\end{equation}
+\rev{where $\mathbf{n}_j^\text{s}$ is the unit normal vector at the face contact point, $\mathbf{f}_j^\text{s}$ is the feature of $\mathbf{m}_j^\text{s}$, and $\mathbf{t}_j^\text{s}$ is the unit tangent vector along the edge.  A contact pair is valid when $d_{\text{proj}} < d$, where $d$ denotes the contact region diameter.}
+
+\rev{For $\mathtt{f}$-$\mathtt{f}$, $\mathtt{e}$-$\mathtt{f}$, and $\mathtt{e}$-$\mathtt{e}$ contacts, both contact points are constrained with relatively accurate normal estimates. We denote $\theta_j^\text{s}$ as the angle between the normal vectors at the two points, shown in Eq.~\ref{eq:theta_j^s}.
+If $\theta_j^\text{s}$ exceeds the threshold $\theta_{\text{th}}$, the contact pair $\mathbf{p}_i$ is considered valid. The tunable threshold $\theta_{\text{th}}$ is used to filter the antipodal grasp pair considering the angle between the two normals, which affects the number of generated grasping configurations. A larger threshold imposes stricter constraints, resulting in fewer configurations. Please find the comparative results of tuning $\theta_{\text{th}}$ in Appendix III.C.} 
+
+\begin{equation}
+    \rev{\theta_j^\text{s} = \arccos \left( \frac{\mathbf{n}_i^\text{s} \cdot \mathbf{n}_j^\text{s}}{\|\mathbf{n}_i^\text{s}\| \|\mathbf{n}_j^\text{s}\|} \right)}
+    \label{eq:theta_j^s}
+\end{equation}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\linewidth]{pic/contact_pairing_para.pdf}
+%     \caption{Caption}
+%     \label{fig:contact_pairing_para}
+% \end{figure}
+
+\rev{After obtaining each contact pair, we determine the contact vector $\mathbf{v}_i$ and gripper center $\mathbf{j}_i$.  For $\mathbf{m}_j^\text{s}$ on faces ($\mathtt{f}$), which experience strict parallel constraints from the faces, we use their normal as $\mathbf{v}_i$. For the pairs without $\mathtt{f}$, $\mathbf{v}_i$ is constructed by connecting the two points (Eq.~\ref{eq:v_j^s}). And $\mathbf{j}_i$ is the mean of these two points (Eq.~\ref{eq:j_j^s}).}
+
+\begin{equation}
+\rev{
+    \mathbf{v}_i = \begin{cases}
+        \mathbf{n}_j^\text{s} & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{f} \\
+        \mathbf{m}_j^\text{s} - \mathbf{s}_i & \text{if } \mathbf{f}_j^\text{s} \text{ is } \mathtt{e} \text{ or } \mathtt{c}
+    \end{cases}}
+    \label{eq:v_j^s}
+\end{equation}
+
+\begin{equation}
+    \rev{\mathbf{j}_i = (\mathbf{m}_j^\text{s} + \mathbf{s}_i)/2}
+    \label{eq:j_j^s}
+\end{equation}
+
+% The potential contact set $\mathcal{M}_i$ contains the potential contact points $\mathbf{m}_{i,j}$ of $\mathbf{s}_i$. The feature of point can be $\mathtt{f}$, $\mathtt{e}$, and $\mathtt{c}$ to represent face, edge, and corner, respectively. 
+% If the feature of $\mathbf{s}_i$ or $\mathbf{m}_{i, j}$ is $\mathtt{f}$, the contact vector $\mathbf{v}_i$ of the grasp pair should be opposite to the normal vector $\mathbf{n}_i$ of the face point. To determine valid pairs, the angle $\theta_{i, j}$ between the connection vector $\mathbf{d}_{i, j} = \mathbf{m}_{i,j} - \mathbf{s}_i$ and $\mathbf{n}_i$ is computed as \cref{eq:theta_ij_1}. 
+% \begin{equation}
+%     \theta_{i, j} = \arccos \left( \frac{\mathbf{d}_{i,j} \cdot \mathbf{n}_i}{\|\mathbf{d}_{i,j}\| \|\mathbf{n}_i\|} \right)
+%     \label{eq:theta_ij_1}
+% \end{equation}
+
+% If both the feature of $\mathbf{f}_i$ and $\mathbf{f}_{i, j}$ are not $\mathtt{f}$, the validity criterion is instead based on the normal vectors of $\mathbf{s}_i$ and $\mathbf{m}_{i,j}$. The angle $\theta_{i, j}$ between their normal vectors $\mathbf{n}_i$ and $\mathbf{n}_{i,j}$ is computed as \cref{eq:theta_ij_2}. 
+% \begin{equation}
+%     \theta_{i, j} = \arccos \left( \frac{\mathbf{n}_i \cdot \mathbf{n}_{i,j}}{\|\mathbf{n}_i\| \|\mathbf{n}_{i,j}\|} \right)
+%     \label{eq:theta_ij_2}
+% \end{equation}
+
+% Based on the computed $\theta_{i, j}$ for different types of $\mathbf{s}_i$, a specific threshold is assigned to each of the six contact types. If $\theta_{i, j}$ falls below the corresponding threshold, the contact pair ${p}_{i} = (\mathbf{s}_i, \mathbf{m}_{i, j})$ is regarded as a valid match.
+
+% The qualified contact pairs are then stored in a set $\mathcal{C}_{i}$. The algorithm then traverses the set $\mathcal{S}$ and aggregates all $\mathcal{C}_{i}$ and outputs a final set $\mathcal{P}$, which represents the complete set of contact pairs. Then, $\mathcal{P}$ is sent to the stability estimation module to further screen these candidates.
+
+
+\begin{table*}[t]
+    \centering
+    \small
+    \setlength{\tabcolsep}{8pt}
+    % \captionsetup{labelfont={color=red}, font={color=red}}
+    \caption{\rev{Statistical metrics of grasp configurations for analyzing grasp distribution.}}
+    \label{tab:distribution_metrics}
+    \rev{\begin{threeparttable}
+        \begin{tabular}{cccc ccc ccc ccc ccc c}
+        \toprule
+        Objects & \multicolumn{3}{c}{Tetrahedron} & \multicolumn{3}{c}{Amicelli} & \multicolumn{3}{c}{Seal}\\
+        \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+         & STD($\uparrow$) & R($\uparrow$) & MAD($\uparrow$) & STD($\uparrow$) & R($\uparrow$) & MAD($\uparrow$) & STD($\uparrow$) & R($\uparrow$) & MAD($\uparrow$) &  \\
+        \midrule
+        GraspIt\cite{miller2004graspit} & 0.2516 & 0.8676 & 0.1998 & 0.1669 & 0.6687 & 0.1177 & 0.2718 & 0.9063 & 0.2154\\
+        GPD\cite{ten2017grasp}& 0.2878 & 0.9375 & 0.2389 & 0.2742 & 0.9454 & 0.2162 & 0.2667 & 0.8409 & 0.2284\\
+        WRS\cite{wan2020planning}& / & / & / & 0.2639 & 0.9365 & 0.2002 & 0.2427 & 0.8690 & 0.2014\\
+        Ours & \textbf{0.2995} & \textbf{0.9498} & \textbf{0.2450} & \textbf{0.2835} & \textbf{0.9922} & \textbf{0.2193} & \textbf{0.2857} & \textbf{0.9154} & \textbf{0.2429}\\
+        \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+        \footnotesize
+         \bl{STD: Standard deviation; R: Range; MAD: Mean absolute deviation.}
+        % $\dagger$ Using the normals estimated from mesh models. 
+     \end{tablenotes}
+    \end{threeparttable}}
+\end{table*}
+
+\subsection{Stability estimation}
+% The paired contact points are then sent to the stability estimator to further screen the candidates. With known contacts, we can obtain the local neighbor points that shape the deformed contact on soft finger pads. However, the accurate deformation between finger pads and edges/corners follows complex nonlinearity. Thus, to simplify the process, we propose to obtain the contact local points considering the thickness of finger pads ($t_{pad}$). The thickness can be regarded as the upper limit of the deformation, so assumed deformation is  $\eta t_{pad}$ where $\eta$ is an empirical tunable parameter to constrain the stability computation. As shown in XXXX, the potential contact points are XXXXX (distance less than $\eta t_{pad}$ ). XXXXXXX
+
+% The paired contact points are then sent to the stability estimator to further screen the candidates.
+
+We introduce a soft contact model to estimate grasp stability, enabling the potential contacts on edges and corners. When gripping objects, soft finger pads can deform to fit and wrap the edges and corners, providing a higher holding wrench. However, the accurate deformation between finger pads and edges/corners follows complex nonlinearity, and is computationally demanding to model in detail. Thus, we propose to obtain the contact local points considering the thickness of finger pads. Using the contact pair, \rev{$\mathbf{p}_i$}, and the contact vector, $\mathbf{v}_i$, as the position and direction to locate a finger pad, the green pillar in Fig. \ref{fig:stability}.
+Here, $t_\mathrm{pad}$ denotes the pad thickness, and  $\eta \in [0,1]$ \rev{represents the proportion of the finger pad thickness that can be compressed during contact.} We assume that any points near the object's edge and corners lying within $\eta t_\mathrm{pad}$ of the contact region can participate in the contact. 
+\rev{It is hard to accurately model $\eta$ because it depends on many coupled factors. In physical scenarios, the properties of the soft finger material, the applied gripping force, the object materials, and the geometry of the contact region all influence the effective compression, and many of these effects are nonlinear. Thus, we can use a compromised approach to experimentally measure $\eta$. In this paper, we used a DH-ROBOTICS PGC gripper equipped with 3 mm rubber finger pads to grasp the object that has an edge contact with a 90$^\circ$ angle. The gripping force was set to 100 N. We can obtain $\eta$ is about 0.7 for corner contacts and about 0.4 for edge contacts using this setting.}
+
+As shown in Fig. \ref{fig:stability}, the potential contact points are marked as red (distance less than $\eta t_{pad}$). This yields clusters of contact points $\mathbf{C}_i$ approximating the $i$-th soft finger pads' potential contact region by a finite set of contact points $\{\mathbf{x}_\mathrm{i,1}, \mathbf{x}_\mathrm{i,2}, \ldots \mathbf{x}_\mathrm{i,|\mathbf{C}_i|}\}$.
+
+For each identified cluster of contact points, we assign a contact normal $\mathbf{n}_\mathrm{fp}$, which can be approximated by the finger pad’s approach direction\footnote{Although subtle differences in surface geometry can cause local normal variations, we assume the deformation of the finger pad remains nearly aligned with $\mathbf{n}_\mathrm{fp}$.}.  
+
+% The friction coefficient $\mu$ is assumed uniform. At each point $\mathbf{x}_\mathrm{i,j}$,  let the corresponding contact force be $\mathbf{f}_\mathrm{i,j}$. This force must satisfy standard Coulomb friction constraints:
+The friction coefficient $\mu$ is assumed uniform. At each point $\mathbf{x}_\mathrm{i,j}$,  let the corresponding contact force be $\mathbf{f}_\mathrm{i,j}$. This force must satisfy standard Coulomb friction constraints:
+\begin{equation}
+\begin{cases}
+    ~\mathbf{f}_\mathrm{i,j}\mathbf{n}_\mathrm{fp} \leq 0 \\
+    ~||\mathbf{f}_\mathrm{i,j}-(\mathbf{f}_\mathrm{i,j}\mathbf{n}_\mathrm{fp})\mathbf{n}_\mathrm{fp}|| \leq \mu(\mathbf{f}_\mathrm{i,j}\mathbf{n}_\mathrm{fp}),
+\end{cases}
+\end{equation}
+this ensures that the tangential component of the force $\mathbf{f}_\mathrm{i,j}$ does not exceed the frictional bound determined by $\mu$ and normal direction $\mathbf{n}_\mathrm{fp}$. 
+
+% To assess grasp stability, we must verify that there exists a feasible combination of contact forces $\{\mathbf{f}_\mathrm{i,j}\}$ that can counteract gravity and any external disturbance wrench $\mathbf{w}_\mathrm{ext}$. Formally, let $\mathbf{r}_\mathrm{i,j}$ be the position vector of the contact point $\mathbf{x}_\mathrm{i,j}$ relative to a chosen reference frame. Then the equilibrium conditions require:
+To assess grasp stability, we \rev{determine if a feasible set of contact forces $\{\mathbf{f}_\mathrm{i,j}\}$ exists that balances the system against gravity and external disturbances.}  Formally, let $\mathbf{r}_\mathrm{i,j}$ be the position vector of the contact point $\mathbf{x}_\mathrm{i,j}$ relative to a chosen reference frame. Then the equilibrium conditions require:
+
+\begin{equation}
+    \sum_{i=1}^2 \sum_{j=1}^{|\mathbf{C}_i|}
+\begin{bmatrix}
+\mathbf{f}_{i,j} \\[6pt]
+\mathbf{r}_{i,j} \times \mathbf{f}_{i,j}
+\end{bmatrix}
+\;+\;
+\rev{\mathbf{w}_{\mathrm{g}}}
+\;+\;
+\mathbf{w}_{\mathrm{ext}}
+\;=\;
+\mathbf{0}.
+\end{equation}
+% Here,  $\rev{\mathbf{w}_\mathrm{g}}\in\mathbb{R}^6$ encodes the gravitational force (and any torque due to the center of mass offset), and $\mathbf{w}_\mathrm{ext}\in\mathbb{R}^6$ is the external wrench to be resisted. 
+Here,  $\rev{\mathbf{w}_\mathrm{g}}\in\mathbb{R}^6$ \rev{denotes} the gravitational \rev{wrench}, and $\mathbf{w}_\mathrm{ext}\in\mathbb{R}^6$ \rev{represents} the external \rev{disturbance} wrench\footnote{
+\rev{$\mathbf{w}_\mathrm{g}$ includes the gravitational force and the torque induced by the center of mass offset. In our implementation, this is computed using mass properties derived from the object's CAD model or user input. In this paper, we assume no additional external disturbances. Thus, $\mathbf{w}_\mathrm{ext}$  is set to zero, though the formulation remains general.}
+}. 
+A grasp is deemed stable if there exists a feasible set $\{\mathbf{f}_\mathrm{i,j}\}$ satisfying the friction constraints at every contact point and the equilibrium conditions.
+\rev{Note that unlike the classical soft finger model \cite{murray1994mathematical}, which simplifies the contact to a single point with an explicit torsional friction about the contact normal, we model the soft pad--object contact as a distributed set of hard point contacts $\mathbf{C}_i$. The torsional resistance is captured \emph{implicitly} by the aggregate moment of these distributed contact forces (via the $\mathbf{r}_{i,j} \times \mathbf{f}_{i,j}$ terms), eliminating the need for an explicit torsional constraint.} 
+
+
+\begin{figure}[t!]
+    \centering
+\includegraphics[width=0.8\linewidth]{pic/stability.pdf}
+    \caption{Obtaining contact points for stability estimation considering soft contact.}
+    \label{fig:stability}
+\end{figure}
+
+\subsection{Grasp configuration augmentation}
+\rev{The planner generates the contact vector $\mathbf{v}_{i}$ and the jaw center $\mathbf{j}_{i}$ in the previous step. To obtain the grasp configuration, the center of the gripper should align with $\mathbf{j}_{i}$ and the x-axis of the gripper should align with $\mathbf{v}_{i}$, as shown in Fig. \ref{fig:augmentation}(a). To specify a gripper configuration, we need to specify a rotation angle $\beta$ along \rev{$\mathbf{v}_i$} (the x-axis of the gripper).}
+We can set multiple angles to make augmentative configurations \cite{wan2020planning}, as shown in Fig. \ref{fig:augmentation}(b). \rev{The illustrations of varying $\beta$ are shown in Appendix III.D. This rotation results in multiple grasps that share the same contact position but differ in orientation, thereby enriching the set of grasp candidates.} However, these grasps essentially rely on the same contacts and don't clearly reflect the inherent increase of grasp distributions. So in the evaluation of grasp distributions, as explained in \rev{Section VI.A, we} use the contact vector, \rev{$\mathbf{v}_i$}, to represent the 3D rotation, and use the jaw center to denote the 3D position. 
+In the visualized results \rev{of grasps, the augmentation} is omitted to make the visualization clear and concise. Therefore, \rev{for each contact pair,} a single random rotation angle is applied to compute one representative grasp configuration for visualization.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\linewidth]{pic/augmentation.pdf}
+    \caption{Grasp augmentation. The planner can rotate the candidates along the contact vector, \rev{$\mathbf{v}_i$} (x-axis of the gripper), to increase the grasp candidates.}
+    \label{fig:augmentation}
+\end{figure}
+
+% \section{Distribution of grasp configurations}
+% In this paper, we propose to use the distributions of grasp configurations as \rev{quantitative metrics} to evaluate planned grasp candidates. Conventional grasp criteria focus on the stability\cite{harada2011grasp}, graspability\cite{domae2014fast}, and affordance\cite{myers2015affordance}. However, the distribution of grasp configurations, which characterizes the range of positions and rotations through which robot hands can approach and grasp objects, is rarely addressed in existing work. From this \rev{perspective}, the proposed planner \rev{produces grasp candidates with greater configuration variability}, allowing grippers to handle objects with more variable positions and rotations.
+% For each object, grasp planners can generate a set of grasp configurations (6D data for each configuration). The statistical criteria of this set can reflect the degree of dispersion. \rev{A more dispersed distribution implies that the robot possesses grasp candidates spanning a broader configuration space.} \rev{Therefore}, we evaluate the grasp planner according to this principle. To be noted, as explained in Section V.E, we use the contact vector, \rev{$\mathbf{v}_i$}, to represent the 3D rotation to ensure the clarity and significance of the results and comparisons.
+
+% In this paper, we used Standard Deviation (STD), Range (R), and Mean Absolute Deviation (MAD) to quantify the distribution of grasp configurations. The related results, analysis, and discussion can be found in Section VII.A.
+
+\begin{figure*}[t]
+\begin{center}
+% \includegraphics[width=0.75\linewidth]{pic/distribution.pdf}
+\includegraphics[width=0.85\linewidth]{pic/grasp_distribution_main.pdf}
+\caption{\rev{Comparisons of planning candidates, distributions, and success rates.} (a)Visualized grasps. (a.1) Tetrahedron. (a.2) Amicelli (KIT, ID: 10). (a.3) Seal (KIT, ID: 132). (b) 
+Visualized grasp distributions (3D rotation) using different planners. Blue triangle: GraspIt, yellow times sign: GPD, green star: WRS, and red dot: the proposed method. To make the results concise and easy to observe, we didn't include grasp augmentation in this experiment. \rev{Please find more results in Appendix V.}}    
+\label{exp:distribution}
+\end{center}
+\end{figure*} 
+
+\section{Experiments}
+\label{sec:experiments}
+In this section, we first studied the distributions of planned grasps and compared the results with other methods to validate the performance of the proposed method. Then, we \rev{demonstrated the grasp in the real world and carried out the grasp success rate experiments to compare the performance of our method with others. Finally, we discussed the limitations of the proposed method.} We used the DH-ROBOTICS PGC gripper in the experiments, which provides a maximum 76 mm gripping stroke. Using different fingers, the gripper has two different jaw widths, 0-76 and 30-106 mm. The finger pads are round with a diameter of 28 mm, and they have a thickness of 3 mm and a friction coefficient of 0.25. \rev{We used 9 objects for experiments and validations, which include the models from open data sets, off-the-shelf items from both industries and daily life, and the manually designed model. The detailed reasons for selecting these samples are explained in Appendix IV.}
+
+
+\subsection{Distributions of grasps}
+\subsubsection{\rev{Metrics of distributions}}
+\rev{We propose to use the distributions of grasp configurations as criteria to evaluate planned grasp candidates. Conventional grasp criteria focus on the stability \cite{harada2011grasp} and graspability \cite{domae2014fast}
+% , and affordance\cite{myers2015affordance}
+. However, the distribution of grasp configurations, which characterizes the range of positions and rotations through which robot hands can approach and grasp objects, is rarely addressed in existing work. From this point, the proposed planner takes advantage of annotating more flexible results, allowing grippers to handle objects with more variable positions and rotations. For each object, grasp planners can generate a set of grasp configurations (6D data for each configuration). The statistical criteria of this set can reflect the degree of dispersion. A more dispersed distribution implies that the robot possesses grasp candidates spanning a broader configuration space. To be noted, as explained in Section V.E, we use the contact vector, $\mathbf{v}_i$, to represent the 3D rotation to ensure the clarity and significance of the results and comparisons.}
+
+\rev{To quantify these distributions, we used three statistical metrics: Standard Deviation (STD), Range (R), and Mean Absolute Deviation (MAD).} 
+
+
+For comparison, we evaluated our method against GraspIt \cite{miller_graspit_2021}, GPD \cite{ten2017grasp}, and WRS \cite{wan2020planning}. Among them, GraspIt and WRS are model-based grasp planners, whereas GPD is a learning-based planner trained on a grasp dataset selected through a rule-based strategy (force closure). \rev{To ensure fair comparisons, each planner first generated more than 20 grasp candidates, and we then downsampled them to 20 candidates to eliminate the influence of differing candidate numbers (GraspIt outputs exactly 20 candidates). The analysis and comparison are based on the sampled 20 candidates.
+We used three objects in this quantitative comparison and tests: (1) Tetrahedron; (2) Amicelli; (3) Seal. Please find the explanation of object selection in Appendix IV.}
+
+% The proposed method emphasizes the importance of flexibility in grasp configurations. The distribution of 6D grasp configurations provides a measure of this flexibility, as explained in Section VI. A higher flexibility indicates that robots are capable of approaching and grasping objects from a broader set of positions and orientations, thus improving their manipulability and adaptability to diverse objects in unstructured environments.
+
+\subsubsection{Results and visualizations}
+% In the experiments, we used the statistical metrics to quantify the 6D grasp distributions (3D position and 3D rotation): Standard Deviation (STD), Range (R), and Mean Absolute Deviation (MAD). For comparison, we evaluated our method against GraspIt\cite{miller_graspit_2021}, GPD\cite{ten2017grasp}, and WRS\cite{wan2020planning}. Among them, GraspIt and WRS are model-based grasp planners, whereas GPD is a learning-based planner trained on a grasp dataset selected through a rule-based strategy (force closure\cite{murray_mathematical_1994}). We used three objects in this comparison and test: (1) an arrow-shaped object, which is specially designed to provide all six different contact combinations; (2) Amicelli, a chocolate box with a shape of hexagonal prism, which is selected from KIT object set (ID: 10); (3) Seal, a seal-shaped object, which is selected from KIT object set (ID: 132). 
+
+The quantitative results are shown in Table.\ref{tab:distribution_metrics}. The results show that our method achieves the highest values across all three statistical metrics, STD, R, and MAD. And the results exhibit consistent performance over all three objects. It indicates our planner can plan grasps with larger ranges and deviations, allowing for more \rev{candidates from diverse orientations}. 
+
+The visualized grasps are shown in Fig. \ref{exp:distribution}(a). The colored grippers illustrated the grasp configurations. The results of GraspIt, GPD, WRS, and ours are shown in blue, yellow, green, and red, respectively. It can be observed that the grippers in ours cover more space, \rev{exhibiting greater configuration diversity.} It benefits from the highlights of our method, which allows the contacts on the edges and corners. While the other methods heavily rely on face contact. The grasps of the \rev{Tetrahedron} (Fig. \ref{exp:distribution}(a.1)) shows a representative example, the WRS specifies the dependency of face pairs, thus \rev{cannot find feasible grasps}. The GraspIt and GPD also searched fewer grasps. The grasps of the Amicelli (Fig. \ref{exp:distribution}(a.2)), a hexagonal prism box, show \rev{that our method covers wider space, while the other methods generate the results with obvious clustered situations.} The Seal has a curved and smooth surface, so the edges and corners are not so significant. But the results of our method still show better distributions. GPD also indicates competitive results, because the learning-based method relies less on the strict surface segmentation and normal estimation, and performs well for the irregular and curved objects. \rev{But the grasps from WRS concentrate on a certain region without even distribution.}
+
+Furthermore, for more intuitive visualization, we highlighted the orientation and ignored the position, and illustrated the distribution by scattering the 3D coordinate values of the normalized pair vector of each grasp configuration in a 3D Cartesian space \rev{(Fig. \ref{exp:distribution}(b))}. Each note marks a grasp configuration: the blue triangle, yellow times sign, green star, and red dot denote the results from GraspIt, GPD, WRS, and ours, respectively. \rev{It can be observed, for} all three objects, our methods show wide and even distributions. 
+% \rev{The WRS cannot find grasps for the t}
+% \hu{In Fig. \ref{exp:distribution}(b.1), the other methods exhibit two clustered regions, primarily because the pentagonal prism part allows for more common grasp configurations across different methods. Although GraspIt produces relatively better distributions, they remain less competitive compared to ours. In Fig. \ref{exp:distribution}(b.2), the overall distributions form a circular pattern, which is influenced by the surface constraints of the hexagonal prism. Notably, our method generates grasps in all clustered regions, whereas the other methods fail to cover some of these regions. In Fig. \ref{exp:distribution}(b.3), the smooth surfaces of the object weaken the effect of edge and corner contact. But our method still covers the larger range in this 3D space. The experiments and comparisons quantitatively validated the advantages of our method on planning flexible grasp configurations for more dexterous and adaptive robotic manipulation.} 
+
+\rev{Here, we only visualized the results of three objects in the manuscript. Please find the results of more objects (the other 6 objects) in Appendix V.}
+
+\subsection{\rev{Evaluation of grasp success rate}}
+\subsubsection{\rev{Experimental setting and description}}
+We used the ABB GOFA-5 robot equipped with the DH-ROBOTICS PGC grippers to carry out grasp attempts. Fig. \ref{fig:setting}(a) shows the setting. A pillar was placed on the table to support the target objects. The items that hold the objects may become obstacles for the robot grippers to approach specific grasps. So we used such a thin pillar to keep the objects away from the table and reduce the potential collision, and increase the solvable non-collision grasps and robot motions. 
+
+As this paper intensively focuses on grasping, we ignore the challenges and difficulties of non-collision motion planning and rich-contact interactions. Furthermore, to avoid the influence of visual uncertainty, no vision modules were incorporated in this study. We executed all grasp motions from known object positions. As shown in Fig. \ref{fig:setting}(b), \rev{the motion planner was based on RRT-connect. We applied this planner to} generate robot motions to approach the object (green motions), grasp it (blue object), and move it to a target position marked as red (green motions). \rev{The purpose of this setup and pipeline was to isolate and evaluate the performance of the proposed grasp planner, independent of perception noise or influence from a dynamically online system.}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{pic/setting.pdf}
+    \caption{(a) Experimental setting. (b) Planned robot motion to approach the target object (green motions), grasp it, and pick it up (blue motions).}
+    \label{fig:setting}
+\end{figure}
+
+\rev{The scale of objects also matters in the planning results. Here, we manually give the scale according to the jaw width of the gripper. The numbers of planned grasps are also studied and presented. To make the results observable and concise, we didn't include grasp augmentation and generated one grasp for one contact pair (See Section VI).}
+
+\rev{We compared the performance with representative state-of-the-art methods, including WRS \cite{wan2020planning}, GPD \cite{ten2017grasp}, and GraspIt \cite{miller_graspit_2021}. To ensure fair comparisons, each planner first generated more than 20 grasp candidates, and we then downsampled them to 20 candidates to eliminate the influence of differing candidate numbers (GraspIt outputs exactly 20 candidates). We subsequently executed physical grasp trials for all selected candidates. After testing all candidates, the grasp success rate for each object was computed. To avoid the influence of the vision system, all objects were placed at known positions and orientations prior to grasp execution. Due to collisions or unsolvable IK configurations, some objects needed to be placed in multiple poses to ensure that all candidates were reachable. A grasp trial was considered successful if the robot could lift the object without failure while maintaining a stable in-hand orientation. The main failure cases are: (1) the fingers push the object before establishing antipodal contact, (2) insufficient or misaligned contact, and (3) unstable grasp configurations that cannot hold the weight.}
+
+\begin{table*}[t]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \captionsetup{labelfont={color=black}, font={color=black}}
+    \caption{\rev{Success rate of grasp planning methods.}}
+    \rev{
+    \label{tab:statistical results}
+    \begin{threeparttable}
+    \begin{tabular}{l|ccccccccc|c}
+        \toprule
+        Method & Tetrahedron & Amicelli & Seal & LEGO & Sprocket & Milk box & Cup noodle & Motor bracket & Gear &  Average \\
+        \midrule
+        Ours & 100\% & 100\% & 90\% & 100\% & 100\% & 95\% & 95\% & 100\% & 100\% & \textbf{97.8\%} \\
+        WRS~\cite{wan2020planning} & 0\%   & 100\% & 100\% & 100\% & 95\%  & 95\% & 0\%  & 100\% & 100\% & 76.7\% \\
+        GPD~\cite{ten2017grasp}& 35\%  & 85\%  & 75\%  & 85\%  & 85\%  & 70\% & 75\% & 70\%  & 55\%  & 70.6\% \\
+        Graspit~\cite{miller_graspit_2021} & 55\%  & 90\%  & 70\%  & 90\%  & 80\%  & 80\% & 90\% & 75\%  & 70\%  & 77.8\% \\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}
+    }
+\end{table*}
+
+\rev{The planned grasps are illustrated in Fig. \ref{exp:distribution}, limited by the page requirement, only three objects are shown here. The complete results can be found in Appendix VII. The success rates are concluded in Table.\ref{tab:statistical results}. Overall, the proposed method demonstrates the highest average success rate of 97.8\%, demonstrating strong robustness and reliability, while WRS performs an average success rate of 76.7\%, and GPD and GraspIt reach 70.6\% and 77.8\%, respectively. WRS also shows competitive performance for the objects for which it can obtain feasible grasps. However, it fails to generate grasp candidates that don't include parallel faces, such as the tetrahedron and cup noodle, which represents a main limitation. In contrast, although GPD and GraspIt can generate candidates for all objects, they exhibit lower success rates in most cases, particularly for objects with sharp edges or complex geometries. For instance, on the tetrahedron, the success rates drop to 35\% for GPD and 55\% for GraspIt; on the gear, they are 55\% and 70\%, respectively. Our methods have special consideration for the edges and corners, thus can also achieve over 95\% grasp success rates on these two objects. For objects such as the Sprocket, Lego, and Amicelli, where grasping primarily relies on face contacts, all methods exhibit relatively higher performance. This comparison demonstrates the advantages of our method in grasping objects with diverse contact types and highlights its superior adaptability and success rates. The photos of physical grasping experiments are shown in Appendix VI. Please also find the demonstrations in the attached video.}
+
+% and real-world grasp results are shown in Fig. \ref{teaser}. We can find all six different contact pairs on this single object, which is hardly observed on off-the-shelf objects. Fig. \ref{teaser}(a-c) demonstrates the grasps of corner-corner (C-C), corner-edge (C-E), and corner-face (C-F) contacts. The edge-edge (E-E) grasp and edge-face (E-F) grasps are shown in Fig. \ref{teaser}(d) and (e). And Fig. \ref{teaser}(f) indicates the face-face (F-F) grasp. We can observe the contacts on the sharp corners and edges, and ensure stable grasps. \uline{Please see the detailed demonstrations in the supplementary video}.
+
+% Then, we tested our planning on the popular and representative object datasets, KIT\cite{kasper_kit_2012}, YCB\cite{calli_ycb_2015}, and ABC\cite{koch_abc_2019}. We selected 5 objects for experimental visualization: Amicelli (KIT, ID: 10), Seal (KIT, ID: 132), LEGO block (YCB, ID: 073-c), Mug (YCB, ID: 025), and Sprocket (ABC, ID: 1090). We used 3D printing to fabricate the models. The scale of objects also matters in the planning results. Here, we manually give the scale according to the jaw width of the gripper. The numbers of planned grasps are also studied and presented. To make the results observable and concise, we didn't include grasp augmentation and generated one grasp for one contact pair (See Section VI). Limited by the length of the paper,  \uline{please find the experimental results and visualizations in Appendix I and the execution in the supplementary video}.
+% % Limited by the length of the paper, we show the experimental results and pictures in Appendix I.
+% Finally, we used six off-the-shelf objects (industrial components and daily-life objects) to test the proposed method: a pen box, a dodecahedron cube, a motor bracket, a milk box, a cup noodle, and a gear. \uline{The associated results, illustrations, and demonstrations can be found in Appendix II and the supplementary video}.
+
+
+% As shown in Fig. \ref{exp_dataset}, the planner generated 142 grasps (Fig. \ref{exp_dataset}(a.1)) for the Amicelli (KIT, ID: 10), the C-C grasp (Fig. \ref{exp_dataset}(a.2)), E-E grasp (Fig. \ref{exp_dataset}(a.3)), and F-F grasp (Fig. \ref{exp_dataset}(a.4)) were displayed. It plans 63 grasps for the Seal (KIT, ID: 132), the C-C grasps and C-E grasps were displayed. For the YCB dataset, we selected the LEGO block (ID: 073-c) and Mug (ID: 025), and obtained 78 and 48 grasps, respectively. The C-C grasp (Fig. \ref{exp_dataset}(a.2)), E-E grasp (Fig. \ref{exp_dataset}(a.3)), and F-F grasp (Fig. \ref{exp_dataset}(a.4)) were observed. We also select an object for the ABC dataset, Sprocket (ID: 1090). The planner can generate 159 grasps, and we demonstrated the C-C (Fig. \ref{exp_dataset}(a.3)), E-E(Fig. \ref{exp_dataset}(a.3)), and F-F (Fig. \ref{exp_dataset}(a.3)) grasps.
+
+% The planned grasps and grasp scenes are shown in Fig. \ref{exp_dailyobj}. We obtained 108 grasps for a hex prism pen box (Fig. \ref{exp_dailyobj}(a.1)), and demonstrated the E-E (Fig. \ref{exp_dailyobj}(a.1)), C-C (Fig. \ref{exp_dailyobj}(a.1)), and F-F (Fig. \ref{exp_dailyobj}(a.1)) grasps. Fig. \ref{exp_dailyobj}(b.1) illustrates the 96 grasps for a dodecahedron cube, and Fig. \ref{exp_dailyobj}(b.2$\sim$4) show C-C, F-F, and E-E grasps. 
+% Fig. \ref{exp_dailyobj}(c.1) illustrates the 153 grasps for a mother bracket. Fig. \ref{exp_dailyobj}(c.2) and (c.3) show E-E grasps and Fig. \ref{exp_dailyobj}(c.4) shows F-F grasps.
+% The planned grasps for a milk box are illustrated in Fig. \ref{exp_dailyobj}(d.1). We observed the E-E (Fig. \ref{exp_dailyobj}(d.2)), E-F (Fig. \ref{exp_dailyobj}(d.3)), and  F-F (Fig. \ref{exp_dailyobj}(d.4)) grasps. We also tested the planner using a cup noodle (Fig. \ref{exp_dailyobj}(e.1)) and a gear (Fig. \ref{exp_dailyobj}(f.1)). We demonstrated the E-E grasps (Fig. \ref{exp_dailyobj}(e.2) and (f.2)), E-F grasp (Fig. \ref{exp_dailyobj}(e.3)), and C-C grasp (Fig. \ref{exp_dailyobj}(f.3)). The tested objects daily-life items and mechanical parts and the successful grasp attempts validated the adaptations and robustness of the proposed methods. The solvable grasps and feasible robot motions always showed successful results.  
+
+
+
+% \begin{figure*}[t]
+% \begin{center}
+% \includegraphics[width=0.95\linewidth]{pic/exp_dataset.pdf}
+% \caption{Grasp planning and real-world grasp experiments using the objects from open datasets. We only show the number of grasps without considering grasp augmentation. The pictures show selected grasp cases.}    
+% \label{exp_dataset}
+% \end{center}
+% \end{figure*} 
+
+% \begin{figure*}[t]
+% \begin{center}
+% \includegraphics[width=0.95\linewidth]{pic/exp_dailyobj.pdf}
+% \caption{Grasp planning and real-world grasp experiments using off-the-shelf daily items. We only show the number of grasps without considering grasp augmentation. The pictures show selected grasp cases.}    
+% \label{exp_dailyobj}
+% \end{center}
+% \end{figure*} 
+
+\subsection{Discussions}
+\subsubsection{Computation time}
+We formulated this method as a completely offline grasp planning framework aimed at producing a maximally intensive grasp dataset. So, the computational cost was not prioritized. \rev{But we also experimentally studied the computation time of the proposed method. The related results and analysis can be found in Appendix VII.}
+
+\subsubsection{\rev{Extension to multi-fingered gripper}}
+\rev{The current planner is for antipodal parallel grasping, regardless of finger configurations. For multi-fingered grippers, our planner can be applied when the fingers behave similarly to a parallel gripper, for example, when two fingers are grouped to act as one and execute a parallel grasp with the remaining finger (Robotiq 3-finger gripper). However, if they perform dexterous grasps involving multiple synergies, non-uniform contact distributions, or more than two contact points, the planner cannot be directly used. But the detection part can still serve as a submodule for identifying contact regions. The primary challenge is the pairing of multiple contact points, which becomes computationally expensive.}
+
+\subsubsection{Completeness of input model}
+This method only accepts complete models as input. It is difficult to handle partially observed models and occlusions, which are common in online grasping scenarios. This weakness limits the applicability of the method in real-time applications. 
+\rev{For unknown objects, we can manually model the objects, perform 3D scanning to capture the shapes, or apply point-cloud completion methods to reconstruct the models from partial observations.}
+
+\subsubsection{Comparisons}
+We compared different methods in the experiments. However, these methods differ in their rules and design objectives. Each method requires \rev{separate} fine-tuning of multiple parameters and thresholds, which vary substantially across approaches and are subjectively determined. Consequently, \rev{a perfectly uniform comparison is difficult to achieve}. Nonetheless, \rev{the main conclusion remains valid}. Since all parameters were tuned on a best-effort basis, the comparative results \rev{still provide a meaningful reference and demonstrate that the proposed method offers superior performance in generating diverse grasp configurations. Furthermore, WRS cannot generate any feasible grasp for the tetrahedron, regardless of parameter tuning, because it relies on parallel contact pairs. This naturally highlights a core advantage of our method.}
+% We compared different methods in the experiments. However, these methods differ in their rules and design objectives. Each planner requires fine-tuning of multiple parameters and thresholds, which vary significantly across different approaches and are subjectively determined. Consequently, the comparisons may not be entirely fair. Nonetheless, the core highlight of our method remains reasonable. Since the parameters were determined on a best-effort basis, the comparative results offer a reference, demonstrating that the proposed method exhibits superior performance in the diversity of grasps.
+\section{Conclusions and Future Work}
+\label{sec:conclusion}
+This paper presents a novel model-based grasp planning algorithm that explicitly incorporates edge and corner contacts, extending the distributions and flexibility of 6D antipodal grasp planning. Unlike the conventional methods that rely on face contact, our method significantly extends the potential contact regions on an object. We developed a feature-extracting method to recognize faces, edges, and corners, used category-wise sampling strategies and contact detectors to search antipodal contact pairs, and introduced soft contact to ensure accurate stability estimation. Our method can generate grasp candidates that conform to physical stability constraints while allowing better grasp distributions and diversity. We also proposed to use statistical metrics to quantitatively evaluate the grasp distributions.
+Experiments validated the superior performance on grasp distribution compared to the popular and state-of-the-art methods. And we demonstrated the grasp planning and real-world grasp manipulation on the widely used open object datasets to confirm the adaptations and robustness. 
+
+\rev{Future work will focus on improving computational efficiency by reducing the feature detection cost, extending the planner to multi-fingered grippers and dexterous grasping, and enabling the use of incomplete models through reconstruction or point-cloud completion techniques.}
+
+% In the future, we will develop to solve the weakness as shown in the discussion section. We will improve the computation efficiency and develop to adapt to partially observed models, which will improve the performance in online applications. And we will develop the planner to adapt to soft and deformable objects.
+
+\section{Acknowledgement}
+This work was supported by the National Natural Science Foundation of China (62403297) and the Shanghai Municipal Commission of Science and Technology (23550790702).
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/hu.jpg}}]{Zhengtao Hu}
+received the Ph.D. degree from the Graduate School of Engineering Science, Osaka University, Suita, Japan, in 2022. And he received the B.Eng. and M.S. from Xi’an Jiaotong University, Xi’an, China, in 2015 and 2018, respectively. From 2022 to 2023, he was a research assistant professor in Osaka University. Since 2023, he has been a lecturer with the School of Mechatronic Engineering and Automation, Shanghai University, Shanghai, China.
+His research interests focus on robotic manipulation and mechanism design.
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/liu.jpg}}]{Ruishuang Liu} received her Ph.D. degree in system science from the Graduate School of Engineering Science, Osaka University in 2023.
+And she received the bachelor’s degree in information management and information system from Tianjin University, Tianjin, China, in 2016 and the master’s degree in knowledge management from Nanyang Technological University, Singapore, in 2017. 
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/qiu.jpg}}]{Mocong Qiu}
+received the B.Eng. degree in Mechanical Design and Automation from Shantou University, Guangdong, China, in 2023. He is currently working toward the M.Eng. degree in Mechanical with the School of Mechatronic Engineering and Automation, Shanghai University, Shanghai, China. 
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/chen.jpg}}]{Hao Chen} received his Ph.D. in System Innovation from Osaka University in 2024. He earned his M.Sc. in System Innovation from Osaka University in 2021 and his B.Sc. in Electrical and Computer Engineering from the University of Macau in 2018. He is currently an Associate Professor at the College of Computer and Information Sciences, Fujian Agriculture and Forestry University. His research interests include manipulation planning and assembly planning for next-generation manufacturing.
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/duliang.jpg}}]%
+{Liang Du} received his B.E., M.E. and Ph.D. degrees in Mechanical Engineering from Shanghai Jiao Tong University, China, in 2011, 2015 and 2019, respectively. From 2019 to 2021, he was a Senior Researcher with Ritsumeikan University, Japan. He is currently a lecturer with the School of Mechatronic Engineering and Automation, Shanghai University, China. His research interest includes field robotics, soft robotics, and artificial intelligence.
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/kiyokawa.jpg}}]{Takuya Kiyokawa}
+received the Ph.D. degree from the Nara Institute of Science and Technology, Japan, in 2021. From 2021 to 2022, he was with Osaka University and the Nara Institute of Science and Technology, both in Japan, as a Specially Appointed Assistant Professor. Since 2023, he has been an Assistant Professor at Osaka University. His current research interests include reconfigurable manipulation robots.
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/wan.png}}]{Weiwei Wan}
+(Senior Member, IEEE) received the Ph.D. degree from the
+Department of Mechano Informatics, the University
+of Tokyo, Japan, in 2013.
+He is currently an Associate Professor working with the Graduate School of Engineering Science, Osaka University, Suita, Japan. From 2013 to 2015, he did his postdoc research with Carnegie Mellon University, Pennsylvania, USA, under the support of Japanese Society for the Promotion of Science. From 2015 to 2017, he was a Research Scientist with the National Institute of AIST, Japan. 
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/yuan.png}}]{Jianjun Yuan}
+received the B.Eng. and M.S. degrees in precise instrument and mechanism from Tsinghua University, Beijing, China, in 1999 and 2001, respectively. He received the Ph.D. degree in mechanical and aerospace engineering from Tokyo Institute of Technology, Tokyo, Japan, in 2005.,Since 2006, he has been an Associate Professor with the Research Institute of Robotics, Shanghai Jiao Tong University, Shanghai, China. His major research is related to innovative design, manipulators, and special Robotics.
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{bio/harada.jpg}}]{Kensuke Harada}
+(Fellow, IEEE) received the Ph.D. degree from
+Kyoto University, Kyoto, Japan, in 1997.
+He is currently a Professor working with the Graduate School of Engineering Science, Osaka University. From 1997 to 2002, he was a Research Associate with Hiroshima University, Hiroshima, Japan. From 2005 to 2006, he was a Visiting Scholar with the Computer Science Department, Stanford University, Stanford, CA, USA. Before joining Osaka University, he was a Researcher with the National Institute of AIST, Tsukuba, Japan.
+\end{IEEEbiography}
+
+\end{document}
