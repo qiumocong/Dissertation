@@ -6,8 +6,7 @@ A level-1 auxiliary file: data/chap02.aux
 A level-1 auxiliary file: data/chap03.aux
 A level-1 auxiliary file: data/chap04.aux
 A level-1 auxiliary file: data/chap05.aux
-A level-1 auxiliary file: data/chap_exp.aux
-A level-1 auxiliary file: data/chap_exp2.aux
+A level-1 auxiliary file: data/chap06.aux
 The style file: gbt7714-numerical.bst
 A level-1 auxiliary file: data/publications.aux
 A level-1 auxiliary file: data/acknowledgement.aux
@@ -62,51 +61,47 @@ Warning--I didn't find a database entry for "miller2004graspit"
 Warning--I didn't find a database entry for "yu2024mtgrasp"
 Warning--I didn't find a database entry for "kopicki2014learning"
 Warning--I didn't find a database entry for "domae2014fast"
-Warning--I didn't find a database entry for ""
 Warning--I didn't find a database entry for "paszke_pytorch_2019"
-You've used 27 entries,
+Warning--I didn't find a database entry for ""
+You've used 31 entries,
             5374 wiz_defined-function locations,
-            1299 strings with 15086 characters,
-and the built_in function-call counts, 246755 in all, are:
-= -- 5554
-> -- 28209
-< -- 34863
-+ -- 9721
-- -- 2082
-* -- 1777
-:= -- 34275
-add.period$ -- 98
-call.type$ -- 27
-change.case$ -- 231
-chr.to.int$ -- 8652
-cite$ -- 27
-duplicate$ -- 785
-empty$ -- 2686
-format.name$ -- 939
-if$ -- 64059
+            1328 strings with 16108 characters,
+and the built_in function-call counts, 283176 in all, are:
+= -- 6516
+> -- 32244
+< -- 39814
++ -- 11117
+- -- 2402
+* -- 2122
+:= -- 39399
+add.period$ -- 114
+call.type$ -- 31
+change.case$ -- 267
+chr.to.int$ -- 9859
+cite$ -- 31
+duplicate$ -- 885
+empty$ -- 3188
+format.name$ -- 1085
+if$ -- 73476
 int.to.chr$ -- 1
-int.to.str$ -- 28
+int.to.str$ -- 32
 missing$ -- 0
-newline$ -- 172
-num.names$ -- 82
-pop$ -- 12387
+newline$ -- 196
+num.names$ -- 94
+pop$ -- 14131
 preamble$ -- 1
-purify$ -- 27
+purify$ -- 31
 quote$ -- 0
-skip$ -- 25808
+skip$ -- 29602
 stack$ -- 0
-substring$ -- 12156
-swap$ -- 30
-text.length$ -- 661
+substring$ -- 14104
+swap$ -- 34
+text.length$ -- 760
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 289
+type$ -- 333
 warning$ -- 0
-while$ -- 710
+while$ -- 821
 width$ -- 0
-<<<<<<< HEAD
-write$ -- 418
-=======
-write$ -- 373
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
+write$ -- 486
 (There were 40 warnings)

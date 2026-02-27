@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.20)  26 FEB 2026 15:17
-=======
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.20)  3 FEB 2026 16:51
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.20)  27 FEB 2026 14:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1054,7 +1050,7 @@ Package fontspec Info:
 (fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Courier
 (fontspec)             New/BI/OT:script=latn;language=dflt;"
 
- (./main.aux (./data/chap01.aux) (./data/chap02.aux) (./data/chap03.aux) (./data/chap04.aux) (./data/chap05.aux) (./data/chap_exp.aux) (./data/chap_exp2.aux) (./data/publications.aux) (./data/acknowledgement.aux))
+ (./main.aux (./data/chap01.aux) (./data/chap02.aux) (./data/chap03.aux) (./data/chap04.aux) (./data/chap05.aux) (./data/chap06.aux) (./data/publications.aux) (./data/acknowledgement.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
@@ -1527,14 +1523,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[4]
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[5])
+[4])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
@@ -1545,7 +1534,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[6]
+[5]
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 8.0pt on input line 5.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
@@ -1557,7 +1546,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[7
+[6
 
 
 ]
@@ -1940,8 +1929,9 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 
  (./data/chap03.tex
 第三章
-File: figures/FBGrasp/framework.pdf Graphic file (type pdf)
-<use figures/FBGrasp/framework.pdf>
+
+Package natbib Warning: Citation `paszke_pytorch_2019' on page 24 undefined on input line 11.
+
 
 
 
@@ -1955,10 +1945,18 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 
 
 ]
-File: example-image-a.pdf Graphic file (type pdf)
-<use example-image-a.pdf>
-File: example-image-a.pdf Graphic file (type pdf)
-<use example-image-a.pdf>
+
+Package natbib Warning: Citation `bazazian_fast_2015' on page 25 undefined on input line 25.
+
+
+Package natbib Warning: Citation `ahmed_edge_2018' on page 25 undefined on input line 25.
+
+
+Package natbib Warning: Citation `wang_pienet_2020a' on page 25 undefined on input line 25.
+
+
+Package natbib Warning: Citation `bode_bounded_2023' on page 25 undefined on input line 25.
+
 
 
 
@@ -1968,282 +1966,13 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 
 [25]
 
+Package natbib Warning: Citation `bazazian_fast_2015' on page 26 undefined on input line 46.
 
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[26]
-File: figures/FBGrasp/sampling_strategy.pdf Graphic file (type pdf)
-<use figures/FBGrasp/sampling_strategy.pdf>
+Package natbib Warning: Citation `ahmed_edge_2018' on page 26 undefined on input line 47.
 
 
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[27]
-File: example-image-a.pdf Graphic file (type pdf)
-<use example-image-a.pdf>
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[28]
-File: figures/FBGrasp/contact_detect.pdf Graphic file (type pdf)
-<use figures/FBGrasp/contact_detect.pdf>
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[29]
-<<<<<<< HEAD
-=======
-File: example-image.pdf Graphic file (type pdf)
-<use example-image.pdf>
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[30]
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[31]
-
-LaTeX Warning: Reference `cha:' on page 32 undefined on input line 118.
-
-
-LaTeX Warning: Reference `detect_contacts' on page 32 undefined on input line 123.
-
-
-LaTeX Warning: Reference `detect_contacts' on page 32 undefined on input line 123.
-
-
-LaTeX Warning: Reference `detect_contacts' on page 32 undefined on input line 123.
-
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
-File: example-image.pdf Graphic file (type pdf)
-<use example-image.pdf>
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-<<<<<<< HEAD
-[30]
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[31]
-
-LaTeX Warning: Reference `cha:' on page 32 undefined on input line 121.
-
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[32]
-
-LaTeX Warning: Reference `sec:xx' on page 33 undefined on input line 149.
-
-
-
-=======
-[32]
-
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[33]
-<<<<<<< HEAD
-=======
-
-LaTeX Warning: Reference `sec:xx' on page 34 undefined on input line 155.
-
-
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[34]
-<<<<<<< HEAD
-File: figures/FBGrasp/augmentation.pdf Graphic file (type pdf)
-<use figures/FBGrasp/augmentation.pdf>
-
-
-LaTeX Warning: Reference `sec:xx' on page 35 undefined on input line 187.
-
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[35]
-File: figures/FBGrasp/stability.pdf Graphic file (type pdf)
-<use figures/FBGrasp/stability.pdf>
-
-Underfull \hbox (badness 2197) in paragraph at lines 213--214
-=======
-File: figures/FBGrasp/stability.pdf Graphic file (type pdf)
-<use figures/FBGrasp/stability.pdf>
-
-Underfull \hbox (badness 2197) in paragraph at lines 204--205
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
-[]\TU/SimSun(0)/m/n/12.045 基 于 上 述 定 义，|  原 本 的 单 一 接 触 点 被 扩 展 为 一 个 离 散 的 接 触 点 簇 $[][] \OT1/cmr/m/n/12.045 =
- []
-
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-<<<<<<< HEAD
-[36]
-=======
-[35]
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[36]
-File: figures/FBGrasp/augmentation.pdf Graphic file (type pdf)
-<use figures/FBGrasp/augmentation.pdf>
-
-
-LaTeX Warning: Reference `sec:xx' on page 37 undefined on input line 244.
-
-
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[37])
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[38]
-\openout2 = `data/chap04.aux'.
-
- (./data/chap04.tex
-第四章
-)
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[39
-
-
-
-
-]
-\openout2 = `data/chap05.aux'.
-
- (./data/chap05.tex
-第五章
-)
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[40
-
-
-
-
-]
-\openout2 = `data/chap_exp.aux'.
-
- (./data/chap_exp.tex
-第六章
-
-Package natbib Warning: Citation `paszke_pytorch_2019' on page 41 undefined on input line 11.
-
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[41
-
-
-
-
-]
-
-Package natbib Warning: Citation `bazazian_fast_2015' on page 42 undefined on input line 25.
-
-
-Package natbib Warning: Citation `ahmed_edge_2018' on page 42 undefined on input line 25.
-
-
-Package natbib Warning: Citation `wang_pienet_2020a' on page 42 undefined on input line 25.
-
-
-Package natbib Warning: Citation `bode_bounded_2023' on page 42 undefined on input line 25.
-
-
-
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[42]
-
-Package natbib Warning: Citation `bazazian_fast_2015' on page 43 undefined on input line 46.
-
-
-Package natbib Warning: Citation `ahmed_edge_2018' on page 43 undefined on input line 47.
-
-
-Package natbib Warning: Citation `wang_pienet_2020a' on page 43 undefined on input line 48.
+Package natbib Warning: Citation `wang_pienet_2020a' on page 26 undefined on input line 48.
 
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 5.0pt on input line 55.
@@ -2252,27 +1981,27 @@ LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 5.0pt on input line 55.
 
-LaTeX Warning: Reference `tab:metrics_result_of_four_obj' on page 43 undefined on input line 64.
+LaTeX Warning: Reference `tab:metrics_result_of_four_obj' on page 26 undefined on input line 64.
 
 File: figures/NECDNet/result.jpg Graphic file (type bmp)
 <figures/NECDNet/result.jpg>
 
-Package natbib Warning: Citation `bazazian_fast_2015' on page 43 undefined on input line 118.
+Package natbib Warning: Citation `bazazian_fast_2015' on page 26 undefined on input line 118.
 
 
-Package natbib Warning: Citation `ahmed_edge_2018' on page 43 undefined on input line 119.
+Package natbib Warning: Citation `ahmed_edge_2018' on page 26 undefined on input line 119.
 
 
-Package natbib Warning: Citation `wang_pienet_2020a' on page 43 undefined on input line 120.
+Package natbib Warning: Citation `wang_pienet_2020a' on page 26 undefined on input line 120.
 
 
-Package natbib Warning: Citation `bazazian_fast_2015' on page 43 undefined on input line 150.
+Package natbib Warning: Citation `bazazian_fast_2015' on page 26 undefined on input line 150.
 
 
-Package natbib Warning: Citation `ahmed_edge_2018' on page 43 undefined on input line 151.
+Package natbib Warning: Citation `ahmed_edge_2018' on page 26 undefined on input line 151.
 
 
-Package natbib Warning: Citation `wang_pienet_2020a' on page 43 undefined on input line 152.
+Package natbib Warning: Citation `wang_pienet_2020a' on page 26 undefined on input line 152.
 
 
 Overfull \hbox (2.69977pt too wide) in paragraph at lines 143--163
@@ -2286,12 +2015,184 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
+[26]
+
+Package natbib Warning: Citation `bode_bounded_2023' on page 27 undefined on input line 183.
+
+
+Package natbib Warning: Citation `bode_bounded_2023' on page 27 undefined on input line 190.
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[27]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[28]
+File: figures/NECDNet/limitation.jpg Graphic file (type bmp)
+<figures/NECDNet/limitation.jpg>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[29]
+Overfull \hbox (19.46597pt too wide) in paragraph at lines 237--265
+ [] 
+ []
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[30])
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[31]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[32]
+\openout2 = `data/chap04.aux'.
+
+ (./data/chap04.tex
+第四章
+File: figures/FBGrasp/framework.pdf Graphic file (type pdf)
+<use figures/FBGrasp/framework.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[33
+
+
+
+
+]
+File: example-image-a.pdf Graphic file (type pdf)
+<use example-image-a.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[34]
+File: example-image-a.pdf Graphic file (type pdf)
+<use example-image-a.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[35]
+File: figures/FBGrasp/sampling_strategy.pdf Graphic file (type pdf)
+<use figures/FBGrasp/sampling_strategy.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[36]
+File: example-image-a.pdf Graphic file (type pdf)
+<use example-image-a.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[37]
+File: figures/FBGrasp/contact_detect.pdf Graphic file (type pdf)
+<use figures/FBGrasp/contact_detect.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[38]
+File: example-image.pdf Graphic file (type pdf)
+<use example-image.pdf>
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[39]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[40]
+
+LaTeX Warning: Reference `cha:' on page 41 undefined on input line 124.
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[41]
+
+LaTeX Warning: Reference `sec:xx' on page 42 undefined on input line 152.
+
+
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[42]
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
 [43]
+File: figures/FBGrasp/augmentation.pdf Graphic file (type pdf)
+<use figures/FBGrasp/augmentation.pdf>
 
-Package natbib Warning: Citation `bode_bounded_2023' on page 44 undefined on input line 183.
 
-
-Package natbib Warning: Citation `bode_bounded_2023' on page 44 undefined on input line 190.
+LaTeX Warning: Reference `sec:xx' on page 44 undefined on input line 192.
 
 
 
@@ -2308,8 +2209,13 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [45]
-File: figures/NECDNet/limitation.jpg Graphic file (type bmp)
-<figures/NECDNet/limitation.jpg>
+File: figures/FBGrasp/stability.pdf Graphic file (type pdf)
+<use figures/FBGrasp/stability.pdf>
+
+Underfull \hbox (badness 2197) in paragraph at lines 224--225
+[]\TU/SimSun(0)/m/n/12.045 基 于 上 述 定 义，|  原 本 的 单 一 接 触 点 被 扩 展 为 一 个 离 散 的 接 触 点 簇 $[][] \OT1/cmr/m/n/12.045 =
+ []
+
 
 
 
@@ -2318,11 +2224,6 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [46]
-Overfull \hbox (19.46597pt too wide) in paragraph at lines 237--265
- [] 
- []
-
-
 
 
 Package fancyhdr Warning: \footskip is too small (19.91692pt): 
@@ -2337,17 +2238,10 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [48]
+\openout2 = `data/chap05.aux'.
 
-
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[49]
-\openout2 = `data/chap_exp2.aux'.
-
- (./data/chap_exp2.tex
-第七章
+ (./data/chap05.tex
+第五章
 File: figures/FBGrasp/setting.pdf Graphic file (type pdf)
 <use figures/FBGrasp/setting.pdf>
 
@@ -2357,7 +2251,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[50
+[49
 
 
 
@@ -2369,14 +2263,14 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[51]
+[50]
 
 
 Package fancyhdr Warning: \footskip is too small (19.91692pt): 
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[52]
+[51]
 File: figures/FBGrasp/grasp_distribution_main.pdf Graphic file (type pdf)
 <use figures/FBGrasp/grasp_distribution_main.pdf>
 
@@ -2386,34 +2280,51 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[53]
+[52]
 
-LaTeX Warning: Reference `tab:statistical_results' on page 54 undefined on input line 81.
-
-
-Package natbib Warning: Citation `wan2020planning' on page 54 undefined on input line 96.
+LaTeX Warning: Reference `tab:statistical_results' on page 53 undefined on input line 81.
 
 
-Package natbib Warning: Citation `ten2017grasp' on page 54 undefined on input line 97.
+Package natbib Warning: Citation `wan2020planning' on page 53 undefined on input line 96.
 
 
-Package natbib Warning: Citation `miller_graspit_2021' on page 54 undefined on input line 98.
+Package natbib Warning: Citation `ten2017grasp' on page 53 undefined on input line 97.
 
 
+Package natbib Warning: Citation `miller_graspit_2021' on page 53 undefined on input line 98.
 
 
-Package fancyhdr Warning: \footskip is too small (19.91692pt): 
-(fancyhdr)                Make it at least 21.68097pt, for example:
-(fancyhdr)                \setlength{\footskip}{21.68097pt}.
-
-[54])
 
 
 Package fancyhdr Warning: \footskip is too small (19.91692pt): 
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[55] (./main.lof
+[53])
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[54]
+\openout2 = `data/chap06.aux'.
+
+ (./data/chap06.tex
+第六章
+)
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[55
+
+
+
+
+] (./main.lof
 
 
 Package fancyhdr Warning: \footskip is too small (19.91692pt): 
@@ -2437,7 +2348,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
 [57] (./main.lot
-Underfull \hbox (badness 4316) in paragraph at lines 8--8
+Underfull \hbox (badness 4316) in paragraph at lines 5--5
  [][] [][][]\TU/texgyretermes(0)/m/n/12.045 ABC-Corner \TU/SimSun(0)/m/n/12.045 数 据 集 上 各 边 缘 与 角 点 检 测 方 法 的 宏 平 均  |（\TU/texgyretermes(0)/m/n/12.045 Macro- 
  []
 
@@ -2472,14 +2383,21 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[60])
+[60]
 
 
 Package fancyhdr Warning: \footskip is too small (19.91692pt): 
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[61]
+[61])
+
+
+Package fancyhdr Warning: \footskip is too small (19.91692pt): 
+(fancyhdr)                Make it at least 21.68097pt, for example:
+(fancyhdr)                \setlength{\footskip}{21.68097pt}.
+
+[62]
 \openout2 = `data/publications.aux'.
 
  (./data/publications.tex)
@@ -2489,7 +2407,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[62
+[63
 
 
 
@@ -2503,7 +2421,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[63
+[64
 
 
 
@@ -2523,7 +2441,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[64
+[65
 
 
 
@@ -2545,7 +2463,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[65
+[66
 
 ]
 
@@ -2554,7 +2472,7 @@ Package fancyhdr Warning: \footskip is too small (19.91692pt):
 (fancyhdr)                Make it at least 21.68097pt, for example:
 (fancyhdr)                \setlength{\footskip}{21.68097pt}.
 
-[66] (./main.aux (./data/chap01.aux) (./data/chap02.aux) (./data/chap03.aux) (./data/chap04.aux) (./data/chap05.aux) (./data/chap_exp.aux) (./data/chap_exp2.aux) (./data/publications.aux) (./data/acknowledgement.aux))
+[67] (./main.aux (./data/chap01.aux) (./data/chap02.aux) (./data/chap03.aux) (./data/chap04.aux) (./data/chap05.aux) (./data/chap06.aux) (./data/publications.aux) (./data/acknowledgement.aux))
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/08/05>
@@ -2571,23 +2489,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-<<<<<<< HEAD
-(rerunfilecheck)             Checksum: DEC29F421D5214EE6B2357ACDA2D7368;13350.
+(rerunfilecheck)             Checksum: 79A5468E4C92F3016FC3C907A24BF933;11623.
  ) 
 Here is how much of TeX's memory you used:
- 28057 strings out of 473832
- 600041 string characters out of 5733157
- 1016124 words of memory out of 5000000
- 50473 multiletter control sequences out of 15000+600000
-=======
-(rerunfilecheck)             Checksum: 2C4ED696370B2E7C8D7ED9E599AB5B0C;13024.
- ) 
-Here is how much of TeX's memory you used:
- 28053 strings out of 473832
- 599902 string characters out of 5733157
- 1015691 words of memory out of 5000000
- 50469 multiletter control sequences out of 15000+600000
->>>>>>> 96206e64fc1f36e23f7f50c9ce472a3f51cda414
+ 28040 strings out of 473832
+ 599516 string characters out of 5733157
+ 1013158 words of memory out of 5000000
+ 50463 multiletter control sequences out of 15000+600000
  594518 words of font info for 282 fonts, out of 8000000 for 9000
  1349 hyphenation exceptions out of 8191
  107i,16n,125p,3254b,800s stack positions out of 10000i,1000n,20000p,200000b,200000s
