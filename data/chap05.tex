@@ -33,25 +33,40 @@
 % 添加表格：分布指标对比
 \begin{table}[htbp]
     \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
     \caption{不同抓取规划方法在三个测试物体上的分布统计指标对比}
     \label{tab:distribution_metrics}
+    \begin{threeparttable}
     \begin{tabular}{lcccc}
         \toprule
-        \textbf{物体} & \textbf{方法} & \textbf{STD (标准差)} & \textbf{R (极差)} & \textbf{MAD (平均偏差)} \\
+        \textbf{物体} & \textbf{方法} & \textbf{STD ($\uparrow$)} & \textbf{R ($\uparrow$)} & \textbf{MAD ($\uparrow$)} \\
         \midrule
-        \multirow{4}{*}{Tetrahedron} 
-        & GraspIt! & 0.xx & 0.xx & 0.xx \\
-        & GPD & 0.xx & 0.xx & 0.xx \\
-        & WRS & N/A & N/A & N/A \\
-        & \textbf{Ours} & \textbf{0.xx} & \textbf{0.xx} & \textbf{0.xx} \\
+        \multirow{4}{*}{四面体} 
+        & GraspIt!~\cite{miller_graspit_2021} & 0.2516 & 0.8676 & 0.1998 \\
+        & GPD~\cite{ten2017grasp} & 0.2878 & 0.9375 & 0.2389 \\
+        & WRS~\cite{wan2020planning} & / & / & / \\
+        & \textbf{本文方法} & \textbf{0.2995} & \textbf{0.9498} & \textbf{0.2450} \\
         \midrule
-        \multirow{4}{*}{Amicelli} 
-        & GraspIt! & 0.xx & 0.xx & 0.xx \\
-        & GPD & 0.xx & 0.xx & 0.xx \\
-        & WRS & 0.xx & 0.xx & 0.xx \\
-        & \textbf{Ours} & \textbf{0.xx} & \textbf{0.xx} & \textbf{0.xx} \\
+        \multirow{4}{*}{巧克力（Amicelli）} 
+        & GraspIt!~\cite{miller_graspit_2021} & 0.1669 & 0.6687 & 0.1177 \\
+        & GPD~\cite{ten2017grasp} & 0.2742 & 0.9454 & 0.2162 \\
+        & WRS~\cite{wan2020planning} & 0.2639 & 0.9365 & 0.2002 \\
+        & \textbf{本文方法} & \textbf{0.2835} & \textbf{0.9922} & \textbf{0.2193} \\
+        \midrule
+        \multirow{4}{*}{海豹（Seal）}
+        & GraspIt!~\cite{miller_graspit_2021} & 0.2718 & 0.9063 & 0.2154 \\
+        & GPD~\cite{ten2017grasp} & 0.2667 & 0.8409 & 0.2284 \\
+        & WRS~\cite{wan2020planning} & 0.2427 & 0.8690 & 0.2014 \\
+        & \textbf{本文方法} & \textbf{0.2857} & \textbf{0.9154} & \textbf{0.2429} \\
         \bottomrule
     \end{tabular}
+    \begin{tablenotes}
+        \footnotesize
+        \item STD：标准差；R：极差；MAD：平均绝对偏差。
+        \item WRS 对四面体无法生成有效抓取候选，以"/"表示。
+    \end{tablenotes}
+    \end{threeparttable}
 \end{table}
 
 \subsection{抓取分布可视化}
@@ -86,7 +101,7 @@
     \small
     \setlength{\tabcolsep}{4pt}
     \caption{各抓取规划方法的抓取成功率统计}
-    \label{tab:statistica_results}
+    \label{tab:statistical_results}
     \begin{threeparttable}
     \begin{tabular}{l|ccccccccc|c}
         \toprule
