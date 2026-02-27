@@ -8,7 +8,7 @@
 \subsection{软硬件环境与参数设置}
 \label{sec:experiment setup}
 
-实验在 NVIDIA RTX 3090（256 GB 显存）平台上完成，系统为 Windows 10，开发框架为 PyTorch~\cite{paszke_pytorch_2019}。训练时 batch size 设为 20,000，训练 64 个 epoch，数据加载线程数为 8。优化器采用 Adam，参数为 $\beta_1=0.9$、$\beta_2=0.999$，初始学习率为 0.001。
+实验在 NVIDIA RTX 3090（256 GB 显存）平台上完成，系统为 Windows 10，开发框架为 PyTorch~\cite{paszke_pytorch_2019}。训练时 batch size 设为 20,000，训练 64 个 epoch，数据加载线程数为 8。优化器采用 Adam，参数为 $\beta_1=0.9$、$\beta_2=0.999$，初始学习率为 0.001，并采用余弦退火学习率调度。
 
 考虑到 ABC-Corner 中面点、边点和角点分布严重不均衡，训练阶段采用 Focal Loss~\cite{lin_focal_2020}，并将 $\gamma$ 设为 2.5，以增强模型对困难样本和少数类样本的关注。
 
@@ -209,7 +209,7 @@
 
 \subsection{多尺度参数的选择}
 
-尺度实验将邻域大小 $k$ 设为 8--128，并测试 2 到 8 个尺度的组合。结果表明，4 个尺度（8, 16, 32, 64）时性能最佳。尺度过少会限制感受野，尺度过多则引入噪声并增加计算负担。
+尺度实验将邻域大小 $k$ 设为 8 到 128，并测试 2 到 8 个尺度的组合。结果表明，4 个尺度（8, 16, 32, 64）时性能最佳。尺度过少会限制感受野，尺度过多则引入噪声并增加计算负担。
 
 \begin{table*}[ht]
     \centering
