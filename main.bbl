@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{43}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -11,10 +11,28 @@
   \let\eprint\href
 \fi
 
+\bibitem[Ahmed et~al.(2018)Ahmed, Tan, Chew, Mamun, and Wong]{ahmed_edge_2018}
+AHMED S~M, TAN Y~Z, CHEW C~M, et~al.
+\newblock Edge and corner detection for unorganized 3d point clouds with application to robotic welding\allowbreak[C]//\allowbreak
+2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS).
+\newblock 2018: 7350-7355.
+
+\bibitem[Miller et~al.(2021)Miller and Allen]{miller_graspit_2021}
+MILLER A~T, ALLEN P~K.
+\newblock Graspit!: A versatile simulator for grasp analysis\allowbreak[C]//\allowbreak
+ASME 2000 International Mechanical Engineering Congress and Exposition.
+\newblock American Society of Mechanical Engineers Digital Collection, 2021: 1251-1258.
+
 \bibitem[Gumhold et~al.(2001)Gumhold and Wang]{gumhold_feature_2001}
 GUMHOLD S, WANG X.
 \newblock Feature extraction from point clouds\allowbreak[J].
 \newblock Proceedings of 10th international meshing roundtable, 2001, 2001.
+
+\bibitem[Bazazian et~al.(2015)Bazazian, Casas, and {Ruiz-Hidalgo}]{bazazian_fast_2015}
+BAZAZIAN D, CASAS J~R, {Ruiz-Hidalgo} J.
+\newblock Fast and robust edge extraction in unorganized point clouds\allowbreak[C]//\allowbreak
+2015 International Conference on Digital Image Computing: Techniques and Applications (DICTA).
+\newblock 2015: 1-8.
 
 \bibitem[Lin et~al.(2015)Lin, Wang, Cheng, Chen, Jia, Chen, and Li]{lin_line_2015}
 LIN Y, WANG C, CHENG J, et~al.
@@ -30,6 +48,11 @@ DEMARSIN K, VANDERSTRAETEN D, VOLODINE T, et~al.
 HIMEUR C~E, LEJEMBLE T, PELLEGRINI T, et~al.
 \newblock Pcednet : A lightweight neural network for fast and interactive edge detection in 3d point clouds\allowbreak[J].
 \newblock ACM Transactions on Graphics, 2022, 41\allowbreak (1): 1-21.
+
+\bibitem[Bode et~al.(2023)Bode, Weinmann, and Klein]{bode_bounded_2023}
+BODE L, WEINMANN M, KLEIN R.
+\newblock Bounded: Neural boundary and edge detection in 3d point clouds via local neighborhood statistics\allowbreak[J].
+\newblock ISPRS Journal of Photogrammetry and Remote Sensing, 2023, 205: 334-351.
 
 \bibitem[Mirzaei et~al.(2022)Mirzaei, Arashpour, Asadi, Masoumi, Bai, and Behnood]{mirzaei_3d_2022}
 MIRZAEI K, ARASHPOUR M, ASADI E, et~al.
@@ -59,6 +82,14 @@ HOPPE H, DEROSE T, DUCHAMP T, et~al.
 \newblock Surface reconstruction from unorganized points\allowbreak[J/OL].
 \newblock SIGGRAPH Comput. Graph., 1992, 26\allowbreak (2): 71-78.
 \newblock DOI: \doi{10.1145/142920.134011}.
+
+\bibitem[Cignoni et~al.(2008)Cignoni, Callieri, Corsini, Dellepiane, Ganovelli, and Ranzuglia]{cignoni_meshlab_2008}
+CIGNONI P, CALLIERI M, CORSINI M, et~al.
+\newblock {MeshLab: an Open-Source Mesh Processing Tool}\allowbreak[C/OL]//\allowbreak
+SCARANO V, CHIARA R~D, ERRA U.
+\newblock Eurographics Italian Chapter Conference.
+\newblock The Eurographics Association, 2008.
+\newblock DOI: \doi{10.2312/LocalChapterEvents/ItalChap/ItalianChapConf2008/129-136}.
 
 \bibitem[Tolstikhin et~al.(2021)Tolstikhin, Houlsby, Kolesnikov, Beyer, Zhai, Unterthiner, Yung, Steiner, Keysers, Uszkoreit, Lucic, and Dosovitskiy]{tolstikhin_mlpmixer_2021}
 TOLSTIKHIN I~O, HOULSBY N, KOLESNIKOV A, et~al.
@@ -101,30 +132,6 @@ MAO A, MOHRI M, ZHONG Y.
 ICML'23: Vol. 202\quad Proceedings of the 40th International Conference on Machine Learning.
 \newblock Honolulu, Hawaii, USA: JMLR.org, 2023: 23803-23828.
 
-\bibitem[Krstini{\'c} et~al.(2020)Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c}, {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}, Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c}, and {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}]{krstinic_multilabel_2020}
-KRSTINI{\'C} D, BRAOVI{\'C} M, {\v S}ERI{\'C} L, et~al.
-\newblock Multi-label classifier performance evaluation with confusion matrix\allowbreak[J/OL].
-\newblock Computer Science \& Information Technology (CS \& IT), 2020, 10\allowbreak (8): 1.
-\newblock DOI: \doi{10.5121/csit.2020.100801}.
-
-\bibitem[Chicco et~al.(2020)Chicco and Jurman]{chicco_advantages_2020}
-CHICCO D, JURMAN G.
-\newblock The advantages of the matthews correlation coefficient (mcc) over f1 score and accuracy in binary classification evaluation\allowbreak[J/OL].
-\newblock BMC Genomics, 2020, 21: 6.
-\newblock DOI: \doi{10.1186/s12864-019-6413-7}.
-
-\bibitem[D{\"u}ntsch et~al.(2019)D{\"u}ntsch and Gediga]{duntsch_confusion_2019}
-D{\"U}NTSCH I, GEDIGA G.
-\newblock Confusion matrices and rough set data analysis\allowbreak[J/OL].
-\newblock Journal of Physics: Conference Series, 2019, 1229\allowbreak (1): 012055.
-\newblock DOI: \doi{10.1088/1742-6596/1229/1/012055}.
-
-\bibitem[Erbani et~al.(2024)Erbani, Portier, {Egyed-Zsigmond}, and Nurbakova]{erbani_confusion_2024}
-ERBANI J, PORTIER P~{\'E}, {Egyed-Zsigmond} E, et~al.
-\newblock Confusion matrices: A unified theory\allowbreak[J/OL].
-\newblock IEEE Access, 2024, 12: 181372-181419.
-\newblock DOI: \doi{10.1109/ACCESS.2024.3507199}.
-
 \bibitem[Koch et~al.(2019)Koch, Matveev, Jiang, Williams, Artemov, Burnaev, Alexa, Zorin, and Panozzo]{koch_abc_2019}
 KOCH S, MATVEEV A, JIANG Z, et~al.
 \newblock Abc: A big cad model dataset for geometric deep learning\allowbreak[C/OL]//\allowbreak
@@ -151,6 +158,66 @@ LAI K, BO L, REN X, et~al.
 \newblock 2011: 1817-1824.
 \newblock DOI: \doi{10.1109/ICRA.2011.5980382}.
 
+\bibitem[Pedregosa et~al.(2011)Pedregosa, Varoquaux, Gramfort, Michel, Thirion, Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos, Cournapeau, Brucher, Perrot, and Duchesnay]{pedregosa_scikitlearn_2011}
+PEDREGOSA F, VAROQUAUX G, GRAMFORT A, et~al.
+\newblock Scikit-learn: Machine learning in python\allowbreak[J].
+\newblock Journal of Machine Learning Research, 2011, 12\allowbreak (85): 2825-2830.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, Desmaison, K{\"o}pf, Yang, DeVito, Raison, Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala]{paszke_pytorch_2019}
+PASZKE A, GROSS S, MASSA F, et~al.
+\newblock Pytorch: An imperative style, high-performance deep learning library\allowbreak[A].
+\newblock 2019.
+
+\bibitem[Harris et~al.(2020)Harris, Millman, {van der Walt}, Gommers, Virtanen, Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, {van Kerkwijk}, Brett, Haldane, {del R{\'i}o}, Wiebe, Peterson, {G{\'e}rard-Marchant}, Sheppard, Reddy, Weckesser, Abbasi, Gohlke, and Oliphant]{harris_array_2020}
+HARRIS C~R, MILLMAN K~J, {van der Walt} S~J, et~al.
+\newblock Array programming with numpy\allowbreak[J].
+\newblock Nature, 2020, 585\allowbreak (7825): 357-362.
+
+\bibitem[Virtanen et~al.(2020)Virtanen, Gommers, Oliphant, Haberland, Reddy, Cournapeau, Burovski, Peterson, Weckesser, Bright, {van der Walt}, Brett, Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng, Moore, VanderPlas, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris, Archibald, Ribeiro, Pedregosa, {van Mulbregt}, and {SciPy 1.0 Contributors}]{virtanen_scipy_2020}
+VIRTANEN P, GOMMERS R, OLIPHANT T~E, et~al.
+\newblock Scipy 1.0: Fundamental algorithms for scientific computing in python\allowbreak[J].
+\newblock Nature Methods, 2020, 17\allowbreak (3): 261-272.
+
+\bibitem[Kingma et~al.(2014)Kingma and Ba]{kingma_adam_2014}
+KINGMA D~P, BA J.
+\newblock Adam: A method for stochastic optimization\allowbreak[J].
+\newblock CoRR, 2014.
+
+\bibitem[Loshchilov et~al.(2017)Loshchilov and Hutter]{loshchilov_sgdr_2017}
+LOSHCHILOV I, HUTTER F.
+\newblock Sgdr: Stochastic gradient descent with warm restarts: arXiv:1608.03983\allowbreak[M].
+\newblock arXiv, 2017.
+
+\bibitem[Krstini{\'c} et~al.(2020)Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c}, {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}, Krstini{\'c}, Braovi{\'c}, {\v S}eri{\'c}, and {Bo{\v z}i{\'c}-{\v S}tuli{\'c}}]{krstinic_multilabel_2020}
+KRSTINI{\'C} D, BRAOVI{\'C} M, {\v S}ERI{\'C} L, et~al.
+\newblock Multi-label classifier performance evaluation with confusion matrix\allowbreak[J/OL].
+\newblock Computer Science \& Information Technology (CS \& IT), 2020, 10\allowbreak (8): 1.
+\newblock DOI: \doi{10.5121/csit.2020.100801}.
+
+\bibitem[Chicco et~al.(2020)Chicco and Jurman]{chicco_advantages_2020}
+CHICCO D, JURMAN G.
+\newblock The advantages of the matthews correlation coefficient (mcc) over f1 score and accuracy in binary classification evaluation\allowbreak[J/OL].
+\newblock BMC Genomics, 2020, 21: 6.
+\newblock DOI: \doi{10.1186/s12864-019-6413-7}.
+
+\bibitem[D{\"u}ntsch et~al.(2019)D{\"u}ntsch and Gediga]{duntsch_confusion_2019}
+D{\"U}NTSCH I, GEDIGA G.
+\newblock Confusion matrices and rough set data analysis\allowbreak[J/OL].
+\newblock Journal of Physics: Conference Series, 2019, 1229\allowbreak (1): 012055.
+\newblock DOI: \doi{10.1088/1742-6596/1229/1/012055}.
+
+\bibitem[Erbani et~al.(2024)Erbani, Portier, {Egyed-Zsigmond}, and Nurbakova]{erbani_confusion_2024}
+ERBANI J, PORTIER P~{\'E}, {Egyed-Zsigmond} E, et~al.
+\newblock Confusion matrices: A unified theory\allowbreak[J/OL].
+\newblock IEEE Access, 2024, 12: 181372-181419.
+\newblock DOI: \doi{10.1109/ACCESS.2024.3507199}.
+
+\bibitem[Wang et~al.(2020)Wang, Xu, Xu, Tagliasacchi, Zhou, {Mahdavi-Amiri}, and Zhang]{wang_pienet_2020}
+WANG X, XU Y, XU K, et~al.
+\newblock Pie-net: Parametric inference of point cloud edges\allowbreak[C]//\allowbreak
+NIPS '20: Proceedings of the 34th International Conference on Neural Information Processing Systems.
+\newblock Red Hook, NY, USA: Curran Associates Inc., 2020: 20167-20178.
+
 \bibitem[Li et~al.(2019)Li and Qiao]{li_survey_2019}
 LI R, QIAO H.
 \newblock A survey of methods and strategies for high-precision robotic grasping and assembly tasks---some new trends\allowbreak[J/OL].
@@ -171,9 +238,8 @@ TEN~PAS A, GUALTIERI M, SAENKO K, et~al.
 
 \bibitem[Wan et~al.(2021)Wan, Harada, and Kanehiro]{wan_planning_2021}
 WAN W, HARADA K, KANEHIRO F.
-\newblock Planning grasps with suction cups and parallel grippers using superimposed segmentation of object meshes\allowbreak[J/OL].
+\newblock Planning grasps with suction cups and parallel grippers using superimposed segmentation of object meshes\allowbreak[J].
 \newblock IEEE Transactions on Robotics, 2021, 37\allowbreak (1): 166-184.
-\newblock DOI: \doi{10.1109/TRO.2020.3014036}.
 
 \bibitem[Ester et~al.(1996)Ester, Kriegel, Sander, and Xu]{ester_densitybased_1996}
 ESTER M, KRIEGEL H~P, SANDER J, et~al.

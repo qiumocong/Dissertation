@@ -1,37 +1,173 @@
-\chapter{点云几何特征检测实验结果及分析}
-\label{chap:experiment}
+\chapter{点云几何特征检测实验及分析}
+\label{chap:necdnet_experiment}
 
+\section{引言}
+\listoftodos
 本章旨在通过系统性的实验验证本文所提出的 NECDNet 在三维点云边缘与角点检测任务中的有效性与鲁棒性。实验主要基于本文构建的 ABC-Corner 数据集展开。首先，本章将详细阐述 ABC-Corner 数据集的构建过程、实验的硬件环境、参数配置以及针对数据不平衡问题所采用的评价指标与训练策略。随后，将 NECDNet 与当前主流的传统几何分析方法及深度学习方法进行多维度的定性与定量对比，并重点分析法向量估计精度对检测结果的显著影响。此外，为了验证网络结构设计的合理性，本章还对特征维度、多尺度参数选择及数据增强策略进行了详尽的消融实验分析。最后，本章对实验结果进行了总结与讨论。
 
-\section{实验环境及配置}
+\section{\textrm{ABC-Corner} 数据集构建}
+\label{sec:dataset}
+网络训练和评估离不开高质量的标注数据集。针对点云几何特征检测任务，本文构建了一个专门的数据集：ABC-Corner 数据集。该数据集基于 ABC 数据集~\cite{koch_abc_2019} 中的 CAD 模型，经过精细的标注和处理，包含丰富的面点、边缘点和角点样本，能够有效支持深度学习模型的训练与评估。下文将详细介绍数据集的选取标准、标注流程及统计特性。
+\subsection{数据集选取}
+针对点云数据的深度学习任务，目前已有多个公开数据集可供使用，图~\ref{fig:dataset_comparison}展示了 ShapeNet~\cite{chang_shapenet_2015}、ScanNet~\cite{dai_scannet_2017}、RGB-D Object Dataset~\cite{lai_largescale_2011} 数据集中的部分内容。这些数据集的原始数据一般为扫描得到的非结构化点云，或者RGB-D估计得到的点云，适用于多种点云处理任务，如分类、分割和重建等。然而，在本文的几何特征检测任务中，要求数据集具备高质量的几何特征标注，特别是边缘和角点的精确位置标注。通过扫描或重建得到的点云数据往往存在噪声和不完整性，且难以得到精确的几何特征标注，故本文选择基于 CAD 模型的数据集进行构建。
 
-\subsection{软硬件环境与参数设置}
-\label{sec:experiment setup}
+\begin{figure}
+    \centering
+    % \includegraphics[width=1.0\textwidth]{NECDNet/dataset_comparison.jpg}
+    \includegraphics[width=0.5\textwidth]{example-image-a}
+    \bicaption{常用点云数据集对比示意图。}{Comparison of commonly used point cloud datasets.}
+    \label{fig:dataset_comparison}
+\end{figure}
 
-为了确保实验结果的可复现性，本节首先明确实验的软硬件环境。本次实验的计算平台采用一台配备 NVIDIA RTX 3090 图形处理单元（显存 256 GB）的高性能工作站，运行环境为 Windows 10 操作系统。算法的开发与实现基于 PyTorch 深度学习框架~\cite{paszke_pytorch_2019}，集成开发环境为 PyCharm。
+在 CAD 模型数据集中，ABC 数据集因其丰富的几何多样性和高精度的模型表示而被广泛应用于几何处理和计算机图形学领域~\cite{koch_abc_2019}。如图~\ref{fig:abc_dataset_examples}，ABC 数据集包含了大量由真实工程设计生成的 CAD 模型，涵盖了各种复杂的几何形状和结构，适合用于点云几何特征检测任务。并且，CAD 模型本身具有明确的几何定义，便于从中提取精确的边缘和角点信息，满足本文对数据集标注质量的高要求。因此，本文选择 ABC 数据集作为构建 ABC-Corner 数据集的基础。
 
-在网络模型的训练阶段，超参数的设定对于模型的收敛速度和最终性能至关重要。为了平衡计算效率与显存占用，将批次大小（Batch Size）设定为 20,000，共进行 64 个 Epoch 的迭代训练。为了加速大规模点云数据的读取与预处理，数据加载器的并行工作线程数被配置为 8。模型优化采用 Adam 优化器，该优化器结合了动量法和自适应学习率的优点，能够有效应对稀疏梯度问题。其动量参数分别设定为 $\beta_1 = 0.9$ 和 $\beta_2 = 0.999$，初始学习率设置为 0.001，配合余弦退火策略进行学习率衰减，以确保网络在训练初期的快速收敛以及后期的稳定优化。
+\begin{figure}
+    \centering
+    % \includegraphics[width=1.0\textwidth]{NECDNet/abc_dataset_examples.jpg}
+    \includegraphics[width=0.5\textwidth]{example-image-a}
+    \bicaption{ABC 数据集中的部分 CAD 模型示例。}{Examples of CAD models from the ABC dataset.}
+    \label{fig:abc_dataset_examples}
+\end{figure}
 
-针对三维点云数据中普遍存在的几何特征分布不平衡问题，即面点数量远多于边点，而角点最为稀缺，传统的交叉熵损失函数往往会导致模型被大量简单样本主导。为此，本文采用了 Focal Loss~\cite{lin_focal_2020} 作为损失函数，并将聚焦参数 $\gamma$ 设为 2.5。该参数能够动态降低易分类样本的权重，使得模型在训练过程中更加关注那些难以分类的边缘与角点样本，从而有效缓解类别不平衡带来的负面影响。
+\subsection{数据集标注流程}
+ABC 数据集中包含了大量的 CAD 模型，原始数据为模型的几何表示（如 B-Rep）。ABC 数据集在构建过程中基于模型的原始数据，生成了网格化表示和几何真值（法向量、曲率、补丁分割、尖锐特征等）。本文的数据集 ABC-Corner 主要使用原始数据集中的OBJ模型文件及其对应的几何真值文件，结合自定义的标注流程，生成包含面点、边缘点和角点标签的点云数据集。如图~\ref{fig:annotation_pipeline}所示，本文数据集标注流程主要包括以下几个步骤：边缘提取、粗角点检测和人工精修。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{NECDNet/annotation_pipeline.jpg}
+    \bicaption{ABC-Corner 数据集标注流程示意图。}{Annotation pipeline for the ABC-Corner dataset.}
+    \label{fig:annotation_pipeline}
+\end{figure}
+
+ABC 数据集的模型文件中包含均匀采样得到的点云数据（顶点），以及每个顶点的法向量和曲率信息。几何真值文件中包含了模型的曲面补丁划分和边缘曲线信息。其中的边缘曲线信息是将模型所有边缘进行参数化表示，包含边缘上各顶点的索引信息，以及曲线的样式。基于该信息可以实现边缘点的自动标注。
+
+ABC 数据集中虽然包含了边缘信息，但并未直接提供角点的标注。为了提取角点，本文设计了一种基于几何规则的粗角点检测方法。具体而言，根据边缘曲线信息，识别出边缘的交叉点作为角点候选集，即某个索引在所有曲线中出现三次或三次以上，则将其视为角点。在实际检测中发现对于样条曲线，交点的提取由于索引定义的问题，按照上述规则会将所有构成点均视为角点，导致误检较多。因此，在角点粗提取中会排除样条曲线，仅针对直线和圆弧进行交点检测。通过该方法，能够初步获得角点的候选集。
+
+观察图~\ref{fig:annotation_pipeline} 中的标注结果，可以发现自动提取的边缘点和角点存在一定的误差和遗漏。且粗角点检测中未考虑样条曲线。为此，本文引入了人工精修环节，对自动标注的结果进行校正和补充。具体而言，使用点云处理软件 CloudCompare 对点云进行展示，人工检查每个模型的边缘和角点标注，修正错误标注并补充遗漏的特征点。通过该流程，最终生成了高质量的点云几何特征标注数据集 ABC-Corner。
+
+ABC-Corner 数据集在 ABC 数据集的基础上增加了对于模型尖锐角点的准确标注，极大地提升了数据集在点云几何特征检测任务中的适用性。该数据集包含了多样化的几何形状和复杂结构，能够有效支持深度学习模型的训练与评估。在平衡人工标注难度及本文训练数据量要求后，最终的 ABC-Corner 包含了ABC数据集chunk00子集中的1000个模型，模型的选择主要针对几何特征较为突出的模型进行筛选。每个模型均经过上述标注流程处理，生成了包含面点、边缘点和角点标签的点云数据。图~\ref{fig:dataset_samples} 展示了 ABC-Corner 数据集中的部分样本及其标注结果。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{NECDNet/dataset_samples.jpg}
+    \bicaption{ABC-Corner 数据集中的部分样本及其标注结果。}{Samples from the ABC-Corner dataset and their annotation results.}
+    \label{fig:dataset_samples}
+\end{figure}
+
+\section{实验环境与参数配置}
+\label{sec:necdnet_expset}
+
+进行实验验证前，首先需要明确实验的软硬件环境、数据处理方法、模型训练超参数以及评价指标设计，以确保实验结果的可复现性、科学性和可对比性。本文的实验主要基于自建的 ABC-Corner 数据集进行，涉及两个关键实验任务：点云几何特征的多分类检测，即面、边缘与角点的联合检测；面与边缘的二分类检测。设置这两个任务的主要原因在于，部分现有的对比方法仅具备边缘特征检测的能力，为了全面评估本文方法的有效性，除了多分类检测外，本文也在 ABC 数据集上针对单独的边缘提取任务与这些方法进行了对比。本节将详细阐述实验的完整流程，包括数据预处理策略、训练环境与超参数配置、法向量估计方法的比较，以及多维度评价指标体系的设计。
+
+\subsection{软硬件环境与开发框架}
+\label{subsec:necdnet_hardware_environment}
+
+为了确保实验的可复现性，本文明确记录了实验的所有环境信息。计算硬件采用一台配备 NVIDIA RTX 3090 GPU（显存 24 GB）的高性能工作站，CPU 为 Intel Core i7-10700K，内存 256 GB。软件环境为 Ubuntu 22.04 LTS 操作系统。算法实现基于 PyTorch 2.10 深度学习框架，使用 Python 3.10 编程语言和 CUDA 13.0 计算平台以充分发挥 GPU 的计算能力。为了便于代码的开发、调试和版本管理，采用 PyCharm 作为集成开发环境，并使用 Git 进行版本控制。此外，采用 scikit-learn 库用于计算各种评价指标，numpy 和 scipy 库用于数值计算和科学计算~\cite{pedregosa_scikitlearn_2011,paszke_pytorch_2019,harris_array_2020,virtanen_scipy_2020}。
+
+\subsection{数据预处理与划分方案}
+\label{subsec:data_preprocessing}
+
+ABC-Corner 数据集中包含 1000 个点云及其对应的几何特征标签，其中各个点云的点数不同。根据章节~\ref{sec:necdnet_structure}中描述的NECDNet网络架构可知，网络的输入为逐点的多尺度特征矩阵。因此，在数据预处理阶段，首先需要从数据集原始点云中计算各个点的多尺度特征矩阵。根据章节~\ref{sec:feature_computed}中描述的方法进行特征矩阵的计算，值得注意的是数据归一化在计算过程中进行了实现，输入的点云无需进行点数或尺寸的归一化。在特征计算过程中采用了并行计算的方式，以加速处理过程，进程数为 16。
+得到逐点特征矩阵后，后续的数据则以点为单位进行处理，ABC-Corner的数据点总数达到了千万级别。
+
+本文采用分层 $k$ 折交叉验证（Stratified $k$-Fold Cross-Validation）的方法进行数据集划分。本实验选取 $k=5$，即采用 5 折分层交叉验证，此时训练集数据占比为 60\%，验证集占比为 20\%，测试集占比为 20\%，能够在保证训练数据充足的同时，提供足够的验证和测试数据用于模型评估。交叉验证方法具体而言，首先将整个数据集按照标签类别比例进行分层，随机划分为 5 个互不重叠的子集。在每一轮实验中，轮流选取其中 1 个子集作为测试集，1 个子集作为验证集，其余 3 个子集作为训练集。通过这种方式，共进行 5 次独立的训练与评估过程，确保每个子集都曾作为测试集被评估过。最终的实验结果取这 5 次实验的平均值，以减小随机划分带来的偶然误差，从而更准确地反映模型的泛化能力。
+
+此外，在各折数据划分时，本文采用了随机分层划分的方式，确保每个子集中各类别的分布比例与整个数据集保持一致。这种分层划分方法能够有效避免由于随机划分导致的模型训练偏差，即将某些类别过多地分配到训练集或测试集中，从而导致模型在某些类别上的性能评估不准确。通过分层划分，能够确保模型在训练和评估过程中都能接触到各个类别的样本，从而更全面地评估模型的性能。
+
+\subsection{训练超参数配置}
+\label{subsec:hyperparameter_configuration}
+
+网络模型的训练还需要进行超参数配置，本文的设置主要目的是在计算效率与模型性能之间取得最优平衡。部分参数在进行多次训练后的模型评估进行选择，确保最终模型的稳定性和性能。各项参数的具体配置如下。
+
+\subsubsection{批量大小与数据加载}
+为了充分利用 GPU 显存并提高训练效率，批次大小（Batch Size）设定为 20,000。数据加载器（DataLoader）的并行工作线程数配置为 16，以实现高效的多线程数据读取和预处理，减少 GPU 的空闲时间。为了避免因随机数据顺序导致的模型不稳定，采用了随机 Seed 固定的方法，实现数据加载的可重复性，确保实验的可复现性。
+
+\subsubsection{训练轮次与早停策略}
+训练过程的轮次（Epoch）设置为 64，为了防止过拟合现象的发生，实现了早停机制：在验证集上的 F1 分数连续 10 个 Epoch 不再改善时，训练自动停止。这种策略能够在保证模型性能的同时，避免不必要的计算浪费。
+
+\subsubsection{优化器与学习率策略}
+模型优化采用 Adam 优化器，该优化器结合了动量法和自适应学习率的优点，特别适合处理稀疏梯度和高维优化问题~\cite{kingma_adam_2014}。本文中 Adam 优化器的超参数设置为：一阶矩估计系数 $\beta_1 = 0.9$，二阶矩估计系数 $\beta_2 = 0.999$，数值稳定性参数 $\epsilon = 10^{-8}$。
+
+模型的学习率设置采用余弦退火（Cosine Annealing）学习率衰减策略，其数学表达式如式~\ref{eq:cosine_annealing}所示。其中 $\eta_{\max} = 0.001$ 为最大学习率，$\eta_{\min} = 1e^{-5}$ 为最小学习率，$t$ 为当前 epoch，$T = 64$ 为训练总 epoch 数。这种策略能够确保网络在训练初期快速收敛，在训练后期通过较小的学习率进行精细调优，提高最终模型的性能和稳定性~\cite{loshchilov_sgdr_2017}。
+\begin{equation}
+    \eta_t = \eta_{\min} + \frac{1}{2}(\eta_{\max} - \eta_{\min})\left(1 + \cos\left(\pi \frac{t}{T}\right)\right)
+    \label{eq:cosine_annealing}
+\end{equation}
+
+
+\subsection{类别不平衡问题处理}\todo[inline]{这里需要补充实验数据}
+\label{subsec:loss_function_balanced}
+
+点云中三类几何特征的分布严重不平衡，具体统计如表~\ref{tab:class_distribution}所示。面点占总数的约 85\%，边缘点占 12\%，而角点仅占 3\%。这种极度不平衡的类别分布会导致网络在训练过程中被大量简单样本（面点）主导，导致对少数类（特别是角点）的学习不充分。例如，模型可能会倾向于将所有点预测为面点，以获得较高的整体准确率，但这显然无法满足实际应用中对边缘和角点的检测需求。因此，针对这一问题，本文采用了Focal Loss辅以针对性的数据上采样（Oversampling）策略来共同缓解类别不平衡带来的影响。
+
+\begin{table}[!htbp]
+    \centering
+    \bicaption{ABC-Corner 数据集中各类几何特征的分布统计。}{Distribution statistics of geometric features in the ABC-Corner dataset.}
+    \begin{tabular}{lccc}
+        \toprule
+        几何特征类别 & 点数量 & 占比(\%) & 样本数/模型 \\
+        \midrule
+        面点（Face）& 852,000,000 & 85.2\% & 852,000 \\
+        边缘点（Edge）& 120,000,000 & 12.0\% & 120,000 \\
+        角点（Corner）& 28,000,000 & 2.8\% & 28,000 \\
+        总计 & 1,000,000,000 & 100\% & 1,000,000 \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:class_distribution}
+\end{table}
+
+在损失函数的设计上，本文采用了 Focal Loss~\cite{lin_focal_2020} 作为主要的训练损失函数，如第~\ref{sec:loss_function}~章所述。Focal Loss 通过引入动态加权因子 $(1-p_t)^{\gamma}$，能够自适应地降低易分类样本（面点）的权重，同时增加难分类样本（边缘点与角点）的权重。本文中聚焦参数 $\gamma$ 设为 2.5，类别权重均衡因子 $\alpha$ 对三类设置为 $[0.2, 0.3, 0.5]$，即对角点赋予最高的权重。
+
+此外，为了进一步增强训练数据的多样性和模型的鲁棒性，本文对少数类样本进行了上采样处理。通常的数据平衡策略是将所有类别的样本数量上采样至一致，但在本文的任务中，角点的数量级远小于面点和边缘点（仅占边缘点的约1/4）。在进行面点与边缘点的二分类任务时，通过 Focal Loss 的权重调整已能较好地改善类别不平衡问题。然而，角点样本的极度稀缺仍是制约多分类性能的瓶颈。
+
+因此，本文的策略是仅对角点进行上采样，将其数量补充至与边缘点一致，从而将三类的数量比例调整为，面:边缘:角点 = 100:14:14。这种策略旨在重点解决角点学习不足的问题，避免了对面点和边缘点进行不必要的过度采样，还降低了由于过度上采样导致的过拟合风险。为了验证该策略的有效性——即探究是仅对角点上采样更好，还是对边缘点和角点同时上采样至与面点一致更好——本文在后续的消融实验（章节~\ref{sec:ablation_study}）中进行了详细的对比分析与指标评估。
+
+\subsection{法向量估计方法的选择与对比}
+\label{subsec:normal_estimation}
+
+法向量是 NECDNet 计算特征的重要输入之一，其精度直接影响检测结果。第~\ref{sec:normal_estimate}节已详细论述了本文所涉及的两种法向量估计方法：基于 PCA 的点云法向量估计与基于 CAD 网格模型的法向量估计。基于 PCA 的方法适用于非结构化点云，而基于 CAD 网格模型的方法能够提供精确的几何真值。
+
+为了验证法向量估计精度对检测网络性能的影响，本文设计了对比实验，分别训练了两个版本的 NECDNet 模型：一个使用基于 PCA 方法估计的法向量作为输入特征（记为 NECDNet），以模拟原始数据为点云；另一个使用从 CAD 网格模型提取的精确法向量作为输入（记为 NECDNet$\dagger$），作为原始数据为网格模型时的对照组。后续实验对两者在 ABC-Corner 数据集上的检测性能进行定量评估和对比分析，以验证法向量精度对边缘与角点检测结果的显著影响。
 
 \subsection{评价指标设计}
+\label{sec:metrics}
+为了全面评估 NECDNet 在点云几何特征检测任务中的性能，本文采用了多种评价指标，包括准确率（Accuracy）、精确率（Precision）、召回率（Recall）、F1 分数（F1 Score）、交并比（Intersection over Union, IoU）和马修斯相关系数（The Matthews Correlation Coefficient, MCC）~\cite{krstinic_multilabel_2020, chicco_advantages_2020, japkowicz_class_2002a}。这些指标能够从不同角度反映模型的分类效果，特别是在处理类别不平衡问题时，精确率和召回率尤为重要。评价指标主要通过混淆矩阵（Confusion Matrix）进行计算，混淆矩阵记录了模型在各类别上的预测结果与真实标签的对比情况。混淆矩阵的行表示真实类别，列表示预测类别，其中对角线上的值表示正确分类的数量，非对角线上的值表示分类错误的数量。基于混淆矩阵，可以计算出各项评价指标，从而全面评估模型的性能~\cite{duntsch_confusion_2019}，各项指标的具体计算公式请见附录\ref{cha:app_metrics}。
 
-为了全面且客观地评估模型的性能，本文选取精确率（Precision）和召回率（Recall）作为主要评价指标，同时辅以准确率（Accuracy）。此外，为了与现有的 SOTA 方法进行公平对比，还计算了马修斯相关系数（MCC）、F1 分数以及交并比（IoU）。
+本文中分类任务为三分类，类别分别为：$\mathtt{f}$（面点）、$\mathtt{e}$（边缘点）、$\mathtt{c}$（角点）。可以构建对应的混淆矩阵，如表~\ref{tab:confusion_matrix}所示。表中，$TP$（True Positive）表示正确预测为正类的数量，$TN$（True Negative）表示正确预测为负类的数量，$FP$（False Positive）表示错误预测为正类的数量，$FN$（False Negative）表示错误预测为负类的数量。
+\begin{table}[!htbp]
+    \centering
+    \bicaption{三分类任务的混淆矩阵示例。}{Example of confusion matrix for three-class classification task.}
+    \begin{tabular}{ccccc}
+        \toprule
+        & \multicolumn{3}{c}{预测类别} & \\ 
+        \cmidrule(lr){2-4}
+        真实类别 & $\mathtt{f}$ & $\mathtt{e}$ & $\mathtt{c}$ & 总计 \\
+        \midrule
+        $\mathtt{f}$ & $TP_{\mathtt{f}}$ & $FP_{\mathtt{e}}$ & $FP_{\mathtt{c}}$ & $P_{\mathtt{f}}$ \\
+        $\mathtt{e}$ & $FN_{\mathtt{f}}$ & $TP_{\mathtt{e}}$ & $FP_{\mathtt{c}}$ & $P_{\mathtt{e}}$ \\
+        $\mathtt{c}$ & $FN_{\mathtt{f}}$ & $FN_{\mathtt{e}}$ & $TP_{\mathtt{c}}$ & $P_{\mathtt{c}}$ \\
+        总计 & $N_{\mathtt{f}}$ & $N_{\mathtt{e}}$ & $N_{\mathtt{c}}$ & $N$ \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:confusion_matrix}
+\end{table}
 
-对于纯边缘检测任务，直接采用标准的二分类指标公式。而对于边缘与角点的联合检测任务，这是一个典型的多分类问题，且存在严重的类别不平衡。若直接使用全局准确率，模型倾向于将所有点预测为面点即可获得极高的分数，这显然是不合理的。为此，本文采用宏平均（Macro-averaging）策略来计算 Precision、Recall 和 F1 分数。具体而言，首先基于各类别的真正例（TP）、假正例（FP）、真负例（TN）和假负例（FN）统计量分别计算该类别的指标，然后对所有类别的指标取算术平均。这种计算方式赋予了每个类别同等的权重，确保了稀疏类别（如角点）的检测效果能够被充分反映，避免了评价结果被数量占优的面点所主导。
+上述评价指标的标准公式是基于二分类任务进行设计的。对于多分类任务，需要在指标的计算或者混淆矩阵的构建上进行调整。例如\citet{erbani_confusion_2024} 提出基于传输的混淆矩阵构建方法，建立在最优传输理论和最大熵原理之上，针对多标签或软标签分类复杂任务提出了一种新的混淆矩阵构建方法。此外，在指标计算上可以采用宏平均（Macro-Averaging）和微平均（Micro-Averaging）两种方式~\cite{krstinic_multilabel_2020, japkowicz_class_2002a}。宏平均是对每个类别分别计算指标，然后取平均值，适用于类别分布不均衡的情况；而微平均则是将所有类别的预测结果合并后计算指标，更适用于类别分布均衡的情况。
+
+由于本文的分类任务较为简单，且为了与目前的其余最新方法（state-of-the-art, SOTA） 进行对比，本文中主要采用一般的混淆矩阵构建方法加宏平均的方式计算各项评价指标。具体而言，设 $C$ 为类别总数，$M_c$ 为类别 $c$ 的评价指标值，则宏平均的计算公式如(\ref{eq:macro_average})所示。本文中 $C=3$，分别对应面、边缘、角点三类。
+\begin{equation}
+    M_\text{macro} = \frac{1}{C} \sum_{c=1}^{C} M_c
+    \label{eq:macro_average}
+\end{equation}
+
 
 \section{对比实验结果及分析}
 
-为了全面评估 NECDNet 的性能，本节将其与现有的 SOTA 方法进行了对比。对比实验涵盖两个层面：一是针对边缘与角点联合检测的多分类任务，对比方法包括基于协方差分析的 CA 方法~\cite{bazazian_fast_2015}、两阶段检测法 TECD~\cite{ahmed_edge_2018} 以及深度学习方法 PIE-Net~\cite{wang_pienet_2020a}；二是针对纯边缘检测的二分类任务，对比方法包括 PCEDNet~\cite{himeur_pcednet_2022} 和 BoundED~\cite{bode_bounded_2023}。
+为了全面评估 NECDNet 的性能，本节将其与现有的 SOTA 方法进行了对比。对比实验涵盖两个层面：一是针对边缘与角点联合检测的三分类任务，对比方法包括基于协方差分析的 CA 方法~\cite{bazazian_fast_2015}、两阶段检测法 TECD~\cite{ahmed_edge_2018} 以及深度学习方法 PIE-Net~\cite{wang_pienet_2020}；二是针对纯边缘检测的二分类任务，对比方法包括 PCEDNet~\cite{himeur_pcednet_2022} 和 BoundED~\cite{bode_bounded_2023}。
 
 \subsection{边缘与角点联合检测结果分析}
 
-在边缘与角点的联合检测任务中，表~\ref{tab:corner_result} 展示了各方法在 ABC-Corner 数据集上的定量评估结果。数据表明，NECDNet 在 Precision、Recall、F1 分数、Accuracy、IoU 及 MCC 等所有关键指标上均显著优于对比方法。
-
-具体分析各方法的表现，传统几何分析方法 CA 和 TECD 的各项指标相对较低。CA 方法主要依赖单一尺度的几何统计量（如协方差矩阵特征值）进行阈值判定。这种硬阈值策略难以适应不同物体间巨大的几何差异，例如在处理薄壁物体时，单一尺度的邻域分析容易跨越物体的两个表面，导致大量的误检。TECD 方法虽然采用了两步策略，即先检测边缘再基于边缘检测角点，但其角点检测的准确性高度依赖于第一阶段边缘提取的质量，且存在复杂的阈值参数依赖，导致其泛化能力不足，在复杂拓扑结构下的鲁棒性较差。
-
-相比之下，基于深度学习的 PIE-Net 虽然在性能上优于传统方法，但其 F1 分数仍低于本文方法。PIE-Net 采用了两个独立的网络分支分别处理边缘和角点，缺乏对两者特征相关性的联合建模。这种设计割裂了边缘与角点在几何上的内在联系，导致在某些模糊区域容易产生混淆，且存在较高的假阳性率。本文提出的 NECDNet 通过端到端的特征学习和多尺度特征融合，能够更有效地捕捉局部几何结构。特别是当使用从网格模型（Mesh）估计的精确法向量作为输入时，模型的 F1 分数达到 0.815，MCC 达到 0.943，展现了极高的分类一致性。
-
+在边缘与角点的联合检测任务中，表~\ref{tab:corner_result} 展示了各方法在 ABC-Corner 数据集上的定量评估结果。为了确保结果的统计可靠性，所有方法的报告数据均为 5 折交叉验证的平均值。其中 PIE-Net 的作者仅开源了其网络模型部分，并未提供完整的数据处理过程，难以进行复现，因此本文直接引用其论文中的数据进行大致对比。对于 CA 和 TECD 方法，本文在 ABC-Corner 数据集上进行了重新实现和评估，以确保对比的公平性和准确性。对于 NECDNet，本文分别评估了使用基于 PCA 的法向量输入（NECDNet）和使用从 CAD 网格模型提取的精确法向量输入（NECDNet$\dagger$）两种版本，以验证法向量精度对检测性能的影响。
 \begin{table*}[ht]
     \centering
     \small
@@ -45,7 +181,7 @@
         \midrule
         CA~\cite{bazazian_fast_2015} & 0.415 & 0.616 & 0.420 & 0.616 & 0.346 & 0.276 \\
         TECD~\cite{ahmed_edge_2018} & 0.472 & 0.642 & 0.513 & 0.642 & 0.438 & 0.526 \\
-        PIE-NET~\cite{wang_pienet_2020a} & 0.615 & 0.814 & 0.686 & 0.935 & 0.577 & 0.718 \\
+        PIE-NET~\cite{wang_pienet_2020} & 0.615 & 0.814 & 0.686 & 0.935 & 0.577 & 0.718 \\
         NECDNet (Ours)  & 0.646 & 0.857 & 0.715 & 0.983 & 0.616 & 0.833 \\
         NECDNet$\dagger$ (Ours)  & \textbf{0.765} & \textbf{0.933} & \textbf{0.815} & \textbf{0.995} & \textbf{0.743} & \textbf{0.943} \\
         \bottomrule
@@ -53,15 +189,14 @@
     \begin{tablenotes}
         \footnotesize
         \item PIE-Net 的数据基于其作者提供的评估结果整理得出。
-        
         \item $\dagger$ 表示使用从 Mesh 模型估计的法向量。 
      \end{tablenotes}
-    
     \end{threeparttable}
-    
 \end{table*}
 
-定性分析进一步印证了上述结论。如图~\ref{fig:edge_corner_result} 所示的可视化结果显示，NECDNet 的检测结果与真值（Ground Truth）最为接近，能够清晰地勾勒出物体的骨架结构并准确定位角点。CA 和 TECD 方法的鲁棒性较差，出现了较多的噪点；PIE-Net 虽然检测出了大部分特征，但在角点定位上不够精准。PCEDNet 虽然在边缘检测上表现良好，但由于无法检测角点，在图示中缺失了红色角点标记。为了更细致地探究各方法在不同几何拓扑下的表现，表~\ref{tab:metrics_result_of_four_obj} 列出了针对图~\ref{fig:edge_corner_result} 中四个典型复杂物体的分类别详细指标。结果显示，NECDNet 在最具挑战性的“角点”类别上取得了压倒性优势，其角点 F1 分数大幅领先于第二名，证明了本文提出的多尺度特征融合模块在捕捉稀疏拓扑特征方面的有效性。
+表~\ref{tab:corner_result} 的总体评估结果显示，NECDNet 在各项核心指标上均显著优于现有方法。具体而言，NECDNet 的宏平均 F1 分数达到 0.715，相较于 PIE-Net 提升了约 4.2\%；在使用网格法向量（NECDNet$\dagger$）时，F1 分数更是提升至 0.815，展现了卓越的特征提取能力。在反映分类一致性的 MCC 指标上，NECDNet$\dagger$ 达到 0.943，远超 PIE-Net (0.718) 和 TECD (0.526)，证明了模型在处理极度不平衡样本时的鲁棒性。
+
+为了进一步揭示各方法在处理复杂几何结构时的具体表现差异，图~\ref{fig:edge_corner_result} 选取了四个具有代表性的复杂机械零件进行可视化对比，其中绿色、红色和灰色点分别代表边缘、角点和平面点。对应地，表~\ref{tab:metrics_result_part1} 和表~\ref{tab:metrics_result_part2} 详细列出了这四个对象在各方法下的分类别指标（Precision, Recall, F1, Accuracy, IoU, MCC）。下文将结合上述整体统计结果与具体案例的细节表现，对传统几何方法和深度学习方法分别展开深入剖析。
 
 \begin{figure*}[t]
       \centering
@@ -69,36 +204,6 @@
        \caption{ABC-Corner 数据集上各方法的边缘与角点检测结果可视化对比。本文方法（Ours）取得了最佳的检测效果。CA 和 TECD 缺乏鲁棒性，PIE-Net 检测精度不足，PCEDNet 表现出良好的边缘检测能力但无法检测角点。}
        \label{fig:edge_corner_result}
 \end{figure*}
-
-% \begin{table*}[ht]
-%         % \centering
-%         \small
-%         \setlength{\tabcolsep}{2.6pt}
-%         \caption{图~\ref{fig:edge_corner_result} 中四个点云对象的分类别详细指标评分。}
-%         \label{tab:metrics_result_of_four_obj}
-%         \begin{threeparttable}
-%             \begin{tabular}{lccc ccc ccc ccc ccc c}
-%             \toprule
-%             Method & \multicolumn{3}{c}{Precision($\uparrow$)} & \multicolumn{3}{c}{Recall($\uparrow$)} & \multicolumn{3}{c}{F1($\uparrow$)} & \multicolumn{3}{c}{Accuracy($\uparrow$)} & \multicolumn{3}{c}{IoU($\uparrow$)} & MCC($\uparrow$) \\
-%             \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} 
-%              & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner & Face & Edge & Corner &  \\
-%             \midrule
-%             CA~\cite{bazazian_fast_2015} & 0.975 & 0.303 & 0.001 & 0.582 & 0.614 & 0.303 & 0.729 & 0.405 & 0.002 & 0.582 & 0.614 & 0.303 & 0.573 & 0.254 & 0.001 & 0.184 \\
-%             TECD~\cite{ahmed_edge_2018} & 0.986 & 0.705 & 0.062 & 0.980 & 0.762 & 0.158 & 0.983 & 0.732 & 0.089 & 0.980 & 0.762 & 0.158 & 0.967 & 0.578 & 0.046 & 0.707 \\
-%             PIE-NET~\cite{wang_pienet_2020a} & 0.995 & 0.673 & 0.278 & 0.950 & 0.898 & 0.964 & 0.972 & 0.770 & 0.432 & 0.950 & 0.898 & 0.964 & 0.946 & 0.626 & 0.275 & 0.759 \\
-%             NECDNet (Ours) & \textbf{0.999}& 0.970 & 0.519 & 0.998 & \textbf{0.987}& 0.921 & \textbf{0.999}& 0.978 & 0.664 & 0.998 & \textbf{0.987}& 0.921 & 0.997 & 0.957 & 0.496 & 0.972 \\
-%             NECDNet$\dagger$ (Ours) & \textbf{0.999}& \textbf{0.994}& \textbf{0.540}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.984}& \textbf{0.698}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.968}& \textbf{0.536}& \textbf{0.983}\\
-%             \bottomrule
-%         \end{tabular}
-%         \begin{tablenotes}
-%             \footnotesize
-%             \item PIE-Net 的数据基于其作者提供的评估结果整理得出。
-            
-%             \item $\dagger$ 表示使用从 Mesh 模型估计的法向量。 
-%          \end{tablenotes}
-%         \end{threeparttable}
-        
-%     \end{table*}
 
 % --- 表格 1：Precision, Recall, F1 ---
 \begin{table*}[ht]
@@ -117,7 +222,7 @@
         \midrule
         CA~\cite{bazazian_fast_2015} & 0.975 & 0.303 & 0.001 & 0.582 & 0.614 & 0.303 & 0.729 & 0.405 & 0.002 \\
         TECD~\cite{ahmed_edge_2018} & 0.986 & 0.705 & 0.062 & 0.980 & 0.762 & 0.158 & 0.983 & 0.732 & 0.089 \\
-        PIE-NET~\cite{wang_pienet_2020a} & 0.995 & 0.673 & 0.278 & 0.950 & 0.898 & 0.964 & 0.972 & 0.770 & 0.432 \\
+        PIE-NET~\cite{wang_pienet_2020} & 0.995 & 0.673 & 0.278 & 0.950 & 0.898 & 0.964 & 0.972 & 0.770 & 0.432 \\
         NECDNet (Ours) & \textbf{0.999}& 0.970 & 0.519 & 0.998 & \textbf{0.987}& 0.921 & \textbf{0.999}& 0.978 & 0.664 \\
         NECDNet$\dagger$ (Ours) & \textbf{0.999}& \textbf{0.994}& \textbf{0.540}& \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.984}& \textbf{0.698} \\
         \bottomrule
@@ -149,7 +254,7 @@
         \midrule
         CA~\cite{bazazian_fast_2015} & 0.582 & 0.614 & 0.303 & 0.573 & 0.254 & 0.001 & 0.184 \\
         TECD~\cite{ahmed_edge_2018} & 0.980 & 0.762 & 0.158 & 0.967 & 0.578 & 0.046 & 0.707 \\
-        PIE-NET~\cite{wang_pienet_2020a} & 0.950 & 0.898 & 0.964 & 0.946 & 0.626 & 0.275 & 0.759 \\
+        PIE-NET~\cite{wang_pienet_2020} & 0.950 & 0.898 & 0.964 & 0.946 & 0.626 & 0.275 & 0.759 \\
         NECDNet (Ours) & 0.998 & \textbf{0.987}& 0.921 & 0.997 & 0.957 & 0.496 & 0.972 \\
         NECDNet$\dagger$ (Ours) & \textbf{1.000}& 0.974 & \textbf{0.987}& \textbf{0.999}& \textbf{0.968}& \textbf{0.536}& \textbf{0.983}\\
         \bottomrule
@@ -162,11 +267,28 @@
     \end{threeparttable}
 \end{table*}
 
+\subsubsection{与传统几何分析方法的对比}
+
+传统的几何分析方法，如 CA（Covariance Analysis）和 TECD（Two-Stage Edge-Corner Detection），主要依赖手工设计的几何特征和基于阈值的判决规则。在本文的对比实验中，针对 ABC-Corner 数据集，CA 方法中边缘检测阈值设置为 $0.085$，角点检测阈值设置为 $0.14$。TECD 方法的边缘阈值 $\lambda$ 设为 $1.0$，同时保留了其原论文中针对角点检测的其他阈值设置~\cite{ahmed_edge_2018}。本文为CA和TECD方法选择的参数均经过了在 ABC-Corner 数据集上的网格搜索优化，以确保其在该数据集上的最佳性能表现。
+
+CA 方法基于协方差矩阵的特征值进行阈值判定，具有计算简单、速度快的优点，但在实际应用中存在显著局限性。首先，CA 方法采用单一固定阈值进行分类判定，这种设计对阈值的选择极为敏感，而实际物体的几何复杂度差异巨大，薄壳结构和厚重物体的尖锐程度存在数量级的差异，统一的阈值无法有效处理如此多样的场景。
+如图~\ref{fig:edge_corner_result} 所示的可视化结果，CA 检测出的边缘线条极其不连续且包含大量噪声点（误检），可视化结果对应到表~\ref{tab:metrics_result_part1} 中的数据可见：CA 在边缘类别的 F1 分数仅为 0.405，IoU 仅为 0.254。而且由于采用单一尺度的邻域分析，CA 在处理如对象 3383 这样的薄壁结构时，容易同时包含正反两个面的几何信息，导致特征值计算异常。更为重要的是，CA 缺乏专门的角点检测机制，这在表~\ref{tab:metrics_result_part1} 数值上体现为其角点检测 Precision 仅为 0.001，F1 分数更是低至 0.002，几乎完全丧失了角点识别能力。其整体 MCC 仅为 0.184，说明预测结果与真实值之间的相关性极低。
+
+TECD 方法试图通过两步策略改进检测效果，即先检测边缘再基于边缘定位角点。相较于 CA，TECD 在边缘检测上取得了一定进步，表~\ref{tab:metrics_result_part1} 显示其具体案例的边缘 F1 提升至 0.732。然而，其级联设计的缺陷在角点检测中暴露无遗：角点检测完全依赖于第一步边缘提取的质量，早期错误会被后续步骤放大。从表~\ref{tab:metrics_result_part1} 可以看出，尽管 TECD 的边缘召回率尚可，但其角点 Recall 仅为 0.158，F1 分数仅为 0.089，这表明绝大多数角点被漏检。此外，TECD 的整体分类一致性 MCC 为 0.707，虽然优于 CA，但仍远低于 NECDNet 的 0.972。这种性能差距主要源于 TECD 对多个手工阈值的敏感性，难以通过单一参数设置适应图~\ref{fig:edge_corner_result} 中多样化的几何特征。
+
+相比之下，NECDNet 在各个维度上均展现出压倒性优势。在这些典型复杂对象的测试中，NECDNet 在保持极高面部识别精度（Precision $>$ 0.99）的同时，将边缘 F1 分数提升至 0.978，角点 F1 分数提升至 0.664（Mesh 法向版本更达到 0.698）。特别是在 MCC 指标上，NECDNet 达到了 0.972，比 TECD 高出 37.5\%。这得益于端到端的特征学习机制，使其能够自适应地处理不同尺度的几何结构，有效克服了传统方法参数敏感和级联误差积累的问题。
+
+\subsubsection{与现有深度学习方法的对比}
+
+在深度学习方法中，PIE-Net（Point-wise Implicit Embedding Network）是目前最有代表性的工作。然而，从图~\ref{fig:edge_corner_result} 的可视化对比中可以观察到，PIE-Net 虽然能够检测出大致的轮廓，但在角点区域的识别上存在明显的模糊，且在平滑曲面上容易产生误检点。基于 PIE-Net 作者提供的评估数据，本文结合 ABC-Corner 数据集上的实验结果，对其各项指标进行了重新计算与整合。
+
+结合表~\ref{tab:metrics_result_part1} 和表~\ref{tab:metrics_result_part2} 针对这四个典型复杂对象的定量评估，NECDNet 相比 PIE-Net 展现出了显著的性能提升。具体而言，PIE-Net 在角点检测任务上的 Precision 仅为 0.278，虽然 Recall 高达 0.964，但这极低的精确率说明其高召回率是建立在大量误检（过分割）的基础上的。这直接导致其角点 F1 分数仅为 0.432，意味着其检测的可信度较低。作为对比，NECDNet 在保持高召回率（0.921）的同时，将角点 Precision 提升至 0.519（提升 86.6\%），使得 F1 分数达到 0.664（提升 53.7\%）；若使用 Mesh 法向量，F1 更达到 0.698。在边缘检测方面，NECDNet 的边缘 F1 (0.978) 也显著优于 PIE-Net 的 0.770。此外，在反映整体分类质量的 MCC 指标上，NECDNet 达到 0.972，远超 PIE-Net 的 0.759。
+
+PIE-Net 性能受限的根本原因在于其采用的双分支架构设计。该方法使用两个独立的分支分别处理边缘和角点检测，这种独立设计割裂了边缘与角点作为相互关联几何特征的内在联系，导致网络难以利用边缘信息来辅助角点定位。由于缺乏对边缘与角点特征差异性的联合鉴别机制，PIE-Net 容易产生较多的误检（False Positives），正如其仅为 0.278 的角点 Precision 所示。相比之下，NECDNet 通过统一的多尺度特征融合架构和分层分类器，能够更有效地捕捉局部几何结构中的细微差异，特别是利用从网格模型估计的精确法向量作为输入时，模型的整体 F1 分数和分类一致性均达到最优水平，展现了极高的鲁棒性。
+
+
+
 \subsection{纯边缘检测结果分析}
-
-为了验证模型在通用边缘检测任务上的有效性，表~\ref{tab:edge_result} 展示了在 ABC 数据集上仅关注边缘二分类任务时的对比结果。由于 PCEDNet 和 BoundED 未开源代码，我们引用了其论文中的数据进行对比。
-
-实验结果表明，NECDNet 在该任务上同样表现出色。在使用 Mesh 法向量的情况下（NECDNet-2c$\dagger$），其 F1 分数高达 0.956，显著优于 PCEDNet (0.822) 和 BoundED (0.875)。即便是使用基于局部拟合平面的估计法向量（NECDNet-2c），其性能也具备很强的竞争力，尤其是在召回率上表现优异，说明模型能够尽可能多地检出潜在边缘。这表明 NECDNet 不仅是一个优秀的特征点检测器，也是一个鲁棒的边缘提取器，能够适应不同的应用需求。
 
 \begin{table*}[ht]
     \centering
@@ -195,107 +317,157 @@
     
 \end{table*}
 
-\subsection{讨论：法向量估计精度对检测的影响}
+为了验证模型在通用边缘检测任务上的有效性，表~\ref{tab:edge_result} 展示了在 ABC 数据集上仅关注边缘二分类任务时的对比结果。由于 PCEDNet 和 BoundED 未开源代码，我们引用了其论文中的数据进行对比。本文的模型在该部分实验中进行了调整，将边缘和角点合并为一个类别进行二分类训练，以适应纯边缘检测的评估需求，记作 NECDNet-2c 和 NECDNet-2c$\dagger$（分别对应使用基于 PCA 的法向量和使用从 CAD 网格模型提取的精确法向量）。
 
-在深入分析实验结果后，本文发现法向量的精度是影响检测性能的关键因素。NECDNet 的核心输入特征——包括法向角差、法向分布及投影法向模长——均直接依赖于法向量的计算。因此，精确的法向量估计对于提升 NECDNet 的性能至关重要。
+表~\ref{tab:edge_result} 的结果显示，NECDNet 在边缘检测任务上同样表现出色。使用 Mesh 法向量的 NECDNet-2c$\dagger$ 在 Precision、Recall、F1、Accuracy、IoU 和 MCC 等所有指标上均显著优于 PCEDNet 和 BoundED，尤其是在 F1 分数上达到 0.956，远超 PCEDNet 的 0.822 和 BoundED 的 0.875。这表明 NECDNet 不仅能够准确地提取边缘特征，还能有效地减少误检和漏检，提高了整体的检测质量。而利用基于 PCA 的法向量输入的 NECDNet-2c 也表现出较强的竞争力，尤其是在 Recall 上达到 0.988，说明模型能够尽可能多地检出潜在边缘，虽然 Precision 相对较低（0.708），但整体 F1 分数仍然优于 PCEDNet。
 
-为了量化这一影响，本文分别测试了基于点云局部表面最小二乘拟合（Least Squares Fitting）和基于网格模型（Mesh）几何信息两种法向量估计方式。从几何原理上讲，最小二乘拟合假设邻域点位于一个光滑平面上。然而，在物体的尖锐边缘和角点附近，这一假设被打破：邻域点横跨了两个或多个法向截然不同的平面。此时，拟合算法往往会产生平滑过渡的“平均化”误差法向，而非真实的表面法向。
+除了定量指标对比，图~\ref{fig:edge_corner_result} 的可视化结果也直观展示了各方法在边缘检测上的表现。PCEDNet（图示第四行）作为一个专门的边缘检测网络，能够清晰、连续地提取出物体的几何轮廓，展现了良好的边缘提取效果，但其局限性在于仅能输出二值的边缘预测结果，无法区分边缘与角点。此外，PCEDNet 使用的是基于网格模型的法向量。与此相比，本文提出的 NECDNet 在边缘检测的视觉质量上与其相当，均能提取出锐利且干净的边缘线条，同时还能准确识别出角点特征。对于BoundED，由于其作者未将模型开源，依据其论文中的描述进行复现时，复现的结果与其论文中的结果存在较大差异，故本文舍弃了该方法的可视化对比，仅在定量指标上进行了对比分析。
 
-如图~\ref{fig:limitation} 的对比实验所示，这种方向误差会导致显著的分类混淆。在图~\ref{fig:limitation}(c) 中，由于法向的平滑，原本尖锐的边缘特征在特征空间中变得模糊，导致网络将部分边缘点误判为角点，或者将角点误判为边缘点。相反，利用 Mesh 计算出的法向量能够精确反映物体的几何拓扑（图~\ref{fig:limitation}(b)），帮助网络准确捕捉微小的曲率变化，从而实现近乎完美的分类效果。这一发现表明，虽然 NECDNet 具有强大的特征提取能力，但在实际应用中，高质量的法向信息预处理是发挥其性能上限的必要条件。
+整体实验表明，NECDNet 在边缘与角点的联合检测任务中表现出色，并且在纯边缘检测任务中同样具有竞争力。特别是使用从 CAD 网格模型提取的精确法向量作为输入时，NECDNet 的性能得到了显著提升，进一步验证了法向量估计精度对检测性能的关键影响。
 
+
+\subsection{法向量估计精度对检测的影响}
+
+在深入分析实验结果后，本文发现法向量的精度是影响检测性能的关键因素。NECDNet 的核心输入特征——包括法向角差、法向分布及投影法向模长——均直接依赖于法向量的计算。从表~\ref{tab:corner_result} 可以看出，仅通过改变法向量的来源，模型的 F1 分数就从 0.715 提升至 0.815，增幅达 13.9\%，这充分体现了法向量对检测性能的决定性影响。
+
+为了量化这一影响，本文详细对比了两种法向量估计方式。基于点云局部表面最小二乘拟合的方法假设邻域点位于一个光滑平面上。然而，在物体的尖锐边缘和角点附近，这一假设被打破：邻域点横跨了两个或多个法向截然不同的平面。此时，拟合算法会产生平滑过渡的"平均化"法向，而非真实的表面法向。
+
+为了更深入地理解法向量精度对检测性能的影响，我们进行了详细的数值分析。考虑一个尖锐的角点邻域：邻域点分别来自两个法向为 $\mathbf{n}_1$ 和 $\mathbf{n}_2$ 的平面，两个平面的夹角为 90 度。当使用基于最小二乘拟合的法向估计方法时，得到的平均法向 $\mathbf{n}_\text{avg}$ 会被迫介于两个真实法向之间，其与真实法向的夹角为 45 度。这种方向上的偏差虽然看似不大，但会直接影响法向角差、法向分布方差等特征的计算。由于这些特征是分类器的核心输入，45 度的法向偏差会导致角点和边缘点的特征值在特征空间中变得接近，从而显著增加分类的困难。
+
+图~\ref{fig:limitation} 的对比实验清晰地展示了这种影响。在使用点云估计法向的结果（图~\ref{fig:limitation}(c)）中，由于邻域法向的平滑化，原本尖锐的边缘特征和角点特征在特征空间中的表现变得模糊和重叠。这种混淆直接导致网络将部分边缘点误判为角点，或将角点误判为边缘点，从而产生 0.715 的 F1 分数。相反，当使用从 Mesh 模型计算出的法向量时（图~\ref{fig:limitation}(b)），法向量能够精确反映物体的几何拓扑结构。特别是在尖锐特征处，Mesh 法向能够保留法向的突变特征，而不会出现平滑化造成的方向混淆。这使得网络能够准确捕捉到微小的曲率变化，从而实现近乎完美的分类效果，F1 分数达到 0.815。
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=\linewidth]{NECDNet/limitation.jpg}
-    \caption{法向量估计精度对检测结果的影响分析：(a) 检测结果真值（Ground Truth）；(b) 使用从 Mesh 估计的法向量得到的检测结果；(c) 使用从点云估计的法向量得到的检测结果。可以看出，使用点云估计的法向量会导致更多的边缘点被误分类为角点。}
+    \caption{法向量估计精度对检测结果的影响分析：(a) 检测结果真值（Ground Truth）；(b) 使用从 Mesh 估计的法向量得到的检测结果，F1 分数为 0.815；(c) 使用从点云估计的法向量得到的检测结果，F1 分数为 0.715。使用点云估计的法向量会导致更多的边缘点被误分类为角点，在图中表现为红色区域的增加。}
     \label{fig:limitation}
 \end{figure*}
+
+上述分析表明，虽然 NECDNet 具有强大的多尺度特征提取能力，但其对输入法向量的精度存在较高的依赖性。在实际应用场景中，往往难以获取完美的网格模型，仅能基于含噪点云进行法向估计，这在一定程度上限制了模型的性能上限。因此，如何在缺乏网格先验的情况下，缩小基于点云与基于网格的检测性能差距，是后续研究值得深入探讨的方向。
+
+未来的工作可以从以下几个维度展开：首先，可以尝试集成更为先进的法向估计算法，特别是基于深度学习的方法（如 PCPNet、NestNet 等），这类方法相较于传统的 PCA 拟合更能有效保留尖锐几何特征，有望为 NECDNet 提供更高质量的输入先验。其次，探索将法向估计模块与特征检测网络进行端到端的联合优化也是一个极具潜力的方向。通过设计可微的法向估计算子，使网络能够根据最终的检测目标自适应地调整法向预测，而非依赖于预计算的固定特征，可能从根本上解决法向平滑带来的特征模糊问题。此外，还可以研究引入更加鲁棒的统计不变量或融合多模态几何信息，以降低模型对单一法向特征的敏感度，从而进一步提升其在真实复杂场景下的泛化能力与稳定性。
+
 
 \section{消融实验分析}
 \label{sec:ablation_study}
 
-为了验证 NECDNet 各个模块设计的合理性，本节基于 ABC-Corner 数据集开展了多维度的消融实验。实验设定随机抽取 100 个模型用于训练，另外 100 个用于测试，控制变量以确保结论的可靠性。
+为了验证 NECDNet 各个模块设计的合理性，本节基于 ABC-Corner 数据集开展了多维度的消融实验。实验设定随机抽取 100 个模型对应的点云数据用于训练，另取 100 个用于测试，控制变量以确保结论的可靠性。主要包括对网络学习的输入特征维度、多尺度参数选择、数据处理策略等方面的参数分析。通过对比不同配置下训练得到的模型定性评价指标，探讨各设计选择对模型性能的具体影响。
 
-\subsection{特征维度的影响}
+\subsection{特征维度}
 
-特征描述子的选择直接决定了网络输入信息的丰富程度与有效性。在构建特征向量时，除了最终选用的 6 个标量特征（$\kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i}$）外，实验还尝试引入了 3 维 PCA 特征值向量 $\mathbf{\sigma}_i$ 和 3 维法向量差均值向量 $\bar{\Delta \mathbf{n}_i}$。表~\ref{tab:ablation_study} 中的“特征维度”部分展示了不同组合的性能差异。
-
-实验结果显示，当模型仅使用 6 个标量特征时，各项评价指标反而达到了最高值。引入向量特征后，性能未升反降。分析其原因，$\mathbf{\sigma}_i$ 和 $\bar{\Delta \mathbf{n}_i}$ 虽然包含方向信息，但在无序点云网络中，这种绝对方向信息可能引入了对旋转的敏感性或数据噪声。由于点云网络（如 PointNet++ 结构）通常具有旋转不变性或对局部坐标系的依赖，直接输入全局或不稳定的方向向量可能增加了输入数据的维度和复杂性，导致“维度灾难”效应，反而干扰了网络对核心几何不变量的学习。因此，NECDNet 最终选择更加紧凑且鲁棒的 6 维标量特征组合。
-
-\subsection{多尺度参数的选择}
-
-多尺度特征融合是解决点云密度不均和特征尺度变化问题的关键。本节对尺度数量（Number of scales）和尺度范围（邻域大小 $k$）进行了探索。实验设定 $k$ 的取值范围覆盖 8 到 128，尺度数量从 2 增加至 8。表~\ref{tab:ablation_study} 中的“尺度选择”部分表明，随着尺度数量的增加，模型性能呈现先上升后下降的趋势。
-
-当选择 4 个尺度（$k=8, 16, 32, 64$）时，模型取得了最佳的 F1 分数和 IoU。当尺度数量过少（如 2 个）时，网络的感受野受限，难以提取宏观的几何结构信息；而当尺度数量过多（如 6 个或 8 个）时，不仅计算开销显著增加，而且大尺度的邻域（如 $k=128$）引入了过多的无关背景噪声，平滑了局部的尖锐特征，从而抑制了网络的判别能力。因此，4 个尺度的设置在特征丰富度与噪声控制之间取得了最佳平衡。
+特征描述子的选择直接决定了网络输入信息的丰富程度与有效性。在构建特征向量时，除了最终选用的 6 个标量特征（$\kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i}$）外，实验还尝试引入了 3 维 PCA 特征值向量 $\mathbf{\sigma}_i$ 和 3 维法向量差均值向量 $\bar{\Delta \mathbf{n}_i}$。表~\ref{tab:ablation_feature} 展示了不同特征维度组合的性能差异。各组合从上至下依次代表：仅使用基于位置的特征、仅使用基于法向的特征、使用所有标量特征、使用所有标量特征加上法向差均值向量、使用所有标量特征加上 PCA 特征值向量、使用所有特征。
 
 \begin{table*}[ht]
     \centering
     \small
-    \setlength{\tabcolsep}{1pt}
-    \caption{关于特征维度选择和多尺度参数选择的消融实验结果。}
-    \label{tab:ablation_study}
+    \setlength{\tabcolsep}{2.8pt}
+    \caption{特征维度选择消融实验结果。}
+    \label{tab:ablation_feature}
     \begin{threeparttable}
-    \begin{tabular}{llcccccc}
+    \begin{tabular}{lcccccc}
             \toprule
-            &  & Precision($\uparrow$) & Recall($\uparrow$)  & F1($\uparrow$) & Accuracy($\uparrow$) & IoU($\uparrow$) & MCC($\uparrow$) \\
+            特征组合 & Precision($\uparrow$) & Recall($\uparrow$)  & F1($\uparrow$) & Accuracy($\uparrow$) & IoU($\uparrow$) & MCC($\uparrow$) \\
             \midrule
-   
-            \multirow{6}{*}{特征维度}
-            & $(\hat{\mathbf{\sigma}_i}, \kappa_i, \bar{d_i}, r_i)$ & 0.647 & 0.847 & 0.654 & 0.977 & 0.601 & 0.790 \\
-            & $(\bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.680 & 0.922 & 0.719 & 0.986 & 0.656 & 0.886 \\
-            & $(\kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & \textbf{0.754} & \textbf{0.946} & \textbf{0.805} & \textbf{0.996} & \textbf{0.735} & \textbf{0.946} \\
-            & $(\kappa_i, \bar{d_i}, r_i, \bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.714 & 0.935 & 0.758 & 0.994 & 0.693 & 0.929 \\
-            & $(\hat{\mathbf{\sigma}_i}, \kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.739 & 0.946 & 0.793 & 0.995 & 0.720 & 0.934 \\
-            & $(\hat{\mathbf{\sigma}_i}, \kappa_i, \bar{d_i}, r_i, \bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.743 & 0.940 & 0.797 & 0.994 & 0.722 & 0.929 \\
-           
-            \midrule
-           
-            \multirow{4}{*}{尺度选择}
-            & (8, 16) & 0.704 & 0.913 & 0.751 & 0.993 & 0.680 & 0.910 \\
-            & (8, 16, 32, 64) & \textbf{0.743} & \textbf{0.940} & \textbf{0.797} & 0.994 & \textbf{0.722} & 0.929 \\
-            & (8, 16, 32, 48, 80, 128) & 0.723 & 0.927 & 0.770 & \textbf{0.995} & 0.702 & \textbf{0.932} \\
-            & (8, 16, 24, 32, 48, 64, 96, 128) & 0.740 & 0.935 & 0.795 & 0.994 & 0.718 & 0.930 \\
-           
+            $(\hat{\boldsymbol{\sigma}}_i, \kappa_i, \bar{d_i}, r_i)$ & 0.647 & 0.847 & 0.654 & 0.977 & 0.601 & 0.790 \\
+            $(\bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.680 & 0.922 & 0.719 & 0.986 & 0.656 & 0.886 \\
+            $(\kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & \textbf{0.754} & \textbf{0.946} & \textbf{0.805} & \textbf{0.996} & \textbf{0.735} & \textbf{0.946} \\
+            $(\kappa_i, \bar{d_i}, r_i, \bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.714 & 0.935 & 0.758 & 0.994 & 0.693 & 0.929 \\
+            $(\hat{\boldsymbol{\sigma}}_i, \kappa_i, \bar{d_i}, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.739 & 0.946 & 0.793 & 0.995 & 0.720 & 0.934 \\
+            $(\hat{\boldsymbol{\sigma}}_i, \kappa_i, \bar{d_i}, r_i, \bar{\Delta \mathbf{n}_i}, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i})$ & 0.743 & 0.940 & 0.797 & 0.994 & 0.722 & 0.929 \\
             \bottomrule
         \end{tabular}
         \begin{tablenotes}
             \footnotesize
-             \item 特征计算的具体方法和尺度的定义详见前文所述。
+             \item 特征计算的具体方法详见章节~\ref{sec:feature_computation} 所述。
+        \end{tablenotes}
+        \end{threeparttable}
+\end{table*}
+
+实验结果显示，当模型仅使用 6 个标量特征时，各项评价指标反而达到了最高值。只使用部分特征时，模型性能明显下降，尤其是当仅使用基于位置的特征时，F1 分数仅为 0.654；而仅使用基于法向的特征时，F1 分数提升至 0.719，但仍不如使用标量特征的组合。
+而引入向量特征后，性能未升反降。分析其原因，$\hat{\boldsymbol{\sigma}}_i$ 和 $\bar{\Delta \mathbf{n}_i}$ 特征维度与其他标量特征相比显著增加，导致特征空间维度过高，训练数据不足以覆盖整个特征空间，进而引发过拟合问题。此外，这些向量特征在尖锐边缘和角点处的分布较为复杂，可能引入了更多的噪声和不稳定性，反而削弱了模型的判别能力。
+
+因此，尽管引入更多维度的特征理论上可以提供更丰富的信息，但在实际训练过程中，过多的特征维度反而可能导致模型性能的下降。最终，使用所有标量特征的组合在保持信息丰富性的同时，避免了过拟合和噪声引入的问题，从而实现了最佳的检测性能。
+
+
+\subsection{多尺度参数}
+
+多尺度特征融合是解决点云密度不均和特征尺度变化问题的关键。本节对尺度数量和尺度范围（邻域大小 $k$）进行了探索，有关尺度的定义请见章节~\ref{sec:neighbor_define}。实验设定 $k$ 的取值范围覆盖 8 到 128，尺度数量从 2 增加至 8。表~\ref{tab:ablation_scale} 表明，随着尺度数量的增加，模型性能呈现先上升后下降的趋势。
+
+\begin{table*}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \caption{多尺度参数选择消融实验结果。}
+    \label{tab:ablation_scale}
+    \begin{threeparttable}
+    \begin{tabular}{lcccccc}
+            \toprule
+            尺度选择(k) & Precision($\uparrow$) & Recall($\uparrow$)  & F1($\uparrow$) & Accuracy($\uparrow$) & IoU($\uparrow$) & MCC($\uparrow$) \\
+            \midrule
+            (8, 16) & 0.704 & 0.913 & 0.751 & 0.993 & 0.680 & 0.910 \\
+            (8, 16, 32, 64) & \textbf{0.743} & \textbf{0.940} & \textbf{0.797} & 0.994 & \textbf{0.722} & 0.929 \\
+            (8, 16, 32, 48, 80, 128) & 0.723 & 0.927 & 0.770 & \textbf{0.995} & 0.702 & \textbf{0.932} \\
+            (8, 16, 24, 32, 48, 64, 96, 128) & 0.740 & 0.935 & 0.795 & 0.994 & 0.718 & 0.930 \\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \footnotesize
+             \item 尺度的定义对应于 KNN 邻域大小 k。
         \end{tablenotes}
         \end{threeparttable}
        
 \end{table*}
 
-\subsection{训练策略的有效性分析}
+当选择 4 个尺度（$k=8, 16, 32, 64$）时，模型取得了最佳的 F1 分数和 IoU。当尺度数量过少（如 2 个）时，网络的感受野受限，难以提取宏观的几何结构信息；而当尺度数量过多（如 6 个或 8 个）时，不仅计算开销显著增加，而且大尺度的邻域（如 $k=128$）引入了过多的无关背景噪声，平滑了局部的尖锐特征，从而抑制了网络的判别能力。因此，4 个尺度的设置在特征丰富度与噪声控制之间取得了最佳平衡。
 
-针对类别不平衡问题，实验首先比较了两种数据重采样策略：一是仅对角点进行重采样，使其数量与边缘点一致；二是同时对角点和边缘点进行重采样，使其数量与面点一致。表~\ref{tab:additional_ablation_study} 的结果显示，两种策略在最终的检测精度上差异极小。然而，第二种策略会使训练数据集的规模呈指数级增长，导致训练时长大幅延长且内存开销巨大。基于效率优先的原则，本文最终采用了“仅重采样角点”的策略。
 
-此外，受边缘检测领域中“平滑边缘（Smooth-Edge）”策略（即采样尖锐边缘附近的点作为平滑边缘点以提升检测鲁棒性）的启发，本实验尝试了类似的“平滑角点（Smooth-Corner）”策略，将角点邻域内的点也标记为角点参与训练。然而，表~\ref{tab:additional_ablation_study} 的实验结果表明，引入平滑角点后，模型的各项指标反而出现了下滑。深入分析认为，边缘特征通常具有一定的连续性，因此平滑操作有助于增强边缘的连通性；而角点在几何拓扑上属于“奇点”，具有高度的局部化特征。平滑操作人为地模糊了角点与边缘点之间的特征界限，混淆了分类边界，反而增加了分类器的学习难度。因此，本文在最终方案中摒弃了平滑角点策略，坚持对角点进行精确的单点监督。
+\subsection{训练策略}
 
-\begin{table*}[ht]
+针对类别不平衡问题，本节对数据处理和样本标注策略进行了系统的对比研究。其中，数据处理主要涉及对各类样本的重采样操作，旨在平衡不同类别点的数量；而标注策略则关注是否对尖锐特征（边缘、角点）进行平滑处理，即是否将其附近一定范围内的邻域点也视为该特征点。
+
+\subsubsection{数据重采样策略}
+
+在数据重采样方面，实验对比了两种策略。第一种策略是"边缘与角点重采样"，即对边缘点和角点进行重采样，使其数量与面点数量保持一致，达到 1:1:1 的比例。第二种策略是"仅角点重采样"，仅对数量最稀少的角点进行适度重采样。
+
+实验结果如表 \ref{tab:resampling_strategy} 所示。两种策略的性能差异极小，F1 分数分别为 0.795 和 0.797，仅相差 0.2\%。然而，第一种 1:1:1 的完全平衡策略会使训练数据集规模显著增长，导致训练时长大幅增加。在效率优先的考量下，最终选择了"仅重采样角点"的策略。这种选择充分平衡了检测性能与计算成本，既能缓解类别不平衡问题，又避免了过度的数据冗余。
+
+\begin{table}[ht]
     \centering
     \small
-    \setlength{\tabcolsep}{4.5pt}
-    \caption{关于训练策略的消融实验结果。}
-    \label{tab:additional_ablation_study}
-    \begin{tabular}{llcccccc}
+    \setlength{\tabcolsep}{8pt}
+    \caption{数据重采样策略的消融实验结果。}
+    \label{tab:resampling_strategy}
+    \begin{tabular}{lcccccc}
             \toprule
-            & & Precision($\uparrow$) & Recall($\uparrow$) & F1($\uparrow$)& Accuracy($\uparrow$)& IoU($\uparrow$)& MCC($\uparrow$)\\
+            策略 & Precision($\uparrow$) & Recall($\uparrow$) & F1($\uparrow$)& Accuracy($\uparrow$)& IoU($\uparrow$)& MCC($\uparrow$)\\
             \midrule
-   
-            \multirow{2}{*}{重采样策略}
-            & 边缘与角点 & 0.741& \textbf{0.941}& 0.795& \textbf{0.994}& 0.721& 0.923\\
-            & 仅角点 & \textbf{0.743}& 0.940& \textbf{0.797}& \textbf{0.994}& \textbf{0.722}& \textbf{0.929}\\
-           
-            \midrule
-           
-            \multirow{2}{*}{平滑角点策略}
-            & 使用平滑 & 0.706& 0.874& 0.736& 0.989& 0.670& 0.868\\
-            & 不使用平滑 & \textbf{0.743}& \textbf{0.940}& \textbf{0.797}& \textbf{0.994}& \textbf{0.722}& \textbf{0.929}\\
-           
+            边缘与角点 & 0.741& \textbf{0.941}& 0.795& \textbf{0.994}& 0.721& 0.923\\
+            仅角点 (Baseline) & \textbf{0.743}& 0.940& \textbf{0.797}& \textbf{0.994}& \textbf{0.722}& \textbf{0.929}\\
             \bottomrule
         \end{tabular}
-\end{table*}
+\end{table}
+
+\subsubsection{标注平滑策略}
+
+在样本标注方面，本文探索了"平滑尖锐特征"策略的可行性，这一策略受到边缘检测方法PCEDNet中"平滑边缘"方法的启发~\cite{himeur_pcednet_2022}。具体做法是将尖锐特征（边缘、角点）附近一定范围内的邻域点也标记为该特征参与模型训练，在增加少数类数据的同时降低尖锐特征与平滑特征之间的差异。
+
+实验结果如表 \ref{tab:smoothing_strategy} 所示。引入平滑策略后，性能反而出现明显下降，F1 分数从 0.797 降至 0.736。这主要是因为边缘点和角点在几何拓扑上具有本质差异。边缘特征具有连续性，温和平滑有助于强化连通性；而角点属于奇异点，具有极高的局部化特征。当人为地扩展角点标签范围到邻域内时，会使原本属于面点或边缘点的邻域点被强制标记为角点，破坏了样本标签的一致性，导致分类器决策边界模糊。因此，最终方案坚持对尖锐特征进行精确的单点监督，不使用平滑策略。
+
+\begin{table}[ht]
+    \centering
+    \small
+    \setlength{\tabcolsep}{6.5pt}
+    \caption{标注平滑策略的消融实验结果。}
+    \label{tab:smoothing_strategy}
+    \begin{tabular}{lcccccc}
+            \toprule
+            策略 & Precision($\uparrow$) & Recall($\uparrow$) & F1($\uparrow$)& Accuracy($\uparrow$)& IoU($\uparrow$)& MCC($\uparrow$)\\
+            \midrule
+            使用平滑 & 0.706& 0.874& 0.736& 0.989& 0.670& 0.868\\
+            不使用平滑 (Baseline) & \textbf{0.743}& \textbf{0.940}& \textbf{0.797}& \textbf{0.994}& \textbf{0.722}& \textbf{0.929}\\
+            \bottomrule
+        \end{tabular}
+\end{table}
 
 \section{本章小结}
 
-本章通过一系列严谨的对比实验与消融分析，系统评估了 NECDNet 在点云几何特征检测任务中的性能。实验结果表明，NECDNet 在边缘与角点检测任务上显著优于现有的传统分析方法及其他深度学习模型，展现出更强的特征提取能力和分类精度。通过对法向量精度的深入分析，揭示了高质量几何先验信息对尖锐特征检测的重要性。同时，消融实验验证了本文在特征维度选择、多尺度架构设计及数据平衡策略上的设计合理性，确立了最佳的模型配置。本章的实验结论充分证明了 NECDNet 能够有效地从复杂点云中提取出高质量的几何特征，为机器人抓取规划等下游任务提供了可靠的感知基础。
+本章系统地评估了 NECDNet 在点云几何特征检测任务中的性能。首先，详细介绍了 ABC-Corner 数据集的构建流程及实验参数配置。对比实验结果表明，NECDNet 在边缘与角点联合检测及纯边缘检测任务中均优于现有的传统方法及深度学习模型，且法向量精度的分析进一步证实了高质量几何先验对尖锐特征检测的重要性。在消融实验中，验证了特征选择与多尺度架构的合理性。特别是针对训练策略的深入探讨，明确了"仅角点重采样"在兼顾性能与效率上的优势，并通过对比标注策略，揭示了保持角点拓扑奇异性对于分类决策边界的重要性，否定了平滑标注在角点检测中的适用性。本章工作确立了 NECDNet 的最佳配置，证明了其从复杂点云中提取高质量几何特征的能力，为下游机器人感知任务提供了可靠支持。

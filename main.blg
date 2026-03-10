@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2025)
+This is BibTeX, Version 0.99d (TeX Live 2024)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 A level-1 auxiliary file: data/chap01.aux
@@ -25,12 +25,9 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: reference/refs.bib
 Warning--I didn't find a database entry for "li_surface_2023"
 Warning--I didn't find a database entry for "lavin-delgado_efficient_2024"
-Warning--I didn't find a database entry for "ahmed_edge_2018"
-Warning--I didn't find a database entry for "miller_graspit_2021"
 Warning--I didn't find a database entry for "wan2020planning"
 Warning--I didn't find a database entry for "bicchi2000robotic"
 Warning--I didn't find a database entry for "xia_fast_2017"
-Warning--I didn't find a database entry for "bazazian_fast_2015"
 Warning--I didn't find a database entry for "nguyen_edge_2018"
 Warning--I didn't find a database entry for "daniels_robust_2007"
 Warning--I didn't find a database entry for "guo_sglbp_2022"
@@ -43,7 +40,6 @@ Warning--I didn't find a database entry for "qi_pointnet_2017"
 Warning--I didn't find a database entry for "bazazian_edcnet_2021"
 Warning--I didn't find a database entry for "guerrero_pcpnet_2018"
 Warning--I didn't find a database entry for "jiao_mslnet_2024"
-Warning--I didn't find a database entry for "bode_bounded_2023"
 Warning--I didn't find a database entry for "matveev_def_2022"
 Warning--I didn't find a database entry for "yu_ecnet_2018"
 Warning--I didn't find a database entry for "zhu_nerve_2023"
@@ -61,47 +57,46 @@ Warning--I didn't find a database entry for "miller2004graspit"
 Warning--I didn't find a database entry for "yu2024mtgrasp"
 Warning--I didn't find a database entry for "kopicki2014learning"
 Warning--I didn't find a database entry for "domae2014fast"
-Warning--I didn't find a database entry for "paszke_pytorch_2019"
 Warning--I didn't find a database entry for ""
-You've used 31 entries,
+You've used 43 entries,
             5374 wiz_defined-function locations,
-            1328 strings with 16108 characters,
-and the built_in function-call counts, 283176 in all, are:
-= -- 6516
-> -- 32244
-< -- 39814
-+ -- 11117
-- -- 2402
-* -- 2122
-:= -- 39399
-add.period$ -- 114
-call.type$ -- 31
-change.case$ -- 267
-chr.to.int$ -- 9859
-cite$ -- 31
-duplicate$ -- 885
-empty$ -- 3188
-format.name$ -- 1085
-if$ -- 73476
+            1399 strings with 20355 characters,
+and the built_in function-call counts, 431271 in all, are:
+= -- 9623
+> -- 49999
+< -- 61067
++ -- 17013
+- -- 4137
+* -- 2915
+:= -- 60003
+add.period$ -- 151
+call.type$ -- 43
+change.case$ -- 376
+chr.to.int$ -- 15093
+cite$ -- 43
+duplicate$ -- 1199
+empty$ -- 4098
+format.name$ -- 1674
+if$ -- 111688
 int.to.chr$ -- 1
-int.to.str$ -- 32
+int.to.str$ -- 44
 missing$ -- 0
-newline$ -- 196
-num.names$ -- 94
-pop$ -- 14131
+newline$ -- 262
+num.names$ -- 131
+pop$ -- 21653
 preamble$ -- 1
-purify$ -- 31
+purify$ -- 43
 quote$ -- 0
-skip$ -- 29602
+skip$ -- 45198
 stack$ -- 0
-substring$ -- 14104
-swap$ -- 34
-text.length$ -- 760
+substring$ -- 21316
+swap$ -- 46
+text.length$ -- 1131
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 333
+type$ -- 465
 warning$ -- 0
-while$ -- 821
+while$ -- 1209
 width$ -- 0
-write$ -- 486
-(There were 40 warnings)
+write$ -- 649
+(There were 35 warnings)

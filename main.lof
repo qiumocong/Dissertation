@@ -1,29 +1,37 @@
 \addvspace {10.0pt}
 \addvspace {10.0pt}
 \contentsline {figure}{\numberline {2.1}{\ignorespaces NECDNet 网络架构及工作流程示意图。}}{7}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces 投影距离均值的几何意义示意图。}}{11}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。}}{15}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces NECDNet 网络架构示意图。}}{15}{figure.caption.12}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces 常用点云数据集对比示意图。}}{20}{figure.caption.14}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces ABC 数据集中的部分 CAD 模型示例。}}{20}{figure.caption.15}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces ABC-Corner 数据集标注流程示意图。}}{21}{figure.caption.16}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces ABC-Corner 数据集中的部分样本及其标注结果。}}{22}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces 基于 PCA 的点云法向量估计结果示意图。}}{10}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces 基于 CAD 网格模型的点云法向量估计结果示意图。}}{10}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces 投影距离均值的几何意义示意图。}}{13}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。}}{17}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces NECDNet 网络架构示意图。}}{17}{figure.caption.14}%
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces ABC-Corner 数据集上各方法的边缘与角点检测结果可视化对比。本文方法（Ours）取得了最佳的检测效果。CA 和 TECD 缺乏鲁棒性，PIE-Net 检测精度不足，PCEDNet 表现出良好的边缘检测能力但无法检测角点。}}{27}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 法向量估计精度对检测结果的影响分析：(a) 检测结果真值（Ground Truth）；(b) 使用从 Mesh 估计的法向量得到的检测结果；(c) 使用从点云估计的法向量得到的检测结果。可以看出，使用点云估计的法向量会导致更多的边缘点被误分类为角点。}}{29}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 常用点云数据集对比示意图。}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces ABC 数据集中的部分 CAD 模型示例。}}{23}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces ABC-Corner 数据集标注流程示意图。}}{24}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces ABC-Corner 数据集中的部分样本及其标注结果。}}{25}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces ABC-Corner 数据集上各方法的边缘与角点检测结果可视化对比。本文方法（Ours）取得了最佳的检测效果。CA 和 TECD 缺乏鲁棒性，PIE-Net 检测精度不足，PCEDNet 表现出良好的边缘检测能力但无法检测角点。}}{32}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 法向量估计精度对检测结果的影响分析：(a) 检测结果真值（Ground Truth）；(b) 使用从 Mesh 估计的法向量得到的检测结果，F1 分数为 0.815；(c) 使用从点云估计的法向量得到的检测结果，F1 分数为 0.715。使用点云估计的法向量会导致更多的边缘点被误分类为角点，在图中表现为红色区域的增加。}}{37}{figure.caption.32}%
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {4.1}{\ignorespaces 基于几何特征的机器人抓取规划框架}}{34}{figure.caption.31}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 基于类别的体素采样结果}}{35}{figure.caption.32}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces 基于NECDNet的几何特征检测结果}}{35}{figure.caption.33}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces 不同体素采样尺寸及采样策略下的采样结果}}{37}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces 凸性检测中凹凸查询点点对应 $\theta _i^\text {s}$ 对比}}{37}{figure.caption.35}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces 基于几何特征的接触对检测流程}}{39}{figure.caption.36}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces 基于几何特征的三种接触检测器：(a) 面接触圆柱体检测器；(b) 边接触扇形柱检测器；(c) 角接触圆锥体检测器}}{40}{figure.caption.37}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces 抓取构型增强示意图}}{44}{figure.caption.38}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces 基于软接触变形的接触点集获取示意图}}{46}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 基于几何特征的机器人抓取规划框架}}{43}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 基于类别的体素采样结果}}{44}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 基于NECDNet的几何特征检测结果}}{44}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 不同体素采样尺寸及采样策略下的采样结果}}{46}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 凸性检测中凹凸查询点点对应 $\theta _i^\text {s}$ 对比}}{46}{figure.caption.43}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 基于几何特征的接触对检测流程}}{48}{figure.caption.44}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 基于几何特征的三种接触检测器：(a) 面接触圆柱体检测器；(b) 边接触扇形柱检测器；(c) 角接触圆锥体检测器}}{49}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 抓取构型增强示意图}}{53}{figure.caption.46}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces 碰撞检测结果对比：红色表示发生碰撞的构型，绿色表示无碰撞的构型}}{54}{figure.caption.47}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces 基于软接触变形的接触点集获取示意图}}{55}{figure.caption.48}%
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {5.1}{\ignorespaces (a) 真实物理实验场景设置；(b) 机器人运动规划路径示意：接近物体（绿色）、执行抓取（蓝色）及移动至目标位（绿色）。}}{50}{figure.caption.40}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces 抓取分布可视化对比。(a) 各方法生成的抓取位姿展示（蓝色：GraspIt，黄色：GPD，绿色：WRS，红色：本文方法）；(b) 抓取构型在 3D 空间中的分布散点图。}}{52}{figure.caption.42}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 实验平台架构示意图。左侧为物理实验平台，包含 ABB GOFA-5 六轴协作机械臂与 DH-ROBOTICS PGC 系列平行电动夹爪；右侧为软件仿真平台，基于 World Robot System (WRS) 进行开发与测试。}}{59}{figure.caption.49}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 评估对象集的三维模型示例。}}{60}{figure.caption.50}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 体素尺寸 $v$ 对采样结果的影响分析。}}{62}{figure.caption.52}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 接触检测器尺寸参数 $d$、$\theta _\mathrm {sec}$ 和 $\theta _\mathrm {cone}$ 对潜在对跖接触点数量的影响分析。}}{63}{figure.caption.53}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 接触对验证阈值 $\theta _\mathrm {th}$ 对生成对数量的影响分析。}}{64}{figure.caption.54}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 抓取增强旋转角 $\beta $ 对生成抓取数量的影响分析。}}{65}{figure.caption.55}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces (a) 各算法生成的抓取可视化结果对比（a.1 四面体, a.2 巧克力盒, a.3 海豹模型）。蓝色：GraspIt!，黄色：GPD，绿色：WRS，红色：本文方法。(b) 抓取分布的三维散点图，展示了本文方法在方向覆盖上的优势。}}{67}{figure.caption.58}%
 \addvspace {10.0pt}
 \addvspace {10.0pt}
 \addvspace {10.0pt}

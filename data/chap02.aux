@@ -2,134 +2,126 @@
 \providecommand\hyper@newdestlabel[2]{}
 \citation{mirzaei_3d_2022}
 \citation{gumhold_feature_2001,demarsin_detection_2007,lin_line_2015}
-\citation{himeur_pcednet_2022}
-\pp@pagectr{footnote}{2}{17}{6}
+\pp@pagectr{footnote}{2}{18}{6}
 \@writefile{toc}{\contentsline {chapter}{\numberline {第二章}基于多尺度特征融合的点云几何特征检测}{6}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
 \@writefile{loa}{\addvspace {10\p@ }}
 \newlabel{chap:necdnet}{{二}{6}{基于多尺度特征融合的点云几何特征检测}{chapter.2}{}}
-\newlabel{chap:necdnet@cref}{{[chapter][2][]二thechapter\endcsname }{[1][6][]6}{}{}{}}
+\newlabel{chap:necdnet@cref}{{[chapter][2][]二}{[1][6][]6}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}引言}{6}{section.2.1}\protected@file@percent }
 \citation{cover_nearest_1967}
 \citation{brown_review_2025a}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces NECDNet 网络架构及工作流程示意图。}}{7}{figure.caption.9}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:necdnet_framework}{{2.1}{7}{NECDNet 网络架构及工作流程示意图。}{figure.caption.9}{}}
-\newlabel{fig:necdnet_framework@cref}{{[figure][1][2]2.1}{[1][6][]7}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}多尺度局部特征提取与计算}{7}{section.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}多尺度邻域构建}{7}{subsection.2.2.1}\protected@file@percent }
+\newlabel{fig:necdnet_framework@cref}{{[figure][1][2]2.1}{[1][6][]7}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}逐点邻域构建及前处理}{7}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}邻域构建策略}{7}{subsection.2.2.1}\protected@file@percent }
+\newlabel{sec:neighbor_define}{{2.2.1}{7}{邻域构建策略}{subsection.2.2.1}{}}
+\newlabel{sec:neighbor_define@cref}{{[subsection][1][2,2]2.2.1}{[1][7][]7}}
 \citation{shlens_tutorial_2014}
-\newlabel{eq:X_i}{{2.1}{8}{多尺度邻域构建}{equation.2.1}{}}
-\newlabel{eq:X_i@cref}{{[equation][1][2]2.1}{[1][8][]8}{}{}{}}
+\newlabel{eq:point_cloud}{{2.1}{8}{邻域构建策略}{equation.2.1}{}}
+\newlabel{eq:point_cloud@cref}{{[equation][1][2]2.1}{[1][8][]8}}
+\newlabel{eq:knn_neighborhood}{{2.2}{8}{邻域构建策略}{equation.2.2}{}}
+\newlabel{eq:knn_neighborhood@cref}{{[equation][2][2]2.2}{[1][8][]8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}点云前处理}{8}{subsection.2.2.2}\protected@file@percent }
 \newlabel{sec:preprocessing}{{2.2.2}{8}{点云前处理}{subsection.2.2.2}{}}
-\newlabel{sec:preprocessing@cref}{{[subsection][2][2,2]2.2.2thesubsection\endcsname }{[1][8][]8}{}{}{}}
-\newlabel{eq:svd_Ki}{{2.2}{8}{点云前处理}{equation.2.2}{}}
-\newlabel{eq:svd_Ki@cref}{{[equation][2][2]2.2}{[1][8][]8}{}{}{}}
+\newlabel{sec:preprocessing@cref}{{[subsection][2][2,2]2.2.2}{[1][8][]8}}
+\newlabel{eq:svd_Ki}{{2.3}{8}{点云前处理}{equation.2.3}{}}
+\newlabel{eq:svd_Ki@cref}{{[equation][3][2]2.3}{[1][8][]8}}
 \citation{hoppe_surface_1992}
-\newlabel{eq:center_Qi}{{2.3}{9}{点云前处理}{equation.2.3}{}}
-\newlabel{eq:center_Qi@cref}{{[equation][3][2]2.3}{[1][9][]9}{}{}{}}
-\newlabel{eq:norm_Qi}{{2.4}{9}{点云前处理}{equation.2.4}{}}
-\newlabel{eq:norm_Qi@cref}{{[equation][4][2]2.4}{[1][9][]9}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}局部特征描述符设计}{10}{subsection.2.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}曲率（ $\kappa _i$ ）}{10}{subsubsection.2.2.3.1}\protected@file@percent }
-\newlabel{eq:curvature}{{2.5}{10}{曲率（ $\kappa _i$ ）}{equation.2.5}{}}
-\newlabel{eq:curvature@cref}{{[equation][5][2]2.5}{[1][10][]10}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}投影距离均值（ $\bar  {d_i}$ ）}{10}{subsubsection.2.2.3.2}\protected@file@percent }
-\newlabel{eq:projection_distance}{{2.6}{10}{投影距离均值（ $\bar {d_i}$ ）}{equation.2.6}{}}
-\newlabel{eq:projection_distance@cref}{{[equation][6][2]2.6}{[1][10][]10}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces 投影距离均值的几何意义示意图。}}{11}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:projection_distance}{{2.2}{11}{投影距离均值的几何意义示意图。}{figure.caption.10}{}}
-\newlabel{fig:projection_distance@cref}{{[figure][2][2]2.2}{[1][10][]11}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3）}中心偏离比（ $r_i$ ）}{11}{subsubsection.2.2.3.3}\protected@file@percent }
-\newlabel{eq:mean_center_distance}{{2.7}{11}{中心偏离比（ $r_i$ ）}{equation.2.7}{}}
-\newlabel{eq:mean_center_distance@cref}{{[equation][7][2]2.7}{[1][11][]11}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4）}法向量角度差（$\mu _{\theta ,i}$）}{12}{subsubsection.2.2.3.4}\protected@file@percent }
-\newlabel{eq:normal_angle}{{2.8}{12}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.8}{}}
-\newlabel{eq:normal_angle@cref}{{[equation][8][2]2.8}{[1][12][]12}{}{}{}}
-\newlabel{eq:normal_angle_difference}{{2.9}{12}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.9}{}}
-\newlabel{eq:normal_angle_difference@cref}{{[equation][9][2]2.9}{[1][12][]12}{}{}{}}
-\newlabel{eq:normal_value_difference}{{2.10}{12}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.10}{}}
-\newlabel{eq:normal_value_difference@cref}{{[equation][10][2]2.10}{[1][12][]12}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5）}法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{12}{subsubsection.2.2.3.5}\protected@file@percent }
-\newlabel{eq:normal_distribution_variance}{{2.11}{13}{法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{equation.2.11}{}}
-\newlabel{eq:normal_distribution_variance@cref}{{[equation][11][2]2.11}{[1][12][]13}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6）}法线投影距离均值（ $\bar  {\text  {proj}_i}$ ）}{13}{subsubsection.2.2.3.6}\protected@file@percent }
-\newlabel{eq:projectional_normal_norm}{{2.12}{13}{法线投影距离均值（ $\bar {\text {proj}_i}$ ）}{equation.2.12}{}}
-\newlabel{eq:projectional_normal_norm@cref}{{[equation][12][2]2.12}{[1][13][]13}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}局部特征描述符数值可视化分析}{13}{subsection.2.2.4}\protected@file@percent }
-\newlabel{eq:feature_vector}{{2.13}{13}{局部特征描述符数值可视化分析}{equation.2.13}{}}
-\newlabel{eq:feature_vector@cref}{{[equation][13][2]2.13}{[1][13][]13}{}{}{}}
+\citation{cignoni_meshlab_2008}
+\newlabel{eq:center_Qi}{{2.4}{9}{点云前处理}{equation.2.4}{}}
+\newlabel{eq:center_Qi@cref}{{[equation][4][2]2.4}{[1][8][]9}}
+\newlabel{eq:norm_Qi}{{2.5}{9}{点云前处理}{equation.2.5}{}}
+\newlabel{eq:norm_Qi@cref}{{[equation][5][2]2.5}{[1][9][]9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}法向量估计与定向}{9}{subsection.2.2.3}\protected@file@percent }
+\newlabel{sec:normal_estimate}{{2.2.3}{9}{法向量估计与定向}{subsection.2.2.3}{}}
+\newlabel{sec:normal_estimate@cref}{{[subsection][3][2,2]2.2.3}{[1][9][]9}}
+\citation{himeur_pcednet_2022}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces 基于 PCA 的点云法向量估计结果示意图。}}{10}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:normal_estimation}{{2.2}{10}{基于 PCA 的点云法向量估计结果示意图。}{figure.caption.10}{}}
+\newlabel{fig:normal_estimation@cref}{{[figure][2][2]2.2}{[1][9][]10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces 基于 CAD 网格模型的点云法向量估计结果示意图。}}{10}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:normal_estimation_true}{{2.3}{10}{基于 CAD 网格模型的点云法向量估计结果示意图。}{figure.caption.11}{}}
+\newlabel{fig:normal_estimation_true@cref}{{[figure][3][2]2.3}{[1][10][]10}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}多尺度局部特征提取与计算}{10}{section.2.3}\protected@file@percent }
+\newlabel{sec:feature_computed}{{2.3}{10}{多尺度局部特征提取与计算}{section.2.3}{}}
+\newlabel{sec:feature_computed@cref}{{[section][3][2]2.3}{[1][10][]10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}多尺度特征矩阵构建}{11}{subsection.2.3.1}\protected@file@percent }
+\newlabel{eq:X_i}{{2.6}{11}{多尺度特征矩阵构建}{equation.2.6}{}}
+\newlabel{eq:X_i@cref}{{[equation][6][2]2.6}{[1][11][]11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}局部特征描述符设计}{12}{subsection.2.3.2}\protected@file@percent }
+\newlabel{sec:feature_computation}{{2.3.2}{12}{局部特征描述符设计}{subsection.2.3.2}{}}
+\newlabel{sec:feature_computation@cref}{{[subsection][2][2,3]2.3.2}{[1][11][]12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}曲率（ $\kappa _i$ ）}{12}{subsubsection.2.3.2.1}\protected@file@percent }
+\newlabel{eq:curvature}{{2.7}{12}{曲率（ $\kappa _i$ ）}{equation.2.7}{}}
+\newlabel{eq:curvature@cref}{{[equation][7][2]2.7}{[1][12][]12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}投影距离均值（ $\bar  {d_i}$ ）}{12}{subsubsection.2.3.2.2}\protected@file@percent }
+\newlabel{eq:projection_distance}{{2.8}{12}{投影距离均值（ $\bar {d_i}$ ）}{equation.2.8}{}}
+\newlabel{eq:projection_distance@cref}{{[equation][8][2]2.8}{[1][12][]12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces 投影距离均值的几何意义示意图。}}{13}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:projection_distance}{{2.4}{13}{投影距离均值的几何意义示意图。}{figure.caption.12}{}}
+\newlabel{fig:projection_distance@cref}{{[figure][4][2]2.4}{[1][12][]13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3）}中心偏离比（ $r_i$ ）}{13}{subsubsection.2.3.2.3}\protected@file@percent }
+\newlabel{eq:mean_center_distance}{{2.9}{13}{中心偏离比（ $r_i$ ）}{equation.2.9}{}}
+\newlabel{eq:mean_center_distance@cref}{{[equation][9][2]2.9}{[1][13][]13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4）}法向量角度差（$\mu _{\theta ,i}$）}{14}{subsubsection.2.3.2.4}\protected@file@percent }
+\newlabel{eq:normal_angle}{{2.10}{14}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.10}{}}
+\newlabel{eq:normal_angle@cref}{{[equation][10][2]2.10}{[1][14][]14}}
+\newlabel{eq:normal_angle_difference}{{2.11}{14}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.11}{}}
+\newlabel{eq:normal_angle_difference@cref}{{[equation][11][2]2.11}{[1][14][]14}}
+\newlabel{eq:normal_value_difference}{{2.12}{14}{法向量角度差（$\mu _{\theta ,i}$）}{equation.2.12}{}}
+\newlabel{eq:normal_value_difference@cref}{{[equation][12][2]2.12}{[1][14][]14}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5）}法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{14}{subsubsection.2.3.2.5}\protected@file@percent }
+\newlabel{eq:normal_distribution_variance}{{2.13}{15}{法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{equation.2.13}{}}
+\newlabel{eq:normal_distribution_variance@cref}{{[equation][13][2]2.13}{[1][14][]15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6）}法线投影距离均值（ $\bar  {\text  {proj}_i}$ ）}{15}{subsubsection.2.3.2.6}\protected@file@percent }
+\newlabel{eq:projectional_normal_norm}{{2.14}{15}{法线投影距离均值（ $\bar {\text {proj}_i}$ ）}{equation.2.14}{}}
+\newlabel{eq:projectional_normal_norm@cref}{{[equation][14][2]2.14}{[1][15][]15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}局部特征描述符数值可视化分析}{15}{subsection.2.3.3}\protected@file@percent }
+\newlabel{eq:feature_vector}{{2.15}{15}{局部特征描述符数值可视化分析}{equation.2.15}{}}
+\newlabel{eq:feature_vector@cref}{{[equation][15][2]2.15}{[1][15][]15}}
 \citation{tolstikhin_mlpmixer_2021}
 \citation{xu_empirical_2015,srivastava_dropout_2014}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}\textrm  {NECDNet} 网络架构设计}{14}{section.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}多尺度特征融合}{14}{subsection.2.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。}}{15}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:feature_distribution}{{2.3}{15}{六个局部特征描述符在不同几何类别下的数值分布情况。}{figure.caption.11}{}}
-\newlabel{fig:feature_distribution@cref}{{[figure][3][2]2.3}{[1][14][]15}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces NECDNet 网络架构示意图。}}{15}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:necdnet_architecture}{{2.4}{15}{NECDNet 网络架构示意图。}{figure.caption.12}{}}
-\newlabel{fig:necdnet_architecture@cref}{{[figure][4][2]2.4}{[1][14][]15}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}\textrm  {NECDNet} 网络架构设计}{16}{section.2.4}\protected@file@percent }
+\newlabel{sec:necdnet_structure}{{2.4}{16}{\textrm {NECDNet} 网络架构设计}{section.2.4}{}}
+\newlabel{sec:necdnet_structure@cref}{{[section][4][2]2.4}{[1][16][]16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}多尺度特征融合}{16}{subsection.2.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces 六个局部特征描述符在不同几何类别下的数值分布情况。}}{17}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:feature_distribution}{{2.5}{17}{六个局部特征描述符在不同几何类别下的数值分布情况。}{figure.caption.13}{}}
+\newlabel{fig:feature_distribution@cref}{{[figure][5][2]2.5}{[1][16][]17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces NECDNet 网络架构示意图。}}{17}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:necdnet_architecture}{{2.6}{17}{NECDNet 网络架构示意图。}{figure.caption.14}{}}
+\newlabel{fig:necdnet_architecture@cref}{{[figure][6][2]2.6}{[1][16][]17}}
 \citation{xu_empirical_2015}
 \citation{srivastava_dropout_2014}
 \citation{bishop_pattern_2006}
-\newlabel{eq:secondary_fusion}{{2.15}{16}{多尺度特征融合}{equation.2.15}{}}
-\newlabel{eq:secondary_fusion@cref}{{[equation][15][2]2.15}{[1][16][]16}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}逐级分类器}{16}{subsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}第一级分类（面点判别）}{16}{subsubsection.2.3.2.1}\protected@file@percent }
-\newlabel{eq:softmax_result}{{2.16}{16}{第一级分类（面点判别）}{equation.2.16}{}}
-\newlabel{eq:softmax_result@cref}{{[equation][16][2]2.16}{[1][16][]16}{}{}{}}
+\newlabel{eq:secondary_fusion}{{2.17}{18}{多尺度特征融合}{equation.2.17}{}}
+\newlabel{eq:secondary_fusion@cref}{{[equation][17][2]2.17}{[1][18][]18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}逐级分类器}{18}{subsection.2.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1）}第一级分类（面点判别）}{18}{subsubsection.2.4.2.1}\protected@file@percent }
+\newlabel{eq:softmax_result}{{2.18}{18}{第一级分类（面点判别）}{equation.2.18}{}}
+\newlabel{eq:softmax_result@cref}{{[equation][18][2]2.18}{[1][18][]18}}
 \citation{japkowicz_class_2002a}
 \citation{lin_focal_2020}
 \citation{mao_crossentropy_2023}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}第二级分类（边缘点与角点判别）}{17}{subsubsection.2.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}损失函数}{17}{subsection.2.3.3}\protected@file@percent }
-\newlabel{eq:ce_loss}{{2.17}{17}{损失函数}{equation.2.17}{}}
-\newlabel{eq:ce_loss@cref}{{[equation][17][2]2.17}{[1][17][]17}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2）}第二级分类（边缘点与角点判别）}{19}{subsubsection.2.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}损失函数}{19}{subsection.2.4.3}\protected@file@percent }
+\newlabel{sec:loss_function}{{2.4.3}{19}{损失函数}{subsection.2.4.3}{}}
+\newlabel{sec:loss_function@cref}{{[subsection][3][2,4]2.4.3}{[1][19][]19}}
+\newlabel{eq:ce_loss}{{2.19}{19}{损失函数}{equation.2.19}{}}
+\newlabel{eq:ce_loss@cref}{{[equation][19][2]2.19}{[1][19][]19}}
 \citation{lin_focal_2020}
-\citation{krstinic_multilabel_2020,chicco_advantages_2020,japkowicz_class_2002a}
-\citation{duntsch_confusion_2019}
-\citation{erbani_confusion_2024}
-\citation{krstinic_multilabel_2020,japkowicz_class_2002a}
-\newlabel{eq:weighted_ce_loss}{{2.18}{18}{损失函数}{equation.2.18}{}}
-\newlabel{eq:weighted_ce_loss@cref}{{[equation][18][2]2.18}{[1][17][]18}{}{}{}}
-\newlabel{eq:focal_loss}{{2.19}{18}{损失函数}{equation.2.19}{}}
-\newlabel{eq:focal_loss@cref}{{[equation][19][2]2.19}{[1][18][]18}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}评价指标}{18}{subsection.2.3.4}\protected@file@percent }
-\newlabel{sec:metrics}{{2.3.4}{18}{评价指标}{subsection.2.3.4}{}}
-\newlabel{sec:metrics@cref}{{[subsection][4][2,3]2.3.4thesubsection\endcsname }{[1][18][]18}{}{}{}}
-\citation{koch_abc_2019}
-\citation{chang_shapenet_2015}
-\citation{dai_scannet_2017}
-\citation{lai_largescale_2011}
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces 三分类任务的混淆矩阵示例。}}{19}{table.caption.13}\protected@file@percent }
-\newlabel{tab:confusion_matrix}{{2.1}{19}{三分类任务的混淆矩阵示例。}{table.caption.13}{}}
-\newlabel{tab:confusion_matrix@cref}{{[table][1][2]2.1}{[1][18][]19}{}{}{}}
-\newlabel{eq:macro_average}{{2.20}{19}{评价指标}{equation.2.20}{}}
-\newlabel{eq:macro_average@cref}{{[equation][20][2]2.20}{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}\textrm  {ABC-Corner} 数据集构建}{19}{section.2.4}\protected@file@percent }
-\newlabel{sec:dataset}{{2.4}{19}{\textrm {ABC-Corner} 数据集构建}{section.2.4}{}}
-\newlabel{sec:dataset@cref}{{[section][4][2]2.4thesection\endcsname }{[1][19][]19}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}数据集选取}{19}{subsection.2.4.1}\protected@file@percent }
-\citation{koch_abc_2019}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces 常用点云数据集对比示意图。}}{20}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:dataset_comparison}{{2.5}{20}{常用点云数据集对比示意图。}{figure.caption.14}{}}
-\newlabel{fig:dataset_comparison@cref}{{[figure][5][2]2.5}{[1][20][]20}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces ABC 数据集中的部分 CAD 模型示例。}}{20}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:abc_dataset_examples}{{2.6}{20}{ABC 数据集中的部分 CAD 模型示例。}{figure.caption.15}{}}
-\newlabel{fig:abc_dataset_examples@cref}{{[figure][6][2]2.6}{[1][20][]20}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces ABC-Corner 数据集标注流程示意图。}}{21}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:annotation_pipeline}{{2.7}{21}{ABC-Corner 数据集标注流程示意图。}{figure.caption.16}{}}
-\newlabel{fig:annotation_pipeline@cref}{{[figure][7][2]2.7}{[1][21][]21}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}数据集标注流程}{21}{subsection.2.4.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces ABC-Corner 数据集中的部分样本及其标注结果。}}{22}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:dataset_samples}{{2.8}{22}{ABC-Corner 数据集中的部分样本及其标注结果。}{figure.caption.17}{}}
-\newlabel{fig:dataset_samples@cref}{{[figure][8][2]2.8}{[1][22][]22}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}本章小结}{22}{section.2.5}\protected@file@percent }
+\newlabel{eq:weighted_ce_loss}{{2.20}{20}{损失函数}{equation.2.20}{}}
+\newlabel{eq:weighted_ce_loss@cref}{{[equation][20][2]2.20}{[1][19][]20}}
+\newlabel{eq:focal_loss}{{2.21}{20}{损失函数}{equation.2.21}{}}
+\newlabel{eq:focal_loss@cref}{{[equation][21][2]2.21}{[1][20][]20}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}本章小结}{20}{section.2.5}\protected@file@percent }
 \@setckpt{data/chap02}{
-\setcounter{page}{24}
-\setcounter{equation}{20}
+\setcounter{page}{21}
+\setcounter{equation}{21}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -143,15 +135,15 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{8}
-\setcounter{table}{1}
+\setcounter{figure}{6}
+\setcounter{table}{0}
 \setcounter{parentequation}{0}
 \setcounter{caption@flags}{2}
 \setcounter{continuedfloat}{0}
 \setcounter{subfigure}{0}
 \setcounter{subtable}{0}
 \setcounter{pp@a@footnote}{2}
-\setcounter{endNonectr}{27}
+\setcounter{endNonectr}{28}
 \setcounter{currNonectr}{0}
 \setcounter{LT@tables}{0}
 \setcounter{LT@chunks}{0}
@@ -161,7 +153,7 @@
 \setcounter{Item}{0}
 \setcounter{Hfootnote}{0}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{27}
+\setcounter{bookmark@seq@number}{26}
 \setcounter{AlgoLine}{0}
 \setcounter{algocfline}{0}
 \setcounter{algocfproc}{0}
@@ -207,4 +199,5 @@
 \setcounter{endproofctr}{0}
 \setcounter{proof}{0}
 \setcounter{float@type}{4}
+\setcounter{@todonotes@numberoftodonotes}{0}
 }
