@@ -3,10 +3,32 @@
 \item[$\mathcal{P}^\text{c}$] 非结构化点云
 \item[$n$] 点云中点的数量
 \item[$\mathbf{p}_i^\text{c}$] 查询点（点云中第 $i$ 个点的三维坐标）
-\item[$\mathcal{Q}_i^\text{c}$] 查询点 $\mathbf{p}_i^\text{c}$ 的邻域
+\item[$\mathcal{Q}_i^\text{c}$] 查询点 $\mathbf{p}_i^\text{c}$ 的邻域点集合
 \item[$k$] 查询点邻域 $\mathcal{Q}_i^\text{c}$ 中点的数量
+\item[$\mathbf{n}_i^\text{c}$] 查询点 $\mathbf{p}_i^\text{c}$ 的法向量
+\item[$\kappa_i$] 查询点邻域的曲率特征
+\item[$\bar{d}_i$] 查询点邻域的投影距离均值特征
+\item[$r_i$] 查询点邻域的中心偏离比特征
+\item[$\mu_{\theta,i}$] 查询点邻域的法向量角度差均值特征
+\item[$\sigma^2_{\theta,i}$] 查询点邻域的法向量分布方差特征
+\item[$\bar{\text{proj}_i}$] 查询点邻域的法线投影距离均值特征
 \item[$\mathbf{x}_i^\text{c}$] 查询点 $\mathbf{p}_i^\text{c}$ 在某一尺度下的局部特征向量
 \item[$\mathbf{X}_i^\text{c}$] 查询点 $\mathbf{p}_i^\text{c}$ 的多尺度特征矩阵
-\item[$m$] 多尺度邻域的数量
-
+\item[$m$] 多尺度特征矩阵中的尺度数量
+\item[$\mathcal{S}$] 用于抓取规划的采样点集合
+\item[$\mathbf{s}_i$] 采样点（集合 $\mathcal{S}$ 中第 $i$ 个点）
+\item[$f_i$] 采样点 $\mathbf{s}_i$ 的几何特征类别标签
+\item[$\mathtt{f}, \mathtt{e}, \mathtt{c}$] 几何特征类别：面点、边缘点、角点
+\item[$v$] 体素采样尺寸参数
+\item[$\mathcal{D}_i$] 基于几何特征的接触检测器
+\item[$d$] 接触检测器（或机械手指腹）的直径
+\item[$l$] 接触检测器的长度
+\item[$\theta_{\mathrm{sec}}$] 边特征检测器（扇形柱）的张角
+\item[$\theta_{\mathrm{cone}}$] 角特征检测器（圆锥体）的顶角
+\item[$\theta_{\mathrm{th}}$] 对偶接触点法向对齐验证阈值
+\item[$\mathbf{j}_i$] 机械手抓取中心位置
+\item[$\mathbf{v}_i$] 机械手接触向量（接近方向）
+\item[$\beta$] 机械手绕接触轴的旋转增强角度
+\item[$\eta$] 软指腹有效压缩系数
+\item[$\mathbf{C}_i$] 软接触模型下的离散接触点簇
 \end{denotation}

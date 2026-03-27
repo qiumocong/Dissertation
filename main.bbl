@@ -1,4 +1,4 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{83}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -11,38 +11,63 @@
   \let\eprint\href
 \fi
 
+\bibitem[Mirzaei et~al.(2022)Mirzaei, Arashpour, Asadi, Masoumi, Bai, and Behnood]{mirzaei_3d_2022}
+MIRZAEI K, ARASHPOUR M, ASADI E, et~al.
+\newblock 3d point cloud data processing with machine learning for construction and infrastructure applications: A comprehensive review\allowbreak[J].
+\newblock ADVANCED ENGINEERING INFORMATICS, 2022, 51: 101501.
+
+\bibitem[Li et~al.(2023)Li, Liu, Yang, Guo, Guo, and Guo]{li_surface_2023}
+LI Y, LIU S, YANG X, et~al.
+\newblock Surface and edge detection for primitive fitting of point clouds\allowbreak[C]//\allowbreak
+SIGGRAPH '23: ACM SIGGRAPH 2023 Conference Proceedings.
+\newblock New York, NY, USA: Association for Computing Machinery, 2023: 1-10.
+
+\bibitem[{Lav{\'i}n-Delgado} et~al.(2024){Lav{\'i}n-Delgado}, {G{\'o}mez-Aguilar}, {Urueta-Hinojosa}, {Zamudio-Beltr{\'a}n}, and {Alan{\'i}s-Navarro}]{lavin-delgado_efficient_2024}
+{Lav{\'i}n-Delgado} J~E, {G{\'o}mez-Aguilar} J~F, {Urueta-Hinojosa} D~E, et~al.
+\newblock An efficient technique for object recognition using fractional harris--stephens corner detection algorithm\allowbreak[J].
+\newblock Multimedia Tools and Applications, 2024, 83\allowbreak (8): 23173-23199.
+
+\bibitem[{高俊杰}\ 等(2024){高俊杰}, {王瑞安}, {王子雄}, {董秋杰}, {高浩浩}, and {辛士庆}]{GaoJunJie_ji_2024}
+{高俊杰}, {王瑞安}, {王子雄}, 等.
+\newblock 基于边缘感知的点云配准算法\allowbreak[J].
+\newblock 计算机辅助设计与图形学学报, 2024, 36\allowbreak (7).
+
+\bibitem[{张志佳}\ 等(2017){张志佳}, {魏信}, {周自强}, {吴天舒}, and {贾梦思}]{ZhangZhiJia_ji_2017}
+{张志佳}, {魏信}, {周自强}, 等.
+\newblock 基于深度图像和点云边缘特征的典型零部件识别\allowbreak[J].
+\newblock 信息与控制, 2017, 46\allowbreak (3).
+
 \bibitem[Ahmed et~al.(2018)Ahmed, Tan, Chew, Mamun, and Wong]{ahmed_edge_2018}
 AHMED S~M, TAN Y~Z, CHEW C~M, et~al.
 \newblock Edge and corner detection for unorganized 3d point clouds with application to robotic welding\allowbreak[C]//\allowbreak
 2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS).
 \newblock 2018: 7350-7355.
 
-\bibitem[Miller et~al.(2021)Miller and Allen]{miller_graspit_2021}
-MILLER A~T, ALLEN P~K.
-\newblock Graspit!: A versatile simulator for grasp analysis\allowbreak[C]//\allowbreak
-ASME 2000 International Mechanical Engineering Congress and Exposition.
-\newblock American Society of Mechanical Engineers Digital Collection, 2021: 1251-1258.
-
 \bibitem[Gumhold et~al.(2001)Gumhold and Wang]{gumhold_feature_2001}
 GUMHOLD S, WANG X.
 \newblock Feature extraction from point clouds\allowbreak[J].
 \newblock Proceedings of 10th international meshing roundtable, 2001, 2001.
 
-\bibitem[Bazazian et~al.(2015)Bazazian, Casas, and {Ruiz-Hidalgo}]{bazazian_fast_2015}
-BAZAZIAN D, CASAS J~R, {Ruiz-Hidalgo} J.
-\newblock Fast and robust edge extraction in unorganized point clouds\allowbreak[C]//\allowbreak
-2015 International Conference on Digital Image Computing: Techniques and Applications (DICTA).
-\newblock 2015: 1-8.
-
-\bibitem[Lin et~al.(2015)Lin, Wang, Cheng, Chen, Jia, Chen, and Li]{lin_line_2015}
-LIN Y, WANG C, CHENG J, et~al.
-\newblock Line segment extraction for large scale unorganized point clouds\allowbreak[J].
-\newblock ISPRS Journal of Photogrammetry and Remote Sensing, 2015, 102: 172-183.
-
 \bibitem[Demarsin et~al.(2007)Demarsin, Vanderstraeten, Volodine, and Roose]{demarsin_detection_2007}
 DEMARSIN K, VANDERSTRAETEN D, VOLODINE T, et~al.
 \newblock Detection of closed sharp edges in point clouds using normal estimation and graph theory\allowbreak[J].
 \newblock Computer-Aided Design, 2007, 39\allowbreak (4): 276-283.
+
+\bibitem[Nguyen et~al.(2018)Nguyen, Aprilia, Khairyanto, Pang, Seet, and Tor]{nguyen_edge_2018}
+NGUYEN K~W~L, APRILIA A, KHAIRYANTO A, et~al.
+\newblock Edge detection from point cloud of worn parts\allowbreak[C]//\allowbreak
+2018.
+
+\bibitem[Charles et~al.(2017)Charles, Su, Kaichun, and Guibas]{charles_pointnet_2017a}
+CHARLES R~Q, SU H, KAICHUN M, et~al.
+\newblock Pointnet: Deep learning on point sets for 3d classification and segmentation\allowbreak[C]//\allowbreak
+2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR).
+\newblock Honolulu, HI: IEEE, 2017: 77-85.
+
+\bibitem[Bazazian et~al.(2021)Bazazian and Par{\'e}s]{bazazian_edcnet_2021}
+BAZAZIAN D, PAR{\'E}S M~E.
+\newblock Edc-net: Edge detection capsule network for 3d point clouds\allowbreak[J].
+\newblock Applied Sciences, 2021, 11\allowbreak (4): 1833.
 
 \bibitem[Himeur et~al.(2022)Himeur, Lejemble, Pellegrini, Paulin, Barthe, and Mellado]{himeur_pcednet_2022}
 HIMEUR C~E, LEJEMBLE T, PELLEGRINI T, et~al.
@@ -54,10 +79,230 @@ BODE L, WEINMANN M, KLEIN R.
 \newblock Bounded: Neural boundary and edge detection in 3d point clouds via local neighborhood statistics\allowbreak[J].
 \newblock ISPRS Journal of Photogrammetry and Remote Sensing, 2023, 205: 334-351.
 
-\bibitem[Mirzaei et~al.(2022)Mirzaei, Arashpour, Asadi, Masoumi, Bai, and Behnood]{mirzaei_3d_2022}
-MIRZAEI K, ARASHPOUR M, ASADI E, et~al.
-\newblock 3d point cloud data processing with machine learning for construction and infrastructure applications: A comprehensive review\allowbreak[J].
-\newblock ADVANCED ENGINEERING INFORMATICS, 2022, 51: 101501.
+\bibitem[Wang et~al.(2020)Wang, Xu, Xu, Tagliasacchi, Zhou, {Mahdavi-Amiri}, and Zhang]{wang_pienet_2020}
+WANG X, XU Y, XU K, et~al.
+\newblock Pie-net: Parametric inference of point cloud edges\allowbreak[C]//\allowbreak
+NIPS '20: Proceedings of the 34th International Conference on Neural Information Processing Systems.
+\newblock Red Hook, NY, USA: Curran Associates Inc., 2020: 20167-20178.
+
+\bibitem[Li et~al.(2019)Li and Qiao]{li_survey_2019}
+LI R, QIAO H.
+\newblock A survey of methods and strategies for high-precision robotic grasping and assembly tasks---some new trends\allowbreak[J].
+\newblock IEEE/ASME Transactions on Mechatronics, 2019, 24\allowbreak (6): 2718-2732.
+
+\bibitem[Newbury et~al.(2023)Newbury, Gu, Chumbley, Mousavian, Eppner, Leitner, Bohg, Morales, Asfour, Kragic, Fox, and Cosgun]{newbury_deep_2023}
+NEWBURY R, GU M, CHUMBLEY L, et~al.
+\newblock Deep learning approaches to grasp synthesis: A review\allowbreak[J].
+\newblock Trans. Rob., 2023, 39\allowbreak (5): 3994-4015.
+
+\bibitem[Asada(1979)]{asada_studies_1979}
+ASADA H.
+\newblock Studies on prehension and handling by robot hands with elastic fingers\allowbreak[D].
+\newblock Kyoto University, 1979.
+
+\bibitem[Miller et~al.(2003)Miller, Knoop, Christensen, and Allen]{miller_automatic_2003}
+MILLER A, KNOOP S, CHRISTENSEN H, et~al.
+\newblock Automatic grasp planning using shape primitives\allowbreak[C]//\allowbreak
+2003 IEEE International Conference on Robotics and Automation (Cat. No.03CH37422): Vol.~2.
+\newblock 2003: 1824-1829 vol.2.
+
+\bibitem[Goldfeder et~al.(2007)Goldfeder, Allen, Lackner, and Pelossof]{goldfeder_grasp_2007}
+GOLDFEDER C, ALLEN P~K, LACKNER C, et~al.
+\newblock Grasp planning via decomposition trees\allowbreak[C]//\allowbreak
+Proceedings 2007 IEEE International Conference on Robotics and Automation.
+\newblock 2007: 4679-4684.
+
+\bibitem[Harada et~al.(2011)Harada, Tsuji, Nagata, Yamanobe, Maruyama, Nakamura, and Kawai]{harada_grasp_2011}
+HARADA K, TSUJI T, NAGATA K, et~al.
+\newblock Grasp planning for parallel grippers with flexibility on its grasping surface\allowbreak[C]//\allowbreak
+2011 IEEE International Conference on Robotics and Biomimetics.
+\newblock 2011: 1540-1546.
+
+\bibitem[Wan et~al.(2021)Wan, Harada, and Kanehiro]{wan_planning_2021}
+WAN W, HARADA K, KANEHIRO F.
+\newblock Planning grasps with suction cups and parallel grippers using superimposed segmentation of object meshes\allowbreak[J].
+\newblock IEEE Transactions on Robotics, 2021, 37\allowbreak (1): 166-184.
+
+\bibitem[Chen et~al.(2022)Chen, Kiyokawa, Wan, and Harada]{chen_category_2022}
+CHEN H, KIYOKAWA T, WAN W, et~al.
+\newblock Category-association based similarity matching for novel object pick-and-place task\allowbreak[J].
+\newblock IEEE Robotics and Automation Letters, 2022, 7\allowbreak (2): 2961-2968.
+
+\bibitem[Mahler et~al.(2017)Mahler, Liang, Niyaz, Laskey, Doan, Liu, Ojea, and Goldberg]{mahler_dexnet_2017}
+MAHLER J, LIANG J, NIYAZ S, et~al.
+\newblock Dex-net 2.0: Deep learning to plan robust grasps with synthetic point clouds and analytic grasp metrics: arXiv:1703.09312\allowbreak[M].
+\newblock arXiv, 2017.
+
+\bibitem[Lenz et~al.(2015)Lenz, Lee, and Saxena]{lenz_deep_2015}
+LENZ I, LEE H, SAXENA A.
+\newblock Deep learning for detecting robotic grasps\allowbreak[J].
+\newblock The International Journal of Robotics Research, 2015, 34\allowbreak (4-5): 705-724.
+
+\bibitem[Song et~al.(2018)Song, Wang, and Hang]{song_fingertip_2018}
+SONG H, WANG M~Y, HANG K.
+\newblock Fingertip surface optimization for robust grasping on contact primitives\allowbreak[J].
+\newblock IEEE Robotics and Automation Letters, 2018, 3\allowbreak (2): 742-749.
+
+\bibitem[Ringwald et~al.(2023)Ringwald, Schneider, Chen, Knobbe, Johannsmeier, Swikir, and Haddadin]{ringwald_towards_2023}
+RINGWALD J, SCHNEIDER S, CHEN L, et~al.
+\newblock Towards task-specific modular gripper fingers: Automatic production of fingertip mechanics\allowbreak[J].
+\newblock IEEE Robotics and Automation Letters, 2023, 8\allowbreak (3): 1866-1873.
+
+\bibitem[Grady et~al.(2021)Grady, Tang, Twigg, Vo, Brahmbhatt, and Kemp]{grady_contactopt_2021}
+GRADY P, TANG C, TWIGG C~D, et~al.
+\newblock Contactopt: Optimizing contact to improve grasps\allowbreak[C]//\allowbreak
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition.
+\newblock 2021: 1471-1481.
+
+\bibitem[Bicchi et~al.(2000)Bicchi and Kumar]{bicchi_robotic_2000}
+BICCHI A, KUMAR V.
+\newblock Robotic grasping and contact: A review\allowbreak[C]//\allowbreak
+Proceedings 2000 ICRA. Millennium conference. IEEE international conference on robotics and automation. Symposia proceedings: Vol.~1.
+\newblock IEEE, 2000: 348-353.
+
+\bibitem[Xia et~al.(2017)Xia and Wang]{xia_fast_2017}
+XIA S, WANG R.
+\newblock A fast edge extraction method for mobile lidar point clouds\allowbreak[J].
+\newblock IEEE Geoscience and Remote Sensing Letters, 2017, 14\allowbreak (8): 1288-1292.
+
+\bibitem[Pauly et~al.(2003)Pauly, Keiser, and Gross]{pauly_multiscale_2003}
+PAULY M, KEISER R, GROSS M.
+\newblock Multi-scale feature extraction on point-sampled surfaces\allowbreak[J].
+\newblock Computer Graphics Forum, 2003, 22\allowbreak (3): 281-289.
+
+\bibitem[Bazazian et~al.(2015)Bazazian, Casas, and {Ruiz-Hidalgo}]{bazazian_fast_2015}
+BAZAZIAN D, CASAS J~R, {Ruiz-Hidalgo} J.
+\newblock Fast and robust edge extraction in unorganized point clouds\allowbreak[C]//\allowbreak
+2015 International Conference on Digital Image Computing: Techniques and Applications (DICTA).
+\newblock 2015: 1-8.
+
+\bibitem[{王丽辉}\ 等(2011){王丽辉} and {袁保宗}]{WangLiHui_san_2011}
+{王丽辉}, {袁保宗}.
+\newblock 三维散乱点云模型的特征点检测\allowbreak[J].
+\newblock 信号处理, 2011, 27\allowbreak (6).
+
+\bibitem[Che et~al.(2018)Che and Olsen]{che_multiscan_2018}
+CHE E, OLSEN M~J.
+\newblock Multi-scan segmentation of terrestrial laser scanning data based on normal variation analysis\allowbreak[J].
+\newblock ISPRS Journal of Photogrammetry and Remote Sensing, 2018, 143: 233-248.
+
+\bibitem[Daniels et~al.(2007)Daniels, Ha, Ochotta, and Silva]{daniels_robust_2007}
+DANIELS J~I, HA L~K, OCHOTTA T, et~al.
+\newblock Robust smooth feature extraction from point clouds\allowbreak[C]//\allowbreak
+SMI '07: Proceedings of the IEEE International Conference on Shape Modeling and Applications 2007.
+\newblock USA: IEEE Computer Society, 2007: 123-136.
+
+\bibitem[Zhang et~al.(2019)Zhang, Cao, Liu, Chen, Li, and Liu]{zhang_multinormal_2019}
+ZHANG J, CAO J, LIU X, et~al.
+\newblock Multi-normal estimation via pair consistency voting\allowbreak[J].
+\newblock IEEE Transactions on Visualization and Computer Graphics, 2019, 25\allowbreak (4): 1693-1706.
+
+\bibitem[Lin et~al.(2015)Lin, Wang, Cheng, Chen, Jia, Chen, and Li]{lin_line_2015}
+LIN Y, WANG C, CHENG J, et~al.
+\newblock Line segment extraction for large scale unorganized point clouds\allowbreak[J].
+\newblock ISPRS Journal of Photogrammetry and Remote Sensing, 2015, 102: 172-183.
+
+\bibitem[Schmidt et~al.(2023)Schmidt, Volland, Iwaszczuk, and Eichhorn]{schmidt_detection_2023}
+SCHMIDT J, VOLLAND V, IWASZCZUK D, et~al.
+\newblock Detection of hidden edges and corners in slam-based indoor point clouds\allowbreak[J].
+\newblock The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, 2023, XLVIII-1-W1-2023: 443-449.
+
+\bibitem[Qi et~al.(2017)Qi, Yi, Su, and Guibas]{qi_pointnet_2017}
+QI C~R, YI L, SU H, et~al.
+\newblock Pointnet++: Deep hierarchical feature learning on point sets in a metric space\allowbreak[C]//\allowbreak
+NIPS'17: Proceedings of the 31st International Conference on Neural Information Processing Systems.
+\newblock Red Hook, NY, USA: Curran Associates Inc., 2017: 5105-5114.
+
+\bibitem[Guerrero et~al.(2018)Guerrero, Kleiman, Ovsjanikov, and Mitra]{guerrero_pcpnet_2018}
+GUERRERO P, KLEIMAN Y, OVSJANIKOV M, et~al.
+\newblock Pcpnet learning local shape properties from raw point clouds\allowbreak[J].
+\newblock Computer Graphics Forum, 2018, 37\allowbreak (2): 75-85.
+
+\bibitem[Jiao et~al.(2024)Jiao, Lv, Yi, Zhao, Pan, Wu, and Liu]{jiao_mslnet_2024}
+JIAO X, LV C, YI R, et~al.
+\newblock Msl-net: Sharp feature detection network for 3d point clouds\allowbreak[J].
+\newblock IEEE Transactions on Visualization and Computer Graphics, 2024, 30\allowbreak (9): 6433-6446.
+
+\bibitem[Yu et~al.(2018)Yu, Li, Fu, {Cohen-Or}, and Heng]{yu_ecnet_2018}
+YU L, LI X, FU C~W, et~al.
+\newblock Ec-net: An edge-aware point set consolidation network\allowbreak[C]//\allowbreak
+FERRARI V, HEBERT M, SMINCHISESCU C, et~al.
+\newblock Computer Vision -- ECCV 2018.
+\newblock Cham: Springer International Publishing, 2018: 398-414.
+
+\bibitem[Matveev et~al.(2022)Matveev, Rakhimov, Artemov, Bobrovskikh, Egiazarian, Bogomolov, Panozzo, Zorin, and Burnaev]{matveev_def_2022}
+MATVEEV A, RAKHIMOV R, ARTEMOV A, et~al.
+\newblock Def: Deep estimation of sharp geometric features in 3d shapes\allowbreak[J].
+\newblock ACM Trans. Graph., 2022, 41\allowbreak (4): 108:1-108:22.
+
+\bibitem[Zhu et~al.(2023)Zhu, Du, Chen, Zhao, Nie, and Han]{zhu_nerve_2023}
+ZHU X, DU D, CHEN W, et~al.
+\newblock Nerve: Neural volumetric edges for parametric curve extraction from point cloud\allowbreak[C]//\allowbreak
+2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR).
+\newblock 2023: 13601-13610.
+
+\bibitem[Hu et~al.(2020)Hu, Zhen, Bai, Fu, and Tai]{hu_jsenet_2020}
+HU Z, ZHEN M, BAI X, et~al.
+\newblock Jsenet: Joint semantic segmentation and edge detection network for 3d point clouds\allowbreak[M]//\allowbreak
+VEDALDI A, BISCHOF H, BROX T, et~al.
+\newblock Computer Vision -- ECCV 2020: Vol. 12365.
+\newblock Cham: Springer International Publishing, 2020: 222-239.
+
+\bibitem[Miller et~al.(2021)Miller and Allen]{miller_graspit_2021}
+MILLER A~T, ALLEN P~K.
+\newblock Graspit!: A versatile simulator for grasp analysis\allowbreak[C]//\allowbreak
+ASME 2000 International Mechanical Engineering Congress and Exposition.
+\newblock American Society of Mechanical Engineers Digital Collection, 2021: 1251-1258.
+
+\bibitem[Mahler et~al.(2019)Mahler, Matl, Satish, Danielczuk, DeRose, McKinley, and Goldberg]{mahler_learning_2019}
+MAHLER J, MATL M, SATISH V, et~al.
+\newblock Learning ambidextrous robot grasping policies\allowbreak[J].
+\newblock Science Robotics, 2019, 4\allowbreak (26): eaau4984.
+
+\bibitem[Mousavian et~al.(2019)Mousavian, Eppner, and Fox]{mousavian_graspnet_2019}
+MOUSAVIAN A, EPPNER C, FOX D.
+\newblock 6-dof graspnet: Variational grasp generation for object manipulation\allowbreak[C]//\allowbreak
+International Conference on Computer Vision (ICCV).
+\newblock 2019.
+
+\bibitem[Fang et~al.(2020)Fang, Wang, Gou, and Lu]{fang_graspnet1billion_2020}
+FANG H~S, WANG C, GOU M, et~al.
+\newblock Graspnet-1billion: A large-scale benchmark for general object grasping\allowbreak[C]//\allowbreak
+2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR).
+\newblock 2020: 11441-11450.
+
+\bibitem[Cao et~al.(2023)Cao, Chen, Li, Feng, Lin, and Knoll]{cao_efficient_2023}
+CAO H, CHEN G, LI Z, et~al.
+\newblock Efficient grasp detection network with gaussian-based grasp representation for robotic manipulation\allowbreak[J].
+\newblock IEEE/ASME Transactions on Mechatronics, 2023, 28\allowbreak (3): 1384-1394.
+
+\bibitem[Ferrari et~al.(1992)Ferrari and Canny]{ferrari_planning_1992}
+FERRARI C, CANNY J.
+\newblock Planning optimal grasps\allowbreak[C]//\allowbreak
+Proceedings 1992 IEEE International Conference on Robotics and Automation.
+\newblock 1992: 2290-2295 vol.3.
+
+\bibitem[Ten~Pas et~al.(2017)Ten~Pas, Gualtieri, Saenko, and Platt]{tenpas_grasp_2017}
+TEN~PAS A, GUALTIERI M, SAENKO K, et~al.
+\newblock Grasp pose detection in point clouds\allowbreak[J/OL].
+\newblock The International Journal of Robotics Research, 2017, 36\allowbreak (13-14): 1455-1473.
+\newblock DOI: \doi{10.1177/0278364917735594}.
+
+\bibitem[Liang et~al.(2019)Liang, Ma, Li, Gorner, Tang, Fang, Sun, and Zhang]{liang_pointnetgpd_2019}
+LIANG H, MA X, LI S, et~al.
+\newblock Pointnetgpd: Detecting grasp configurations from point sets\allowbreak[J].
+\newblock 2019 International Conference on Robotics and Automation (ICRA), 2019: 3629-3635.
+
+\bibitem[Yu et~al.(2025)Yu, Zhai, and Xia]{yu_mtgrasp_2025}
+YU S, ZHAI D~H, XIA Y.
+\newblock Mtgrasp: Multiscale 6-dof robotic grasp detection\allowbreak[J].
+\newblock IEEE/ASME Transactions on Mechatronics, 2025, 30\allowbreak (1): 156-167.
+
+\bibitem[Kopicki et~al.(2014)Kopicki, Detry, Schmidt, Borst, Stolkin, and Wyatt]{kopicki_learning_2014}
+KOPICKI M, DETRY R, SCHMIDT F, et~al.
+\newblock Learning dexterous grasps that generalise to novel objects by combining hand and contact models\allowbreak[C]//\allowbreak
+2014 IEEE International Conference on Robotics and Automation (ICRA).
+\newblock 2014: 5358-5365.
 
 \bibitem[Cover et~al.(1967)Cover and Hart]{cover_nearest_1967}
 COVER T, HART P.
@@ -211,35 +456,6 @@ ERBANI J, PORTIER P~{\'E}, {Egyed-Zsigmond} E, et~al.
 \newblock Confusion matrices: A unified theory\allowbreak[J/OL].
 \newblock IEEE Access, 2024, 12: 181372-181419.
 \newblock DOI: \doi{10.1109/ACCESS.2024.3507199}.
-
-\bibitem[Wang et~al.(2020)Wang, Xu, Xu, Tagliasacchi, Zhou, {Mahdavi-Amiri}, and Zhang]{wang_pienet_2020}
-WANG X, XU Y, XU K, et~al.
-\newblock Pie-net: Parametric inference of point cloud edges\allowbreak[C]//\allowbreak
-NIPS '20: Proceedings of the 34th International Conference on Neural Information Processing Systems.
-\newblock Red Hook, NY, USA: Curran Associates Inc., 2020: 20167-20178.
-
-\bibitem[Li et~al.(2019)Li and Qiao]{li_survey_2019}
-LI R, QIAO H.
-\newblock A survey of methods and strategies for high-precision robotic grasping and assembly tasks---some new trends\allowbreak[J/OL].
-\newblock IEEE/ASME Transactions on Mechatronics, 2019, 24\allowbreak (6): 2718-2732.
-\newblock DOI: \doi{10.1109/TMECH.2019.2945135}.
-
-\bibitem[Newbury et~al.(2023)Newbury, Gu, Chumbley, Mousavian, Eppner, Leitner, Bohg, Morales, Asfour, Kragic, Fox, and Cosgun]{newbury_deep_2023a}
-NEWBURY R, GU M, CHUMBLEY L, et~al.
-\newblock Deep learning approaches to grasp synthesis: A review\allowbreak[J/OL].
-\newblock Trans. Rob., 2023, 39\allowbreak (5): 3994-4015.
-\newblock DOI: \doi{10.1109/TRO.2023.3280597}.
-
-\bibitem[Ten~Pas et~al.(2017)Ten~Pas, Gualtieri, Saenko, and Platt]{tenpas_grasp_2017}
-TEN~PAS A, GUALTIERI M, SAENKO K, et~al.
-\newblock Grasp pose detection in point clouds\allowbreak[J/OL].
-\newblock The International Journal of Robotics Research, 2017, 36\allowbreak (13-14): 1455-1473.
-\newblock DOI: \doi{10.1177/0278364917735594}.
-
-\bibitem[Wan et~al.(2021)Wan, Harada, and Kanehiro]{wan_planning_2021}
-WAN W, HARADA K, KANEHIRO F.
-\newblock Planning grasps with suction cups and parallel grippers using superimposed segmentation of object meshes\allowbreak[J].
-\newblock IEEE Transactions on Robotics, 2021, 37\allowbreak (1): 166-184.
 
 \bibitem[Ester et~al.(1996)Ester, Kriegel, Sander, and Xu]{ester_densitybased_1996}
 ESTER M, KRIEGEL H~P, SANDER J, et~al.
