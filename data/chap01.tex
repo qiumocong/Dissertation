@@ -1,4 +1,4 @@
-% !Mode:: "TeX:UTF-8"
+﻿% !Mode:: "TeX:UTF-8"
 \chapter{研究背景与意义}
 \label{cha:intro}
 
@@ -34,11 +34,11 @@
 \subsubsection{传统解析方法}
 传统方法包括基于人工设计的几何描述符、基于表面网格重建以及基于图的方法以及来表征局部邻域的统计特性等，实现不同几何特征的区分。其中基于人工设计的几何描述符是最早被广泛研究的技术路线。
 
-Gumhold等人~\cite{gumhold_feature_2001} 提出的基于主成分分析（PCA）的方法是该领域的经典工作。该方法通过构建点云中每个点及其 $k$ 近邻点的协方差矩阵，计算该矩阵的特征值来描述局部表面的几何变化。如图~\ref{fig:gumhold_feature_2001} 所示，不同几何特征的邻域范围内存在不同的数据分布。具体而言，如果不为零的最小特征值超过了预设的阈值，则认为该点附件的数据变化程度较大，属于边缘或角点特征。
+Gumhold等人~\cite{gumhold_feature_2001} 提出的基于主成分分析（Principal Component Analysis, PCA）的方法是该领域的经典工作。该方法通过构建点云中每个点及其 $k$ 近邻点的协方差矩阵，计算该矩阵的特征值来描述局部表面的几何变化。如图~\ref{fig:gumhold_feature_2001} 所示，不同几何特征的邻域范围内存在不同的数据分布。具体而言，如果不为零的最小特征值超过了预设的阈值，则认为该点附件的数据变化程度较大，属于边缘或角点特征。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{Others/gumhold_feature_2001.jpg}
-    \bicaption{不同几何特征点的邻域形状~\cite{gumhold_feature_2001}：(a) 平面点；(b) 折边点；(c) 边界点；(d) 角点。}{Neighborhood shapes of different geometric feature points~\cite{gumhold_feature_2001}: (a) Face point; (b) Ridge point; (c) Boundary point; (d) Corner point.}
+    \bicaption{不同几何特征点的邻域形状~\cite{gumhold_feature_2001}：(a) 平面点；(b) 折边点；(c) 边界点；(d) 角点}{Neighborhood shapes of different geometric feature points~\cite{gumhold_feature_2001}: (a) Face point; (b) Ridge point; (c) Boundary point; (d) Corner point.}
     \label{fig:gumhold_feature_2001}
 \end{figure}
 
@@ -46,11 +46,11 @@ Gumhold等人~\cite{gumhold_feature_2001} 提出的基于主成分分析（PCA�
 
 Nguyen等人~\cite{nguyen_edge_2018} 基于曲率进行边缘特征提取并分为三个阶段：先利用曲率估计并配合阈值策略定位可能的边缘点；再通过迭代非极大值抑制对高曲率响应的宽带区域进行压缩与精炼，以获得更准确、稀疏的边缘点集合；最后基于距离阈值判定点与点之间的邻接关系，将相邻点逐步连接形成连续的特征线或边缘，从而实现稳定的线状特征恢复。王丽辉等人~\cite{WangLiHui_san_2011} 则结合曲率和法线信息进行邻域分析，并通过八叉树结构计算模型数据点密度，利用密度信息辅助边缘点的提取和连接，提升了边缘检测的准确性和连续性。
 
-基于图的方法可以通过结合全局上下文信息进一步增强特征提取。例如，Demarsin等人~\cite{demarsin_detection_2007} 针对曲线的检测开展相关工作。其先基于点云法线信息，通过一阶分割获得候选特征点，并将其组织为图结构以恢复锐特征线；随后构建最小生成树以形成初始线结构，并通过后续的重连接过程将断裂的线段闭合，从而获得闭合特征线。此外，Che等人~\cite{che_multiscan_2018} 采样了一种无需通用法向估计的方法：首先设计了新的特征提取策略 NORmal VAriation ANAlysis（Norvana），能够剔除部分噪声点并提取边缘点；随后采用区域生长，将同一平滑曲面上的点聚合得到分割结果。图~\ref{fig:che_multiscan_2018} 展示了Norvana的结构。
+基于图的方法可以通过结合全局上下文信息进一步增强特征提取。例如，Demarsin等人~\cite{demarsin_detection_2007} 针对曲线的检测开展相关工作。其先基于点云法线信息，通过一阶分割获得候选特征点，并将其组织为图结构以恢复锐特征线；随后构建最小生成树以形成初始线结构，并通过后续的重连接过程将断裂的线段闭合，从而获得闭合特征线。此外，Che等人~\cite{che_multiscan_2018} 采用了基于一致性投票的方法：首先设计了特征提取策略 NORmal VAriation ANAlysis（Norvana），能够针对点云多视图投影中频繁出现的边缘进行投票提取；随后采用区域生长，将同一平滑曲面上的点聚合得到分割结果。图~\ref{fig:che_multiscan_2018} 展示了Norvana的结构。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{Others/che_multiscan_2018.jpg}
-    \bicaption{基于法向量分析的边缘检测方法Norvana~\cite{che_multiscan_2018}。}{Norvana: Normal Variation Analysis-based edge detection method~\cite{che_multiscan_2018}.}
+    \bicaption{基于一致性投票的边缘检测方法Norvana~\cite{che_multiscan_2018}}{Norvana: Normal Variation Analysis-based edge detection method~\cite{che_multiscan_2018}.}
     \label{fig:che_multiscan_2018}
 \end{figure}
 
@@ -60,11 +60,11 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{Others/lin_line_2015.jpg}
-    \bicaption{基于多视图投影的三维点云边缘检测流程~\cite{lin_line_2015}：(a) 各阶段检测结果；(b) LSHP结构示意图。}{Multi-view projection-based 3D point cloud edge detection pipeline~\cite{lin_line_2015}: (a) The detection results of each stage; (b) Schematic of the LSHP structure.}
+    \bicaption{基于多视图投影的三维点云边缘检测流程~\cite{lin_line_2015}：(a) 各阶段检测结果；(b) LSHP结构示意图}{Multi-view projection-based 3D point cloud edge detection pipeline~\cite{lin_line_2015}: (a) The detection results of each stage; (b) Schematic of the LSHP structure.}
     \label{fig:lin_line_2015}
 \end{figure}
 
-在角点检测方面，针对仅提取边缘不足以描述完整几何特征的问题，Ahmed等人~\cite{ahmed_edge_2018} 采用了两步提取过程：首先基于邻域的空间分析区分出面点和非面点，然后利用聚类的方法在非面点中识别角点。此外，Schmidt等人~\cite{schmidt_detection_2023} 提出使用 RANSAC 算法从点云中提取直线或平面，并在它们的交点处检测角点。这些方法尝试通过几何基元的组合关系来定位角点，但在复杂噪声环境下仍面临挑战。
+在角点检测方面，针对仅提取边缘不足以描述完整几何特征的问题，Ahmed等人~\cite{ahmed_edge_2018} 采用了两步提取过程：首先基于邻域的空间分析区分出面点和非面点，然后利用聚类的方法在非面点中识别角点。此外，Schmidt等人~\cite{schmidt_detection_2023} 提出使用随机采样一致性（Random Sample Consensus, RANSAC）算法从点云中提取直线或平面，并在它们的交点处检测角点。这些方法尝试通过几何基元的组合关系来定位角点，但在复杂噪声环境下仍面临挑战。
 
 综上所述，虽然以几何描述符、表面重建及图优化为代表的传统解析方法为点云特征提取奠定了理论基础，并在规则模型的边缘检测中表现出一定有效性，但其局限性亦十分显著。首先，这类方法本质上依赖于人工设计的几何规则与先验假设，对噪声极其敏感，且高度依赖如邻域尺度、曲率阈值等参数的精细调节，难以在物体形状多变、数据质量参差的现实场景中实现自适应的稳健检测。其次，基于平滑拟合的策略往往导致尖锐特征被过度平滑，造成定位精度损失。最为关键的是，角点检测在此类方法中常被边缘化，多作为边缘提取后的二次处理步骤或依赖于理想化的平面相交假设，这种两阶段策略不仅计算冗余，且在处理复杂拓扑结构的角点时极易因特征模糊而产生误检或漏检。
 
@@ -76,7 +76,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{Others/bazazian_edcnet_2021.jpg}
-    \bicaption{基于胶囊网络的边缘检测方法 EDC-Net~\cite{bazazian_edcnet_2021}。}{EDC-Net: Capsule network-based method for edge detection~\cite{bazazian_edcnet_2021}.}
+    \bicaption{基于胶囊网络的边缘检测方法 EDC-Net~\cite{bazazian_edcnet_2021}}{EDC-Net: Capsule network-based method for edge detection~\cite{bazazian_edcnet_2021}.}
     \label{fig:bazazian_edcnet_2021}
 \end{figure}
 针对特征空间层级关系的建模，Bazazian 等人提出的 EDC-Net~\cite{bazazian_edcnet_2021} 引入了胶囊网络（Capsule Network），如图~\ref{fig:bazazian_edcnet_2021} 所示。该方法首先将局部邻域编码为几何描述符，利用胶囊层独特的动态路由机制来捕捉特征的空间分布结构，从而将点稳健地分类为非边缘或锐利边缘，减少了对人工参数的依赖。此外，针对输入形式的不同，Guerrero 等人的 PCPNet~\cite{guerrero_pcpnet_2018} 专注于局部几何属性的估计，它以多尺度的点云局部图块（Patches）作为输入，通过共享权重的 MLP 学习局部形状特征，不仅能估计法向量和曲率，也能用于特征点的分类。Jiao 等人的 MSL-Net~\cite{jiao_mslnet_2024} 则提出了一种轻量级的多尺度局域网络，通过在不同半径下聚合局部邻域信息增强特征表达，旨在解决大规模点云场景下边缘提取的实时性问题。
@@ -88,7 +88,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{Others/zhu_nerve_2023.jpg}
-    \bicaption{基于体素网格的边缘检测方法 NerVE~\cite{zhu_nerve_2023}。}{NerVE: Voxel-based edge detection method~\cite{zhu_nerve_2023}.}
+    \bicaption{基于体素网格的边缘检测方法 NerVE~\cite{zhu_nerve_2023}}{NerVE: Voxel-based edge detection method~\cite{zhu_nerve_2023}.}
     \label{fig:zhu_nerve_2023}
 \end{figure}
 在数据表征方面，Zhu 等人提出的 NerVE~\cite{zhu_nerve_2023} （如图~\ref{fig:zhu_nerve_2023} 所示）针对无序点云难以进行常规卷积的问题，将点云转化为规则的体素（Voxel）网格。该方法利用稀疏三维卷积神经网络提取体素特征，并在体素内进一步进行节点分类，在保持结构化感知的同时实现了对尖锐几何特征的有效检测。Hu 等人的 JSENet~\cite{hu_jsenet_2020} 则将任务扩展为三维语义边缘检测，采用双流全卷积架构，一支流负责语义分割，另一支流专注边缘检测，通过特征交互模块融合两者的信息，从而在提取几何边缘的同时赋予其语义类别属性。这种方法的检测结果不仅具有几何准确性，还能提供丰富的语义信息，但其处理效率较低，在大规模点云场景下的适应性有待提升。
@@ -104,7 +104,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{Others/goldfeder_grasp_2007.jpg}
-    \bicaption{基于图元拟合的抓取规划方法~\cite{goldfeder_grasp_2007}：(a) 图元拟合过程；(b) 抓取构型生成；(c) 抓取质量评估。}{Grasp planning method based on primitive fitting~\cite{goldfeder_grasp_2007}: (a) Primitive fitting process; (b) Grasp configuration generation; (c) Grasp evaluation.}
+    \bicaption{基于图元拟合的抓取规划方法~\cite{goldfeder_grasp_2007}：(a) 图元拟合过程；(b) 抓取构型生成；(c) 抓取质量评估}{Grasp planning method based on primitive fitting~\cite{goldfeder_grasp_2007}: (a) Primitive fitting process; (b) Grasp configuration generation; (c) Grasp evaluation.}
     \label{fig:goldfeder_grasp_2007}
 \end{figure}
 
@@ -112,15 +112,15 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{Others/wan_planning_2021.jpg}
-    \bicaption{基于表面分割的抓取规划方法~\cite{wan_planning_2021}：(a)物体模型；(b.1-3)表面分割结果；(c)抓取构型生成。}{Grasp planning method based on surface segmentation~\cite{wan_planning_2021}: (a) Object model; (b.1-3) Surface segmentation results; (c) Grasp configuration generation.}
+    \bicaption{基于表面分割的抓取规划方法~\cite{wan_planning_2021}：(a)物体模型；(b.1-3)表面分割结果；(c)抓取构型生成}{Grasp planning method based on surface segmentation~\cite{wan_planning_2021}: (a) Object model; (b.1-3) Surface segmentation results; (c) Grasp configuration generation.}
     \label{fig:wan_planning_2021}
 \end{figure}
 
-另一方面，基于学习的方法利用神经网络和数据驱动技术来增强抓取的泛化能力。Mahler 等人提出的 Dex-Net~\cite{mahler_dexnet_2017,mahler_learning_2019} 系列构建了大规模的合成抓取数据集，训练卷积神经网络（GQ-CNN）直接从深度图像中预测平面抓取的成功率。Mousavian 等人~\cite{mousavian_graspnet_2019} 则提出了 6-DOF GraspNet，通过基于变分自编码器（VAE）的框架生成多样化的6自由度抓取构型。该方法利用抓取评价或精炼网络对候选进行评分并迭代优化，以提高抓取的稳定性与可执行性；最终结合碰撞检测等几何约束过滤不可行抓取，实现对复杂物体的多样化6D抓取构型生成。
+另一方面，基于学习的方法利用神经网络和数据驱动技术来增强抓取的泛化能力。Mahler 等人提出的 Dex-Net~\cite{mahler_dexnet_2017,mahler_learning_2019} 系列构建了大规模的合成抓取数据集，训练卷积神经网络（Convolutional Neural Network, CNN）模型 GQ-CNN 直接从深度图像中预测平面抓取的成功率。Mousavian 等人~\cite{mousavian_graspnet_2019} 则提出了六自由度（six degrees of freedom, 6-DOF）GraspNet，通过基于变分自编码器（VAE）的框架生成多样化的6自由度抓取构型。该方法利用抓取评价或精炼网络对候选进行评分并迭代优化，以提高抓取的稳定性与可执行性；最终结合碰撞检测等几何约束过滤不可行抓取，实现对复杂物体的多样化6D抓取构型生成。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{Others/mousavian_graspnet_2019.jpg}
-    \bicaption{基于变分自编码器的6-DOF抓取生成方法~\cite{mousavian_graspnet_2019}。}{6-DOF grasp generation method based on variational autoencoder~\cite{mousavian_graspnet_2019}.}
+    \bicaption{基于变分自编码器的6-DOF抓取生成方法~\cite{mousavian_graspnet_2019}}{6-DOF grasp generation method based on variational autoencoder~\cite{mousavian_graspnet_2019}.}
     \label{fig:mousavian_graspnet_2019}
 \end{figure}
 
@@ -134,7 +134,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{Others/liang_pointnetgpd_2019.jpg}
-    \bicaption{基于深度学习的抓取质量评估方法 PointNetGPD~\cite{liang_pointnetgpd_2019}。}{PointNetGPD: Grasp Pose Detection method based on deep learning~\cite{liang_pointnetgpd_2019}.}
+    \bicaption{基于深度学习的抓取质量评估方法 PointNetGPD~\cite{liang_pointnetgpd_2019}}{PointNetGPD: Grasp Pose Detection method based on deep learning~\cite{liang_pointnetgpd_2019}.}
     \label{fig:liang_pointnetgpd_2019}
 \end{figure}
 
@@ -152,7 +152,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/teaser.jpg}
-    \bicaption{不同几何特征检测方法结果对比：(a) NECDNet；(b.1-3) CA~\cite{gumhold_feature_2001}, TECD~\cite{ahmed_edge_2018}, PCEDNet~\cite{himeur_pcednet_2022}。}{Comparison of geometric feature detection results: (a) NECDNet; (b.1-3) CA~\cite{gumhold_feature_2001}, TECD~\cite{ahmed_edge_2018}, PCEDNet~\cite{himeur_pcednet_2022}.}
+    \bicaption{不同几何特征检测方法结果对比：(a) NECDNet；(b.1-3) CA~\cite{gumhold_feature_2001}, TECD~\cite{ahmed_edge_2018}, PCEDNet~\cite{himeur_pcednet_2022}}{Comparison of geometric feature detection results: (a) NECDNet; (b.1-3) CA~\cite{gumhold_feature_2001}, TECD~\cite{ahmed_edge_2018}, PCEDNet~\cite{himeur_pcednet_2022}.}
     \label{fig:necdnet_result}
 \end{figure}
 
@@ -163,7 +163,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{FBGrasp/teaser.jpg}
-    \bicaption{基于物体几何特征的抓取规划结果展示：(a-f) 针对三种几何特征实现的六种抓取构型，依次为：角-角，角-边，角-面，边-边，边-面，面-面。}{Grasp planning results based on object geometric features: (a-f) Six grasp configurations for three geometric features, including C-C, C-E, C-F, E-E, E-F, and F-F.}
+    \bicaption{基于物体几何特征的抓取规划结果展示：(a-f) 针对三种几何特征实现的六种抓取构型，依次为：角-角，角-边，角-面，边-边，边-面，面-面}{Grasp planning results based on object geometric features: (a-f) Six grasp configurations for three geometric features, including C-C, C-E, C-F, E-E, E-F, and F-F.}
     \label{fig:fbgrasp_result}
 \end{figure}
 
@@ -191,6 +191,8 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 第五章对所提抓取规划方法进行实验验证，分别从仿真与真实物理实验两个层面评估其性能，并通过抓取分布统计指标、抓取成功率指标与对比方法进行综合分析，验证方法在复杂几何物体上的有效性与实用性。最后分析了算法计算效率。
 
 第六章对全文工作进行总结，归纳本文在物体几何特征检测与机器人抓取规划两方面的主要贡献，客观讨论当前方法的局限，并结合机器人操作场景的发展需求给出后续研究方向与改进思路。
+
+
 
 
 

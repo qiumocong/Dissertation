@@ -23,7 +23,6 @@ Reallocated global_strs (elt_size=200001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: reference/refs.bib
-Warning--I didn't find a database entry for ""
 Warning--empty booktitle in nguyen_edge_2018
 You've used 83 entries,
             5374 wiz_defined-function locations,
@@ -66,4 +65,4 @@ warning$ -- 1
 while$ -- 2274
 width$ -- 0
 write$ -- 1205
-(There were 2 warnings)
+(There was 1 warning)

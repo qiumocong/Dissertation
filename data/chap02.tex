@@ -1,22 +1,22 @@
-% !Mode:: "TeX:UTF-8"
-\chapter{基于多尺度特征融合的点云几何特征检测}
+﻿% !Mode:: "TeX:UTF-8"
+\chapter{基于多维特征融合的物体几何特征检测}
 \label{chap:necdnet}
 
 \section{引言}
 % 分析边缘与角点特征的模糊性及检测难点。
-三维点云几何特征检测（如边缘和角点的提取）是三维视觉领域的关键环节，在模型重建、物体识别及机器人抓取规划中具有不可替代的作用~\cite{mirzaei_3d_2022}。传统的分析方法主要依赖于局部几何描述符（如曲率、法向量偏差等）并结合人工设置的阈值。然而，由于点云数据存在噪声、密度不均以及边缘及角点定义模糊等问题，传统方法往往难以兼顾检测精度与鲁棒性~\cite{gumhold_feature_2001, demarsin_detection_2007, lin_line_2015}。
+物体几何特征检测（如边缘和角点提取）是三维视觉领域的关键环节，在模型重建、物体识别及机器人抓取规划中具有重要作用~\cite{mirzaei_3d_2022}。传统方法主要依赖局部几何描述符（如曲率、法向量偏差等）并结合人工设置的阈值进行判别。然而，由于点云数据普遍存在噪声干扰、采样密度不均以及边缘与角点定义模糊等问题，此类方法往往难以同时兼顾检测精度与鲁棒性~\cite{gumhold_feature_2001, demarsin_detection_2007, lin_line_2015}。
 
-为了解决边缘与角点特征难以区分的问题，本章提出了一种名为 NECDNet（Neural Edge and Corner Detection Network）的深度学习架构。该方法通过融合统计特征描述符与轻量级神经网络，利用多尺度邻域分析来捕捉点云局部的空间分布和法向量变化特征，并利用网络进行学习，从而实现对点云中面点（Face）、边缘点（Edge）和角点（Corner）的高精度同步分类。
+为了解决边缘与角点特征难以区分的问题，本章提出了一种名为 NECDNet（Neural Edge and Corner Detection Network）的深度学习架构。该方法通过融合统计特征描述符与轻量级神经网络，利用多尺度邻域分析来捕捉点云局部的空间分布和法向量变化特征，并利用网络进行学习，从而实现对物体点云中面点（Face points）、边缘点（Edge points）和角点（Corner points）的高精度同步分类。
 
-图~\ref{fig:necdnet_framework}展示了 NECDNet 的工作流程，NECDNet 由两个主要部分组成：多尺度局部特征矩阵计算和基于神经网络的分类器。流程的输入是一个非结构化点云，输出包含面点、边缘点和角点逐点分类的结果。在多尺度特征计算阶段，本文针对每个查询点构建了包含四个不同尺度邻域的特征矩阵，每个尺度下计算六种解析特征：曲率、投影距离均值、中心偏离比、法向角度差、法向分布方差和法向投影距离均值。最终形成一个 4$\times$6 的多尺度特征矩阵，作为神经网络的输入。在分类器阶段，本文基于多层感知机（MLP）设计了一个层次化网络结构，通过逐层融合多尺度特征，学习从特征矩阵到几何类别的映射关系。输出三类几何特征的概率得分，从而实现面、边缘和角点的同步检测。
+图~\ref{fig:necdnet_framework} 展示了 NECDNet 的工作流程。NECDNet 由两个主要部分组成：多尺度局部特征矩阵计算和基于神经网络的分类器。流程输入为非结构化点云，输出为面点、边缘点和角点的逐点分类结果。在多尺度特征计算阶段，本文针对每个查询点构建包含四个不同尺度邻域的特征矩阵，并在每个尺度下计算六种解析特征：曲率、投影距离均值、中心偏离比、法向角度差、法向分布方差和法向投影距离均值。最终形成 4$\times$6 的多尺度特征矩阵，作为神经网络输入。在分类器阶段，本文基于多层感知机（MLP）设计层次化网络结构，通过逐层融合多尺度特征，学习从特征矩阵到几何类别的映射关系，输出三类几何特征的概率得分，从而实现面、边缘和角点的同步检测。
 
-图中左上为输入的点云数据，每次选择一个查询点及其邻域（绿色）。其中不同的$k$值表示不同尺度的邻域大小（黄色点的数量）。通过计算各尺度下的六维特征，形成多尺度特征矩阵并输入神经网络进行分类。最终输出查询点所属的几何类别（面、边缘或角点）。通过循环查询各个点，完成整个点云的几何特征检测任务，最后输出图中左下的检测结果。
+图中左上为输入点云，每次选择一个查询点及其邻域（绿色）。其中，不同的 $k$ 值对应不同尺度的邻域大小（黄色点数量）。通过计算各尺度下的六维特征，形成多尺度特征矩阵并输入神经网络进行分类，最终输出查询点所属几何类别（面、边缘或角点）。通过循环遍历各查询点，可完成整个点云的物体几何特征检测任务，得到图中左下所示结果。
 
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/workflow.jpg}
-    \bicaption{NECDNet 架构及工作流程示意图。}{NECDNet architecture and workflow diagram.}
+    \bicaption{NECDNet 架构及工作流程示意图}{NECDNet architecture and workflow diagram.}
     \label{fig:necdnet_framework}
 \end{figure}
 
@@ -29,42 +29,41 @@
 
 为了有效描述点云中每个查询点的局部几何特性，需要首先确定其邻域范围。本文采用基于距离度量的 k-NN 方法为每个查询点构建邻域~\cite{cover_nearest_1967}。k-NN 是一种基于距离度量的邻域选择方法，通过计算查询点与其他点之间的欧氏距离，选取距离最近的 $k$ 个点作为邻域。与固定半径（radius-based）邻域相比，即将距离查询点一定距离内的点作为邻域，k-NN 对点云非均匀采样与稀疏区域更加稳健：在稠密区不会过采样、在稀疏区不会因样本不足而破坏特征稳定性。对于非结构化的点云，其只包含点的三维坐标信息，k-NN 方法能够有效适应点云的稀疏性和不均匀分布特性。
 
-为提升检索效率，给定一个非结构化点云 $\mathcal{P}^\text{c}$，其定义如公式(\ref{eq:point_cloud})所示。本文在三维坐标空间上构建 KD-树（K-Dimensional Tree）索引~\cite{brown_review_2025a}。KD-树通过在各坐标轴上递归划分点集，使每个节点对应一个超矩形子空间，从而形成近似平衡的二叉树。查询时，先依据查询点坐标自顶向下定位至叶节点，再在回溯过程中检查可能包含更近邻点的分支，并维护容量为 $k$ 的候选集合以持续更新最近邻。相比于暴力检索的 $O(n)$ 复杂度，KD-树可将单次最近邻查询的平均复杂度降至 $O(\log n)$ ，显著提升大规模点云处理的效率。
+为提升检索效率，给定一个非结构化点云 $\mathcal{P}^\text{c}$，其定义如公式~(\ref{eq:point_cloud}) 所示。本文在三维坐标空间上构建 KD 树（k-dimensional tree）索引~\cite{brown_review_2025a}。KD 树通过在各坐标轴上递归划分点集，使每个节点对应一个超矩形子空间，从而形成近似平衡的二叉树。查询时，先依据查询点坐标自顶向下定位至叶节点，再在回溯过程中检查可能包含更近邻点的分支，并维护容量为 $k$ 的候选集合以持续更新最近邻。相比暴力检索的 $O(n)$ 复杂度，KD 树可将单次最近邻查询的平均复杂度降至 $O(\log n)$，显著提升大规模点云处理效率。
 \begin{equation}
     \mathcal{P}^\text{c} = \{\mathbf{p}_i^\text{c} \mid i = 1, \dots, n\}
      \label{eq:point_cloud}
 \end{equation}
 
-基于上述索引结构，对每个查询点 $\mathbf{p}_i^\text{c}$，通过 k-NN 方法在点云中搜索其 $k$ 个最近邻点，形成邻域集合 $\mathcal{Q}_i^\text{c}$，其定义如公式(\ref{eq:knn_neighborhood})所示。通过调节 $k$ 的大小即可改变邻域的空间尺度：较小的 $k$ 更敏感于细粒度几何细节，较大的 $k$ 则能稳健表征更大范围的局部结构。邻域构建完成后，即可在此基础上进行几何特征的计算与提取。
+基于上述索引结构，对每个查询点 $\mathbf{p}_i^\text{c}$，通过 k-NN 方法在点云中搜索其 $k$ 个最近邻点，形成邻域集合 $\mathcal{Q}_i^\text{c}$，其定义如公式~(\ref{eq:knn_neighborhood}) 所示。通过调节 $k$ 的大小即可改变邻域空间尺度：较小的 $k$ 更敏感于细粒度几何细节，较大的 $k$ 则能稳健表征更大范围的局部结构。邻域构建完成后，即可在此基础上进行几何特征计算与提取。
 \begin{equation}
-    \mathcal{Q}_i^\text{c} = \{\mathbf{p}_{i,j}^\text{c} \mid j = 1, \dots, k\}
      \label{eq:knn_neighborhood}
 \end{equation}
 
 \subsection{点云前处理}
 \label{sec:preprocessing}
 
-为了消除点云绝对坐标、平移以及尺度差异对特征计算的影响，在提取特征前，本文首先对邻域 $\mathcal{Q}_i^\text{c}$ 进行归一化处理。该过程同样基于 PCA 的思想，计算邻域点的协方差矩阵 $\mathbf{K}_i = \mathrm{cov}(\mathcal{Q}_i^\text{c})$，并对其进行奇异值分解（Singular Value Decomposition, SVD），如公式(\ref{eq:svd_Ki}) 所示~\cite{shlens_tutorial_2014}。
+为了消除点云绝对坐标、平移以及尺度差异对特征计算的影响，在提取特征前，本文首先对邻域 $\mathcal{Q}_i^\text{c}$ 进行归一化处理。该过程同样基于 PCA 思想，计算邻域点的协方差矩阵 $\mathbf{K}_i = \mathrm{cov}(\mathcal{Q}_i^\text{c})$，并对其进行奇异值分解（Singular Value Decomposition, SVD），如公式~(\ref{eq:svd_Ki}) 所示~\cite{shlens_tutorial_2014}。
 \begin{equation}
-\mathbf{K}_i = \mathbf{U}_i \boldsymbol{\Sigma}_i \mathbf{V}_i^T
-\label{eq:svd_Ki}
+    \mathbf{K}_i = \mathbf{U}_i \boldsymbol{\Sigma}_i \mathbf{V}_i^T
+    \label{eq:svd_Ki}
 \end{equation}
 
-其中，$\mathbf{U}_i$ 和 $\mathbf{V}_i$ 分别为左奇异向量矩阵和右奇异向量矩阵，$\boldsymbol{\Sigma}_i$ 为对角奇异值矩阵。通过该分解，我们能够获得邻域点在主方向上的分布特性。具体而言，通过对角矩阵 $\boldsymbol{\Sigma}_i$ 提取奇异向量 $\boldsymbol{\sigma}_i = (\sigma_{i,1}, \sigma_{i,2}, \sigma_{i,3})$ ，其中的奇异值计为降序排列。右奇异向量矩阵 $\mathbf{V}_i$ 的列向量对应于邻域点在三个主方向上的投影轴。不同的奇异值反映了邻域点在各主方向上的扩展程度。奇异值较小的方向点云分布较为集中，反之则较为分散。图~\ref{fig:svd_decomposition} 展示了三种几何特征邻域点云的 PCA 分解示意图，其中不同颜色的线段表示对应于不同奇异值的主轴方向。
+其中，$\mathbf{U}_i$ 和 $\mathbf{V}_i$ 分别为左奇异向量矩阵和右奇异向量矩阵，$\boldsymbol{\Sigma}_i$ 为对角奇异值矩阵。通过该分解，能够获得邻域点在主方向上的分布特性。具体而言，通过对角矩阵 $\boldsymbol{\Sigma}_i$ 提取奇异向量 $\boldsymbol{\sigma}_i = (\sigma_{i,1}, \sigma_{i,2}, \sigma_{i,3})$ ，其中的奇异值计为降序排列。右奇异向量矩阵 $\mathbf{V}_i$ 的列向量对应于邻域点在三个主方向上的投影轴。不同的奇异值反映了邻域点在各主方向上的扩展程度。奇异值较小的方向点云分布较为集中，反之则较为分散。图~\ref{fig:svd_decomposition} 展示了三种几何特征邻域点云的 PCA 分解示意图，其中不同颜色的线段表示对应于不同奇异值的主轴方向及占比。
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/svd_decomposition.jpg}
-    \bicaption{不同几何特征邻域点云的 PCA 分解示意图。}{PCA decomposition diagram of neighborhood point clouds with different geometric features.}
+    \bicaption{不同几何特征邻域点云的 PCA 分解示意图}{PCA decomposition of neighbor region with different geometric features.}
     \label{fig:svd_decomposition}
 \end{figure}
 
-通过上述分解结果，可以对邻域点进行去中心化与尺度归一化处理。具体而言，首先计算邻域点的质心 $\bar{\mathbf{p}}_{i,j}^\text{c}$ ，如公式(\ref{eq:center_Qi})所示。其中$|\mathcal{Q}_i^\text{c}|$ 表示邻域点的数量。
+通过上述分解结果，可以对邻域点进行去中心化与尺度归一化处理。具体而言，首先计算邻域点的质心 $\bar{\mathbf{p}}_{i,j}^\text{c}$，如公式~(\ref{eq:center_Qi}) 所示。其中，$|\mathcal{Q}_i^\text{c}|$ 表示邻域点数量。
 \begin{equation}
     \bar{\mathbf{p}}_{i,j}^\text{c} = \frac{1}{|\mathcal{Q}_i^\text{c}|} \sum_{j=1}^{k} \mathbf{p}_{i,j}^\text{c}
     \label{eq:center_Qi}
 \end{equation}
 
-随后，将所有邻域点坐标减去质心实现去中心化，并利用奇异值 $\sigma_{i,1}$ 和 $\sigma_{i,2}$ 对去中心化后的邻域点进行尺度缩放，确保各个方向上的分布具有统一的量纲，如公式(\ref{eq:norm_Qi})所示。最终，得到归一化后的邻域 $\hat{\mathcal{Q}}_i^\text{c}$，为后续特征计算提供了标准化的输入。归一化邻域后的查询点坐标记为 $\hat{\mathbf{p}}_i^\text{c}$，邻域中的点坐标记为 $\hat{\mathbf{p}}_{i,j}^\text{c}$。
+随后，将所有邻域点坐标减去质心实现去中心化，并利用奇异值 $\sigma_{i,1}$ 和 $\sigma_{i,2}$ 对去中心化后的邻域点进行尺度缩放，确保各个方向上的分布具有统一量纲，如公式~(\ref{eq:norm_Qi}) 所示。最终，得到归一化后的邻域 $\hat{\mathcal{Q}}_i^\text{c}$，为后续特征计算提供标准化输入。归一化邻域后的查询点坐标记为 $\hat{\mathbf{p}}_i^\text{c}$，邻域中的点坐标记为 $\hat{\mathbf{p}}_{i,j}^\text{c}$。
 \begin{equation}
     \hat{\mathcal{Q}}_i^\text{c} = \left\{ \frac{2}{\sqrt{\sigma_{i,1}} + 
     \sqrt{\sigma_{i,2}}} \left( \mathbf{p}_{i,j}^\text{c} - \bar{\mathbf{p}}_{i,j}^\text{c} \right) \mid 
@@ -77,14 +76,14 @@
 
 法向量是描述点云局部表面方位的重要几何属性，也是计算后续方向特征的基础。本文采用基于局部平面拟合的方法估计查询点的法向量。从公式 (\ref{eq:svd_Ki}) 的奇异值分解结果中可知，奇异值 $\sigma_{i,1}, \sigma_{i,2}, \sigma_{i,3}$ 对应的右奇异向量（即矩阵 $\mathbf{V}_i$ 的列向量）构成了邻域内点集分布的正交主轴。由于奇异值按降序排列，最小奇异值 $\sigma_{i,3}$ 对应的奇异向量 $\mathbf{v}_{i,3}$ 指向了邻域内点集分布方差最小的方向。在几何意义上，该方向与局部最小二乘拟合平面的法向重合。因此，查询点的法向量 $\mathbf{n}_i^\text{c}$ 可根据归一化后的右奇异向量 $\mathbf{v}_{i,3}$ 得出。
 
-然而，仅通过 PCA 获得的法向量存在 $180^\circ$ 的方向模糊性（即法向量可能指向物体内侧或外侧）。为了确保在计算后续法向量夹角差异等特征时的数值一致性，必须对法向量进行定向处理。在处理具有闭合表面的物体时，通常利用视点方向或邻域一致性进行约束。本文采用最小生成树（Minimum Spanning Tree, MST）算法在点云图中传播法向量方向，以实现全局的方向一致化~\cite{hoppe_surface_1992}。具体而言，将点云视为图结构，以点间距离为边权构建图，从初始点开始，通过遍历图确保相邻点的法向量满足内积大于零的约束，实现对点云中各点法向量的方向一致化。最终得到的法向量 $\mathbf{n}_i^\text{c}$ 既具有准确的方向信息，又消除了模糊性，为后续特征计算提供了可靠的基础，整体点云的法向量估计结果如图~\ref{fig:normal_estimation} 所示。
+然而，仅通过 PCA 获得的法向量存在 $180^\circ$ 的方向模糊性（即法向量可能指向物体内侧或外侧）。为了确保在计算后续法向量夹角差异等特征时的数值一致性，必须对法向量进行定向处理。在处理具有闭合表面的物体时，通常利用视点方向或邻域一致性进行约束。本文采用最小生成树（Minimum Spanning Tree, MST）算法在点云图中传播法向量方向，以实现全局的方向一致化~\cite{hoppe_surface_1992}。具体而言，将点云视为图结构，以点间距离为边权构建图，从初始点开始，通过遍历图确保相邻点的法向量满足内积大于零的约束，实现对点云中各点法向量的方向一致化。最终得到的法向量 $\mathbf{n}_i^\text{c}$ 既具有准确的方向信息，又消除了模糊性，为后续特征计算提供了可靠的基础。
 
-基于 PCA 的法向量估计方法具有计算效率高、实现简单的优点，能够在大规模点云数据中快速获得局部表面方向信息。然而查询点位于边缘或角点位置时，其近邻区域内点的分布较为不规则，导致法向量估计结果不稳定，使法向量估计精度下降。当点云数据存在其对应的CAD 网格结构时，可以通过网格面片的法向量直接获取查询点的法向量，从而避免上述问题，真实的法相朝向如图~\ref{fig:normal_estimation} 所示。在后续实验章节~\ref{chap:necdnet_experiment} 中，本文将训练两个模型：一个使用基于 PCA 的法向量估计结果作为输入特征，另一个使用 MeshLab 基于原始 CAD 网格模型进行点云法向量估计~\cite{cignoni_meshlab_2008}。通过对比分析两个模型的检测性能，验证法向量估计精度对边缘与角点检测结果的显著影响。
+基于 PCA 的法向量估计方法具有计算效率高、实现简单的优点，能够在大规模点云数据中快速获得局部表面方向信息。然而，当查询点位于边缘或角点等尖锐特征附近时，其邻域点分布通常不规则，容易导致法向量估计不稳定并降低估计精度。当点云对应 CAD 网格可用时，可直接利用网格面片法向量获取查询点法向，从而缓解上述问题。图~\ref{fig:normal_estimation} 展示了基于 PCA 和基于 CAD 网格模型的法向量估计结果，其中基于 PCA 的方法在靠近尖锐特征的区域会显示出偏斜的法向。在后续实验章节~\ref{chap:necdnet_experiment} 中，本文将训练两个模型：一个使用基于 PCA 的法向量估计结果作为输入特征，另一个使用 MeshLab 基于原始 CAD 网格模型进行法向量估计~\cite{cignoni_meshlab_2008}。通过对比两个模型的检测性能，验证法向量估计精度对边缘与角点检测结果的影响。
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{NECDNet/normal_estimation.jpg}
-    \bicaption{估计自原始点云及网格模型的部分点云法向量示意图。}{Normal vectors estimated from point cloud and mesh model.}
+    \bicaption{估计自原始点云及网格模型的部分点云法向量示意图}{Normal vectors estimated from point cloud and mesh model.}
     \label{fig:normal_estimation}
 \end{figure}
 
@@ -93,7 +92,7 @@
 
 在完成邻域构建和前处理后，本节将重点介绍如何在多尺度邻域框架下提取和计算局部几何特征。多尺度表示的是针对每个查询点，选择不同数量的邻域点以构建多层次的局部几何描述。由于点云捕获时的视角、距离及分辨率等因素影响，单一尺度往往难以全面反映局部几何结构的信息。通过分析不同尺度下的点云分布特征，可以更全面地捕捉局部几何结构，从而提升边缘和角点的区分能力~\cite{himeur_pcednet_2022}。
 
-适用的尺度取决于多个因素：物体大小、形状复杂度、点云密度、观察尺度等。为了使训练得到的模型能泛化处理未知物体的情况，本文为输入点云中的每个查询点在多尺度邻域内计算多个特征，并在章节~\ref{sec:ablation_study}中进行了消融实验确保各个尺度选择的合理性。本节首先介绍多尺度特征矩阵的构建策略，随后详细阐述六种局部几何特征描述符的设计与计算方法，最后通过数值可视化分析验证所选特征的有效性。
+适用的尺度取决于多个因素：物体大小、形状复杂度、点云密度、观察尺度等。为了使训练得到的模型能泛化处理未知物体的情况，本文为输入点云中的每个查询点在多尺度邻域内计算多个特征，并在章节~\ref{sec:ablation_study} 中进行了消融实验确保各个尺度选择的合理性。本节首先介绍多尺度特征矩阵的构建策略，随后详细阐述六种局部几何特征描述符的设计与计算方法，最后通过数值可视化分析验证所选特征的有效性。
 
 \subsection{多尺度特征矩阵构建}
 
@@ -110,18 +109,18 @@
     \label{eq:X_i}
 \end{equation}
 
-其中，$k_1, k_2, \ldots, k_m$ 表示所选择的不同邻域尺度，$m$ 为尺度数量。多尺度特征矩阵中的尺度数 $m$ 和尺度大小 $k$ 直接影响神经网络的学习结果。具体来说，$k$ 影响结果对点云不同稀疏度的适用性，而 $m$ 影响网络学习数据的维度。选择合适的尺度尺寸和数量可以优化检测精度。因此，在第~\ref{sec:ablation_study}~节中，本文对邻近尺度选择进行了消融实验以确定参数，并最终选择了 $k$ 的四个值：8、16、32 和 64 进行特征计算。这种多尺度策略能够在保证计算效率的同时，充分捕捉从局部细节到全局结构的几何信息。
+其中，$k_1, k_2, \ldots, k_m$ 表示所选择的不同邻域尺度，$m$ 为尺度数量。多尺度特征矩阵中的尺度数 $m$ 和尺度大小 $k$ 直接影响神经网络的学习结果。具体来说，$k$ 影响结果对点云不同稀疏度的适用性，而 $m$ 影响网络学习数据的维度。选择合适的尺度尺寸和数量可以优化检测精度。因此，在章节~\ref{sec:ablation_study} 中，本文对邻近尺度选择进行了消融实验以确定参数，并最终选择了 $k$ 的四个值：8、16、32 和 64 进行特征计算。这种多尺度策略能够在保证计算效率的同时，充分捕捉从局部细节到全局结构的几何信息。
 
 \subsection{局部特征描述符设计}
 \label{sec:feature_computation}
 % 详细介绍位置特征（曲率、投影距离、均值中心距离）和法向量特征（法向角差、法向分布、投影法向模）。
 
-在构建多尺度邻域的基础上，本文进一步设计了一套包含六个维度的局部几何特征描述符，旨在精确捕捉查询点及其邻域在不同空间尺度下的结构属性。这六种特征可归纳为基于位置的几何特征（Position-based Features）与基于法向量方向的特征（Normal-based Features）两大类。
+在构建多尺度邻域的基础上，本文进一步设计了一套包含六个维度的局部几何特征描述符，旨在精确捕捉查询点及其邻域在不同空间尺度下的结构属性。这六种特征可归纳为基于位置的几何特征与基于法向量方向的特征两大类。
 基于位置的特征主要通过分析邻域点的空间分布规律来描述局部形状，而基于法向量的特征则通过分析表面方向的连续性与一致性，提供关于几何边缘与尖锐角点的关键判别信息。这种多维特征的结合，增强了模型在面对复杂、模糊边界时的区分能力。消融实验中对特征计算中涉及的所有描述符进行了评估，说明了该选择的有效性。
 
 \subsubsection{曲率（ $\kappa_i$ ）}
 % 差一张插图
-首先计算基于位置的几何特征，表征邻域内点的几何分布特性。曲率 $\kappa_i$ 是几何物体偏离平面程度的度量。在本文中，查询点邻域的曲率可以根据上述得到的奇异值进行计算，用于表征局部表面的平坦程度。具体而言，曲率定义为最大奇异值与三维奇异值之和的比值，如公式(\ref{eq:curvature})所示。
+首先计算基于位置的几何特征，表征邻域内点的几何分布特性。曲率 $\kappa_i$ 是几何物体偏离平面程度的度量。在本文中，查询点邻域曲率可根据上述奇异值计算，用于表征局部表面的平坦程度。具体而言，曲率定义为最小奇异值与三维奇异值之和的比值，如公式~(\ref{eq:curvature}) 所示。
 \begin{equation}
     \kappa_i = \frac{\sigma_{i,3}}{\sigma_{i,1} + \sigma_{i,2} + \sigma_{i,3}}
     \label{eq:curvature}
@@ -141,7 +140,7 @@
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/projection_distance.jpg}
-    \bicaption{投影距离均值的几何意义示意图。}{Geometric significance diagram of mean projection distance.}
+    \bicaption{投影距离均值的几何意义示意图}{Geometric significance diagram of mean projectional distance.}
     \label{fig:projection_distance}
 \end{figure}
 
@@ -153,24 +152,24 @@
 \end{equation}
 
 其中 $\operatorname{Sigmoid}$ 表示 Sigmoid 函数，$\| \cdot \|$ 表示欧氏距离，$\min$ 运算符用于获取邻域点中距离质心最近的点的距离，式中省略了减去质心零向量的表示。如图~\ref{fig:center_bias} 所示，中心偏离比 $r_i$ 反映了查询点在邻域内的相对位置关系：当查询点位于邻域质心附近时，$r_i$ 的分子$\| \hat{\mathbf{p}}_i^\text{c} \|$值较小，表明该点可能位于平坦区域；而当查询点远离邻域质心时，同理通常对应于边缘或角点区域。因此，中心偏离比有助于区分不同几何特征。
-\begin{figure}[htpb]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/center_bias.jpg}
-    \bicaption{中心偏离比的几何意义示意图。}{Geometric significance diagram of center bias.}
+    \bicaption{中心偏离比的几何意义示意图}{Geometric significance of center bias.}
     \label{fig:center_bias}
 \end{figure}
 
 \subsubsection{法向量角度差（$\mu_{\theta,i}$）}
-以此特征描述符开始，后续的三个描述符是基于法向量方向的特征，旨在捕捉表面方向的突变信息。如图~\ref{fig:normal_distribution} 所示，
+以此特征描述符开始，后续的三个描述符是基于法向量方向的特征，旨在捕捉表面方向的突变信息。如图~\ref{fig:normal_distribution} 所示，在光滑面区域，邻域内法向量的分布较为集中，且与查询点法向量高度一致；而在边缘区域，邻域内法向量的分布较为分散，与查询点法向量存在较大夹角，角点区域更甚。因此，通过分析邻域内法向量与查询点法向量之间的关系，可以有效区分不同几何特征。
 
-\begin{figure}[htpb]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/normal_distribution.jpg}
-    \bicaption{法向量角度差与法向量分布方差的几何意义示意图。}{Geometric significance diagram of normal angle difference and normal distribution variance.}
+    \bicaption{不同几何特征邻域点云的法向量分布示意图}{Normal vector distribution of neighbor region with different geometric features.}
     \label{fig:normal_distribution}
 \end{figure}
 
-法向角度差 $\mu_{\theta,i}$ 衡量查询点法向量与其邻域内各点法向量之间夹角的平均值，反映了局部表面方向的一致性。具体而言，首先根据章节\ref{sec:normal_estimate}中的方法估计邻域内每个点的单位法向量 $\mathbf{n}_{i,j}^\text{c}$，组合为 $\mathcal{N}_i^\text{c}$。随后，计算查询点法向量 $\mathbf{n}_i^\text{c}$ 与邻域内各点法向量之间的夹角 $\theta_{i, j}$ ，最后并求各个夹角的平均值，求解公式如(\ref{eq:normal_angle_difference})所示。
+法向角度差 $\mu_{\theta,i}$ 衡量查询点法向量与其邻域内各点法向量之间夹角的平均值，反映了局部表面方向的一致性。具体而言，首先根据章节~\ref{sec:normal_estimate}~中的方法估计邻域内每个点的单位法向量 $\mathbf{n}_{i,j}^\text{c}$，组合为 $\mathcal{N}_i^\text{c}$。随后，计算查询点法向量 $\mathbf{n}_i^\text{c}$ 与邻域内各点法向量之间的夹角 $\theta_{i, j}$ ，最后并求各个夹角的平均值，求解公式如(\ref{eq:normal_angle_difference})所示。
 \begin{equation}
     \left\{
     \begin{aligned}
@@ -183,7 +182,7 @@
 
 其中，$\arccos$ 表示反余弦函数。法向角度差 $\mu_{\theta,i}$ 反映了邻域内法向量的方向变化程度：当邻域内法向量与查询点法向量高度一致时，$\mu_{\theta,i}$ 值较小，表明局部表面较为平滑；而当邻域内法向量与查询点法向量差异较大时，$\mu_{\theta,i}$ 值增大，通常对应于边缘或角点区域。
 
-此外，除了用法向量夹角来表示方向变化外，还可以直接使用法向量的数值之差来表示方向变化。具体而言，计算查询点法向量与邻域内各点法向量的差值，并求其平均值，得到法向量数值差 $\bar{\Delta \mathbf{n}}_i$，计算公式如(\ref{eq:normal_value_difference})所示。相较与法向量角度差 $\mu_{\theta,i}$，法向量数值差 $\bar{\Delta \mathbf{n}}_i$ 直接采用原始法向量数据进行统计计算，后续消融实验中会讨论两者的效果差异。
+此外，除了采用法向量夹角刻画方向变化外，也可直接使用法向量的数值差异进行表征。具体而言，计算查询点法向量与邻域内各点法向量的差值并求其均值，得到法向量数值差 $\bar{\Delta \mathbf{n}}_i$，计算公式如(\ref{eq:normal_value_difference})所示。相较于法向量角度差 $\mu_{\theta,i}$，法向量数值差 $\bar{\Delta \mathbf{n}}_i$ 直接基于原始法向量进行统计，后续消融实验将比较两者的效果差异。
 \begin{equation}
     \bar{\Delta \mathbf{n}}_i = \frac{1}{|\mathcal{N}_i^\text{c}|} \sum_{\mathbf{n}_{i,j}^\text{c} \in \mathcal{N}_i^\text{c}} ( \mathbf{n}_i^\text{c} - \mathbf{n}_{i,j}^\text{c} )
     \label{eq:normal_value_difference}
@@ -209,7 +208,7 @@
 
 \subsection{局部特征描述符数值可视化分析}
 % 展示不同特征在区分面、边、角时的分布差异。
-通过上述计算的局部特征描述符，本文最终选择了其中六个组成特征描述向量，并用于后续的特征融合和分类任务。最后得到的特征向量如公式(\ref{eq:feature_vector})所示。六个特征均为标量，组成的特征向量维度为 6，包含了点云的位置分布特性和法向量变化信息，能够有效表征点云局部的几何结构属性。
+通过上述计算的局部特征描述符，本文最终选择其中六个组成特征描述向量，并用于后续特征融合和分类任务。最终特征向量如公式~(\ref{eq:feature_vector}) 所示。六个特征均为标量，特征向量维度为 6，包含点云的位置分布特性和法向量变化信息，能够有效表征局部几何结构属性。
 \begin{equation}
     \mathbf{x}_i^\text{c} = \left( \kappa_i, \bar{d}_i, r_i, \mu_{\theta,i}, \sigma^2_{\theta,i}, \bar{\text{proj}_i} \right)
     \label{eq:feature_vector}
@@ -219,43 +218,43 @@
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{NECDNet/feature_distribution_single.jpg}
-    \bicaption{单个物体点云的六个特征值在空间上的数值分布情况。}{Spatial distribution of six feature values for a single object point cloud.}
+    \bicaption{单个物体点云的六个特征描述符在空间上的数值分布情况}{Spatial distribution of six feature descriptors for a single object point cloud.}
     \label{fig:feature_distribution_single}
 \end{figure}
 
-图~\ref{fig:feature_distribution} 部分给出了在构建的数据集 ABC-Corner 中 1000 个点云样本的六个特征在三类标签下的数值分布，数据集的描述及构建过程请见章节(\ref{sec:dataset})。纵轴为数据集中的点云ID，横轴为特征数值（归一化至 [0, 1]），颜色标记类别：蓝色为面、黄色为边缘、红色为角点。统计结果显示，在面、边缘、角点三类之间，所有特征分布具有明显的界限。
+图~\ref{fig:feature_distribution} 给出了构建的数据集 ABC-Corner 中 1000 个点云样本在三类标签下的六个特征数值分布，数据集的描述及构建过程见章节~\ref{sec:dataset}。纵轴为数据集中的点云 ID，横轴为特征数值（归一化至 [0, 1]），颜色标记类别：蓝色为面、黄色为边缘、红色为角点。统计结果显示，在面、边缘、角点三类之间，所有特征分布具有明显界限。
 以曲率和法向分布为例，角点主要集中在中高值段，面点则聚集于低值，边缘点分布于中间区域。其他如投影距离、均值中心距离等特征也展现出对类别的良好区分能力。
 
-虽然可以观察到直接使用这些特征描述符就能进行一定程度上的几何特征区分。然而，直接使用这些特征进行检测类似于分析方法，需要参数调整并且可能无法保证稳健的结果。为了解决这个问题，本文利用神经网络从计算的特征矩阵中学习。这种方法使能够结合分析方法和基于学习的检测技术的优势，实现精准的自分类。
+虽然上述特征描述符在一定程度上已具备几何特征区分能力，但若直接基于阈值进行判别，仍属于传统解析范式，通常依赖人工参数调节，且难以保证在复杂场景中的稳健性。为此，本文引入神经网络对特征矩阵进行学习，以结合解析特征的可解释性与数据驱动方法的自适应能力，实现更稳定、准确的分类。
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.0\textwidth]{NECDNet/feature_distribution.jpg}
-    \bicaption{六个特征在三类标签下的数值分布情况。}{Distribution of six features under three class labels.}
+    \includegraphics[width=1.0\textwidth]{NECDNet/feature_distribution.png}
+    \bicaption{六个特征描述符在三类标签下的数值分布情况}{Distribution of six feature descriptors under three class labels.}
     \label{fig:feature_distribution}
 \end{figure}
 
 
 \section{\textrm{NECDNet} 网络架构设计}
 \label{sec:necdnet_structure}
-NECDNet 网络架构针对点云数据中特征点的精细分类任务（包括面点、边缘点和角点），设计了以多层感知机（Multi-Layer Perceptron, MLP）为核心、多尺度特征深度融合与分阶段判别相结合的高效结构~\cite{tolstikhin_mlpmixer_2021}。整体网络流程如图~\ref{fig:necdnet_architecture} 所示，主要包括两大模块：首先，多尺度特征融合模块从多个邻域尺度提取并逐级整合各类局部几何信息，实现输入信息的丰富表达；其次，逐级分类模块采用分层分类思路，将点的最终类别归属过程划分为由简到繁的两个层次，提升了分类准确率和模型的泛化能力。结合全连接层、Leaky ReLU 激活及 Dropout 策略，有效增强了网络的判别能力并抑制了过拟合风险~\cite{xu_empirical_2015, srivastava_dropout_2014}。下文将分别对多尺度特征融合与逐级分类策略进行详细阐述。
+NECDNet 网络架构面向输入点的精细分类任务（面点、边缘点和角点），设计了以多层感知机为核心、融合多尺度特征与分阶段判别的高效结构~\cite{tolstikhin_mlpmixer_2021}。整体网络流程如图~\ref{fig:necdnet_architecture} 所示，主要包括两大模块：首先，多尺度特征融合模块从多个邻域尺度提取并逐级整合局部几何信息，实现输入信息的丰富表达；其次，逐级分类模块采用分层分类思路，将点的最终类别归属过程划分为由简到繁的两个层次，提升分类准确率与模型泛化能力。结合全连接层、Leaky ReLU 激活及 Dropout 策略，网络能够有效增强判别能力并抑制过拟合风险~\cite{xu_empirical_2015, srivastava_dropout_2014}。下文将分别对多尺度特征融合与逐级分类策略进行详细阐述。
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{NECDNet/necdnet_architecture.jpg}
-    \bicaption{NECDNet 网络架构示意图。}{NECDNet network architecture diagram.}
+    \bicaption{NECDNet 网络架构示意图}{NECDNet network architecture diagram.}
     \label{fig:necdnet_architecture}
 \end{figure}
 
 \subsection{多尺度特征融合}
 NECDNet 的输入部分针对每个查询点构建了多尺度邻域下的几何属性特征矩阵。具体地，针对每个点，分别在 $k=8, 16, 32, 64$ 四种不同邻域尺度内提取点云的几何特征，每个尺度获得一个 $6$ 维特征向量 $\mathbf{x}_{i,k} \in \mathbb{R}^6$，所有尺度拼接形成 $4 \times 6$ 的特征矩阵。
 
-这一多尺度特征首先经过特征提取单元处理。对于第 $j$ 个尺度 ($j \in \{1, 2, 3, 4\}$) 的输入特征 $\mathbf{x}_{i,j}$，通过全连接层（FC）、Leaky ReLU 激活函数进行非线性映射。该过程可表示为：
+上述多尺度特征首先经过特征提取单元处理。对于第 $j$ 个尺度 ($j \in \{1, 2, 3, 4\}$) 的输入特征 $\mathbf{x}_{i,j}$，通过全连接层（FC）、Leaky ReLU 激活函数进行非线性映射。该过程可表示为：
 \begin{equation}
     \mathbf{h}_i^{(1)} = \sigma_{\text{LReLU}}(\mathbf{W}_i^{(1)} \mathbf{x}_{i,j} + \mathbf{b}_i^{(1)})
 \end{equation}
 其中，$\mathbf{W}_i^{(1)}$ 和 $\mathbf{b}_i^{(1)}$ 为权重矩阵和偏置项，$\sigma_{\text{LReLU}}$ 表示 Leaky ReLU 激活函数，其定义为 $f(x) = \max(x, \alpha x)$，$\alpha$ 为负半轴斜率（通常取 $0.01$）~\cite{xu_empirical_2015}。
 
-随后，参考图~\ref{fig:necdnet_architecture} 中的结构，模型将相邻两个尺度的特征进行两两拼接（Concatenate）。例如，将 $k=8$ 和 $k=16$ 对应的特征 $\mathbf{h}_1^{(1)}$ 和 $\mathbf{h}_2^{(1)}$ 拼接得到 $\mathbf{z}_{12} = [\mathbf{h}_1^{(1)}, \mathbf{h}_2^{(1)}]$。融合后的特征再次通过类似的非线性变换，公式如(\ref{eq:secondary_fusion})所示。相较于上一步，这里引入了 Dropout 层以防止过拟合现象的发生~\cite{srivastava_dropout_2014}。
+随后，参考图~\ref{fig:necdnet_architecture} 中的结构，模型将相邻两个尺度的特征进行两两拼接（Concatenate）。例如，将 $k=8$ 和 $k=16$ 对应的特征 $\mathbf{h}_1^{(1)}$ 和 $\mathbf{h}_2^{(1)}$ 拼接得到 $\mathbf{z}_{12} = [\mathbf{h}_1^{(1)}, \mathbf{h}_2^{(1)}]$。融合后的特征再次通过类似的非线性变换，具体如公式~(\ref{eq:secondary_fusion}) 所示。相较于上一步，这里引入了 Dropout 层以防止过拟合现象的发生~\cite{srivastava_dropout_2014}。
 \begin{equation}
     \mathbf{h}_{12}^{(2)} = \text{Dropout}\left(\sigma_{\text{LReLU}}(\mathbf{W}_{12}^{(2)} \mathbf{z}_{12} + \mathbf{b}_{12}^{(2)})\right)
     \label{eq:secondary_fusion}
@@ -268,7 +267,7 @@ NECDNet 的输入部分针对每个查询点构建了多尺度邻域下的几何
 多尺度特征融合单元输出的 $16$ 维向量 $\mathbf{F}_{\text{out}}$ 随后交由逐级分类器进行细粒度类别判别。该模块采用两级分层判别架构。
 
 \subsubsection{第一级分类（面点判别）}
-首先，$\mathbf{F}_{\text{out}}$ 经过类似公式(\ref{eq:secondary_fusion})的变换降维至 $8$ 维，得到中间特征 $\mathbf{v}_{\text{mid}}$。随后，通过 FC 层输出面点与非面点的逻辑值（Logits）$\mathbf{l}_1 \in \mathbb{R}^2$。最终的初级分类概率分布 $\mathbf{p}_1$ 由 Softmax 函数计算得出~\cite{bishop_pattern_2006}：
+首先，$\mathbf{F}_{\text{out}}$ 经过类似公式~(\ref{eq:secondary_fusion}) 的变换降维至 $8$ 维，得到中间特征 $\mathbf{v}_{\text{mid}}$。随后，通过 FC 层输出面点与非面点的逻辑值（Logits）$\mathbf{l}_1 \in \mathbb{R}^2$。最终的初级分类概率分布 $\mathbf{p}_1$ 由 Softmax 函数计算得出~\cite{bishop_pattern_2006}：
 \begin{equation}
     \mathbf{p}_1 = \text{Softmax}(\mathbf{l}_1) = \frac{e^{\mathbf{l}_{1,j}}}{\sum_{k=1}^{2} e^{\mathbf{l}_{1,k}}}, \quad j \in \{1, 2\}
     \label{eq:softmax_result}
@@ -276,28 +275,28 @@ NECDNet 的输入部分针对每个查询点构建了多尺度邻域下的几何
 若判定为面点，则直接据此输出结果；若为非面点，则将中间特征 $\mathbf{v}_{\text{mid}}$ 送入下一级分类子模块。
 
 \subsubsection{第二级分类（边缘点与角点判别）}
-在第二级分类器中，传入的 $8$ 维特征 $\mathbf{v}_{\text{mid}}$ 再次经历 FC、Leaky ReLU 和 Dropout 处理，降维为 $4$ 维特征 $\mathbf{v}_{\text{sub}}$，最后映射为边缘点和角点的二分类逻辑值 $\mathbf{l}_2$。同样利用 Softmax 得到概率分布 $\mathbf{p}_2$，类似公式(\ref{eq:softmax_result})所示。
+在第二级分类器中，传入的 $8$ 维特征 $\mathbf{v}_{\text{mid}}$ 再次经历 FC、Leaky ReLU 和 Dropout 处理，降维为 $4$ 维特征 $\mathbf{v}_{\text{sub}}$，最后映射为边缘点和角点的二分类逻辑值 $\mathbf{l}_2$。同样利用 Softmax 得到概率分布 $\mathbf{p}_2$，类似公式~(\ref{eq:softmax_result}) 所示。
 最终，对于每个输入点，网络结合两级输出确定“面-边缘-角”三类别的归属。
 
 这种分级判别方法，有效简化了单次多分类的复杂度，提升了点云中特征类别区分的精度和鲁棒性。值得一提的是，每层分类器均结合 Leaky ReLU 增强非线性表达，Dropout 有效应对过拟合风险，整体保证了 NECDNet 在结构复杂、类别分布不均等点云场景下的自适应能力。
 
 \subsection{损失函数}
 \label{sec:loss_function}
-点云中几何特征的分布存在不平衡现象，面点数量远多于边缘点和角点，特别是角点~\cite{japkowicz_class_2002a}。为了应对类别不平衡问题，本文在训练过程中采用 Focal Loss 作为优化指标~\cite{lin_focal_2020}。Focal Loss 旨在解决训练中前景与背景类别极度不平衡的单阶段物体检测场景（例如1：1000）。其在交叉熵损失（Cross Entropy, CE） 的基础上引入了调节因子，降低了易分类样本的权重，从而使模型更加关注难分类样本。
+训练数据中三类几何特征点的分布存在不平衡现象，面点数量远多于边缘点和角点，尤其是角点~\cite{japkowicz_class_2002a}。为应对类别不平衡问题，本文在训练过程中采用 Focal Loss 作为优化指标~\cite{lin_focal_2020}。Focal Loss 旨在解决训练中前景与背景类别极度不平衡的单阶段物体检测场景。其在交叉熵损失（Cross Entropy, CE）基础上引入调节因子，降低易分类样本权重，从而使模型更加关注难分类样本。
 
-交叉熵损失是分类任务中常用的损失函数，其可以度量模型预测概率分布与真实标签分布之间的差异。交叉熵越小，说明两者越相似；越大，说明差异越大。交叉熵损失的定义如公式(\ref{eq:ce_loss})所示~\cite{mao_crossentropy_2023}。其中，$p_t$ 表示模型对真实类别的预测概率。然而交叉熵损失在类别不平衡的情况下，容易被大量的易分类样本主导，导致模型对少数类别的学习效果不佳。
+交叉熵损失是分类任务中常用的损失函数，可度量模型预测概率分布与真实标签分布之间的差异。交叉熵越小，说明两者越相似；越大，说明差异越大。交叉熵损失的定义如公式~(\ref{eq:ce_loss}) 所示~\cite{mao_crossentropy_2023}。其中，$p_t$ 表示模型对真实类别的预测概率。然而，交叉熵损失在类别不平衡情况下容易被大量易分类样本主导，导致模型对少数类别学习不足。
 \begin{equation}
     \mathrm{CE}(p_t) = -\log(p_t)
     \label{eq:ce_loss}
 \end{equation}
 
-为了解决类别极度不均衡的问题，可以在交叉熵损失的基础上引入类别权重 $\alpha$，得到加权交叉熵损失（Weighted Cross Entropy, WCE）。其在计算时对不同类别赋予不同的权重，增强对少数类别的关注，定义如公式(\ref{eq:weighted_ce_loss})所示。其中，$\alpha_t$ 为类别 $t$ 的权重，通常根据类别频率进行设置。
+为解决类别极度不均衡问题，可在交叉熵损失基础上引入类别权重 $\alpha$，得到加权交叉熵损失（Weighted Cross Entropy, WCE）。其在计算时对不同类别赋予不同权重，增强对少数类别的关注，定义如公式~(\ref{eq:weighted_ce_loss}) 所示。其中，$\alpha_t$ 为类别 $t$ 的权重，通常根据类别频率设置。
 \begin{equation}
     \mathrm{WCE}_{\alpha}(p_t) = -\alpha_t \log(p_t)
     \label{eq:weighted_ce_loss}
 \end{equation}
 
-Focal Loss 正是在加权交叉熵损失的基础上进行改进的。Focal Loss 在加权交叉熵损失的基础上引入了调节因子 $(1 - p_t)^\gamma$，其中 $\gamma$ 为调节参数，用于控制易分类样本的权重衰减程度。Focal Loss 的定义如公式(\ref{eq:focal_loss})所示~\cite{lin_focal_2020}。相较于加权交叉熵损失，Focal Loss 通过调节因子有效降低了易分类样本的影响力，使模型更加关注难分类样本，从而提升在类别不平衡情况下的分类性能。
+Focal Loss 正是在加权交叉熵损失基础上的改进。Focal Loss 在加权交叉熵损失基础上引入调节因子 $(1 - p_t)^\gamma$，其中 $\gamma$ 为调节参数，用于控制易分类样本的权重衰减程度。Focal Loss 的定义如公式~(\ref{eq:focal_loss}) 所示~\cite{lin_focal_2020}。相较于加权交叉熵损失，Focal Loss 通过调节因子有效降低易分类样本影响，使模型更加关注难分类样本，从而提升类别不平衡场景下的分类性能。
 \begin{equation}
     \mathrm{FL}(p_t) = -\alpha_t (1 - p_t)^\gamma \log(p_t)
     \label{eq:focal_loss}
@@ -305,4 +304,5 @@ Focal Loss 正是在加权交叉熵损失的基础上进行改进的。Focal Los
 
 
 \section{本章小结}
-本章主要对NECDNet 网络的设计与实现进行了详细阐述。首先，介绍了多尺度几何特征的提取方法及其在点云三类几何特征中的分布表现，验证了所选特征描述符的有效性。随后，详细描述了NECDNet的网络架构设计，包括多尺度特征融合模块和逐级分类器模块，强调了其在处理点云几何特征检测任务中的优势。接着，介绍了网络训练中的损失函数和评估指标等设置。最后，详细介绍了ABC-Corner数据集的构建过程，包括数据集选取、标注流程及统计特性，为后续实验提供了坚实的数据基础。整体而言，本章为NECDNet的实现奠定了理论与实践基础，为后续章节的实验评估做好准备。
+本章围绕 NECDNet 的方法设计与实现过程展开。首先，给出了逐点邻域构建、前处理与法向量估计策略，并分析了法向量估计精度对后续检测性能的潜在影响。其次，构建了多尺度特征矩阵，设计并计算了六类局部几何描述符，结合可视化结果验证了其对物体几何特征（面、边缘、角点）的区分能力。在此基础上，本章进一步介绍了 NECDNet 的网络架构，包括多尺度特征融合、逐级分类器与损失函数设计。总体而言，本章为后续章节的实验评估提供了完整的方法基础与实现依据。
+

@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{\numberline {2）}抓取质量评估}{10}{subsubsection.1.2.2.2}%
 \contentsline {section}{\numberline {1.3}本文主要研究内容}{12}{section.1.3}%
 \contentsline {section}{\numberline {1.4}论文组织结构}{14}{section.1.4}%
-\contentsline {chapter}{\numberline {第二章}基于多尺度特征融合的点云几何特征检测}{15}{chapter.2}%
+\contentsline {chapter}{\numberline {第二章}基于多维特征融合的物体几何特征检测}{15}{chapter.2}%
 \contentsline {section}{\numberline {2.1}引言}{15}{section.2.1}%
 \contentsline {section}{\numberline {2.2}逐点邻域构建及前处理}{16}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}邻域构建策略}{16}{subsection.2.2.1}%
@@ -20,99 +20,99 @@
 \contentsline {subsection}{\numberline {2.2.3}法向量估计与定向}{18}{subsection.2.2.3}%
 \contentsline {section}{\numberline {2.3}多尺度局部特征提取与计算}{19}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}多尺度特征矩阵构建}{20}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}局部特征描述符设计}{21}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.2}局部特征描述符设计}{20}{subsection.2.3.2}%
 \contentsline {subsubsection}{\numberline {1）}曲率（ $\kappa _i$ ）}{21}{subsubsection.2.3.2.1}%
 \contentsline {subsubsection}{\numberline {2）}投影距离均值（ $\bar {d_i}$ ）}{21}{subsubsection.2.3.2.2}%
-\contentsline {subsubsection}{\numberline {3）}中心偏离比（ $r_i$ ）}{22}{subsubsection.2.3.2.3}%
+\contentsline {subsubsection}{\numberline {3）}中心偏离比（ $r_i$ ）}{21}{subsubsection.2.3.2.3}%
 \contentsline {subsubsection}{\numberline {4）}法向量角度差（$\mu _{\theta ,i}$）}{22}{subsubsection.2.3.2.4}%
 \contentsline {subsubsection}{\numberline {5）}法向量分布方差（ $\sigma ^2_{\theta ,i}$ ）}{24}{subsubsection.2.3.2.5}%
 \contentsline {subsubsection}{\numberline {6）}法线投影距离均值（ $\bar {\text {proj}_i}$ ）}{24}{subsubsection.2.3.2.6}%
 \contentsline {subsection}{\numberline {2.3.3}局部特征描述符数值可视化分析}{24}{subsection.2.3.3}%
 \contentsline {section}{\numberline {2.4}\textrm {NECDNet} 网络架构设计}{26}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}多尺度特征融合}{26}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}逐级分类器}{28}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.2}逐级分类器}{27}{subsection.2.4.2}%
 \contentsline {subsubsection}{\numberline {1）}第一级分类（面点判别）}{28}{subsubsection.2.4.2.1}%
 \contentsline {subsubsection}{\numberline {2）}第二级分类（边缘点与角点判别）}{28}{subsubsection.2.4.2.2}%
 \contentsline {subsection}{\numberline {2.4.3}损失函数}{28}{subsection.2.4.3}%
 \contentsline {section}{\numberline {2.5}本章小结}{29}{section.2.5}%
-\contentsline {chapter}{\numberline {第三章}物体 点云几何特征检测实验及分析}{31}{chapter.3}%
-\contentsline {section}{\numberline {3.1}引言}{31}{section.3.1}%
-\contentsline {section}{\numberline {3.2}\textrm {ABC-Corner} 数据集构建}{32}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}数据集选取}{32}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}数据集标注流程}{33}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}实验环境与参数配置}{35}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}软硬件环境与开发框架}{35}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}数据预处理与划分方案}{36}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}训练超参数配置}{37}{subsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {1）}批量大小与数据加载}{37}{subsubsection.3.3.3.1}%
-\contentsline {subsubsection}{\numberline {2）}训练轮次与早停策略}{37}{subsubsection.3.3.3.2}%
-\contentsline {subsubsection}{\numberline {3）}优化器与学习率策略}{37}{subsubsection.3.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}类别不平衡问题处理}{37}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}法向量估计方法的选择与对比}{39}{subsection.3.3.5}%
-\contentsline {subsection}{\numberline {3.3.6}评价指标设计}{39}{subsection.3.3.6}%
-\contentsline {section}{\numberline {3.4}对比实验结果及分析}{40}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}边缘与角点联合检测结果分析}{40}{subsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {1）}与传统几何分析方法的对比}{41}{subsubsection.3.4.1.1}%
-\contentsline {subsubsection}{\numberline {2）}与现有深度学习方法的对比}{44}{subsubsection.3.4.1.2}%
-\contentsline {subsection}{\numberline {3.4.2}纯边缘检测结果分析}{45}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}法向量估计精度对检测的影响}{46}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}消融实验分析}{47}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}特征维度}{48}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}多尺度参数}{49}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}训练策略}{49}{subsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {1）}数据重采样策略}{49}{subsubsection.3.5.3.1}%
-\contentsline {subsubsection}{\numberline {2）}标注平滑策略}{50}{subsubsection.3.5.3.2}%
-\contentsline {section}{\numberline {3.6}本章小结}{50}{section.3.6}%
-\contentsline {chapter}{\numberline {第四章}考虑边缘与角点接触的机器人抓取规划}{52}{chapter.4}%
-\contentsline {section}{\numberline {4.1}引言}{52}{section.4.1}%
-\contentsline {section}{\numberline {4.2}类别感知的接触点采样}{53}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}几何特征检测}{53}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}基于类别的体素采样}{54}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}凸性检测}{55}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}基于几何特征的接触对检测}{55}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}特征化接触检测器设计}{57}{subsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {1）}面接触检测器}{57}{subsubsection.4.3.1.1}%
-\contentsline {subsubsection}{\numberline {2）}边接触检测器}{58}{subsubsection.4.3.1.2}%
-\contentsline {subsubsection}{\numberline {3）}角接触检测器}{58}{subsubsection.4.3.1.3}%
-\contentsline {subsection}{\numberline {4.3.2}对偶接触点配对策略}{59}{subsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {1）}角-角接触配对（$\mathtt {c}$-$\mathtt {c}$）}{59}{subsubsection.4.3.2.1}%
-\contentsline {subsubsection}{\numberline {2）}角-边/面接触配对（$\mathtt {c}$-$\mathtt {e}$, $\mathtt {c}$-$\mathtt {f}$）}{59}{subsubsection.4.3.2.2}%
-\contentsline {subsubsection}{\numberline {3）}面/边-面/边接触配对（$\mathtt {f}$-$\mathtt {f}$, $\mathtt {e}$-$\mathtt {f}$, $\mathtt {e}$-$\mathtt {e}$）}{60}{subsubsection.4.3.2.3}%
-\contentsline {subsection}{\numberline {4.3.3}初步抓取构型生成}{60}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}抓取构型增强及碰撞检测}{61}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}抓取构型增强策略}{61}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}碰撞检测策略}{62}{subsection.4.4.2}%
-\contentsline {section}{\numberline {4.5}基于软接触模型的稳定性评估}{63}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}接触区域的离散化建模}{64}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}力学平衡与稳定性判据}{65}{subsection.4.5.2}%
-\contentsline {section}{\numberline {4.6}本章小结}{65}{section.4.6}%
-\contentsline {chapter}{\numberline {第五章}机器人抓取规划实验结果及分析}{67}{chapter.5}%
-\contentsline {section}{\numberline {5.1}引言}{67}{section.5.1}%
-\contentsline {section}{\numberline {5.2}实验环境及参数配置}{67}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}实验平台搭建}{67}{subsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {1）}物理实验平台}{68}{subsubsection.5.2.1.1}%
-\contentsline {subsubsection}{\numberline {2）}软件平台}{68}{subsubsection.5.2.1.2}%
-\contentsline {subsection}{\numberline {5.2.2}评估对象集选取}{69}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}实验参数分析及配置}{71}{subsection.5.2.3}%
-\contentsline {subsubsection}{\numberline {1）}体素尺寸 $v$}{71}{subsubsection.5.2.3.1}%
-\contentsline {subsubsection}{\numberline {2）}接触检测器尺寸 $d, \theta _\mathrm {sec}, \theta _\mathrm {cone}$}{71}{subsubsection.5.2.3.2}%
-\contentsline {subsubsection}{\numberline {3）}接触对验证阈值 $\theta _\mathrm {th}$}{73}{subsubsection.5.2.3.3}%
-\contentsline {subsubsection}{\numberline {4）}抓取增强旋转角 $\beta $}{73}{subsubsection.5.2.3.4}%
-\contentsline {section}{\numberline {5.3}对比实验及分析}{74}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}对比实验设置}{74}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}抓取构型多样性分析}{75}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}抓取成功率分析}{76}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}实物抓取演示}{78}{subsection.5.3.4}%
-\contentsline {section}{\numberline {5.4}算法耗时}{80}{section.5.4}%
-\contentsline {section}{\numberline {5.5}总结}{80}{section.5.5}%
-\contentsline {chapter}{\numberline {第六章}总结与展望}{82}{chapter.6}%
-\contentsline {section}{\numberline {6.1}全文总结}{82}{section.6.1}%
-\contentsline {section}{\numberline {6.2}创新点}{83}{section.6.2}%
-\contentsline {section}{\numberline {6.3}研究不足与展望}{83}{section.6.3}%
-\contentsline {chapter}{插图索引}{85}{section*.74}%
-\contentsline {chapter}{表格索引}{88}{section*.76}%
-\contentsline {chapter}{参考文献}{89}{section*.78}%
-\contentsline {chapter}{攻读专业硕士学位期间取得的研究成果}{98}{section*.80}%
-\contentsline {chapter}{致\hspace {\ccwd }谢}{99}{section*.82}%
-\contentsline {chapter}{\numberline {附录 A}经典函数公式}{100}{appendix.A}%
-\contentsline {chapter}{\numberline {附录 B}用于定量比较的指标公式}{101}{appendix.B}%
+\contentsline {chapter}{\numberline {第三章}几何特征检测对比实验及分析}{30}{chapter.3}%
+\contentsline {section}{\numberline {3.1}引言}{30}{section.3.1}%
+\contentsline {section}{\numberline {3.2}\textrm {ABC-Corner} 数据集构建}{30}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}数据集选取}{30}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}数据集标注流程}{31}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}实验环境与参数配置}{33}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}软硬件环境与开发框架}{33}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}数据预处理与划分方案}{34}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}训练超参数配置}{34}{subsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {1）}批量大小与数据加载}{35}{subsubsection.3.3.3.1}%
+\contentsline {subsubsection}{\numberline {2）}训练轮次与早停策略}{35}{subsubsection.3.3.3.2}%
+\contentsline {subsubsection}{\numberline {3）}优化器与学习率策略}{35}{subsubsection.3.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}类别不平衡问题处理}{35}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}法向量估计方法的选择与对比}{36}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}评价指标设计}{37}{subsection.3.3.6}%
+\contentsline {section}{\numberline {3.4}对比实验结果及分析}{38}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}边缘与角点联合检测结果分析}{38}{subsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {1）}与传统几何分析方法的对比}{39}{subsubsection.3.4.1.1}%
+\contentsline {subsubsection}{\numberline {2）}与现有深度学习方法的对比}{42}{subsubsection.3.4.1.2}%
+\contentsline {subsection}{\numberline {3.4.2}纯边缘检测结果分析}{42}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}法向量估计精度对检测的影响}{44}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}消融实验分析}{45}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}特征维度}{45}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}多尺度参数}{46}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}训练策略}{47}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {1）}数据重采样策略}{47}{subsubsection.3.5.3.1}%
+\contentsline {subsubsection}{\numberline {2）}标注平滑策略}{48}{subsubsection.3.5.3.2}%
+\contentsline {section}{\numberline {3.6}本章小结}{48}{section.3.6}%
+\contentsline {chapter}{\numberline {第四章}适应复杂几何特征接触的机器人抓取规划}{49}{chapter.4}%
+\contentsline {section}{\numberline {4.1}引言}{49}{section.4.1}%
+\contentsline {section}{\numberline {4.2}类别感知的接触点采样}{50}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}几何特征检测}{50}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}基于类别的体素采样}{51}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}凸性检测}{52}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}基于几何特征的接触对检测}{52}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}特征化接触检测器设计}{54}{subsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {1）}面接触检测器}{54}{subsubsection.4.3.1.1}%
+\contentsline {subsubsection}{\numberline {2）}边接触检测器}{55}{subsubsection.4.3.1.2}%
+\contentsline {subsubsection}{\numberline {3）}角接触检测器}{55}{subsubsection.4.3.1.3}%
+\contentsline {subsection}{\numberline {4.3.2}对偶接触点配对策略}{56}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {1）}角-角接触配对（$\mathtt {c}$-$\mathtt {c}$）}{56}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {2）}角-边/面接触配对（$\mathtt {c}$-$\mathtt {e}$, $\mathtt {c}$-$\mathtt {f}$）}{56}{subsubsection.4.3.2.2}%
+\contentsline {subsubsection}{\numberline {3）}面/边-面/边接触配对（$\mathtt {f}$-$\mathtt {f}$, $\mathtt {e}$-$\mathtt {f}$, $\mathtt {e}$-$\mathtt {e}$）}{57}{subsubsection.4.3.2.3}%
+\contentsline {subsection}{\numberline {4.3.3}初步抓取构型生成}{57}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}抓取构型增强及碰撞检测}{58}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}抓取构型增强策略}{58}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}碰撞检测策略}{59}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}基于软接触模型的稳定性评估}{60}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}接触区域的离散化建模}{61}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}力学平衡与稳定性判据}{62}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.6}本章小结}{62}{section.4.6}%
+\contentsline {chapter}{\numberline {第五章}面向复杂接触的机器人抓取规划对比实验}{64}{chapter.5}%
+\contentsline {section}{\numberline {5.1}引言}{64}{section.5.1}%
+\contentsline {section}{\numberline {5.2}实验环境及参数配置}{64}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}实验平台搭建}{64}{subsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {1）}物理实验平台}{65}{subsubsection.5.2.1.1}%
+\contentsline {subsubsection}{\numberline {2）}软件平台}{65}{subsubsection.5.2.1.2}%
+\contentsline {subsection}{\numberline {5.2.2}评估对象集选取}{66}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}实验参数分析及配置}{68}{subsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {1）}体素尺寸 $v$}{68}{subsubsection.5.2.3.1}%
+\contentsline {subsubsection}{\numberline {2）}接触检测器尺寸 $d, \theta _\mathrm {sec}, \theta _\mathrm {cone}$}{68}{subsubsection.5.2.3.2}%
+\contentsline {subsubsection}{\numberline {3）}接触对验证阈值 $\theta _\mathrm {th}$}{70}{subsubsection.5.2.3.3}%
+\contentsline {subsubsection}{\numberline {4）}抓取增强旋转角 $\beta $}{70}{subsubsection.5.2.3.4}%
+\contentsline {section}{\numberline {5.3}对比实验及分析}{71}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}对比实验设置}{71}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}抓取构型多样性分析}{72}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}抓取成功率分析}{73}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}实物抓取演示}{75}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}算法耗时}{75}{section.5.4}%
+\contentsline {section}{\numberline {5.5}总结}{77}{section.5.5}%
+\contentsline {chapter}{\numberline {第六章}总结与展望}{78}{chapter.6}%
+\contentsline {section}{\numberline {6.1}全文总结}{78}{section.6.1}%
+\contentsline {section}{\numberline {6.2}创新点}{79}{section.6.2}%
+\contentsline {section}{\numberline {6.3}研究不足与展望}{80}{section.6.3}%
+\contentsline {chapter}{参考文献}{82}{section*.71}%
+\contentsline {chapter}{攻读专业硕士学位期间取得的研究成果}{91}{section*.73}%
+\contentsline {chapter}{致\hspace {\ccwd }谢}{92}{section*.75}%
+\contentsline {chapter}{\numberline {附录 A}经典函数公式}{93}{appendix.A}%
+\contentsline {chapter}{\numberline {附录 B}用于定量比较的指标公式}{94}{appendix.B}%
+\contentsline {chapter}{\numberline {附录 C}\textrm {NECDNet} 额外检测结果}{95}{appendix.C}%
+\contentsline {chapter}{\numberline {附录 D}额外测试物体上的抓取构型分布图}{96}{appendix.D}%

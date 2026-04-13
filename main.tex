@@ -20,7 +20,7 @@
 \setmonofont{Courier New} 
 % \setmonofont{Ubuntu Mono}
 \graphicspath{{figures/}}
-
+\renewcommand{\floatpagefraction}{0.99}
 \renewcommand{\thesubsubsection}{\arabic{subsubsection}）}
 \titleformat{\subsubsection}[block]
   {\normalfont\bfseries} % 字体样式：常规字体，加粗
@@ -38,7 +38,7 @@
   %%%%%%%% 1. 配置里面不要出现空行. 2. 不需要的配置信息可以删除. %%%%%%%%%%%
   secretlevel={公开},             % 秘级
   % 中文信息
-  ctitle={基于学习的点云几何特征检测及机器人抓取规划方法研究},
+  ctitle={基于多维特征融合的物体几何特征检测及机器人抓取规划研究},
   % 物体复杂特征  多维特征融合
   % 基于多维特征融合的物体几何特征检测与机器人抓取规划研究
   % 面向复杂接触 抓取规划
@@ -52,7 +52,7 @@
   cdate={2026 年 5 月},
   coverdate={\zhdigits{2026}年\zhnumber{5}月},
   % 英文信息
-  etitle={Learning-Based Point Cloud Geometric Feature Detection and Robotic Grasp Planning},
+  etitle={Research on Multidimensional Feature Fusion-Based Geometric Feature Detection and Robotic Grasp Planning},
   edisciplines={Engineering},
   edepartment={School of Mechatronic Engineering and Automation},
   emajor={Mechanics},
@@ -77,8 +77,8 @@
 \include{data/chap04}
 \include{data/chap05}
 \include{data/chap06}
-\listoffigures                        % 插图索引
-\listoftables                         % 表格索引
+% \listoffigures                        % 插图索引
+% \listoftables                         % 表格索引
 
 % 参考文献. 
 \bibliographystyle{gbt7714-numerical}
