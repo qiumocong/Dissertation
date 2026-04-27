@@ -5,9 +5,9 @@
 \section{研究背景}
 \label{sec:background}
 
-随着智能制造、服务机器人以及自动驾驶技术的飞速发展，具备高精度环境感知与自主交互能力的智能系统正成为学术界与工业界的研究焦点。在这一领域中，三维点云（3D Point Clouds）凭借其对物体几何结构和空间尺度的精确表达能力，已成为连接物理世界与数字世界的重要纽带。作为一种无序、非结构化的数据集合，点云能够直接反映物体的真实拓扑结构，不存在二维图像中的透视形变，因此被广泛应用于逆向工程、三维重建、场景理解以及机器人自主抓取等关键任务中~\cite{mirzaei_3d_2022}。
+随着智能制造、服务机器人以及自动驾驶技术的飞速发展，具备高精度环境感知与自主交互能力的智能系统正成为学术界与工业界的研究焦点。在这一领域中，三维点云（3D Point Clouds）数据凭借其对物体几何结构和空间尺度的精确表达能力，已成为连接物理世界与数字世界的重要纽带。作为一种无序、非结构化的数据集合，点云能够直接反映物体的真实拓扑结构，不存在二维图像中的透视形变，因此被广泛应用于逆向工程、三维重建、场景理解以及机器人自主抓取等关键任务中~\cite{mirzaei_3d_2022}。
 
-在点云数据分析中，物体几何特征（尤其是边缘与角点）的提取不仅是数据简化的过程，更是语义理解的关键。边缘勾勒了物体的轮廓骨架，角点则确立了形体的关键节点。这些特征承载了最丰富的结构语义信息：在三维重建中，它们往往作为曲面拟合的自然边界，决定了重建模型的保真度~\cite{li_surface_2023}；在物体识别与配准任务中，它们充当了具有高辨识度的关键描述符，能够显著提升算法在复杂场景下的鲁棒性~\cite{lavin-delgado_efficient_2024, GaoJunJie_ji_2024, ZhangZhiJia_ji_2017}；而在机器人操作领域，准确的轮廓信息更是实现精细化装配与灵巧抓取的前提条件~\cite{ahmed_edge_2018}。
+在点云数据分析中，物体几何特征（尤其是边缘与角点）的提取不仅是数据简化的过程，更是语义理解的关键。边缘勾勒了物体的轮廓骨架，角点则确立了形体的关键点。这些特征承载了最丰富的结构语义信息：在三维重建中，它们往往作为曲面拟合的自然边界，决定了重建模型的保真度~\cite{li_surface_2023}；在物体识别与配准任务中，它们充当了具有高辨识度的关键描述区域，能够显著提升算法在复杂场景下的鲁棒性~\cite{lavin-delgado_efficient_2024, GaoJunJie_ji_2024, ZhangZhiJia_ji_2017}；而在机器人操作领域，准确的轮廓信息更是实现精细化装配与灵巧抓取的条件~\cite{ahmed_edge_2018}。
 
 尽管物体几何特征具有重要的应用价值，但从非结构化点云中自动且精确地检测这些特征仍面临严峻挑战。首先受限于物理平滑及采样精度，现实物体原本的尖锐几何特征在点云数据中往往表现为一定范围内的圆角过渡区域，使得边缘和角点的界定变得模糊，不利于检测。其次是不同类别的几何特征数据分布的极度不平衡。在一个完整的物体点云中，绝大多数点属于平坦表面，边缘点次之，而角点最为稀疏。
 传统上，局部几何描述符（如协方差矩阵的特征值~\cite{gumhold_feature_2001}、法向量~\cite{demarsin_detection_2007}和曲率~\cite{nguyen_edge_2018}）通常被用于提取边缘和角点，但这些方法依赖于人工调整的参数和阈值。其优势在于简单且计算效率高，却往往受困于难以调整的阈值、模糊的特征界定以及变化的尺度，难以兼顾检测的灵敏度与特异性。
@@ -37,8 +37,9 @@
 Gumhold等人~\cite{gumhold_feature_2001} 提出的基于主成分分析（Principal Component Analysis, PCA）的方法是该领域的经典工作。该方法通过构建点云中每个点及其 $k$ 近邻点的协方差矩阵，计算该矩阵的特征值来描述局部表面的几何变化。如图~\ref{fig:gumhold_feature_2001} 所示，不同几何特征的邻域范围内存在不同的数据分布。具体而言，如果不为零的最小特征值超过了预设的阈值，则认为该点附件的数据变化程度较大，属于边缘或角点特征。
 \begin{figure}[htbp]
     \centering
+    \captionsetup{bi-separator=shu-m}
     \includegraphics[width=0.85\textwidth]{Others/gumhold_feature_2001.jpg}
-    \bicaption{不同几何特征点的邻域形状~\cite{gumhold_feature_2001}：(a) 平面点；(b) 折边点；(c) 边界点；(d) 角点}{Neighborhood shapes of different geometric feature points~\cite{gumhold_feature_2001}: (a) Face point; (b) Ridge point; (c) Boundary point; (d) Corner point.}
+    \bicaption{不同几何特征点的近邻区域形状~\cite{gumhold_feature_2001}：(a) 平面点；(b) 折边点；(c) 边界点；(d) 角点}{Neighborhood shapes of different geometric feature points~\cite{gumhold_feature_2001}: (a) Face point; (b) Ridge point; (c) Boundary point; (d) Corner point.}
     \label{fig:gumhold_feature_2001}
 \end{figure}
 
@@ -59,6 +60,7 @@ Nguyen等人~\cite{nguyen_edge_2018} 基于曲率进行边缘特征提取并分�
 Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边缘检测。如图~\ref{fig:lin_line_2015} ，其将三维点云进行多视图投影，再基于二维图像的线段检测算法（LSD）进行边缘提取，最后将检测到的线段重新映射回三维空间。并利用半平面线段分割结构（Line-Segment-Half-Planes, LSHP）进行进一步的匹配，得到完整的三维线段特征。该方法通过引入多视图投影的策略，成功地将二维图像处理技术应用于三维点云的边缘检测中。
 \begin{figure}[htbp]
     \centering
+    \captionsetup{bi-separator=shu-m}
     \includegraphics[width=0.85\textwidth]{Others/lin_line_2015.jpg}
     \bicaption{基于多视图投影的三维点云边缘检测流程~\cite{lin_line_2015}：(a) 各阶段检测结果；(b) LSHP结构示意图}{Multi-view projection-based 3D point cloud edge detection pipeline~\cite{lin_line_2015}: (a) The detection results of each stage; (b) Schematic of the LSHP structure.}
     \label{fig:lin_line_2015}
@@ -103,6 +105,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 图元拟合策略使用基本的几何图元（如圆柱体、球体、方块等）来近似物体，从而简化抓取合成过程~\cite{goldfeder_grasp_2007}。Miller 等人提出了 GraspIt! 仿真器~\cite{miller_automatic_2003,miller_graspit_2021}，通过将复杂物体分解为一组简单的几何原语来快速生成抓取假设。Chen 等人~\cite{chen_category_2022} 利用词嵌入（Word Embeddings）来量化已知模型类别与真实物体之间的语义相似度，从而实现新物体与数据库模型的匹配。虽然图元近似降低了计算复杂度，但它往往丢失了物体的局部细节几何信息，导致生成的抓取难以适应具有丰富几何特征的复杂物体。
 \begin{figure}[htbp]
     \centering
+    \captionsetup{bi-separator=shu-m}
     \includegraphics[width=0.95\textwidth]{Others/goldfeder_grasp_2007.jpg}
     \bicaption{基于图元拟合的抓取规划方法~\cite{goldfeder_grasp_2007}：(a) 图元拟合过程；(b) 抓取构型生成；(c) 抓取质量评估}{Grasp planning method based on primitive fitting~\cite{goldfeder_grasp_2007}: (a) Primitive fitting process; (b) Grasp configuration generation; (c) Grasp evaluation.}
     \label{fig:goldfeder_grasp_2007}
@@ -111,6 +114,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 表面分割策略则致力于识别有意义的表面区域以指导抓取生成。Harada 等人~\cite{harada_grasp_2011} 针对软指尖手爪，根据接触软度对三角网格进行聚类，规划出适应物体局部曲率的抓取。Wan 等人~\cite{wan_planning_2021} 引入了叠加分割（Superimposed Segmentation）技术，根据表面法向量将每个三角形分割为具有受控重叠和厚度的多个面片。然而，为了确保力封闭的稳定性，这类方法通常显式地剔除边缘和角点附近的区域，避免在曲率突变处建立接触~\cite{wan_planning_2021, miller_graspit_2021}。这种“面接触优先”的策略虽然提高了抓取的保守稳定性，却极大限制了抓取构型在物体表面的分布，导致灵活性不足。
 \begin{figure}[htbp]
     \centering
+    \captionsetup{bi-separator=shu-m}
     \includegraphics[width=0.6\textwidth]{Others/wan_planning_2021.jpg}
     \bicaption{基于表面分割的抓取规划方法~\cite{wan_planning_2021}：(a)物体模型；(b.1-3)表面分割结果；(c)抓取构型生成}{Grasp planning method based on surface segmentation~\cite{wan_planning_2021}: (a) Object model; (b.1-3) Surface segmentation results; (c) Grasp configuration generation.}
     \label{fig:wan_planning_2021}
@@ -151,6 +155,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 
 \begin{figure}[htbp]
     \centering
+    \captionsetup{bi-separator=shu-m}
     \includegraphics[width=1.0\textwidth]{NECDNet/teaser.jpg}
     \bicaption{不同几何特征检测方法结果对比：(a) NECDNet；(b.1-3) CA~\cite{gumhold_feature_2001}, TECD~\cite{ahmed_edge_2018}, PCEDNet~\cite{himeur_pcednet_2022}}{Comparison of geometric feature detection results: (a) NECDNet; (b.1-3) CA~\cite{gumhold_feature_2001}, TECD~\cite{ahmed_edge_2018}, PCEDNet~\cite{himeur_pcednet_2022}.}
     \label{fig:necdnet_result}
@@ -163,6 +168,7 @@ Lin等人~\cite{lin_line_2015} 则利用多视图投影点云的方法进行边�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{FBGrasp/teaser.jpg}
+    \captionsetup{bi-separator=shu-m}
     \bicaption{基于物体几何特征的抓取规划结果展示：(a-f) 针对三种几何特征实现的六种抓取构型，依次为：角-角，角-边，角-面，边-边，边-面，面-面}{Grasp planning results based on object geometric features: (a-f) Six grasp configurations for three geometric features, including C-C, C-E, C-F, E-E, E-F, and F-F.}
     \label{fig:fbgrasp_result}
 \end{figure}

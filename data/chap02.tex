@@ -37,6 +37,7 @@
 
 基于上述索引结构，对每个查询点 $\mathbf{p}_i^\text{c}$，通过 k-NN 方法在点云中搜索其 $k$ 个最近邻点，形成邻域集合 $\mathcal{Q}_i^\text{c}$，其定义如公式~(\ref{eq:knn_neighborhood}) 所示。通过调节 $k$ 的大小即可改变邻域空间尺度：较小的 $k$ 更敏感于细粒度几何细节，较大的 $k$ 则能稳健表征更大范围的局部结构。邻域构建完成后，即可在此基础上进行几何特征计算与提取。
 \begin{equation}
+    \mathcal{Q}_i^\text{c} = \{\mathbf{p}_{i,j}^\text{c} \mid j = 1, \dots, k\}
      \label{eq:knn_neighborhood}
 \end{equation}
 

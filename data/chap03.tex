@@ -170,7 +170,7 @@ ABC-Corner 数据集中包含 1000 个点云及其对应几何特征标签，各
     \small
     \setlength{\tabcolsep}{8pt}
     \begin{threeparttable}
-    \bicaption{ABC-Corner 数据集上各边缘与角点检测方法的宏平均指标评分}{Macro-averaging metrics for edge and corner detection methods on the ABC-Corner dataset.}
+    \bicaption{ABC-Corner 数据集上各边缘与角点检测方法的宏平均指标评分}{Macro-averaging metrics for edge and corner detection methods.}
     \label{tab:corner_result}
     \begin{tabular}{lcccccc}
         \toprule
@@ -317,6 +317,7 @@ PIE-Net 性能受限的根本原因在于其采用的双分支架构设计。该
 图~\ref{fig:limitation} 的对比实验清晰地展示了这种影响。在使用点云估计法向的结果（图~\ref{fig:limitation}(c)）中，由于邻域法向的平滑化，原本尖锐的边缘特征和角点特征在特征空间中的表现变得模糊和重叠。这种混淆直接导致网络将部分边缘点误判为角点，或将角点误判为边缘点，从而产生 0.715 的 F1 分数。相反，当使用从 Mesh 模型计算出的法向量时（图~\ref{fig:limitation}(b)），法向量能够精确反映物体的几何拓扑结构。特别是在尖锐特征处，Mesh 法向能够保留法向的突变特征，而不会出现平滑化造成的方向混淆。这使得网络能够准确捕捉到微小的曲率变化，从而实现近乎完美的分类效果，F1 分数达到 0.815。
 \begin{figure*}[htbp]
     \centering
+    \captionsetup{bi-separator=shu-m}
     \includegraphics[width=\linewidth]{NECDNet/limitation.jpg}
     \bicaption{法向量估计方法对检测结果的影响分析：(a) 检测结果真值；(b) 使用从模型估计的法向量；(c) 使用从点云估计的法向量}{Analysis of the impact of normal vector estimation method on detection results: (a) Ground truth; (b) Using normals estimated from Mesh; (c) Using normals estimated from point cloud.}
     \label{fig:limitation}

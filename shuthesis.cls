@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2017-2024 by Zhenyu Zhang <zhenyuzhang@shu.edu.cn>
+%% Copyright (C) 2017-2026 by Zhenyu Zhang <zhenyuzhang@shu.edu.cn>
 %% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 2.0
@@ -175,7 +175,7 @@
   headsep=7mm,
   top=30mm,
   bottom=26mm,
-  footskip=7mm}
+  footskip=8mm}
 \RequirePackage{fancyhdr}
 \def\theoremautorefname{定理}
 \def\lemmaautorefname{引理}
@@ -288,9 +288,11 @@
 \DeclareCaptionLabelFormat{shu}{{\dawu[1.5]\heiti #1~\rmfamily #2}}
 \DeclareCaptionLabelSeparator{shu}{\hspace{1em}}
 \DeclareCaptionFont{shu}{\dawu[1.5]}
-\captionsetup{labelformat=shu,labelsep=shu,font=shu}
+\DeclareBiCaptionSeparator{shu}{\vspace{-6bp}}
+\DeclareBiCaptionSeparator{shu-m}{\vspace{0bp}}
+\captionsetup{labelformat=shu,labelsep=shu,font=shu,bi-slc=off,bi-separator=shu}
 \captionsetup[table]{position=top,belowskip={12bp-\intextsep},aboveskip=6bp}
-\captionsetup[figure]{position=bottom,belowskip={12bp-\intextsep},aboveskip=6bp}
+\captionsetup[figure]{position=bottom,belowskip={4bp-\intextsep},aboveskip=4bp}
 \captionsetup[sub]{font=shu,skip=6bp}
 \captionsetup[subfigure]{belowskip=3bp}
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
@@ -359,7 +361,13 @@
       \addcontentsline{toc}{chapter}{#3}
     }
   }{%
-    \addcontentsline{toc}{chapter}{#3}
+    \ifthenelse{\equal{\shu@showabstract}{false}}{%
+      \ifthenelse{\equal{#3}{\cabstractname} \or \equal{#3}{\eabstractname}}{}{%
+        \addcontentsline{toc}{chapter}{#3}
+      }
+    }{%
+      \addcontentsline{toc}{chapter}{#3}
+    }
   }%
   \chapter*{#3}%
   \IfValueTF{#4}{%
@@ -419,6 +427,7 @@
 \shu@def@term{cdate}
 \shu@def@term{edate}
 \shu@def@term{coverdate}
+\shu@def@term{showabstract}
 \newcommand{\shu@@cabstract}[1]{\long\gdef\shu@cabstract{#1}}
 \newenvironment{cabstract}{\Collect@Body\shu@@cabstract}{}
 \newcommand{\shu@@eabstract}[1]{\long\gdef\shu@eabstract{#1}}
@@ -462,10 +471,15 @@
  {\zihao{-1}\bfseries
   \centerline{SHANGHAI~~UNIVERSITY}
   \ifshu@profmaster
-  \centerline{\MakeUppercase{\shu@edegree}'S}
-  \centerline{DISSERTATION}
+    \centerline{PROFESSIONAL~~MASTER'S}
+    \centerline{DISSERTATION}
   \else
-  \centerline{\MakeUppercase{\shu@edegree}'S~~DISSERTATION}\fi}
+    \ifshu@doctor
+    \centerline{DOCTORAL~~DISSERTATION}
+    \else
+      \centerline{\MakeUppercase{\shu@edegree}'S~~DISSERTATION}
+    \fi
+  \fi}
  \begin{center}
   {\setlength\arrayrulewidth{1pt}
   \begin{tabular}{|c|c|}
@@ -557,9 +571,9 @@
  \vskip3.5cm
  \begin{center}\xiaoer[1.8]
   \begin{tabular}{cc}
-   \makebox[4em][s]{作者}:     & \uline{\kaishu\makebox[12em]{\shu@cauthor}}\\
-   \makebox[4em][s]{导师}:     & \uline{\kaishu\makebox[12em]{\shu@csupervisor}}\\
-   \makebox[4em][s]{学科专业}: & \uline{\kaishu\makebox[12em]{\shu@cmajor}}\\
+   \makebox[4em][s]{\bfseries{作者}}:     & \uline{\kaishu\makebox[12em]{\shu@cauthor}}\\
+   \makebox[4em][s]{\bfseries{学科专业}}: & \uline{\kaishu\makebox[12em]{\shu@cmajor}}\\
+   \makebox[4em][s]{\bfseries{导师}}:     & \uline{\kaishu\makebox[12em]{\shu@csupervisor}}\\
   \end{tabular}
  \end{center}
  \vskip3.5cm
@@ -573,14 +587,16 @@
  \vspace*{.5cm}
  \begin{center}
  \sanhao[1.6] A Dissertation Submitted to Shanghai University
- for the \\ Degree of \shu@edegree~in \shu@edisciplines\par
+ for the Degree \\ of
+ \ifshu@doctor Doctor of Philosophy \else Master \fi
+ in \shu@edisciplines\par
  \vskip3cm
  \begin{center}\zihao{1}{\bfseries{\shu@etitle}}\end{center}
  \vskip3cm
  \begin{tabular}{rl}
- Candidate:  & \shu@eauthor\\
- Supervisor: & \shu@esupervisor\\
- Major:      & \shu@emajor\\
+ \bfseries{Candidate}:  & \shu@eauthor\\
+ \bfseries{Major}:      & \shu@emajor\\
+ \bfseries{Supervisor}: & \shu@esupervisor\\
  \end{tabular}
  \vskip3cm
  \bfseries\shu@edepartment\\
